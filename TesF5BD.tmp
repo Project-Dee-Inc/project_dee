@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjn2qj3r6lpgb"]
+
+[ext_resource type="Script" path="res://CameraRig.gd" id="1_gvvmv"]
+[ext_resource type="Script" path="res://Camera3DTexelSnapped.gd" id="1_ic5lx"]
+[ext_resource type="Shader" path="res://pixel_art_upscale.gdshader" id="2_egdl7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1eh7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_be0dt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyo72"]
+shader = ExtResource("2_egdl7")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vq6xl"]
+viewport_path = NodePath("Viewport")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Viewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="CameraRig" type="Node3D" parent="Viewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = ExtResource("1_gvvmv")
+
+[node name="Camera3D" type="Camera3D" parent="Viewport/CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+projection = 1
+current = true
+fov = 37.8493
+size = 10.0
+script = ExtResource("1_ic5lx")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, -1, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_c1eh7")
+
+[node name="Plane" type="MeshInstance3D" parent="World"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_be0dt")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.965926, 0.183013, -0.183013, 0, 0.707107, 0.707107, 0.258819, 0.683013, -0.683013, 10, 10, 10)
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_iyo72")
+texture = SubResource("ViewportTexture_vq6xl")
+centered = false
