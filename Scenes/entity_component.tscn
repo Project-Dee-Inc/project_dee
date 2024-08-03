@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b01axettkyau3"]
+
+[ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_cvls6"]
+[ext_resource type="PackedScene" uid="uid://c7c310ubi7rge" path="res://Scenes/health_component.tscn" id="1_n2ht4"]
+[ext_resource type="PackedScene" uid="uid://2baqhascih1d" path="res://Scenes/stat_component.tscn" id="2_8cdex"]
+
+[node name="Entity Component" type="Node"]
+script = ExtResource("1_cvls6")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_n2ht4")]
+
+[node name="StatComponents" type="Node" parent="."]
+
+[node name="BaseStat" parent="StatComponents" instance=ExtResource("2_8cdex")]
+
+[node name="MovementComponent" type="Node" parent="."]
+
+[node name="AnimationComponent" type="Node" parent="."]
