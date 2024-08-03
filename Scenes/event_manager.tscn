@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cywet1ats28g8"]
+
+[sub_resource type="GDScript" id="GDScript_vt8ic"]
+script/source = "extends Node
+
+@export var id:int
+@onready var base_stat = $Stats/BaseStat
+
+
+func _ready():
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_BASE_STATS_READY), base_stat.stat_dict)
+"
+
+[node name="EventManager" type="Node"]
+script = SubResource("GDScript_vt8ic")
