@@ -1,6 +1,5 @@
 extends Node
 
-
 var max_health:int
 var current_health:int
 
@@ -16,6 +15,4 @@ func _heal(value:int):
 	current_health = clamp(current_health + value, 0, max_health)
 
 func _get_health(value:Dictionary):
-	max_health = value[4]
-	
-
+	max_health = Constants.get_enum_value_by_name("HP")
