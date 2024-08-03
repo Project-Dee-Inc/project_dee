@@ -1,0 +1,28 @@
+enum WEAPON_TYPES{
+	MELEE,
+	RANGE,
+	MAGIC
+}
+
+enum STATS { 
+	ATK,
+	C_RATE, 
+	C_DMG, 
+	PEN, 
+	HP,
+	HP_REGEN,
+	DEF,
+	ATK_SPD,
+	MOVE_SPD,
+	CD,
+	CD_HASTE,
+	ENERGY,
+	ENERGY_REGEN,
+	AOE,
+	SKILL_DURATION,
+	PROJ_COUNT,
+	EXP_GAIN,
+	GOLD_GAIN,
+}
+
+@export var stat_dict: Dictionary = {}
