@@ -1,18 +1,26 @@
 extends Node
+class_name HealthComponent
 
-var max_health:int
-var current_health:int
-
-func _on_ready():
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_BASE_STATS_READY), self, "_get_health")
+var max_health:int = 0
+var current_health:int = 0
+var hp_regen:int = 0
+var isHealing:bool
 
 # Damages!
-func _damage(value:int):
+func _damage(value:int):	
 	current_health = clamp(current_health - value, 0, max_health)
+	if(current_health == 0):
+		_die()
 
 # Heals!
 func _heal(value:int):
 	current_health = clamp(current_health + value, 0, max_health)
 
-func _get_health(value:Dictionary):
-	max_health = Constants.get_enum_value_by_name("HP")
+func _set_health(value:int):
+	max_health = value
+	
+func _die():
+	pass
+	
+func _start_regen():
+	pass

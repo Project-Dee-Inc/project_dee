@@ -1,7 +1,8 @@
 extends Node
 
 enum EVENT_NAMES{
-	ON_PLAYER_BASE_STATS_READY
+	ON_PLAYER_BASE_STATS_READY,
+	ON_START_GAME
 }
 
 # Dynamically add a signal
