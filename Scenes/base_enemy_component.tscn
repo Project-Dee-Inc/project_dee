@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bebctyuiqve04"]
+
+[ext_resource type="PackedScene" uid="uid://ujchrdq7tnuw" path="res://Scenes/entity_component.tscn" id="1_8wy2l"]
+[ext_resource type="Script" path="res://Scripts/state_machine_component.gd" id="2_dsbsg"]
+
+[node name="BaseEnemyComponent" instance=ExtResource("1_8wy2l")]
+
+[node name="SkillManagerComponent" type="Node" parent="." index="4"]
+
+[node name="StateMachineComponent" type="Node" parent="." index="5"]
+script = ExtResource("2_dsbsg")
