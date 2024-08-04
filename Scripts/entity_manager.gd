@@ -16,3 +16,5 @@ func _ready():
 func _assign_health():
 	if(health_component != null):
 		health_component._set_health(stat_components.get_child(1).stat_dict[4])
+
+
