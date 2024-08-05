@@ -6,6 +6,7 @@ extends Node
 @onready var stat_components = $StatComponents
 
 @export var isPlayer: bool = false
+var stats
 
 func _ready():
 	if(isPlayer):
