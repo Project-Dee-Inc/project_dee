@@ -36,4 +36,5 @@ func _assign_health(child:Node):
 		if (child.stat_dict.has(index)):
 			#print("index exists")
 			health_component._set_health(child.stat_dict[index])
-
+		if(isPlayer):
+			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED), [child.stat_dict[index]])

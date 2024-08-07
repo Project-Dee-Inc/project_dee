@@ -9,12 +9,14 @@ var isHealing:bool
 # Damages!
 func _damage(value:int):	
 	current_health = clamp(current_health - value, 0, max_health)
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_HEALTH_CHANGED), [current_health])
 	if(current_health == 0):
 		_die()
 
 # Heals!
 func _heal(value:int):
 	current_health = clamp(current_health + value, 0, max_health)
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_HEALTH_CHANGED), [current_health])
 
 func _set_health(value:int):
 	max_health = value
