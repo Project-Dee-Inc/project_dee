@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://didk3s6ip6dcs"]
+
+[ext_resource type="Script" path="res://Scripts/UIHealthBarManager.gd" id="1_ggjwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vst84"]
+bg_color = Color(0.0412845, 0.685564, 0.767154, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_603po"]
+bg_color = Color(0.913725, 0, 0, 1)
+
+[node name="TestHealthbar" type="Node"]
+script = ExtResource("1_ggjwm")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = 40.0
+offset_top = 53.0
+offset_right = 963.0
+offset_bottom = 96.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vst84")
+theme_override_styles/fill = SubResource("StyleBoxFlat_603po")
+value = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TestReduceHealth" type="Button" parent="."]
+offset_left = 45.0
+offset_top = 111.0
+offset_right = 225.0
+offset_bottom = 154.0
+text = "Reduce Health"
+
+[node name="TestRestoreHealth" type="Button" parent="."]
+offset_left = 255.0
+offset_top = 111.0
+offset_right = 435.0
+offset_bottom = 154.0
+text = "Restore Health"
+
+[connection signal="pressed" from="TestReduceHealth" to="." method="_on_test_reduce_health_pressed"]
+[connection signal="pressed" from="TestRestoreHealth" to="." method="_on_test_restore_health_pressed"]
