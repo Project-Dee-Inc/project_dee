@@ -7,6 +7,6 @@
 [node name="Weapon" type="Node"]
 script = ExtResource("1_og3n8")
 
-[node name="StatManager" parent="." instance=ExtResource("2_rw3r3")]
+[node name="StatComponent" parent="." instance=ExtResource("2_rw3r3")]
 
 [node name="WeaponSkill" parent="." instance=ExtResource("3_8tbk0")]
