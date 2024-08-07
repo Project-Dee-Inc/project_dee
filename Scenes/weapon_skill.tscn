@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck4luo4lmbvw6"]
+
+[ext_resource type="Script" path="res://Scripts/test_weapon_skill.gd" id="1_71uqq"]
+
+[node name="WeaponSkill" type="Node"]
+script = ExtResource("1_71uqq")
