@@ -1,5 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://dalwb0ioih62a"]
+[gd_scene load_steps=8 format=3 uid="uid://dalwb0ioih62a"]
 
 [ext_resource type="PackedScene" uid="uid://cr7trc5ktt61" path="res://Scenes/entity_component.tscn" id="1_4uxit"]
+[ext_resource type="Script" path="res://Scripts/animation_component.gd" id="2_evusf"]
+[ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ojsv5"]
+[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_vsdhl"]
+[ext_resource type="Script" path="res://player_character_body.gd" id="5_sf6v1"]
+[ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="6_8ho07"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
+radius = 0.424336
+height = 1.8182
 
 [node name="PlayerComponent" instance=ExtResource("1_4uxit")]
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"MOVE_SPD": 10.0
+}
+
+[node name="StatManager2" parent="StatComponents" index="1" instance=ExtResource("2_ojsv5")]
+
+[node name="StatManager3" parent="StatComponents" index="2" instance=ExtResource("2_ojsv5")]
+
+[node name="StatManager4" parent="StatComponents" index="3" instance=ExtResource("2_ojsv5")]
+
+[node name="Node2D" type="Node2D" parent="AnimationComponent" index="0" node_paths=PackedStringArray("sprite_3d")]
+script = ExtResource("2_evusf")
+sprite_3d = NodePath("../../MovementComponent/CharacterBody3D/Sprite3D")
+
+[node name="MovementComponent" parent="." index="3" node_paths=PackedStringArray("character_body_3d")]
+script = ExtResource("3_vsdhl")
+character_body_3d = NodePath("CharacterBody3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="MovementComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02476, 0)
+script = ExtResource("5_sf6v1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementComponent/CharacterBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0486946, -0.062607, 0)
+shape = SubResource("CapsuleShape3D_46t1g")
+
+[node name="Sprite3D" type="Sprite3D" parent="MovementComponent/CharacterBody3D" index="1"]
+pixel_size = 0.059
+texture_filter = 0
+texture = ExtResource("6_8ho07")
