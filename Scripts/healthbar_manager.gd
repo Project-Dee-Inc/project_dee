@@ -6,7 +6,8 @@ var current_health:int = 0
 @onready var health_bar = $HealthBar
 
 func _ready():
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED), self, "_cache_max_health")
+	#EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED), self, "_cache_max_health")
+	pass
 
 func _cache_max_health(value:int):
 	max_health = value
