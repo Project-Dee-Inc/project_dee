@@ -29,11 +29,12 @@ func _assign_movement(child:Node):
 			movement_component._set_speed(child.stat_dict[index])
 
 func _assign_health(child:Node):
-	#print("Assigning Health")
 	if(health_component != null):
-		#print("Health Component found")
-		var index = Constants.get_enum_name_by_value(Constants.STATS.HP)
-		if (child.stat_dict.has(index)):
-			#print("index exists")
-			health_component._set_health(child.stat_dict[index])
+		var hpIndex = Constants.get_enum_name_by_value(Constants.STATS.HP)
+		if (child.stat_dict.has(hpIndex)):
+			health_component._set_health(child.stat_dict[hpIndex])
+
+		var regenIndex = Constants.get_enum_name_by_value(Constants.STATS.HP_REGEN)
+		if (child.stat_dict.has(regenIndex) && child.stat_dict[regenIndex] > 0):
+			health_component._set_regen(child.stat_dict[regenIndex])
 
