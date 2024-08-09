@@ -6,12 +6,15 @@ extends Node
 @onready var stat_components = $StatComponents
 
 @export var isPlayer: bool = false
+var target:Node3D
 
 func _ready():
 	if(isPlayer):
 		EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_START_GAME),self,"_assign_values")
 	else:
-		_assign_values()
+		target = %Player
+		if(target):
+			_assign_values()
 
 func _assign_values():
 	#print("Assigning values")
