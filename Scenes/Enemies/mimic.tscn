@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cykijjfuy15r1"]
+
+[ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_ulgvm"]
+
+[node name="Mimic" instance=ExtResource("1_ulgvm")]
