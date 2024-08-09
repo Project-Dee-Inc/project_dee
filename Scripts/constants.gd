@@ -27,6 +27,11 @@ enum STATS {
 	GOLD_GAIN,
 }
 
+enum STATES { 
+	FOLLOW,
+	ATTACK
+}
+
 var stats_enum_mapping = {
 	"ATK": STATS.ATK,
 	"C_RATE": STATS.C_RATE, 
@@ -47,14 +52,15 @@ var stats_enum_mapping = {
 	"EXP_GAIN": STATS.EXP_GAIN,
 	"GOLD_GAIN": STATS.GOLD_GAIN
 }
+
 var reverse_stats_enum_mapping = {}
 
-func get_enum_value_by_name(name: String) -> int:
-	return stats_enum_mapping.get(name, -1)  # Return -1 if not found
-	
 func _ready():
 	for key in stats_enum_mapping.keys():
 		reverse_stats_enum_mapping[stats_enum_mapping[key]] = key
+
+func get_enum_value_by_name(str_name: String) -> int:
+	return stats_enum_mapping.get(str_name, -1)  # Return -1 if not found
 
 func get_enum_name_by_value(value: int) -> String:
 	return reverse_stats_enum_mapping.get(value, "Unknown Stat")  # Return "Unknown Stat" if not found
