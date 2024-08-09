@@ -1,12 +1,33 @@
 extends Node
 class_name SkillManager
 
+@onready var parent_component = $".."
+@export var skills:Array[BaseSkill]
+var current_skill:BaseSkill
+var state_is_attacking:bool = false
+var target:Node
 
-# Called when the node enters the scene tree for the first time.
+# Set initial skill
 func _ready():
-	pass # Replace with function body.
+	current_skill = skills[0]
 
+# Set if state is changed to attacking
+# If target is still null, assign it
+func _state_attacking(value:bool):
+	if(value && target == null):
+		target = parent_component.target
+		for skill in skills:
+			skill._set_target(target)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	state_is_attacking = value
+
+	if(state_is_attacking):
+		_attack()
+
+# Change skill to activate
+func _change_skill(value:int):
+	current_skill = skills[value]
+
+# Activate skill
+func _attack():
+	current_skill._activate_skill()
