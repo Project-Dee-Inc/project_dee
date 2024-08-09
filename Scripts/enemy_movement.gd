@@ -15,16 +15,17 @@ func _ready():
 # Set initial movement speed for mob
 func _set_speed(value:int):
 	speed = value
-	target = parent_component.target
-	_state_moving(true)
 
 # Set state to following or not
 func _state_moving(value:bool):
+	if(value && target == null):
+		target = parent_component.target
+
 	state_is_moving = value
 
 # Move to position if in following state
 func _physics_process(delta):
-	if state_is_moving:
+	if (state_is_moving && target != null):
 		move_to_pos(target.global_transform.origin, delta)
 
 # Move to Vector3 position
