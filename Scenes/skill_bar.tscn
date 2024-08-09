@@ -15,6 +15,7 @@ offset_bottom = 379.0
 script = ExtResource("1_p0kfs")
 
 [node name="SkillIcon" type="TextureProgressBar" parent="Skill1"]
+layout_mode = 0
 offset_top = -2.0
 offset_right = 128.0
 offset_bottom = 129.0
@@ -27,6 +28,7 @@ tint_progress = Color(1, 1, 1, 0.862745)
 
 [node name="Key" type="Label" parent="Skill1"]
 clip_contents = true
+layout_mode = 0
 offset_top = 63.0
 offset_right = 128.0
 offset_bottom = 129.0
@@ -36,6 +38,7 @@ vertical_alignment = 2
 autowrap_mode = 3
 
 [node name="Cooldown" type="Label" parent="Skill1"]
+layout_mode = 0
 offset_top = 63.0
 offset_right = 128.0
 offset_bottom = 129.0

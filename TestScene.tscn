@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cjn2qj3r6lpgb"]
+[gd_scene load_steps=21 format=3 uid="uid://cjn2qj3r6lpgb"]
 
 [ext_resource type="Script" path="res://CameraRig.gd" id="1_gvvmv"]
 [ext_resource type="Script" path="res://Camera3DTexelSnapped.gd" id="1_ic5lx"]
@@ -7,9 +7,7 @@
 [ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://ToonShaderWithOutline.material" id="3_pd8et"]
 [ext_resource type="Shader" path="res://outline_and_edge_but_more.gdshader" id="4_a6h3p"]
 [ext_resource type="Script" path="res://LightTest.gd" id="6_6j7us"]
-[ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="8_85h6i"]
 [ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="8_rpclm"]
-[ext_resource type="PackedScene" uid="uid://b4tcqeqpbi0hi" path="res://Scenes/skill_bar.tscn" id="9_6m0j2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c1eh7"]
 
@@ -148,10 +146,6 @@ texture_filter = 2
 material = SubResource("ShaderMaterial_iyo72")
 texture = SubResource("ViewportTexture_vq6xl")
 centered = false
-
-[node name="HealthBar" parent="Display" instance=ExtResource("8_85h6i")]
-
-[node name="SkillBar" parent="Display" instance=ExtResource("9_6m0j2")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51015, -0.0187922, -2.08351)
