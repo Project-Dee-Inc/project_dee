@@ -17,7 +17,6 @@ func _ready():
 			_assign_values()
 
 func _assign_values():
-	#print("Assigning values")
 	var base_stat = stat_components.get_child(0)
 	if(base_stat!=null):
 		_assign_health(base_stat)
@@ -33,6 +32,9 @@ func _assign_movement(child:Node):
 
 func _assign_health(child:Node):
 	if(health_component != null):
+		if(isPlayer):
+			health_component._set_is_player()
+
 		var hpIndex = Constants.get_enum_name_by_value(Constants.STATS.HP)
 		if (child.stat_dict.has(hpIndex)):
 			health_component._set_health(child.stat_dict[hpIndex])
@@ -40,3 +42,4 @@ func _assign_health(child:Node):
 		var regenIndex = Constants.get_enum_name_by_value(Constants.STATS.HP_REGEN)
 		if (child.stat_dict.has(regenIndex) && child.stat_dict[regenIndex] > 0):
 			health_component._set_regen(child.stat_dict[regenIndex])
+
