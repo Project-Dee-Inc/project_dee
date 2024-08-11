@@ -4,11 +4,11 @@ var cooldown: int = 0
 var player_stat_dict: Dictionary = {}
 
 # Variables to control the attack
-var attack_interval: float = 3.0
 var time_since_last_attack: float = 0.0
+@export var attack_interval: float = 3.0
 @export var attack_range: float = 10.0
-var attack_angle_degrees: float = 90.0
-var damage_amount: int = 10
+@export var attack_angle_degrees: float = 90.0
+@export var damage_amount: int = 10
 
 @onready var weapon_skill = $WeaponSkill
 	
