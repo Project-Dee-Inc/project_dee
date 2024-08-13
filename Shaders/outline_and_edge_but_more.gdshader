@@ -4,7 +4,7 @@
 // or whatever, this shader is of no use :)
 
 shader_type spatial;
-render_mode depth_prepass_alpha;
+render_mode depth_prepass_alpha, unshaded;
 
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 uniform sampler2D normal_roughness_texture : hint_normal_roughness_texture, repeat_disable, filter_nearest;
@@ -108,6 +108,12 @@ void fragment() {
 		pos[4].z - pos[5].z > depth_thresh ||
 		pos[4].z - pos[7].z > depth_thresh
 		? mix(ALBEDO, outline_color.rgb, outline_color.a) : mix(ALBEDO, normal_edge.rgb, normal_edge.a);
+		
+	if (!(pos[4].z - pos[1].z > depth_thresh ||
+		pos[4].z - pos[3].z > depth_thresh ||
+		pos[4].z - pos[5].z > depth_thresh ||
+		pos[4].z - pos[7].z > depth_thresh))
+		discard;
 	
 	// ===== DEBUGS ===== //
 	float depth = texture(depth_texture, SCREEN_UV).r;
@@ -118,6 +124,7 @@ void fragment() {
 	
 	//EMISSION = vec3(concave);
 }
+
 
 float DistributionGGX(float cos_theta_m, float alpha)
 {
@@ -144,31 +151,31 @@ float SchlickFresnel(float u)
 	return m2 * m2 * m;
 }
 
-void light()
-{
-	// Calculate some vectors.
-	vec3 lightColor = LIGHT_COLOR / PI;
-	
-	vec3 half = normalize(VIEW + LIGHT);
-	
-	float NdotL = max(dot(NORMAL, LIGHT), 0.0);
-	float NdotV = max(dot(NORMAL, VIEW), 0.0);
-	float NdotH = max(dot(NORMAL, half), 0.0);
-	float LdotH = max(dot(LIGHT, half), 0.0);
-	
-	// Diffuse light (Lambert).
-	DIFFUSE_LIGHT += (ceil(NdotL * 3.0) / 3.0) * ceil(ATTENUATION) * lightColor;
-	
-	// Specular light (Schlick-GGX).
-	float ggxAlpha = ROUGHNESS * ROUGHNESS;
-	float D = DistributionGGX(NdotH, ggxAlpha);
-	float G = GeometryGGX(NdotL, NdotV, ggxAlpha);
-	
-	vec3 f0 = SchlickBaseReflectivity(METALLIC, SPECULAR_AMOUNT, ALBEDO);
-	float LdotH5 = SchlickFresnel(LdotH);
-	float f90 = clamp(50.0 * f0.g, 0.0, 1.0);
-	vec3 F = f0 + (f90 - f0) * LdotH5;
-	
-	vec3 specularBRDF = round(max(NdotL * D * G * F, 0.0));
-	SPECULAR_LIGHT += specularBRDF * LIGHT_COLOR * ATTENUATION;
-}
+//void light()
+//{
+	//// Calculate some vectors.
+	//vec3 lightColor = LIGHT_COLOR / PI;
+	//
+	//vec3 half = normalize(VIEW + LIGHT);
+	//
+	//float NdotL = max(dot(NORMAL, LIGHT), 0.0);
+	//float NdotV = max(dot(NORMAL, VIEW), 0.0);
+	//float NdotH = max(dot(NORMAL, half), 0.0);
+	//float LdotH = max(dot(LIGHT, half), 0.0);
+	//
+	//// Diffuse light (Lambert).
+	//DIFFUSE_LIGHT += (ceil(NdotL * 3.0) / 3.0) * ceil(ATTENUATION) * lightColor;
+	//
+	//// Specular light (Schlick-GGX).
+	//float ggxAlpha = ROUGHNESS * ROUGHNESS;
+	//float D = DistributionGGX(NdotH, ggxAlpha);
+	//float G = GeometryGGX(NdotL, NdotV, ggxAlpha);
+	//
+	//vec3 f0 = SchlickBaseReflectivity(METALLIC, SPECULAR_AMOUNT, ALBEDO);
+	//float LdotH5 = SchlickFresnel(LdotH);
+	//float f90 = clamp(50.0 * f0.g, 0.0, 1.0);
+	//vec3 F = f0 + (f90 - f0) * LdotH5;
+	//
+	//vec3 specularBRDF = smoothstep(0.25, 0.75, max(NdotL * D * G * F, 0.0)) ;
+	//SPECULAR_LIGHT += specularBRDF * LIGHT_COLOR * NdotL * ATTENUATION;
+//}
