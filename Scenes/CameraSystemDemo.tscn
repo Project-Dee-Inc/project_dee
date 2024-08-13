@@ -1,0 +1,171 @@
+[gd_scene load_steps=23 format=3 uid="uid://dmh1yvvaakqap"]
+
+[ext_resource type="Script" path="res://Scripts/Camera/Camera3DTexelSnapped.gd" id="1_huxmj"]
+[ext_resource type="Script" path="res://Scripts/Camera/RefractionCamera.gd" id="2_kkqxx"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementTest.gd" id="2_qfd61"]
+[ext_resource type="Shader" path="res://Shaders/water.gdshader" id="3_4qmlq"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="3_64l5d"]
+[ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="3_f4m30"]
+[ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="4_doru6"]
+[ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="4_w4bfu"]
+[ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="5_5qgn5"]
+[ext_resource type="Script" path="res://Display.gd" id="5_s0bjl"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="6_k0dtn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jo5mw"]
+
+[sub_resource type="Sky" id="Sky_ve7dx"]
+sky_material = SubResource("ProceduralSkyMaterial_jo5mw")
+
+[sub_resource type="Environment" id="Environment_p6t5v"]
+background_mode = 2
+sky = SubResource("Sky_ve7dx")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
+material = ExtResource("3_64l5d")
+size = Vector3(20, 10, 20)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
+viewport_path = NodePath("Refraction")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7k3n"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_4qmlq")
+shader_parameter/refraction = 0.5
+shader_parameter/ripple_speed = 0.1
+shader_parameter/ripple_scale = 4.0
+shader_parameter/use_refraction = true
+shader_parameter/refraction_texture = SubResource("ViewportTexture_wb723")
+shader_parameter/noise_map = ExtResource("4_doru6")
+shader_parameter/normal_map = ExtResource("5_5qgn5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vpq21"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_y7k3n")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7w1u"]
+transparency = 2
+alpha_scissor_threshold = 0.25
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_f4m30")
+normal_enabled = true
+normal_texture = ExtResource("4_w4bfu")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_huykx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
+shader = ExtResource("6_k0dtn")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
+viewport_path = NodePath("Main")
+
+[node name="CameraSystemDemo" type="Node"]
+
+[node name="Main" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(642, 362)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="MainCamera" type="Camera3D" parent="Main" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 30, 60)
+projection = 1
+current = true
+size = 22.5
+far = 100.0
+script = ExtResource("1_huxmj")
+target = NodePath("../../Player")
+
+[node name="Refraction" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(642, 362)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="RefractionCam" type="Camera3D" parent="Refraction" node_paths=PackedStringArray("main_camera")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 30, 60)
+cull_mask = 1048573
+projection = 1
+current = true
+size = 22.5
+far = 100.0
+script = ExtResource("2_kkqxx")
+main_camera = NodePath("../../Main/MainCamera")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_p6t5v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment"]
+transform = Transform3D(0.836764, 0.387186, -0.387186, 0, 0.707107, 0.707107, 0.547563, -0.591682, 0.591682, 0, 0, 0)
+shadow_enabled = true
+shadow_blur = 0.0
+directional_shadow_mode = 0
+
+[node name="Floor" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("BoxMesh_wyeyq")
+
+[node name="Water" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_vpq21")
+
+[node name="Sprite3D" type="Sprite3D" parent="World" groups=["snap"]]
+transform = Transform3D(0.707107, 0.612372, -0.353553, 0, 0.499999, 0.866025, 0.707107, -0.612372, 0.353553, -2.33, 1, 0)
+material_override = SubResource("StandardMaterial3D_u7w1u")
+cast_shadow = 2
+pixel_size = 0.0625
+transparent = false
+double_sided = false
+texture = ExtResource("3_f4m30")
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["snap"]]
+script = ExtResource("2_qfd61")
+speed = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("SphereShape3D_huykx")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_u7w1u")
+cast_shadow = 2
+pixel_size = 0.0625
+transparent = false
+double_sided = false
+texture = ExtResource("3_f4m30")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+remote_path = NodePath("..")
+use_global_coordinates = false
+update_rotation = false
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_s0bjl")
+viewport = NodePath("../Main")
+pixel_movement = false
+sub_pixel_movement_at_integer_scale = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_yxmub")
+texture = SubResource("ViewportTexture_ub6g4")
+centered = false
