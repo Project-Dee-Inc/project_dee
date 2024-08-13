@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/Camera/RefractionCamera.gd" id="2_kkqxx"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovementTest.gd" id="2_qfd61"]
 [ext_resource type="Shader" path="res://Shaders/water.gdshader" id="3_4qmlq"]
-[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="3_64l5d"]
 [ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="3_f4m30"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="3_k01s3"]
 [ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="4_doru6"]
 [ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="4_w4bfu"]
 [ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="5_5qgn5"]
@@ -26,7 +26,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
-material = ExtResource("3_64l5d")
+material = ExtResource("3_k01s3")
 size = Vector3(20, 10, 20)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
