@@ -3,27 +3,31 @@ extends Camera3D
 
 @export var snap := true
 @export var snap_objects := true
-
-var texel_error := Vector2.ZERO
+@export var target: Node3D
+@export var move_speed := 10.0
 
 @onready var _prev_rotation := global_rotation
 @onready var _snap_space := global_transform
-var _texel_size: float = 0.0
 
+var _texel_size: float = 0.0
 var _snap_nodes: Array[Node]
 var _pre_snapped_positions: Array[Vector3]
+var _texel_error := Vector2.ZERO
+var _dir := Vector3.FORWARD
 
 
 func _ready() -> void:
 	RenderingServer.frame_post_draw.connect(_snap_objects_revert)
-
+	_dir = transform.basis.z
+	_follow_target()
 
 func _process(_delta: float) -> void:
 	# rotation changes the snap space
 	if global_rotation != _prev_rotation:
 		_prev_rotation = global_rotation
 		_snap_space = global_transform
-	_texel_size = size / float((get_viewport() as SubViewport).size.y)
+		
+	_texel_size =  size / float((get_viewport() as SubViewport).size.y)
 	# camera position in snap space
 	var snap_space_position := global_position * _snap_space
 	# snap!
@@ -35,11 +39,11 @@ func _process(_delta: float) -> void:
 		h_offset = snap_error.x
 		v_offset = snap_error.y
 		# error in screen texels (will be used later)
-		texel_error = Vector2(snap_error.x, -snap_error.y) / _texel_size
+		_texel_error = Vector2(snap_error.x, -snap_error.y) / _texel_size
 		if snap_objects:
 			_snap_objects.call_deferred()
 	else:
-		texel_error = Vector2.ZERO
+		_texel_error = Vector2.ZERO
 
 
 func _snap_objects() -> void:
@@ -50,11 +54,24 @@ func _snap_objects() -> void:
 		var pos := node.global_position
 		_pre_snapped_positions[i] = pos
 		var snap_space_pos := pos * _snap_space
+		#var angle = sin(deg_to_rad(30.0))
 		var snapped_snap_space_pos := snap_space_pos.snapped(Vector3(_texel_size, _texel_size, 0.0))
 		node.global_position = _snap_space * snapped_snap_space_pos
-
+		
+	if target:
+		_follow_target()
 
 func _snap_objects_revert() -> void:
 	for i in _snap_nodes.size():
 		(_snap_nodes[i] as Node3D).global_position = _pre_snapped_positions[i]
 	_snap_nodes.clear()
+	
+func _follow_target() -> void:
+	if !target:
+		return
+	
+	var target_screen = unproject_position(target.global_position)
+	var rounded = target_screen.round()
+	var projected = project_position(rounded, size)
+	var pos = projected + _dir * size
+	global_position = pos
