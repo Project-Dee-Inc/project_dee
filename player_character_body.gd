@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@onready var animation_tree = $AnimationTree
 
 var speed:float = 5.0
 var JUMP_VELOCITY = 4.5
@@ -21,6 +22,8 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	print(direction)
+	
 	
 	if direction:	
 		velocity.x = direction.x * speed
@@ -29,4 +32,11 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 
-	move_and_slide()
+	if(direction == Vector3.ZERO):
+		animation_tree.get("parameters/playback").travel("Idle")
+		
+	else:
+		animation_tree.get("parameters/playback").travel("Walk")
+		animation_tree.set("parameters/Idle/blend_position",Vector2(direction.x,direction.z))
+		animation_tree.set("parameters/Walk/blend_position",Vector2(direction.x,direction.z))
+		move_and_slide()
