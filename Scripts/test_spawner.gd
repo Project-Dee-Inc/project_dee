@@ -2,7 +2,7 @@ extends Node
 
 # Preload the scene you want to spawn
 @export var spawn_table: Dictionary = {}
-@export var spawn_delay: float = 1
+@export var spawn_delay: float = 0
 
 var camera: Camera3D
 
