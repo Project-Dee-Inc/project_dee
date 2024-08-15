@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="2_4his8"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_34g6m"]
 
-[node name="EntityComponent" type="Node"]
+[node name="EntityComponent" type="Node3D"]
 script = ExtResource("1_8k8u0")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_4his8")]
