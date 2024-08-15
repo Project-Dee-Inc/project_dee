@@ -15,7 +15,7 @@ func _ready():
 # If target is still null, assign it
 func _state_attacking(value:bool):
 	if(value && target == null):
-		target = parent_component.target
+		target = GameManager.player
 		for skill in skills:
 			skill._set_target(target)
 

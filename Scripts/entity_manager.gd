@@ -6,23 +6,24 @@ extends Node
 @onready var stat_components = $StatComponents
 
 @export var isPlayer: bool = false
-var target:Node3D
 
 func _ready():
 	if(isPlayer):
 		EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_START_GAME),self,"_assign_values")
 	else:
-		target = %Player
-		if(target):
-			_assign_values()
+		_assign_values(null)
 
-func _assign_values():
+func _assign_values(params):
 	var base_stat = stat_components.get_child(0)
 	if(base_stat!=null):
 		_assign_health(base_stat)
 		_assign_movement(base_stat)
 	else:
 		print("Base stat not found")
+
+	if(isPlayer):
+		print("STARTING PLAYER INITIALIZATION")
+		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED))
 
 func _assign_movement(child:Node):
 	if(movement_component != null):
