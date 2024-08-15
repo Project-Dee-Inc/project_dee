@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnyu6pkwningf"]
+[gd_scene load_steps=8 format=3 uid="uid://dnyu6pkwningf"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_k4goq"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
@@ -7,6 +7,10 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kpxl2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2a5kc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m15dl"]
 
 [node name="TestPlayer" type="Node2D"]
 
@@ -23,6 +27,7 @@ mesh = SubResource("PlaneMesh_kpxl2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308, -0.0156704, -0.835206, 0.549714, 0.42317, 9.13995, 9.56504)
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
@@ -30,4 +35,14 @@ transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308,
 spawn_table = {
 ExtResource("3_6dflm"): 10
 }
-spawn_delay = 10.0
+spawn_delay = 0.5
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(2.40753, 0, 0, 0, 2.40753, 0, 0, 0, 2.40753, 0.258462, 1.29761, -3.21893)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
