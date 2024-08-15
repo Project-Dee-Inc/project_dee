@@ -64,3 +64,7 @@ func get_enum_value_by_name(str_name: String) -> int:
 
 func get_enum_name_by_value(value: int) -> String:
 	return reverse_stats_enum_mapping.get(value, "Unknown Stat")  # Return "Unknown Stat" if not found
+
+func is_close_to_destination(current_position: Vector3, destination: Vector3, threshold: float = 0.5) -> bool:
+	var distance = current_position.distance_to(destination)
+	return distance <= threshold
