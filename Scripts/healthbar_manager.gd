@@ -6,18 +6,19 @@ var current_health:int = 0
 @onready var health_bar = $HealthBar
 
 func _ready():
-	#EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED), self, "_cache_max_health")
-	pass
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), self, "_set_current_health")
 
 func _cache_max_health(value:int):
 	max_health = value
 	health_bar.max_value = max_health
 	health_bar.min_value = 0
 	health_bar.value = max_health
-	print(max_health)
 	
 func _set_current_health(value:int):
-	current_health = value
+	if(max_health == 0):
+		_cache_max_health(value)
+	else:
+		current_health = value
 	_update_healthbar()
 	
 func _on_test_reduce_health_pressed():
@@ -30,3 +31,4 @@ func _on_test_restore_health_pressed():
 
 func _update_healthbar():
 	health_bar.value = current_health
+	print(current_health)
