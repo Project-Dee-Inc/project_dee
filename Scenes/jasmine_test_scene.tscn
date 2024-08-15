@@ -39,6 +39,7 @@ spawn_delay = 0.5
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(2.40753, 0, 0, 0, 2.40753, 0, 0, 0, 2.40753, 0.258462, 1.29761, -3.21893)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_2a5kc")
