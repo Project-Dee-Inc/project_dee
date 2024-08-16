@@ -5,7 +5,7 @@ var movement_manager
 var skill_manager
 
 func enter():
-	#print("In BASIC ATTACK AND FOLLOWING state!")
+	#print("In FIGHTER BASIC ATTACK AND FOLLOWING state!")
 	skill_manager._change_skill(0)
 	skill_manager._state_attacking(true)
 
