@@ -37,7 +37,8 @@ func damage_enemies_in_cone(direction: Vector3):
 		# Check if the enemy is within the attack cone
 		if angle <= attack_angle_degrees / 2 and is_enemy_in_range(enemy):
 			# Access the health component of the enemy
-			enemy.apply_damage(damage_amount)
+			#enemy.apply_damage(damage_amount)
+			enemy.health_component._damage(damage_amount)
 			
 
 # Function to get the direction towards the cursor
@@ -76,7 +77,7 @@ func _process(delta: float) -> void:
 		var attack_direction = get_attack_direction()
 		
 		# If there's a valid direction, perform the attack
-		print(attack_direction)
+		#print(attack_direction)
 		if attack_direction != Vector3.ZERO:
 			damage_enemies_in_cone(attack_direction)
 
