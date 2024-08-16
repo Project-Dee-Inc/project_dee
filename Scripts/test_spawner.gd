@@ -13,10 +13,11 @@ func _ready():
 	_start_spawning()
 
 func _start_spawning():
+	var target = GameManager.player.movement_component.character_body_3d
 	for spawn_key in spawn_table.keys():
 		var spawn_count = spawn_table[spawn_key]
 		for i in range(spawn_count):
-			var spawn_position = get_random_position_around_object(GameManager.player.movement_component.character_body_3d.global_transform.origin, 10)
+			var spawn_position = get_random_position_around_object(target.global_transform.origin, 10)
 			_spawn_object(spawn_key, spawn_position)
 
 func _spawn_object(object_to_spawn, location):

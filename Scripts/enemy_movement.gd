@@ -53,9 +53,13 @@ func move_to_pos(target_pos:Vector3, delta:float):
 	var direction = (target_pos - body.global_transform.origin).normalized()
 	var desired_velocity: Vector3 = direction * speed
 	var steering: Vector3 = (desired_velocity - velocity) * delta * 2.5
-	
+
+	# Add the gravity.
+	#if not body.is_on_floor():
+		#velocity.y -= gravity * delta
+
 	velocity += steering
-	velocity.y = 0  # Reset Y velocity when on the floor
+	velocity.y = 0
 
 	body.global_transform.origin += velocity * delta
 
