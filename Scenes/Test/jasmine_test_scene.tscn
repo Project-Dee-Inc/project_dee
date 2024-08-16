@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnyu6pkwningf"]
+[gd_scene load_steps=9 format=3 uid="uid://dnyu6pkwningf"]
 
-[ext_resource type="PackedScene" uid="uid://bv8qj800olj00" path="res://Scenes/jasmine_test_player_component.tscn" id="1_iio7v"]
+[ext_resource type="PackedScene" uid="uid://sqgdt5vtt8yb" path="res://Scenes/Test/jasmine_test_player_component.tscn" id="1_iio7v"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
+[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]
 
@@ -47,6 +48,7 @@ skeleton = NodePath("../..")
 
 [node name="TestSpawner" parent="." instance=ExtResource("2_quged")]
 spawn_table = {
-ExtResource("3_6dflm"): 10
+ExtResource("3_6dflm"): 1,
+ExtResource("4_cjhxe"): 1
 }
 spawn_delay = 1.0
