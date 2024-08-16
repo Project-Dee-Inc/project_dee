@@ -10,7 +10,10 @@ var velocity:Vector3 = Vector3.ZERO
 var state_is_moving:bool = false
 
 var is_surround:bool = false
-var radius:float = 2.5
+var is_stay_in_range:bool = false
+
+var follow_range:float = 0
+var kill_radius:float = 2.5
 var randomnum:float
 
 func _ready():
@@ -27,10 +30,17 @@ func _set_speed(value:int):
 
 # Set if movement type surrounds or not
 func _set_surround(value:bool):
-	if(is_surround):
+	if(value):
 		randomnum = _get_rand()
 
 	is_surround = value
+
+# Set if movement type stays within range of player
+func _set_stay_in_range(value:bool, range:float = 0.0):
+	if(value):
+		follow_range = range
+
+	is_stay_in_range = value
 
 # Set state to following or not
 func _state_moving(value:bool):
@@ -43,10 +53,26 @@ func _state_moving(value:bool):
 func _physics_process(delta):
 	if (state_is_moving && target != null):
 		var target_position = target.global_transform.origin
-		if(is_surround):
-			move_to_pos(get_circle_position(target_position, randomnum), delta)
+
+		if(is_stay_in_range):
+			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range)):
+				on_start_move(target_position, delta)
+			else:
+				on_stop_move(delta)
 		else:
-			move_to_pos(target_position, delta)
+			on_start_move(target_position, delta)
+
+# Start movement, check if surround or simple follow movement
+func on_start_move(target_pos:Vector3, delta:float):
+	if(is_surround):
+		move_to_pos(get_circle_position(target_pos, randomnum), delta)
+	else:
+		move_to_pos(target_pos, delta)
+
+# Stop movement and stay stationary
+func on_stop_move(delta:float):
+	velocity = Vector3.ZERO  # Stop moving if within follow range
+	body.global_transform.origin += velocity * delta  # Ensure the body stays in place
 
 # Move to Vector3 position
 func move_to_pos(target_pos:Vector3, delta:float):
@@ -67,8 +93,8 @@ func get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos
 	# Calculate the position on the XZ plane
 	var angle = random * PI * 2.0
-	var x = kill_circle_centre.x + cos(angle) * radius
-	var z = kill_circle_centre.z + sin(angle) * radius
+	var x = kill_circle_centre.x + cos(angle) * kill_radius
+	var z = kill_circle_centre.z + sin(angle) * kill_radius
 
 	return Vector3(x, kill_circle_centre.y, z)
 
