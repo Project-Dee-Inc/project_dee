@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3wag756q0vfk"]
+
+[ext_resource type="PackedScene" uid="uid://dl3cvpkcyjywk" path="res://Scenes/Projectiles/base_projectile.tscn" id="1_jc1sw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y0ugj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf0hc"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1bra"]
+material = SubResource("StandardMaterial3D_gf0hc")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8qyfv"]
+
+[node name="ShooterProjectile" instance=ExtResource("1_jc1sw")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_y0ugj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" index="0"]
+mesh = SubResource("SphereMesh_v1bra")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
+shape = SubResource("SphereShape3D_8qyfv")
+
+[node name="StatComponent" parent="." index="2"]
+stat_dict = {
+"ATK": 2,
+"MOVE_SPD": 10
+}
