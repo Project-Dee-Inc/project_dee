@@ -5,14 +5,12 @@ var movement_manager
 var skill_manager
 
 func enter():
-	print("In BASIC ATTACK state!")
+	#print("In BASIC ATTACK AND FOLLOWING state!")
 	skill_manager._change_skill(0)
 	skill_manager._state_attacking(true)
 
-	# Exit 0.5 seconds later
-	await get_tree().create_timer(0.5).timeout
-	skill_manager._state_attacking(false)
-	exit("Follow")
+	movement_manager._set_surround(false)
+	movement_manager._state_moving(true)
 
 func exit(next_state):
 	fsm.change_to(next_state)

@@ -10,8 +10,8 @@ func enter():
 	movement_manager._state_moving(true)
 
 	# Exit 3 seconds later
-	await get_tree().create_timer(3).timeout
-	exit("Surround")
+	#await get_tree().create_timer(3).timeout
+	#exit("BasicAttack")
 
 func exit(next_state):
 	fsm.change_to(next_state)
