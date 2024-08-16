@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv8qj800olj00"]
+[gd_scene load_steps=9 format=3 uid="uid://sqgdt5vtt8yb"]
 
 [ext_resource type="PackedScene" uid="uid://cr7trc5ktt61" path="res://Scenes/entity_component.tscn" id="1_sas4g"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_303mx"]
@@ -52,7 +52,7 @@ range_stat = NodePath("Range")
 stat_dict = {
 "HP": 50,
 "HP_REGEN": 1,
-"MOVE_SPD": 10.0
+"MOVE_SPD": 7.0
 }
 
 [node name="Magic" parent="StatComponents" index="1" instance=ExtResource("3_jcgop")]

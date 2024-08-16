@@ -41,7 +41,7 @@ func _start_regen():
 
 # Listen for timer timeout and heal
 func _on_regen_timer_timeout():
-	if(current_health < max_health):  # Only heal if not at max health
+	if(current_health < max_health && current_health != 0):  # Only heal if not at max health
 		_heal(hp_regen)
 
 # Raise death events here

@@ -1,10 +1,8 @@
 extends "res://Scripts/skill_component.gd"
 class_name DamageOnContact
 
-@onready var skill_manager_component = $".."
-var can_attack:bool = false
 var damage:int = 0
-var cd:int = 0
+var cd:float = 0
 var skill_is_active:bool = false
 
 func _ready():
