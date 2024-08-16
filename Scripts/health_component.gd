@@ -10,6 +10,7 @@ var current_health:int = 0:
 		current_health = value
 		if(is_player):
 			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), current_health)
+			print("PLAYER HEALTH: ", current_health)
 
 # Set initial health
 func _set_health(value:int):
@@ -45,7 +46,10 @@ func _on_regen_timer_timeout():
 
 # Raise death events here
 func _die():
-	print("Entity has died.")
+	var base_node = get_parent()
+	print(base_node.name, " has died.")
+	if(!is_player):
+		base_node.queue_free()
 
 # Set if this health component is for player to raise the event of on_health_changed
 func _set_is_player():
