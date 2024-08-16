@@ -12,7 +12,7 @@ func enter():
 	# Exit 5 seconds later
 	await get_tree().create_timer(5).timeout
 	#movement_manager._state_moving(false)
-	exit("Follow")
+	#exit("Follow")
 
 func exit(next_state):
 	fsm.change_to(next_state)
