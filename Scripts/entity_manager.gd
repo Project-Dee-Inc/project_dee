@@ -13,7 +13,7 @@ func _ready():
 	else:
 		_assign_values(null)
 
-func _assign_values(params):
+func _assign_values(_params):
 	var base_stat = stat_components.get_child(0)
 	if(base_stat!=null):
 		_assign_health(base_stat)
