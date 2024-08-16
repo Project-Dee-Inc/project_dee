@@ -5,6 +5,7 @@ class_name DamageOnContact
 var can_attack:bool = false
 var damage:int = 0
 var cd:int = 0
+var skill_is_active:bool = false
 
 func _ready():
 	_get_values()
@@ -15,12 +16,17 @@ func _set_values():
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 
 func _set_target(value:Node):
-	#target = value.get_node("HealthComponent")
-	pass
+	target = value.health_component
 
 func _activate_skill():
-	print("Damage On Contact activated");
-	#target.damage(damage)
+	skill_is_active = true
 
 func _deactivate_skill():
-	pass
+	skill_is_active = false
+	await get_tree().create_timer(cd).timeout
+	_activate_skill()
+
+func _on_hit_collider_component_body_entered(body):
+	if(skill_is_active):
+		target._damage(damage)
+		_deactivate_skill()
