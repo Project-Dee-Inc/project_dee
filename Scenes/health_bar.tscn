@@ -21,6 +21,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_603po")
 value = 100.0
 
 [node name="TestReduceHealth" type="Button" parent="."]
+visible = false
 offset_left = 45.0
 offset_top = 111.0
 offset_right = 225.0
@@ -28,6 +29,7 @@ offset_bottom = 154.0
 text = "Reduce Health"
 
 [node name="TestRestoreHealth" type="Button" parent="."]
+visible = false
 offset_left = 255.0
 offset_top = 111.0
 offset_right = 435.0
