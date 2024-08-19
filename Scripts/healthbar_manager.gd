@@ -10,9 +10,11 @@ func _ready():
 
 func _cache_max_health(value:int):
 	max_health = value
+	current_health = max_health
+	health_bar.value = max_health
 	health_bar.max_value = max_health
 	health_bar.min_value = 0
-	health_bar.value = max_health
+	print("max health = %d" % max_health)
 	
 func _set_current_health(value:int):
 	if(max_health == 0):

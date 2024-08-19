@@ -43,4 +43,3 @@ func _assign_health(child:Node):
 		var regenIndex = Constants.get_enum_name_by_value(Constants.STATS.HP_REGEN)
 		if (child.stat_dict.has(regenIndex) && child.stat_dict[regenIndex] > 0):
 			health_component._set_regen(child.stat_dict[regenIndex])
-
