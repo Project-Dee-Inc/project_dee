@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d03xwmlrcr687"]
+[gd_scene load_steps=10 format=3 uid="uid://d03xwmlrcr687"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_dex7l"]
 [ext_resource type="PackedScene" path="res://Scenes/hit_collider_component.tscn" id="2_g780y"]
 [ext_resource type="Script" path="res://Scripts/Skills/shoot_projectiles.gd" id="3_1vo0o"]
+[ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="3_p3r31"]
 [ext_resource type="PackedScene" uid="uid://c3wag756q0vfk" path="res://Scenes/Projectiles/shooter_projectile.tscn" id="4_4h53y"]
 [ext_resource type="Script" path="res://Scripts/States/shooter_basic_state.gd" id="4_py2y5"]
 
@@ -27,10 +28,17 @@ mesh = SubResource("SphereMesh_gmy27")
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
 "ATK": 2,
-"CD": 0.3,
+"CD": 1.0,
 "HP": 15,
 "MOVE_SPD": 5
 }
+
+[node name="RayCast3D" type="RayCast3D" parent="MovementComponent" index="0"]
+target_position = Vector3(0, 0, 5)
+collision_mask = 3
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_p3r31")
 
 [node name="SkillManagerComponent" parent="." index="5" node_paths=PackedStringArray("skills")]
 skills = [NodePath("ShootProjectiles")]

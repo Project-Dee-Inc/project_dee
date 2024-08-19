@@ -1,6 +1,7 @@
 extends Node
 
 @onready var parent_component = $".."
+var raycast:RayCast3D
 var target:Node3D
 var body:Node3D
 
@@ -11,6 +12,7 @@ var state_is_moving:bool = false
 
 var is_surround:bool = false
 var is_stay_in_range:bool = false
+var needs_line_of_sight:bool = false
 
 var follow_range:float = 0
 var kill_radius:float = 2.5
@@ -41,6 +43,14 @@ func _set_stay_in_range(value:bool, range:float = 0.0):
 		follow_range = range
 
 	is_stay_in_range = value
+
+# Set if movement needs to take into mind line of sight
+func _set_line_of_sight(value:bool):
+	if(value):
+		raycast = $RayCast3D
+		raycast.body = body
+
+	needs_line_of_sight = value
 
 # Set state to following or not
 func _state_moving(value:bool):
