@@ -2,7 +2,7 @@ extends Node3D
 class_name Projectile
 
 @export var turn_speed: float = 5.0
-
+@onready var camera: Camera3D = get_viewport().get_camera_3d()
 @onready var stat_component = $StatComponent
 var stat_dict: Dictionary = {}
 var base_target:Node3D
@@ -48,6 +48,9 @@ func _physics_process(delta:float):
 		else:
 			_move_to_direction(manual_dir, delta)
 
+		if (is_outside_camera_view()):
+			queue_free()  # Destroy the projectile if it's outside the camera's view)
+
 func _get_direction(start:Vector3, end:Vector3) -> Vector3:
 	var dir = (start - end).normalized()
 	return dir
@@ -72,3 +75,20 @@ func _home_to_target(target_pos:Vector3, delta:float):
 
 func _on_hit_collider_component_body_entered(_body):
 	target._damage(damage)
+	queue_free()
+
+func is_outside_camera_view() -> bool:
+	if(camera):
+		var screen_pos = camera.unproject_position(body.global_transform.origin)
+
+		# Check if the projectile is within the screen bounds
+		if (screen_pos.x < 0 or screen_pos.x > get_viewport().size.x):
+			return true
+		if (screen_pos.y < 0 or screen_pos.y > get_viewport().size.y):
+			return true
+
+		# Optionally, you can check if it's behind the camera
+		if (camera.is_position_behind(body.global_transform.origin)):
+			return true
+
+	return false
