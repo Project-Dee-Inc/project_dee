@@ -20,14 +20,15 @@ func _state_attacking(value:bool):
 			skill._set_target(target)
 
 	state_is_attacking = value
-
-	if(state_is_attacking):
-		_attack()
+	_attack(state_is_attacking)
 
 # Change skill to activate
 func _change_skill(value:int):
 	current_skill = skills[value]
 
 # Activate skill
-func _attack():
-	current_skill._activate_skill()
+func _attack(value:bool):
+	if(value):
+		current_skill._activate_skill()
+	else:
+		current_skill._deactivate_skill()

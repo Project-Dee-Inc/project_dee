@@ -27,21 +27,21 @@ func _activate_skill():
 
 func _deactivate_skill():
 	skill_is_active = false
-	await get_tree().create_timer(cd).timeout
-	_activate_skill()
 
 func _spawn_projectile():
 	if (projectile_obj):
-		var projectile = projectile_obj.instantiate() as Node3D
-		var base_node = get_parent().parent_component
+		if(skill_is_active):
+			var projectile = projectile_obj.instantiate() as Node3D
+			var base_node = get_parent().parent_component
 
-		projectile.global_transform.origin = base_node.global_transform.origin
-		get_parent().add_child(projectile)
-		projectile.scale = Vector3(0.5, 0.5, 0.5)
+			projectile.global_transform.origin = base_node.global_transform.origin
+			get_parent().add_child(projectile)
+			projectile.scale = Vector3(0.5, 0.5, 0.5)
 
-		projectile.is_homing = is_homing
-		projectile._shoot(projectile, target)
+			projectile.is_homing = is_homing
+			projectile._shoot(projectile, target)
 
-		_deactivate_skill()
+			await get_tree().create_timer(cd).timeout
+			_spawn_projectile()
 	else:
 		print("No projectile")
