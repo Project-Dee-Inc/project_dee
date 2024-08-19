@@ -1,8 +1,9 @@
-[gd_scene load_steps=111 format=3 uid="uid://dalwb0ioih62a"]
+[gd_scene load_steps=112 format=3 uid="uid://dalwb0ioih62a"]
 
 [ext_resource type="PackedScene" uid="uid://cr7trc5ktt61" path="res://Scenes/entity_component.tscn" id="1_4uxit"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_n1od8"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ojsv5"]
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/weapon.tscn" id="2_y5aq2"]
 [ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_vsdhl"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="4_3f8co"]
 [ext_resource type="Script" path="res://player_character_body.gd" id="5_sf6v1"]
@@ -1203,8 +1204,19 @@ animations = [{
 }]
 
 [node name="PlayerComponent" instance=ExtResource("1_4uxit")]
+isPlayer = true
+
+[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("regen_timer")]
+regen_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="HealthComponent" index="0"]
 
 [node name="WeaponManager" type="Node" parent="." index="1"]
+
+[node name="Weapon" parent="WeaponManager" index="0" instance=ExtResource("2_y5aq2")]
+attack_interval = 2.0
+attack_angle_degrees = 45.0
+damage_amount = 25
 
 [node name="StatComponents" parent="." index="2" node_paths=PackedStringArray("base_stat", "melee_stat", "magic_stat", "range_stat")]
 script = ExtResource("2_n1od8")
@@ -1215,6 +1227,8 @@ range_stat = NodePath("Range")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
+"HP": 50,
+"HP_REGEN": 1,
 "MOVE_SPD": 4.0
 }
 
@@ -1233,6 +1247,7 @@ character_body_3d = NodePath("Player")
 
 [node name="Player" type="CharacterBody3D" parent="MovementComponent" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02476, 0)
+collision_layer = 2
 script = ExtResource("5_sf6v1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovementComponent/Player" index="0"]

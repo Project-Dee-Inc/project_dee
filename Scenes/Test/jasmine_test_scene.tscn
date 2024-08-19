@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dnyu6pkwningf"]
 
-[ext_resource type="PackedScene" uid="uid://sqgdt5vtt8yb" path="res://Scenes/Test/jasmine_test_player_component.tscn" id="1_iio7v"]
+[ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_aidch"]
 [ext_resource type="PackedScene" path="res://Scenes/test_spawner.tscn" id="2_quged"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
@@ -26,8 +26,7 @@ transform = Transform3D(41.9243, 0, 0, 0, 41.9243, 0, 0, 0, 41.9243, 0, 0, 0)
 layers = 3
 mesh = SubResource("PlaneMesh_kpxl2")
 
-[node name="Player" parent="." instance=ExtResource("1_iio7v")]
-isPlayer = true
+[node name="Player" parent="." instance=ExtResource("1_aidch")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308, -0.0156704, -0.835206, 0.549714, 0.42317, 9.13995, 9.56504)
