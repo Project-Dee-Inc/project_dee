@@ -8,25 +8,30 @@ extends Node
 var stat_cooldown:float = 0.0
 
 func _ready():
+	# Setup timer.
 	timer.wait_time = 5
 	skill_icon.max_value = timer.wait_time
+	
+	# Disable process.
 	set_process(false)
 
 func _process(delta):
-	#if(Input.action_press("skill_1")):
-		#_activate()
+	# Display cooldown timer.
 	cooldown.text = "%0.1f" % timer.time_left
 	skill_icon.value = timer.time_left
-	
+
+# Activate cooldown.
 func _activate():
 	timer.start()
 	set_process(true)
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode == Key.KEY_1:
-			_activate()
+# Methods for testing.
+#func _input(event):
+	#if event is InputEventKey:
+		#if event.pressed and event.keycode == Key.KEY_1:
+			#_activate()
 
+# Stop cooldown.
 func _on_timer_timeout():
 	cooldown.text = ""
 	skill_icon.value = 0
