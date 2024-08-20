@@ -27,10 +27,10 @@ mesh = SubResource("SphereMesh_llxdu")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
-"ATK": 2,
+"ATK": 3,
 "CD": 1.0,
 "HP": 15,
-"MOVE_SPD": 5
+"MOVE_SPD": 2
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="MovementComponent" index="0"]

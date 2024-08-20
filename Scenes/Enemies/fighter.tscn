@@ -25,10 +25,10 @@ mesh = SubResource("SphereMesh_mjr5s")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
-"ATK": 2,
+"ATK": 5,
 "CD": 3,
 "HP": 10,
-"MOVE_SPD": 5
+"MOVE_SPD": 3
 }
 
 [node name="SkillManagerComponent" parent="." index="8" node_paths=PackedStringArray("skills")]

@@ -1,30 +1,42 @@
 extends Node
 
-# Preload the scene you want to spawn
 @export var spawn_table: Dictionary = {}
 @export var spawn_delay: float = 0
 @export var spawn_range: float = 10
 
-var camera: Camera3D
+var active_spawns: Dictionary = {}
 
 func _ready():
-	camera = get_viewport().get_camera_3d()
+	for scene in spawn_table.keys():
+		active_spawns[scene] = 0 
 
-	await get_tree().create_timer(spawn_delay).timeout
 	_start_spawning()
 
 func _start_spawning():
-	var target = GameManager.player.movement_component.character_body_3d
-	for spawn_key in spawn_table.keys():
-		var spawn_count = spawn_table[spawn_key]
-		for i in range(spawn_count):
-			var spawn_position = get_random_position_around_object(target.global_transform.origin, spawn_range)
-			_spawn_object(spawn_key, spawn_position)
+	while true:
+		await get_tree().create_timer(spawn_delay).timeout
+		spawn_objects()
 
-func _spawn_object(object_to_spawn, location):
-	var instance = object_to_spawn.instantiate()
+func spawn_objects():
+	var target = GameManager.player.global_transform.origin
+	
+	# Attempt to spawn objects for each scene in the spawn table
+	for scene in spawn_table.keys():
+		if active_spawns[scene] < spawn_table[scene]:
+			var spawn_position = get_random_position_around_object(target, spawn_range)
+			spawn_object(scene, spawn_position)
+
+func spawn_object(scene: PackedScene, location: Vector3):
+	var instance = scene.instantiate()
 	instance.global_transform.origin = location
-	get_parent().add_child(instance)
+	add_child(instance)
+	
+	active_spawns[scene] += 1
+	instance.connect("tree_exited", Callable(self, "_on_object_destroyed").bind(scene))
+
+func _on_object_destroyed(scene: PackedScene):
+	# When an object is destroyed, decrement the active count
+	active_spawns[scene] -- 1
 
 func get_random_position_around_object(object_position: Vector3, radius: float) -> Vector3:
 	# Randomly pick a direction in 3D space (spherical coordinates)
