@@ -11,6 +11,7 @@ var state_is_moving:bool = false
 
 var is_surround:bool = false
 var is_stay_in_range:bool = false
+var is_blocked:bool = false
 var needs_line_of_sight:bool = false
 
 var follow_range:float = 0
@@ -64,33 +65,33 @@ func _physics_process(delta):
 		var target_position = target.global_transform.origin
 
 		if(is_stay_in_range):
-			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range)):
-				on_start_move(target_position, delta)
+			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked):
+				_on_start_move(target_position, delta)
 			else:
-				on_stop_move()
+				_on_stop_move()
 		else:
-			on_start_move(target_position, delta)
+			_on_start_move(target_position, delta)
 
 # Start movement, check if surround or simple follow movement
-func on_start_move(target_pos:Vector3, delta:float):
+func _on_start_move(target_pos:Vector3, delta:float):
 	if(is_surround):
-		target_pos = get_circle_position(target_pos, randomnum)
+		target_pos = _get_circle_position(target_pos, randomnum)
 
-	move_to_pos(target_pos, delta)
+	_move_to_pos(target_pos, delta)
 
 # Stop movement and stay stationary
-func on_stop_move():
+func _on_stop_move():
 	body.velocity = Vector3.ZERO  # Stop moving if within follow range
 
 # Move to Vector3 position
-func move_to_pos(target_pos:Vector3, delta:float):
+func _move_to_pos(target_pos:Vector3, delta:float):
 	nav_agent.target_position = target_pos
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
 	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
 
 	body.move_and_slide()
 
-func get_circle_position(target_pos:Vector3, random: float) -> Vector3:
+func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos
 	# Calculate the position on the XZ plane
 	var angle = random * PI * 2.0
