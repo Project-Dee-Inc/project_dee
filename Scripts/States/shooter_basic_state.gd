@@ -18,10 +18,12 @@ func exit(next_state):
 	fsm.change_to(next_state)
 
 func _physics_process(_delta: float):
-	if movement_manager.raycast.has_line_of_sight(movement_manager.target):
+	if movement_manager.raycast._has_line_of_sight(movement_manager.target):
+		if(movement_manager.is_blocked):
+			movement_manager.is_blocked = false
 		if(!skill_manager.state_is_attacking):
 			skill_manager._state_attacking(true)
 	else:
 		if(skill_manager.state_is_attacking):
 			skill_manager._state_attacking(false)
-		#move_towards_line_of_sight(enemy, delta)
+			movement_manager.is_blocked = true

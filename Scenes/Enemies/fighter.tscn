@@ -28,7 +28,7 @@ stat_dict = {
 "ATK": 5,
 "CD": 3,
 "HP": 10,
-"MOVE_SPD": 3
+"MOVE_SPD": 5
 }
 
 [node name="SkillManagerComponent" parent="." index="8" node_paths=PackedStringArray("skills")]
