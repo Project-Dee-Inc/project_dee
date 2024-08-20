@@ -24,7 +24,7 @@ func _deactivate_skill():
 	await get_tree().create_timer(cd).timeout
 	_activate_skill()
 
-func _on_hit_collider_component_body_entered(body):
+func _on_hit_collider_component_body_entered(_body):
 	if(skill_is_active):
 		target._damage(damage)
 		_deactivate_skill()

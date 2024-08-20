@@ -44,7 +44,7 @@ func _shoot(base:Node3D, value:Node3D):
 func _physics_process(delta:float):
 	if(is_shooting):
 		if(is_homing):
-			_home_to_target(base_target.global_transform.origin, delta)
+			_home_to_target(delta)
 		else:
 			_move_to_direction(manual_dir, delta)
 
@@ -59,7 +59,7 @@ func _move_to_direction(direction:Vector3, delta:float):
 	direction.y = 0
 	body.global_transform.origin += direction * speed * delta
 
-func _home_to_target(target_pos:Vector3, delta:float):
+func _home_to_target(delta:float):
 	if (base_target):
 		var direction = _get_direction(base_target.global_transform.origin, body.global_transform.origin)
 		var desired_velocity:Vector3 = direction * speed

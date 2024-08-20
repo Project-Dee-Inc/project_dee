@@ -17,7 +17,7 @@ func enter():
 func exit(next_state):
 	fsm.change_to(next_state)
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if movement_manager.raycast.has_line_of_sight(movement_manager.target):
 		if(!skill_manager.state_is_attacking):
 			skill_manager._state_attacking(true)
