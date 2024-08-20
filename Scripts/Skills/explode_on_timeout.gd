@@ -7,11 +7,13 @@ class_name ExplodeOnTimeout
 var original_material:StandardMaterial3D 
 var warning_color:Color = Color.RED
 var hit_body:Area3D
-	
+
 var damage:int = 0
 var radius:float = 0
 var warning_time:float
 var cd:float = 0
+
+var entered_warning_state:bool = false
 var cd_completed:bool = false
 var skill_is_active:bool = false
 
@@ -51,6 +53,7 @@ func _set_collision_masks(include_player:bool):
 		hit_body.collision_mask  = (1 << 2)
 
 func _start_warning():
+	entered_warning_state = true
 	var new_material = original_material as StandardMaterial3D
 	if (new_material):
 		new_material.albedo_color = warning_color

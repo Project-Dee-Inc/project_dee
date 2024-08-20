@@ -12,7 +12,7 @@ func enter():
 	movement_manager._state_moving(true)
 
 	await get_tree().create_timer(skill_manager.current_skill.cd - skill_manager.current_skill.warning_time).timeout
-	if (is_instance_valid(skill_manager)):
+	if (is_instance_valid(skill_manager) && !skill_manager.current_skill.entered_warning_state):
 		skill_manager.current_skill._start_warning()
 		await get_tree().create_timer(skill_manager.current_skill.warning_time).timeout
 
