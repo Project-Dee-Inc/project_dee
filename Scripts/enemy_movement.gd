@@ -1,13 +1,12 @@
 extends Node
 
+@onready var nav_agent = $"../NavigationAgent3D"
 @onready var parent_component = $".."
 var raycast:RayCast3D
 var target:Node3D
 var body:Node3D
 
 var speed:int = 0
-var gravity: float = 9.8
-var velocity:Vector3 = Vector3.ZERO
 var state_is_moving:bool = false
 
 var is_surround:bool = false
@@ -68,36 +67,28 @@ func _physics_process(delta):
 			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range)):
 				on_start_move(target_position, delta)
 			else:
-				on_stop_move(delta)
+				on_stop_move()
 		else:
 			on_start_move(target_position, delta)
 
 # Start movement, check if surround or simple follow movement
 func on_start_move(target_pos:Vector3, delta:float):
 	if(is_surround):
-		move_to_pos(get_circle_position(target_pos, randomnum), delta)
-	else:
-		move_to_pos(target_pos, delta)
+		target_pos = get_circle_position(target_pos, randomnum)
+
+	move_to_pos(target_pos, delta)
 
 # Stop movement and stay stationary
-func on_stop_move(delta:float):
-	velocity = Vector3.ZERO  # Stop moving if within follow range
-	body.global_transform.origin += velocity * delta  # Ensure the body stays in place
+func on_stop_move():
+	body.velocity = Vector3.ZERO  # Stop moving if within follow range
 
 # Move to Vector3 position
 func move_to_pos(target_pos:Vector3, delta:float):
-	var direction = (target_pos - body.global_transform.origin).normalized()
-	var desired_velocity: Vector3 = direction * speed
-	var steering: Vector3 = (desired_velocity - velocity) * delta * 2.5
+	nav_agent.target_position = target_pos
+	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
+	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
 
-	# Add the gravity.
-	#if not body.is_on_floor():
-		#velocity.y -= gravity * delta
-
-	velocity += steering
-	velocity.y = 0
-
-	body.global_transform.origin += velocity * delta
+	body.move_and_slide()
 
 func get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos

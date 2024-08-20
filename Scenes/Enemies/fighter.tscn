@@ -2,15 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_dqm61"]
 [ext_resource type="Script" path="res://Scripts/Skills/damage_on_contact.gd" id="2_72vw2"]
-[ext_resource type="PackedScene" path="res://Scenes/hit_collider_component.tscn" id="2_uby8r"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_uby8r"]
 [ext_resource type="Script" path="res://Scripts/States/fighter_basic_state.gd" id="4_p3r6b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d8med"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_npnph"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ax2es"]
+albedo_color = Color(1, 0.65098, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kq7g"]
-albedo_color = Color(1, 0.129412, 1, 1)
+[sub_resource type="SphereMesh" id="SphereMesh_mjr5s"]
+material = SubResource("StandardMaterial3D_ax2es")
 
 [node name="Fighter" instance=ExtResource("1_dqm61")]
 
@@ -19,20 +20,18 @@ albedo_color = Color(1, 0.129412, 1, 1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
 shape = SubResource("SphereShape3D_d8med")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HitColliderComponent/CollisionShape3D" index="0"]
-mesh = SubResource("SphereMesh_npnph")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_5kq7g")
+[node name="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_mjr5s")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
 "ATK": 2,
 "CD": 3,
 "HP": 10,
-"MOVE_SPD": 7
+"MOVE_SPD": 5
 }
 
-[node name="SkillManagerComponent" parent="." index="5" node_paths=PackedStringArray("skills")]
+[node name="SkillManagerComponent" parent="." index="8" node_paths=PackedStringArray("skills")]
 skills = [NodePath("DamageOnContact")]
 
 [node name="DamageOnContact" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
