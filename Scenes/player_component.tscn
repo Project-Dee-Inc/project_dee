@@ -1203,7 +1203,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerComponent" instance=ExtResource("1_4uxit")]
+[node name="PlayerComponent" groups=["player"] instance=ExtResource("1_4uxit")]
 isPlayer = true
 
 [node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("regen_timer")]
@@ -1248,6 +1248,7 @@ character_body_3d = NodePath("Player")
 [node name="Player" type="CharacterBody3D" parent="MovementComponent" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02476, 0)
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("5_sf6v1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovementComponent/Player" index="0"]
