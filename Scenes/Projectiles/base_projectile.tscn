@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dl3cvpkcyjywk"]
 
-[ext_resource type="PackedScene" path="res://Scenes/hit_collider_component.tscn" id="1_llw13"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="1_llw13"]
 [ext_resource type="Script" path="res://Scripts/base_projectile.gd" id="1_pr3oy"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ocwhk"]
 
