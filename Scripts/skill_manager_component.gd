@@ -2,13 +2,16 @@ extends Node
 class_name SkillManager
 
 @onready var parent_component = $".."
-@export var skills:Array[BaseSkill]
+var skills:Array[BaseSkill]
 var current_skill:BaseSkill
 var state_is_attacking:bool = false
 var target:Node
 
 # Set initial skill
 func _ready():
+	for skill in get_children():
+		skills.append(skill)
+
 	current_skill = skills[0]
 
 # Set if state is changed to attacking
