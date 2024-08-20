@@ -38,9 +38,9 @@ func _set_surround(value:bool):
 	is_surround = value
 
 # Set if movement type stays within range of player
-func _set_stay_in_range(value:bool, range:float = 0.0):
+func _set_stay_in_range(value:bool, range_to_follow:float = 0.0):
 	if(value):
-		follow_range = range
+		follow_range = range_to_follow
 
 	is_stay_in_range = value
 
