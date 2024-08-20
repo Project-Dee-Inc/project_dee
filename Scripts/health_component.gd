@@ -1,5 +1,6 @@
 extends Node
 class_name HealthComponent
+signal on_death
 
 @export var regen_timer: Timer
 var is_player:bool = false
@@ -46,12 +47,11 @@ func _on_regen_timer_timeout():
 
 # Raise death events here
 func _die():
-	var base_node = get_parent()
-	print(base_node.name, " has died.")
-	if(!is_player):
-		base_node.queue_free()
-	else:
+	on_death.emit()
+
+	if(is_player):
 		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_DEATH), {})
+		print("PLAYER DIED.")
 
 # Set if this health component is for player to raise the event of on_health_changed
 func _set_is_player():

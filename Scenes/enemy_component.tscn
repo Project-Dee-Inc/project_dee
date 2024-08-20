@@ -37,3 +37,5 @@ script = ExtResource("2_ue3mf")
 
 [node name="StateMachineComponent" type="Node" parent="."]
 script = ExtResource("3_nq5ko")
+
+[connection signal="on_death" from="HealthComponent" to="StateMachineComponent" method="_on_death"]
