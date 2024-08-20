@@ -48,7 +48,7 @@ func _physics_process(delta:float):
 		else:
 			_move_to_direction(manual_dir, delta)
 
-		if (is_outside_camera_view()):
+		if (_is_outside_camera_view()):
 			queue_free()  # Destroy the projectile if it's outside the camera's view)
 
 func _get_direction(start:Vector3, end:Vector3) -> Vector3:
@@ -77,7 +77,7 @@ func _on_hit_collider_component_body_entered(_body):
 	target._damage(damage)
 	queue_free()
 
-func is_outside_camera_view() -> bool:
+func _is_outside_camera_view() -> bool:
 	if(camera):
 		var screen_pos = camera.unproject_position(body.global_transform.origin)
 
