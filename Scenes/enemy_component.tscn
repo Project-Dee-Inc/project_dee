@@ -19,6 +19,7 @@ shape = SubResource("SphereShape3D_xqdho")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_uv2xj")]
 
