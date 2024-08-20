@@ -6,6 +6,7 @@ var skill_manager
 
 func enter():
 	#print("In SHOOTER BASIC ATTACK AND FOLLOWING state!")
+	movement_manager.is_blocked = true
 	skill_manager._change_skill(0)
 	skill_manager.current_skill._set_homing(false)
 
@@ -20,6 +21,7 @@ func exit(next_state):
 func _physics_process(_delta: float):
 	if movement_manager.raycast._has_line_of_sight(movement_manager.target):
 		if(movement_manager.is_blocked):
+			await get_tree().create_timer(0.3).timeout
 			movement_manager.is_blocked = false
 		if(!skill_manager.state_is_attacking):
 			skill_manager._state_attacking(true)
