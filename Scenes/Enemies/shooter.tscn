@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d03xwmlrcr687"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_dex7l"]
-[ext_resource type="PackedScene" path="res://Scenes/hit_collider_component.tscn" id="2_g780y"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_g780y"]
 [ext_resource type="Script" path="res://Scripts/Skills/shoot_projectiles.gd" id="3_1vo0o"]
 [ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="3_p3r31"]
 [ext_resource type="PackedScene" uid="uid://c3wag756q0vfk" path="res://Scenes/Projectiles/shooter_projectile.tscn" id="4_4h53y"]
@@ -9,11 +9,11 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymmlb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4labj"]
-albedo_color = Color(0, 1, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d33qm"]
+albedo_color = Color(0.513726, 1, 1, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_gmy27"]
-material = SubResource("StandardMaterial3D_4labj")
+[sub_resource type="SphereMesh" id="SphereMesh_llxdu"]
+material = SubResource("StandardMaterial3D_d33qm")
 
 [node name="Shooter" instance=ExtResource("1_dex7l")]
 
@@ -22,8 +22,8 @@ material = SubResource("StandardMaterial3D_4labj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
 shape = SubResource("SphereShape3D_ymmlb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HitColliderComponent/CollisionShape3D" index="0"]
-mesh = SubResource("SphereMesh_gmy27")
+[node name="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_llxdu")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
@@ -40,7 +40,7 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
 script = ExtResource("3_p3r31")
 
-[node name="SkillManagerComponent" parent="." index="5" node_paths=PackedStringArray("skills")]
+[node name="SkillManagerComponent" parent="." index="8" node_paths=PackedStringArray("skills")]
 skills = [NodePath("ShootProjectiles")]
 
 [node name="ShootProjectiles" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]

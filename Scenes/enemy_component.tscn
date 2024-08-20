@@ -1,17 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://b60cqbceg1qah"]
+[gd_scene load_steps=8 format=3 uid="uid://b60cqbceg1qah"]
 
-[ext_resource type="PackedScene" uid="uid://cr7trc5ktt61" path="res://Scenes/entity_component.tscn" id="1_neunh"]
+[ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_akqr4"]
 [ext_resource type="Script" path="res://Scripts/skill_manager_component.gd" id="2_ue3mf"]
+[ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="2_uv2xj"]
 [ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="2_v4c1i"]
 [ext_resource type="Script" path="res://Scripts/statemachine_component.gd" id="3_nq5ko"]
+[ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_twbxi"]
 
-[node name="EnemyComponent" groups=["enemies"] instance=ExtResource("1_neunh")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xqdho"]
 
-[node name="MovementComponent" parent="." index="3"]
+[node name="EnemyComponent" type="CharacterBody3D" groups=["enemies"]]
+collision_layer = 0
+script = ExtResource("1_akqr4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xqdho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_uv2xj")]
+
+[node name="StatComponents" type="Node" parent="."]
+
+[node name="StatManager" parent="StatComponents" instance=ExtResource("3_twbxi")]
+
+[node name="AnimationComponent" type="Node" parent="."]
+
+[node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("2_v4c1i")
 
-[node name="SkillManagerComponent" type="Node" parent="." index="4"]
+[node name="SkillManagerComponent" type="Node" parent="."]
 script = ExtResource("2_ue3mf")
 
-[node name="StateMachineComponent" type="Node" parent="." index="5"]
+[node name="StateMachineComponent" type="Node" parent="."]
 script = ExtResource("3_nq5ko")

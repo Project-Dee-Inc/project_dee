@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnyu6pkwningf"]
+[gd_scene load_steps=10 format=3 uid="uid://dnyu6pkwningf"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_aidch"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_3c5ep"]
+vertices = PackedVector3Array(4.13204, 0.5, -3.86026, 4.13204, 0.5, -8.86026, 0.632044, 0.5, -8.86026, -5.61796, 0.5, -3.86026, -5.61796, 0.5, -3.86026, 0.382044, 0.5, -9.86026, 0.132044, 0.5, -20.6103, -19.118, 0.5, -20.6103, -19.118, 0.5, -3.11026, -5.61796, 0.5, -3.86026, 0.632044, 0.5, -8.86026, 0.382044, 0.5, -9.86026, -19.118, 0.5, -3.11026, -5.86796, 0.5, -3.11026, -5.61796, 0.5, -3.86026, 12.382, 0.5, -10.3603, 12.632, 0.5, -9.61026, 19.132, 0.5, -9.61026, 19.132, 0.5, -20.6103, 0.132044, 0.5, -20.6103, 0.382044, 0.5, -9.86026, 0.632044, 0.5, -10.3603, 12.382, 0.5, -10.3603, 19.132, 0.5, -20.6103, 0.132044, 0.5, -20.6103, 0.632044, 0.5, -10.3603, 4.13204, 0.5, -8.86026, 4.13204, 0.5, -3.86026, 6.38204, 0.5, -3.61026, 12.382, 0.5, -8.86026, 19.132, 0.5, -9.61026, 12.632, 0.5, -9.61026, 12.382, 0.5, -8.86026, 6.13204, 0.5, -2.36026, 4.13204, 0.5, -2.36026, 4.13204, 0.5, 20.6397, 12.382, 0.5, -8.86026, 6.38204, 0.5, -3.61026, 6.13204, 0.5, -2.36026, 4.13204, 0.5, 20.6397, 19.132, 0.5, 20.6397, 19.132, 0.5, -9.61026, -5.61796, 0.5, -2.36026, -5.86796, 0.5, -3.11026, -19.118, 0.5, -3.11026, -19.118, 0.5, 20.6397, -3.61796, 0.5, 20.6397, -3.61796, 0.5, 20.6397, -3.61796, 0.5, -2.36026, -5.61796, 0.5, -2.36026, -3.61796, 0.5, 20.6397, 4.13204, 0.5, 20.6397, 4.13204, 0.5, -2.36026, -3.61796, 0.5, -2.36026)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 8), PackedInt32Array(6, 8, 7), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(21, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(32, 31, 30), PackedInt32Array(35, 34, 33), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 41), PackedInt32Array(38, 41, 40), PackedInt32Array(38, 40, 39), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(45, 42, 46), PackedInt32Array(49, 48, 47), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51)]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]
 
@@ -15,38 +19,51 @@
 
 [node name="TestPlayer" type="Node2D"]
 
-[node name="Ground" type="StaticBody3D" parent="."]
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("WorldBoundaryShape3D_06ei6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(41.9243, 0, 0, 0, 41.9243, 0, 0, 0, 41.9243, 0, 0, 0)
-layers = 3
-mesh = SubResource("PlaneMesh_kpxl2")
-
-[node name="Player" parent="." instance=ExtResource("1_aidch")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308, -0.0156704, -0.835206, 0.549714, 0.42317, 9.13995, 9.56504)
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(2.40753, 0, 0, 0, 2.40753, 0, 0, 0, 2.40753, 0.258462, 1.29761, -3.21893)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_2a5kc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
-mesh = SubResource("BoxMesh_m15dl")
-skeleton = NodePath("../..")
+[node name="Player" parent="." instance=ExtResource("1_aidch")]
 
 [node name="TestSpawner" parent="." instance=ExtResource("2_quged")]
 spawn_table = {
-ExtResource("3_6dflm"): 2,
-ExtResource("4_cjhxe"): 3
+ExtResource("3_6dflm"): 5,
+ExtResource("4_cjhxe"): 0
 }
 spawn_delay = 1.0
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_3c5ep")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.467938, 0, 0, 0, 0.838939, 0, 0, 0, 0.503533, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground"]
+shape = SubResource("WorldBoundaryShape3D_06ei6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
+transform = Transform3D(41.9243, 0, 0, 0, 41.9243, 0, 0, 0, 41.9243, 0, 0, 0)
+layers = 3
+mesh = SubResource("PlaneMesh_kpxl2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(11.0512, 0, 0, 0, 2.40753, 0, 0, 0, 0.232188, 0.258462, 1.29761, -3.21893)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(11.0512, 0, 0, 0, 2.40753, 0, 0, 0, 0.232188, 6.49557, 1.29761, -9.55025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
