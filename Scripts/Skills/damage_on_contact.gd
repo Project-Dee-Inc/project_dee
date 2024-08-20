@@ -22,7 +22,8 @@ func _activate_skill():
 func _deactivate_skill():
 	skill_is_active = false
 	await get_tree().create_timer(cd).timeout
-	_activate_skill()
+	if (is_instance_valid(self)):
+		_activate_skill()
 
 func _on_hit_collider_component_body_entered(_body):
 	if(skill_is_active):

@@ -34,3 +34,7 @@ func set_state(state_name):
 	current_state = states[state_name]
 	add_child(current_state)
 	current_state.enter()
+
+func _on_death():
+	if(current_state.has_method("exit")):
+		current_state.exit("OnDeath")
