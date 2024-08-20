@@ -3,6 +3,7 @@ extends Node
 # Preload the scene you want to spawn
 @export var spawn_table: Dictionary = {}
 @export var spawn_delay: float = 0
+@export var spawn_range: float = 10
 
 var camera: Camera3D
 
@@ -17,7 +18,7 @@ func _start_spawning():
 	for spawn_key in spawn_table.keys():
 		var spawn_count = spawn_table[spawn_key]
 		for i in range(spawn_count):
-			var spawn_position = get_random_position_around_object(target.global_transform.origin, 10)
+			var spawn_position = get_random_position_around_object(target.global_transform.origin, spawn_range)
 			_spawn_object(spawn_key, spawn_position)
 
 func _spawn_object(object_to_spawn, location):
