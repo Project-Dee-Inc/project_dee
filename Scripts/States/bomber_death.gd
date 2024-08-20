@@ -6,6 +6,8 @@ var skill_manager
 
 func enter():
 	skill_manager._state_attacking(true)
+	if(!skill_manager.current_skill.entered_warning_state):
+		skill_manager.current_skill._start_warning()
 
 	movement_manager._set_surround(false)
 	movement_manager._state_moving(false)
