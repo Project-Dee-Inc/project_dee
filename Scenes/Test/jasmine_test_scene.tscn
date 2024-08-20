@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnyu6pkwningf"]
+[gd_scene load_steps=12 format=3 uid="uid://dnyu6pkwningf"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_aidch"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="5_rrvo8"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_3c5ep"]
 vertices = PackedVector3Array(0.7995, 0.0134801, -3.95612, 1.0495, 0.0134801, -8.70612, 0.2995, 0.0134801, -8.95612, -10.2005, 0.0134801, -3.95612, -13.9505, 0.0134801, 2.04388, -12.9505, 0.0134801, 1.79388, -10.4505, 0.0134801, -2.95612, -10.2005, 0.0134801, -3.95612, -78.4505, 0.0134801, 4.04388, 0.2995, 0.0134801, -9.95612, 2.0495, 0.0134801, -10.2061, 1.7995, 0.0134801, -84.4561, -78.4505, 0.0134801, 4.04388, -10.2005, 0.0134801, -3.95612, 0.2995, 0.0134801, -9.95612, 1.7995, 0.0134801, -84.4561, -78.4505, 0.0134801, -84.4561, -10.2005, 0.0134801, -3.95612, 0.2995, 0.0134801, -8.95612, 0.2995, 0.0134801, -9.95612, -78.4505, 0.0134801, 4.04388, -13.9505, 0.0134801, 4.04388, -13.9505, 0.0134801, 2.04388, 2.0495, 0.0134801, -10.2061, 10.7995, 0.0134801, -10.2061, 11.0495, 0.0134801, -84.4561, 1.7995, 0.0134801, -84.4561, 12.2995, 0.0134801, -10.2061, 12.5495, 0.0134801, -9.45612, 78.5495, 0.0134801, -9.45612, 78.5495, 0.0134801, -84.4561, 11.0495, 0.0134801, -84.4561, 11.0495, 0.0134801, -84.4561, 10.7995, 0.0134801, -10.2061, 12.2995, 0.0134801, -10.2061, 1.0495, 0.0134801, -8.70612, 0.7995, 0.0134801, -3.95612, 1.7995, 0.0134801, -3.70612, 12.2995, 0.0134801, -8.70612, 12.5495, 0.0134801, -9.45612, 12.2995, 0.0134801, -8.70612, 6.0495, 0.0134801, 11.5439, 78.5495, 0.0134801, 11.5439, 78.5495, 0.0134801, -9.45612, 12.2995, 0.0134801, -8.70612, 1.7995, 0.0134801, -3.70612, 1.7995, 0.0134801, -2.70612, 5.7995, 0.0134801, 10.7939, 6.0495, 0.0134801, 11.5439, 1.7995, 0.0134801, -2.70612, 0.0494995, 0.0134801, -2.45612, 0.2995, 0.0134801, 10.7939, 5.7995, 0.0134801, 10.7939, -10.2005, 0.0134801, -2.45612, -10.4505, 0.0134801, -2.95612, -12.9505, 0.0134801, 1.79388, -12.4505, 0.0134801, 2.04388, 0.0494995, 0.0134801, -2.45612, -10.2005, 0.0134801, -2.45612, -12.4505, 0.0134801, 2.04388, -12.4505, 0.0134801, 10.7939, 0.2995, 0.0134801, 10.7939, -78.4505, 0.0134801, 18.7939, -13.9505, 0.0134801, 18.7939, -13.9505, 0.0134801, 4.04388, -78.4505, 0.0134801, 4.04388, 5.7995, 0.0134801, 12.2939, -12.4505, 0.0134801, 12.2939, -12.4505, 0.0134801, 20.7939, -12.4505, 0.0134801, 20.7939, -13.2005, 0.0134801, 21.0439, -13.2005, 0.0134801, 84.5439, 78.5495, 0.0134801, 11.5439, 6.0495, 0.0134801, 11.5439, 5.7995, 0.0134801, 12.2939, 5.7995, 0.0134801, 12.2939, -12.4505, 0.0134801, 20.7939, -13.2005, 0.0134801, 84.5439, 78.5495, 0.0134801, 84.5439, 78.5495, 0.0134801, 11.5439, -13.2005, 0.0134801, 84.5439, -13.2005, 0.0134801, 21.0439, -13.9505, 0.0134801, 20.7939, -78.4505, 0.0134801, 18.7939, -78.4505, 0.0134801, 84.5439, -13.9505, 0.0134801, 20.7939, -13.9505, 0.0134801, 18.7939, -78.4505, 0.0134801, 18.7939)
@@ -36,7 +37,8 @@ transform = Transform3D(0.74278, 0.0426831, 0.668173, -0.113842, 0.991486, 0.063
 [node name="MobSpawner" parent="." instance=ExtResource("2_quged")]
 spawn_table = {
 ExtResource("3_6dflm"): 5,
-ExtResource("4_cjhxe"): 5
+ExtResource("4_cjhxe"): 5,
+ExtResource("5_rrvo8"): 5
 }
 spawn_delay = 2.0
 
@@ -46,9 +48,9 @@ navigation_mesh = SubResource("NavigationMesh_3c5ep")
 
 [node name="Ground" type="StaticBody3D" parent="MapNavMesh"]
 transform = Transform3D(1.88317, 0, -5.96046e-08, 0, 3.37622, 0, -5.96046e-08, 0, 2.02642, 0, 0, 0)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_06ei6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/Ground/CollisionShape3D"]
@@ -59,6 +61,7 @@ skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MapNavMesh"]
 transform = Transform3D(11.0512, 0, 0, 0, 1.46821, 0, 4.76837e-07, 0, 0.232188, -4.294, 0.683983, -3.219)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D"]
 shape = SubResource("BoxShape3D_2a5kc")
@@ -69,6 +72,7 @@ skeleton = NodePath("../..")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="MapNavMesh"]
 transform = Transform3D(11.0512, 0, 0, 0, 1.41994, 0, 4.76837e-07, 0, 0.232188, 6.48027, 0.653183, -9.55591)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D2"]
 shape = SubResource("BoxShape3D_2a5kc")
@@ -79,6 +83,7 @@ skeleton = NodePath("../..")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="MapNavMesh"]
 transform = Transform3D(-1.90735e-06, 0, 0.232188, 0, 1.60272, 0, -18.1714, 0, 0, -13.307, 0.684841, 11.438)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D3"]
 shape = SubResource("BoxShape3D_2a5kc")
@@ -89,6 +94,7 @@ skeleton = NodePath("../..")
 
 [node name="StaticBody3D4" type="StaticBody3D" parent="MapNavMesh"]
 transform = Transform3D(18.1656, 0, 0, 0, 1.80338, 0, 0, 0, 0.232188, -3.705, 0.822879, 11.438)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D4"]
 shape = SubResource("BoxShape3D_2a5kc")

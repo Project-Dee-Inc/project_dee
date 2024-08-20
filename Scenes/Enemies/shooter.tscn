@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d03xwmlrcr687"]
+[gd_scene load_steps=11 format=3 uid="uid://d03xwmlrcr687"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_dex7l"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_g780y"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="3_p3r31"]
 [ext_resource type="PackedScene" uid="uid://c3wag756q0vfk" path="res://Scenes/Projectiles/shooter_projectile.tscn" id="4_4h53y"]
 [ext_resource type="Script" path="res://Scripts/States/shooter_basic_state.gd" id="4_py2y5"]
+[ext_resource type="Script" path="res://Scripts/States/basic_death.gd" id="7_8wu7u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymmlb"]
 
@@ -18,6 +19,7 @@ material = SubResource("StandardMaterial3D_d33qm")
 [node name="Shooter" instance=ExtResource("1_dex7l")]
 
 [node name="HitColliderComponent" parent="." index="0" instance=ExtResource("2_g780y")]
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
 shape = SubResource("SphereShape3D_ymmlb")
@@ -40,9 +42,6 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
 script = ExtResource("3_p3r31")
 
-[node name="SkillManagerComponent" parent="." index="8" node_paths=PackedStringArray("skills")]
-skills = [NodePath("ShootProjectiles")]
-
 [node name="ShootProjectiles" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("3_1vo0o")
 projectile_obj = ExtResource("4_4h53y")
@@ -50,3 +49,6 @@ stat_component = NodePath("../../StatComponents/StatManager")
 
 [node name="BasicAttack" type="Node" parent="StateMachineComponent" index="0"]
 script = ExtResource("4_py2y5")
+
+[node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("7_8wu7u")
