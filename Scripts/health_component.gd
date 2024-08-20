@@ -50,6 +50,8 @@ func _die():
 	print(base_node.name, " has died.")
 	if(!is_player):
 		base_node.queue_free()
+	else:
+		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_DEATH), {})
 
 # Set if this health component is for player to raise the event of on_health_changed
 func _set_is_player():
