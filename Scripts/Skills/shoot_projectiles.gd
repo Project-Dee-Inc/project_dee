@@ -41,6 +41,9 @@ func _spawn_projectile():
 	projectile.global_transform.origin = base_node.global_transform.origin
 	get_parent().add_child(projectile)
 	projectile.scale = Vector3(0.5, 0.5, 0.5)
+	
+	projectile._set_collision_layer(Constants.TARGETS.NEUTRAL)
+	projectile._set_collision_masks(Constants.TARGETS.PLAYER)
 
 	projectile.is_homing = is_homing
 	projectile._shoot(projectile, target)

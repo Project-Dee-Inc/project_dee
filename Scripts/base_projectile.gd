@@ -1,9 +1,9 @@
 extends Node3D
 class_name Projectile
 
-@export var turn_speed: float = 5.0
 @onready var camera: Camera3D = get_viewport().get_camera_3d()
 @onready var stat_component = $StatComponent
+var hit_collider:Area3D 
 var stat_dict: Dictionary = {}
 var base_target:Node3D
 var target:Node
@@ -24,12 +24,19 @@ func _ready():
 
 # Get copy of dictionary from referenced stats
 func _get_values():
+	hit_collider = get_node("HitColliderComponent")
 	stat_dict = stat_component.stat_dict
 
 # Override method to get neccessary values from stat dictionary
 func _set_values():
 	damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
 	speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.MOVE_SPD)]
+
+func _set_collision_masks(target_type:Constants.TARGETS):
+	Constants.set_collision_masks(hit_collider, target_type)
+
+func _set_collision_layer(target_type:Constants.TARGETS):
+	Constants.set_collision_layer(hit_collider, target_type)
 
 func _shoot(base:Node3D, value:Node3D):
 	body = base

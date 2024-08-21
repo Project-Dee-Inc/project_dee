@@ -51,20 +51,10 @@ func _set_collider_radius(value:float):
 	sphere.radius = value
 
 func _set_collision_masks(target_type:Constants.TARGETS):
-	match target_type:
-		Constants.TARGETS.PLAYER:
-			hit_body.collision_mask = (1 << 1)
-		Constants.TARGETS.ENEMY:
-			hit_body.collision_mask  = (1 << 2)
-		Constants.TARGETS.BOTH:
-			hit_body.collision_mask  = (1 << 1) | (1 << 2)
+	Constants.set_collision_masks(hit_body, target_type)
 
 func _set_collision_layer(target_type:Constants.TARGETS):
-	match target_type:
-		Constants.TARGETS.PLAYER:
-			hit_body.collision_layer = 2
-		Constants.TARGETS.ENEMY:
-			hit_body.collision_layer  = 3
+	Constants.set_collision_layer(hit_body, target_type)
 
 func _on_area_entered(_area):
 	if(allow_area_bodies):
