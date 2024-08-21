@@ -6,6 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_1fsa4"]
 
 [node name="AoeHitColliderComponent" node_paths=PackedStringArray("hit_collider") instance=ExtResource("1_foipc")]
+monitorable = false
 script = ExtResource("2_cn2kc")
 hit_collider = NodePath("CollisionShape3D")
 
