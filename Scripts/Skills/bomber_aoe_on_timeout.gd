@@ -8,13 +8,14 @@ func _set_aoe_values(hit_collider:Area3D):
 	if(!cd_completed):
 		targets = Constants.TARGETS.ENEMY
 
+	# Create sphere collider, set radius, and disable
+	hit_collider._create_collider(radius)
+	# Set Base node for counterchecking
 	hit_collider._set_base_node(get_parent().parent_component)
 	# Set CD to despawn collider and the damage value it deals
 	hit_collider._set_values(0.2, damage)
 	# Set AOE Damage type to normal attack
 	hit_collider._set_aoe_damage_type(true)
-	# Set sphere collider radius
-	hit_collider._set_collider_radius(radius)
 	# This sphere collider is set to enemy layer
 	hit_collider._set_collision_layer(Constants.TARGETS.NEUTRAL)
 	# Should scan depending on the targets set above

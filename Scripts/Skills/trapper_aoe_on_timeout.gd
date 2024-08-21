@@ -36,11 +36,12 @@ func _set_aoe_values(hit_collider:Area3D):
 		# Set to debuff damage type and attach which stat it debuffs
 		hit_collider._set_aoe_damage_type(false, debuff_stat)
 
+	# Create and set sphere collider radius
+	hit_collider._create_collider(radius)
+	# Store base node
 	hit_collider._set_base_node(get_parent().parent_component)
 	# Set cd to despawn collider and the value it deals for damage or debuff
 	hit_collider._set_values(cd, value)
-	# Set sphere collider radius
-	hit_collider._set_collider_radius(radius)
 	# Collision layer set to enemy
 	hit_collider._set_collision_layer(Constants.TARGETS.NEUTRAL)
 	# Should only scan player layer
