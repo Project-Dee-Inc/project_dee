@@ -1,11 +1,11 @@
 extends "res://Scripts/skill_component.gd"
-class_name ExplodeOnTimeout
+class_name AoeOnTimeout
 
 @export var mesh_instance:MeshInstance3D 
 @export var hit_body:PackedScene
+@export var warning_color:Color = Color.RED
 
 var original_material:StandardMaterial3D 
-var warning_color:Color = Color.RED
 
 var damage:int = 0
 var radius:float = 0
@@ -52,19 +52,7 @@ func _set_off_aoe():
 	bomb_hit_collider.global_transform.origin = base_node.global_transform.origin
 	var root_node = get_tree().current_scene
 	root_node.add_child(bomb_hit_collider)
-	#get_parent().add_child(bomb_hit_collider)
 	_set_aoe_values(bomb_hit_collider)
 
 func _set_aoe_values(hit_collider:Area3D):
-	var targets = Constants.TARGETS.BOTH
-	if(!cd_completed):
-		targets = Constants.TARGETS.ENEMY
-		
-	hit_collider._set_values(0.2, damage)
-	hit_collider._set_aoe_damage_type(true)
-	hit_collider._set_collider_radius(radius)
-	hit_collider._set_collision_layer(Constants.TARGETS.ENEMY)
-	hit_collider._set_collision_masks(targets)
-	hit_collider._enable_character_bodies()
-	hit_collider._enable_area_bodies()
-	hit_collider._enable_collider(true)
+	pass
