@@ -1,5 +1,61 @@
-[gd_scene load_steps=2 format=3 uid="uid://h7ocenncgjo7"]
+[gd_scene load_steps=12 format=3 uid="uid://h7ocenncgjo7"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_llo2n"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_gg8an"]
+[ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_yxusj"]
+[ext_resource type="Script" path="res://Scripts/Skills/trapper_aoe_on_timeout.gd" id="4_y1b44"]
+[ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="5_haxcj"]
+[ext_resource type="Script" path="res://Scripts/States/trapper_basic_state.gd" id="6_ysqso"]
+[ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="7_73sed"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r76uq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcois"]
+albedo_color = Color(0.654902, 0.584314, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xgn8s"]
+material = SubResource("StandardMaterial3D_bcois")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4oua5"]
+albedo_color = Color(0.654902, 0.584314, 1, 1)
 
 [node name="Trapper" instance=ExtResource("1_llo2n")]
+
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_gg8an")]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
+shape = SubResource("SphereShape3D_r76uq")
+
+[node name="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_xgn8s")
+surface_material_override/0 = SubResource("StandardMaterial3D_4oua5")
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"AOE": 3,
+"CD": 5,
+"EXP_GAIN": 1,
+"HP": 5,
+"MOVE_SPD": 7
+}
+
+[node name="DebuffStatComponent" parent="StatComponents" index="1" instance=ExtResource("3_yxusj")]
+stat_dict = {
+"CD": 5,
+"MOVE_SPD": 0.2
+}
+
+[node name="TrapperAoeOnTimeout" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("debuff_stat_component", "mesh_instance", "stat_component")]
+script = ExtResource("4_y1b44")
+debuff_stat_component = NodePath("../../StatComponents/DebuffStatComponent")
+mesh_instance = NodePath("../../MeshInstance3D")
+hit_body = ExtResource("5_haxcj")
+warning_color = Color(1, 1, 1, 1)
+stat_component = NodePath("../../StatComponents/StatManager")
+
+[node name="BasicAttack" type="Node" parent="StateMachineComponent" index="0"]
+script = ExtResource("6_ysqso")
+
+[node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("7_73sed")

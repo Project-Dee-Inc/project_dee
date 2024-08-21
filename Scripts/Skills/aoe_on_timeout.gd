@@ -21,7 +21,8 @@ func _ready():
 	_set_values()
 
 func _set_values():
-	damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
+	if(stat_dict.has(Constants.get_enum_name_by_value(Constants.STATS.ATK))):
+		damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
 	radius = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.AOE)]
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 
