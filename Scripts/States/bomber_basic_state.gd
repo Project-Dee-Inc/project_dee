@@ -17,7 +17,7 @@ func enter():
 		await get_tree().create_timer(skill_manager.current_skill.warning_time).timeout
 
 	if (is_instance_valid(skill_manager)):
-		skill_manager.current_skill._bomb_timeout()
+		skill_manager.current_skill._aoe_timeout()
 		exit("OnDeath")
 
 func exit(next_state):

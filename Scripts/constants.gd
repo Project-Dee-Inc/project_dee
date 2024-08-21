@@ -1,5 +1,11 @@
 extends Node
 
+enum TARGETS { 
+	PLAYER,
+	ENEMY,
+	BOTH
+}
+
 enum WEAPON_TYPES{
 	MELEE,
 	RANGE,
