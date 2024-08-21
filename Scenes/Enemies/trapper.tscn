@@ -11,13 +11,13 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_r76uq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcois"]
-albedo_color = Color(0.654902, 0.584314, 1, 1)
+albedo_color = Color(0.220109, 0.762635, 7.70092e-07, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_xgn8s"]
 material = SubResource("StandardMaterial3D_bcois")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4oua5"]
-albedo_color = Color(0.654902, 0.584314, 1, 1)
+albedo_color = Color(0.219608, 0.760784, 0, 1)
 
 [node name="Trapper" instance=ExtResource("1_llo2n")]
 
@@ -33,7 +33,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4oua5")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
-"AOE": 3,
+"AOE": 2,
 "CD": 5,
 "EXP_GAIN": 1,
 "HP": 5,
