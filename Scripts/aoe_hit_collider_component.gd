@@ -3,10 +3,11 @@ class_name AoeCollider
 
 @export var allow_character_bodies:bool = false
 @export var allow_area_bodies:bool = false
-@export var hit_collider:CollisionShape3D
 
+var hit_collider:CollisionShape3D
 var base_node:Node
 var hit_body:Area3D
+
 var cd_collider:float = 0
 var damage:float = 0
 
@@ -20,6 +21,16 @@ var stat_to_debuff:Constants.STATS
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hit_body = self
+
+func _create_collider(value:float):
+	var collision_shape = CollisionShape3D.new()
+	var sphere_shape = SphereShape3D.new()
+	sphere_shape.radius = value
+
+	collision_shape.shape = sphere_shape
+	collision_shape.transform.origin = Vector3(0, 0, 0)
+	add_child(collision_shape)
+	hit_collider = collision_shape
 	_enable_collider(false)
 
 func _set_base_node(value:Node):
@@ -51,10 +62,6 @@ func _enable_collider(value:bool):
 		_enable_collider(false)
 		queue_free()
 
-func _set_collider_radius(value:float):
-	var sphere = hit_collider.shape as SphereShape3D
-	sphere.radius = value
-
 func _set_collision_masks(target_type:Constants.TARGETS):
 	Constants.set_collision_masks(hit_body, target_type)
 
@@ -80,7 +87,6 @@ func _deal_damage_to_target(target_node):
 		_on_deal_aoe_damage(collision_target)
 
 func _on_deal_aoe_damage(aoe_target):
-	#print("TARGET IS ", aoe_target.name)
 	if(is_damage_or_debuff):
 		aoe_target.health_component._damage(damage)
 	else:
