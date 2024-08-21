@@ -28,9 +28,10 @@ func _spawn_objects():
 
 func _spawn_object(scene: PackedScene, location: Vector3):
 	var instance = scene.instantiate()
+	add_child(instance)  
+
 	instance.global_transform.origin = location
-	add_child(instance)
-	
+
 	active_spawns[scene] += 1
 	instance.connect("tree_exited", Callable(self, "_on_object_destroyed").bind(scene))
 
