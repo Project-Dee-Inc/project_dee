@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_ee11d"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_yvnni"]
-[ext_resource type="Script" path="res://Scripts/Skills/aoe_on_timeout.gd" id="3_4csjt"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_basic_state.gd" id="4_0rifu"]
 [ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="4_nf6sv"]
+[ext_resource type="Script" path="res://Scripts/Skills/bomber_aoe_on_timeout.gd" id="5_7yuud"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="5_d6d8m"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kkr14"]
@@ -37,8 +37,8 @@ stat_dict = {
 "MOVE_SPD": 2
 }
 
-[node name="AoeOnTimeout" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("mesh_instance", "stat_component")]
-script = ExtResource("3_4csjt")
+[node name="BomberAoeOnTimeout" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("mesh_instance", "stat_component")]
+script = ExtResource("5_7yuud")
 mesh_instance = NodePath("../../MeshInstance3D")
 hit_body = ExtResource("4_nf6sv")
 stat_component = NodePath("../../StatComponents/StatManager")
