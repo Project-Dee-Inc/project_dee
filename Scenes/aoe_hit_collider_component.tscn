@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct7a6n0tb25m8"]
+
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="1_foipc"]
+[ext_resource type="Script" path="res://Scripts/aoe_hit_collider_component.gd" id="2_cn2kc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1fsa4"]
+
+[node name="AoeHitColliderComponent" node_paths=PackedStringArray("hit_collider") instance=ExtResource("1_foipc")]
+script = ExtResource("2_cn2kc")
+hit_collider = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_1fsa4")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
