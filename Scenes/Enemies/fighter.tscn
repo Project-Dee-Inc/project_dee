@@ -16,10 +16,10 @@ material = SubResource("StandardMaterial3D_ax2es")
 
 [node name="Fighter" instance=ExtResource("1_dqm61")]
 
-[node name="HitColliderComponent" parent="." index="0" instance=ExtResource("2_uby8r")]
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_uby8r")]
 collision_layer = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("SphereShape3D_d8med")
 
 [node name="MeshInstance3D" parent="." index="2"]
@@ -43,4 +43,4 @@ script = ExtResource("4_p3r6b")
 [node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
 script = ExtResource("5_msati")
 
-[connection signal="body_entered" from="HitColliderComponent" to="SkillManagerComponent/DamageOnContact" method="_on_hit_collider_component_body_entered"]
+[connection signal="body_entered" from="BodyHitCollider" to="SkillManagerComponent/DamageOnContact" method="_on_hit_collider_component_body_entered"]
