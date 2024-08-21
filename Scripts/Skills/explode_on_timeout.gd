@@ -77,5 +77,6 @@ func _deal_damage_to_target(target_node):
 		elif(target_node is Area3D):
 			bomb_target = target_node.get_parent()
 
-		if(bomb_target):
+		if(bomb_target && bomb_target != hit_body.get_parent()):
+			#print("TARGET IS ", bomb_target.name)
 			bomb_target.health_component._damage(damage)
