@@ -1,6 +1,7 @@
 extends Node
 
 enum TARGETS { 
+	NEUTRAL,
 	PLAYER,
 	ENEMY,
 	BOTH
@@ -74,3 +75,27 @@ func get_enum_name_by_value(value: int) -> String:
 func is_close_to_destination(current_position: Vector3, destination: Vector3, threshold: float = 0.5) -> bool:
 	var distance = current_position.distance_to(destination)
 	return distance <= threshold
+
+func set_collision_masks(collider_component:Area3D, target_type:Constants.TARGETS):
+	#print("HERE MASK ", collider_component)
+	match target_type:
+		Constants.TARGETS.PLAYER:
+			collider_component.collision_mask = (1 << 1)
+		Constants.TARGETS.ENEMY:
+			collider_component.collision_mask  = (1 << 2)
+		Constants.TARGETS.BOTH:
+			collider_component.collision_mask  = (1 << 1) | (1 << 2)
+		_:
+			pass
+
+func set_collision_layer(collider_component:Area3D, target_type:Constants.TARGETS):
+	#print("HERE LAYER ", collider_component)
+	match target_type:
+		Constants.TARGETS.NEUTRAL:
+			collider_component.collision_layer = (1 << 0)
+		Constants.TARGETS.PLAYER:
+			collider_component.collision_layer = (1 << 1)
+		Constants.TARGETS.ENEMY:
+			collider_component.collision_layer  = (1 << 2)
+		_:
+			pass
