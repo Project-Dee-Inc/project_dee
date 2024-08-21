@@ -29,6 +29,7 @@ mesh = SubResource("SphereMesh_mjr5s")
 stat_dict = {
 "ATK": 5,
 "CD": 3,
+"EXP_GAIN": 1,
 "HP": 10,
 "MOVE_SPD": 5
 }
