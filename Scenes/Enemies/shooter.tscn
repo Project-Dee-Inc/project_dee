@@ -18,10 +18,10 @@ material = SubResource("StandardMaterial3D_d33qm")
 
 [node name="Shooter" instance=ExtResource("1_dex7l")]
 
-[node name="HitColliderComponent" parent="." index="0" instance=ExtResource("2_g780y")]
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_g780y")]
 collision_layer = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("SphereShape3D_ymmlb")
 
 [node name="MeshInstance3D" parent="." index="2"]
