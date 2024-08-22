@@ -6,11 +6,12 @@ extends Control
 
 @onready var _sprite: Sprite2D = $Sprite2D
 
+const ERROR_MARGIN: Vector2i = Vector2i(2, 2) 
 
 func _process(_delta: float) -> void:
 	var screen_size := Vector2(get_window().size)
 	# viewport size minus padding
-	var game_size := Vector2(viewport.size - Vector2i(2, 2))
+	var game_size := Vector2(viewport.size - ERROR_MARGIN)
 	var display_scale := screen_size / game_size
 	# maintain aspect ratio
 	var display_scale_min: float = minf(display_scale.x, display_scale.y)
@@ -20,7 +21,7 @@ func _process(_delta: float) -> void:
 	position = ((screen_size - size) / 2).round()
 	# smooth!
 	if pixel_movement:
-		var cam := viewport.get_camera_3d() as Camera3DTexelSnapped3
+		var cam := viewport.get_camera_3d() as Camera3DTexelSnapped
 		var pixel_error: Vector2 = cam._texel_error * _sprite.scale
 		_sprite.position = -_sprite.scale + pixel_error
 		var is_integer_scale := display_scale == display_scale.floor()

@@ -1,10 +1,14 @@
 extends CharacterBody3D
 
 @export var speed = 2.0
-@onready var oldx = self.position.x;
-@onready var oldz = self.position.z;
-@onready var x = self.position.x;
-@onready var z = self.position.z;
+@export var gravity = -9.81
+
+@export var camera : Camera3DTexelSnapped
+
+var target_velocity = Vector3.ZERO
+
+func _ready():
+	floor_snap_length = camera._texel_size * 4.0
 
 func _process(delta):
 	# We create a local variable to store the input direction.
@@ -22,7 +26,18 @@ func _process(delta):
 		direction.z += 1
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
-	#position += direction * speed * delta
-	velocity = direction * speed
-	move_and_slide()
+	target_velocity.x = direction.x * speed
+	target_velocity.z = direction.z * speed
 	
+	if not is_on_floor():
+		target_velocity.y += (gravity * delta)
+	else:
+		target_velocity.y = 0.0
+	
+	velocity = target_velocity
+	move_and_slide()
+	# snap position to nearest texel
+	global_position = global_position.snapped(Vector3(
+	camera._texel_size, 
+	camera._texel_size,
+	camera._texel_size))

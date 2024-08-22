@@ -2,19 +2,14 @@ extends Node3D
 
 @export var following: Node3D
 @export var move_speed: float = 4.0
+@export var adjust_speed: float = 2.0
 
-@export_range(0, 50) var orbit_speed: float = 4.0
-var _target_orbit := rotation.y
-
-@export var circular_radius: float = 0.0
-@export var circular_speed: float = 0.2
-var _circ_angle: float = 0
-
-@onready var cam: Camera3D = $Camera3D
+#@onready var cam: Camera3D = $Camera3D
 
 func _process(delta):
-	#position  = following.position;
-	global_position = following.global_position
+	#global_position =  following.global_position
+	global_position = lerp(global_position.move_toward(following.global_position, delta * adjust_speed), following.global_position, delta * move_speed)
+	
 
 #func _process(delta: float) -> void:
 	## movement

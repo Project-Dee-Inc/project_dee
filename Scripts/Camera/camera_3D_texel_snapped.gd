@@ -1,4 +1,4 @@
-class_name Camera3DTexelSnapped3
+class_name Camera3DTexelSnapped
 extends Camera3D
 
 @export var snap := true
@@ -9,7 +9,7 @@ extends Camera3D
 @onready var _prev_rotation := global_rotation
 @onready var _snap_space := global_transform
 
-var _texel_size: float = 0.0
+@onready var _texel_size: float = size / float((get_viewport() as SubViewport).size.y)
 var _snap_nodes: Array[Node]
 var _pre_snapped_positions: Array[Vector3]
 var _texel_error := Vector2.ZERO
@@ -19,6 +19,7 @@ var _dir := Vector3.FORWARD
 func _ready() -> void:
 	RenderingServer.frame_post_draw.connect(_snap_objects_revert)
 	_dir = transform.basis.z
+	near = -far
 	_follow_target()
 
 func _process(_delta: float) -> void:
