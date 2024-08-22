@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://cjn2qj3r6lpgb"]
 
 [ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="1_26j7o"]
-[ext_resource type="Script" path="res://Scripts/Camera/Camera3DTexelSnapped.gd" id="1_ivhw3"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="1_ivhw3"]
 [ext_resource type="Script" path="res://Display.gd" id="3_h73tw"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="5_4qf27"]
 [ext_resource type="Script" path="res://LightTest.gd" id="6_6j7us"]

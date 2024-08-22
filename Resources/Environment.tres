@@ -1,0 +1,7 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://h51645bjnutc"]
+
+[ext_resource type="Sky" uid="uid://c446wqj1gwnvg" path="res://Resources/Sky.tres" id="1_ie0hq"]
+
+[resource]
+sky = ExtResource("1_ie0hq")
+glow_enabled = true
