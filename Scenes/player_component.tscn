@@ -1,20 +1,24 @@
 [gd_scene load_steps=113 format=3 uid="uid://dalwb0ioih62a"]
 
-[ext_resource type="PackedScene" uid="uid://cr7trc5ktt61" path="res://Scenes/entity_component.tscn" id="1_4uxit"]
+[ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_bxs8n"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_n1od8"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ojsv5"]
-[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="2_y5aq2"]
-[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="3_vsdhl"]
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/weapon.tscn" id="2_y5aq2"]
+[ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="3_wrmso"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="4_3f8co"]
-[ext_resource type="PackedScene" uid="uid://8xly0gj3q41x" path="res://long_sword.tscn" id="6_vd2g4"]
 [ext_resource type="Texture2D" uid="uid://dw46qbofvqrtl" path="res://Assets/TestCharacter/Small-8-Direction-Characters_by_AxulArt.png" id="7_ts3nl"]
+[ext_resource type="Script" path="res://player_movement.gd" id="8_srmj2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
+radius = 0.424336
+height = 1.8182
 
 [sub_resource type="Animation" id="Animation_4fks7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +34,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,7 +46,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -58,7 +62,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +74,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -86,7 +90,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -98,7 +102,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -114,7 +118,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -126,7 +130,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -142,7 +146,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -154,7 +158,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -170,7 +174,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -182,7 +186,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -198,7 +202,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -210,7 +214,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,7 +230,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -238,7 +242,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -254,7 +258,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -270,7 +274,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -286,7 +290,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -302,7 +306,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -318,7 +322,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -334,7 +338,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -350,7 +354,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -366,7 +370,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -383,7 +387,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -395,7 +399,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -412,7 +416,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -424,7 +428,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -441,7 +445,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -453,7 +457,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -470,7 +474,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -482,7 +486,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -499,7 +503,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -511,7 +515,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -528,7 +532,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -540,7 +544,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -557,7 +561,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -569,7 +573,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -586,7 +590,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/path = NodePath("../../AnimationComponent/AnimatedSprite3D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -598,7 +602,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/path = NodePath("../../AnimationComponent/AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -790,10 +794,6 @@ states/Start/position = Vector2(93, 142)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_hratf")
 states/Walk/position = Vector2(369, 142)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_egmuv"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_r6xf6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_nderw"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_3nsvh"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_wjg23"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_cuksa"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_7qqqu")]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
-radius = 0.424336
-height = 1.8182
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0kg0"]
 atlas = ExtResource("7_ts3nl")
@@ -1203,40 +1203,38 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerComponent" groups=["player"] instance=ExtResource("1_4uxit")]
+[node name="PlayerComponent" type="CharacterBody3D"]
+script = ExtResource("1_bxs8n")
 isPlayer = true
 
-[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("regen_timer")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0486946, 0.962153, 0)
+shape = SubResource("CapsuleShape3D_46t1g")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("regen_timer") instance=ExtResource("3_wrmso")]
 regen_timer = NodePath("Timer")
 
-[node name="Timer" type="Timer" parent="HealthComponent" index="0"]
+[node name="Timer" type="Timer" parent="HealthComponent"]
 
-[node name="WeaponManager" type="Node" parent="." index="1"]
-
-[node name="Weapon" parent="WeaponManager" index="0" instance=ExtResource("2_y5aq2")]
-attack_interval = 2.0
-attack_angle_degrees = 45.0
-damage_amount = 25
-
-[node name="StatComponents" parent="." index="2" node_paths=PackedStringArray("base_stat", "melee_stat", "magic_stat", "range_stat")]
+[node name="StatComponents" type="Node" parent="." node_paths=PackedStringArray("base_stat", "melee_stat", "magic_stat", "range_stat")]
 script = ExtResource("2_n1od8")
 base_stat = NodePath("StatManager")
 melee_stat = NodePath("Melee")
 magic_stat = NodePath("Magic")
 range_stat = NodePath("Range")
 
-[node name="StatManager" parent="StatComponents" index="0"]
+[node name="StatManager" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 stat_dict = {
 "HP": 50,
 "HP_REGEN": 1,
 "MOVE_SPD": 4.0
 }
 
-[node name="Magic" parent="StatComponents" index="1" instance=ExtResource("2_ojsv5")]
+[node name="Magic" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
-[node name="Range" parent="StatComponents" index="2" instance=ExtResource("2_ojsv5")]
+[node name="Range" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
-[node name="Melee" parent="StatComponents" index="3" instance=ExtResource("2_ojsv5")]
+[node name="Melee" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
 [node name="WeaponManager" type="Node3D" parent="."]
 
@@ -1245,46 +1243,36 @@ attack_interval = 2.0
 attack_angle_degrees = 45.0
 damage_amount = 25
 
-[node name="LongSword" parent="WeaponManager" instance=ExtResource("6_vd2g4")]
-
 [node name="AnimationComponent" type="Node3D" parent="."]
 script = ExtResource("4_3f8co")
 
-[node name="MovementComponent" parent="." index="4" node_paths=PackedStringArray("character_body_3d")]
-script = ExtResource("3_vsdhl")
-character_body_3d = NodePath("Player")
-
-[node name="Player" type="CharacterBody3D" parent="MovementComponent" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02476, 0)
-collision_layer = 2
-collision_mask = 5
-script = ExtResource("5_sf6v1")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MovementComponent/Player" index="0"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_yiika")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="MovementComponent/Player" index="1"]
+[node name="AnimationTree" type="AnimationTree" parent="AnimationComponent"]
+root_node = NodePath("")
 tree_root = SubResource("AnimationNodeStateMachine_cpeof")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Dash/blend_position = Vector2(-0.00158983, 0.961686)
-parameters/Idle/blend_position = Vector2(0.00158978, 1)
+parameters/Idle/blend_position = Vector2(-0.550179, 0.502645)
 parameters/Walk/blend_position = Vector2(0.00160003, 0.994012)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementComponent/Player" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0486946, -0.062607, 0)
-shape = SubResource("CapsuleShape3D_46t1g")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="MovementComponent/Player" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0884709, -0.176942, 0)
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimationComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0884709, 0.847818, 0)
 pixel_size = 0.054
 billboard = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_ghmpq")
-animation = &"dash_down_right"
+animation = &"dash_up_left"
 autoplay = "idle_down"
 
-[node name="DashTimer" type="Timer" parent="MovementComponent/Player" index="4"]
+[node name="MovementComponent" type="Node3D" parent="." node_paths=PackedStringArray("animation_component")]
+script = ExtResource("8_srmj2")
+animation_component = NodePath("../AnimationComponent")
+
+[node name="DashTimer" type="Timer" parent="MovementComponent"]
 wait_time = 0.2
 one_shot = true
