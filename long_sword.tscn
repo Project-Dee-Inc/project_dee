@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://8xly0gj3q41x"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/weapon.tscn" id="1_wg238"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/long_sword.gd" id="2_gogwd"]
+
+[node name="LongSword" instance=ExtResource("1_wg238")]
+
+[node name="WeaponSkill" parent="." index="1"]
+script = ExtResource("2_gogwd")
