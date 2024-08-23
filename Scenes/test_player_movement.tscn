@@ -21,3 +21,6 @@ mesh = SubResource("PlaneMesh_kpxl2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308, -0.0156704, -0.835206, 0.549714, 0.42317, 9.13995, 9.56504)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0190735, 0.887656, -0.460112, -0.499658, 0.407071, 0.764615, 0.866013, 0.215315, 0.451288, -0.521202, 1.77095, -0.74745)
