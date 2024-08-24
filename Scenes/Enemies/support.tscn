@@ -1,5 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvjogvdjqi50"]
+[gd_scene load_steps=10 format=3 uid="uid://bvjogvdjqi50"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_hl8ss"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_7863v"]
+[ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_iomo7"]
+[ext_resource type="Script" path="res://Scripts/Skills/buff_aoe_on_contact.gd" id="4_mogws"]
+[ext_resource type="Script" path="res://Scripts/States/basic_death.gd" id="4_v70xc"]
+[ext_resource type="Script" path="res://Scripts/States/support_basic_state.gd" id="5_1pvui"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jrnvm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpjwg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8vl1w"]
+material = SubResource("StandardMaterial3D_vpjwg")
 
 [node name="Support" instance=ExtResource("1_hl8ss")]
+
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_7863v")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
+shape = SubResource("SphereShape3D_jrnvm")
+
+[node name="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_8vl1w")
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"ATK": 0,
+"CD": 5,
+"EXP_GAIN": 1,
+"HP": 20,
+"MOVE_SPD": 5
+}
+
+[node name="BuffStatComponent" parent="StatComponents" index="1" instance=ExtResource("3_iomo7")]
+stat_dict = {
+"ATK": 0.05,
+"HP_REGEN": 0.05
+}
+
+[node name="BuffAllies" type="Node" parent="SkillManagerComponent" index="0"]
+script = ExtResource("4_mogws")
+
+[node name="BasicAttack" type="Node" parent="StateMachineComponent" index="0"]
+script = ExtResource("5_1pvui")
+
+[node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("4_v70xc")
