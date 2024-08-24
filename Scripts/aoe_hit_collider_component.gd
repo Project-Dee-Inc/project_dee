@@ -73,7 +73,6 @@ func _enable_collider(value:bool):
 
 	if(!visible_value):
 		await get_tree().create_timer(cd_collider).timeout
-		_enable_collider(false)
 		queue_free()
 
 func _set_collision_masks(target_type:Constants.TARGETS):

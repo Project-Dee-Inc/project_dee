@@ -37,10 +37,10 @@ transform = Transform3D(0.74278, 0.0426831, 0.668173, -0.113842, 0.991486, 0.063
 
 [node name="MobSpawner" parent="." instance=ExtResource("2_quged")]
 spawn_table = {
-ExtResource("3_6dflm"): 8,
+ExtResource("3_6dflm"): 10,
 ExtResource("4_cjhxe"): 8,
-ExtResource("5_rrvo8"): 1,
-ExtResource("6_pgqk8"): 5,
+ExtResource("5_rrvo8"): 2,
+ExtResource("6_pgqk8"): 3,
 ExtResource("7_5eul4"): 1
 }
 spawn_delay = 2.0

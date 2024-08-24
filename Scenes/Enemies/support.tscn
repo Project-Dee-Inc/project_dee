@@ -23,11 +23,19 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("SphereShape3D_jrnvm")
 
-[node name="MeshInstance3D" parent="." index="2"]
+[node name="AoeHitCollider" parent="." index="1" instance=ExtResource("2_7863v")]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AoeHitCollider" index="0"]
+shape = SubResource("SphereShape3D_jrnvm")
+
+[node name="MeshInstance3D" parent="." index="3"]
 mesh = SubResource("SphereMesh_8vl1w")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
+"AOE": 3,
 "ATK": 0,
 "CD": 5,
 "EXP_GAIN": 1,
@@ -41,11 +49,16 @@ stat_dict = {
 "HP_REGEN": 0.05
 }
 
-[node name="BuffAllies" type="Node" parent="SkillManagerComponent" index="0"]
+[node name="BuffAllies" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("aoe_collision_shape", "buff_stat_component", "stat_component")]
 script = ExtResource("4_mogws")
+aoe_collision_shape = NodePath("../../AoeHitCollider/CollisionShape3D")
+buff_stat_component = NodePath("../../StatComponents/BuffStatComponent")
+stat_component = NodePath("../../StatComponents/StatManager")
 
 [node name="BasicAttack" type="Node" parent="StateMachineComponent" index="0"]
 script = ExtResource("5_1pvui")
 
 [node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
 script = ExtResource("4_v70xc")
+
+[connection signal="area_entered" from="AoeHitCollider" to="SkillManagerComponent/BuffAllies" method="_on_aoe_hit_collider_area_entered"]
