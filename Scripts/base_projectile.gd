@@ -38,11 +38,13 @@ func _set_collision_masks(target_type:Constants.TARGETS):
 func _set_collision_layer(target_type:Constants.TARGETS):
 	Constants.set_collision_layer(hit_collider, target_type)
 
+# Get target and direction for projectile to go
 func _shoot(base:Node3D, value:Node3D):
 	body = base
 	base_target = value
 	target = value.health_component
 
+	# If not homing, just get general direction
 	if(!is_homing):
 		manual_dir = _get_direction(base_target.global_transform.origin, body.global_transform.origin)
 
@@ -62,10 +64,12 @@ func _get_direction(start:Vector3, end:Vector3) -> Vector3:
 	var dir = (start - end).normalized()
 	return dir
 
+# Simple follow to general direction
 func _move_to_direction(direction:Vector3, delta:float):
 	direction.y = 0
 	body.global_transform.origin += direction * speed * delta
 
+# Follow target over update
 func _home_to_target(delta:float):
 	if (base_target):
 		var direction = _get_direction(base_target.global_transform.origin, body.global_transform.origin)
@@ -80,10 +84,12 @@ func _home_to_target(delta:float):
 		# If no target, just move forward
 		body.global_transform.origin = body.global_transform.basis.z.normalized() * speed
 
+# On collide, damage and despawn
 func _on_hit_collider_component_body_entered(_body):
 	target._damage(damage)
 	queue_free()
 
+# If projectile goes outside camera, despawn
 func _is_outside_camera_view() -> bool:
 	if(camera):
 		var screen_pos = camera.unproject_position(body.global_transform.origin)
