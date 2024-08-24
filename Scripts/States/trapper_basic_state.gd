@@ -8,6 +8,7 @@ func enter():
 	#print("In TRAPPER BASIC ATTACK AND FOLLOWING state!")
 	skill_manager._change_skill(0)
 
+	# Start moving
 	movement_manager._set_surround(false)
 	movement_manager._state_moving(true)
 
