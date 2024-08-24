@@ -13,7 +13,9 @@ var is_surround:bool = false
 var is_stay_in_range:bool = false
 var is_blocked:bool = false
 var needs_line_of_sight:bool = false
+var override_follow_target:bool = false
 
+var target_position:Vector3
 var follow_range:float = 0
 var kill_radius:float = 2.5
 var randomnum:float
@@ -52,6 +54,14 @@ func _set_line_of_sight(value:bool):
 
 	needs_line_of_sight = value
 
+# Set if movement doesn't have to follow a target, but to a position
+func _set_independent_movement(value:bool):
+	override_follow_target = value
+
+# Manually set target position
+func _set_target_position(value:Vector3):
+	target_position = value
+
 # Set state to following or not
 func _state_moving(value:bool):
 	if(value && target == null):
@@ -62,7 +72,8 @@ func _state_moving(value:bool):
 # Move to position if in following state
 func _physics_process(delta):
 	if (state_is_moving && target != null):
-		var target_position = target.global_transform.origin
+		if(!override_follow_target):
+			target_position = target.global_transform.origin
 
 		if(is_stay_in_range):
 			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked):
@@ -99,4 +110,3 @@ func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var z = kill_circle_centre.z + sin(angle) * kill_radius
 
 	return Vector3(x, kill_circle_centre.y, z)
-
