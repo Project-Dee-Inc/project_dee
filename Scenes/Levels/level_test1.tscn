@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://gsp6mywn68ig"]
+[gd_scene load_steps=5 format=3 uid="uid://gsp6mywn68ig"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_ogvnc"]
+[ext_resource type="PackedScene" uid="uid://xgldkvlu60mg" path="res://Scenes/Levels/dungeon_teleporter.tscn" id="2_20v7c"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_581g6"]
 size = Vector2(10, 10)
@@ -23,3 +24,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09757, 0, -0.42335)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.759839, -0.264741, 0.593765, -0.038991, 0.893126, 0.448113, -0.648941, -0.363645, 0.66831, 5.07333, 5.09377, 5.51145)
+
+[node name="Area3D" parent="." instance=ExtResource("2_20v7c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56717, 0.503354, -2.83077)
