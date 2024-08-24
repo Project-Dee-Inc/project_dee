@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_gg8an"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_yxusj"]
 [ext_resource type="Script" path="res://Scripts/Skills/trapper_aoe_on_timeout.gd" id="4_y1b44"]
-[ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="5_haxcj"]
+[ext_resource type="PackedScene" path="res://Scenes/aoe_hit_collider_component.tscn" id="5_haxcj"]
 [ext_resource type="Script" path="res://Scripts/States/trapper_basic_state.gd" id="6_ysqso"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="7_73sed"]
 
