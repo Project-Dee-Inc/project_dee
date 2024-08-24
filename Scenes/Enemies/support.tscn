@@ -45,8 +45,8 @@ stat_dict = {
 
 [node name="BuffStatComponent" parent="StatComponents" index="1" instance=ExtResource("3_iomo7")]
 stat_dict = {
-"ATK": 0.05,
-"HP_REGEN": 0.05
+"ATK": 0.2,
+"HP": 0.2
 }
 
 [node name="BuffAllies" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("aoe_collision_shape", "buff_stat_component", "stat_component")]

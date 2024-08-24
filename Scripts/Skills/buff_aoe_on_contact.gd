@@ -6,6 +6,8 @@ class_name BuffOnAoe
 
 var buff_stat_dict:Dictionary = {}
 var cd:float = 0
+var heal:float = 0
+var attack_buff:float = 0
 var radius:float = 0
 var skill_is_active:bool = false
 
@@ -21,6 +23,8 @@ func _get_values():
 func _set_values():
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 	radius = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.AOE)]
+	heal = buff_stat_dict[Constants.get_enum_name_by_value(Constants.STATS.HP)]
+	attack_buff = buff_stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
 	_set_collider_radius(radius)
 
 # Set collider shape radius based on AOE
@@ -46,4 +50,12 @@ func _deactivate_skill():
 # If ally within collider, buff
 func _on_aoe_hit_collider_area_entered(area: Area3D):
 	if(skill_is_active):
-		print(area.get_parent().name, " ENTERED AREA")
+		var target = area.get_parent()
+		_buff_allies(target)
+
+func _buff_allies(target:Node3D):
+	var heal_amount = target.health_component.max_health * heal
+	target.health_component._heal(heal_amount)
+	print("HEALING ", target.name, " FOR ", heal_amount)
+
+	print("BUFFING ", target.name)
