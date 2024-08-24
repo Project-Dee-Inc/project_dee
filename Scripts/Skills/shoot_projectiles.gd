@@ -41,8 +41,8 @@ func _spawn_projectile():
 	var projectile = projectile_obj.instantiate() as Node3D
 	var base_node = get_parent().parent_component
 
-	projectile.global_transform.origin = base_node.global_transform.origin
 	get_parent().add_child(projectile)
+	projectile.global_transform.origin = base_node.global_transform.origin
 	projectile.scale = Vector3(0.5, 0.5, 0.5)
 
 	# Set collision layer to 1, the same as environment

@@ -6,7 +6,6 @@ var skill_manager
 var current_cluster_center: Vector3 = Vector3.ZERO
 
 @export var update_interval: float = 0.1
-@export var cluster_radius: float = 10.0
 var update_timer: float = 0.0
 
 func enter():
