@@ -34,11 +34,6 @@ enum STATS {
 	GOLD_GAIN,
 }
 
-enum STATES { 
-	FOLLOW,
-	ATTACK
-}
-
 var stats_enum_mapping = {
 	"ATK": STATS.ATK,
 	"C_RATE": STATS.C_RATE, 
@@ -99,3 +94,16 @@ func set_collision_layer(collider_component:Area3D, target_type:Constants.TARGET
 			collider_component.collision_layer  = (1 << 2)
 		_:
 			pass
+
+func get_group_positions(group_value:String) -> Array:
+	var group_positions = []
+	for group in get_tree().get_nodes_in_group(group_value):
+		if group and group.is_inside_tree():
+			group_positions.append(group.global_transform.origin)
+	return group_positions
+
+func find_group_center(group_positions: Array) -> Vector3:
+	var total_position = Vector3()
+	for pos in group_positions:
+		total_position += pos
+	return total_position / group_positions.size() 
