@@ -17,6 +17,7 @@ func _assign_values(_params):
 	var base_stat = stat_components.get_child(0)
 	if(base_stat!=null):
 		_assign_health(base_stat)
+		_assign_regen_health(base_stat)
 		_assign_movement(base_stat)
 	else:
 		print("Base stat not found")
@@ -41,6 +42,8 @@ func _assign_health(child:Node):
 		if (child.stat_dict.has(hpIndex)):
 			health_component._set_health(child.stat_dict[hpIndex])
 
+func _assign_regen_health(child:Node):
+	if(health_component != null):
 		var regenIndex = Constants.get_enum_name_by_value(Constants.STATS.HP_REGEN)
 		if (child.stat_dict.has(regenIndex) && child.stat_dict[regenIndex] > 0):
 			health_component._set_regen(child.stat_dict[regenIndex])
