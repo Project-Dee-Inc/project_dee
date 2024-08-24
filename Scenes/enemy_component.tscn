@@ -22,9 +22,7 @@ shape = SubResource("SphereShape3D_xqdho")
 avoidance_enabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("regen_timer") instance=ExtResource("2_uv2xj")]
-regen_timer = NodePath("RegenTimer")
-
-[node name="RegenTimer" type="Timer" parent="HealthComponent"]
+regen_timer = NodePath("")
 
 [node name="StatComponents" type="Node" parent="."]
 

@@ -11,13 +11,15 @@ var update_timer: float = 0.0
 func enter():
 	#print("In SUPPORT BASIC BUFF AND FOLLOWING state!")
 	skill_manager._change_skill(0)
-	#skill_manager._state_attacking(true)
+	skill_manager._state_attacking(true)
 
 	movement_manager._set_surround(false)
 	movement_manager._state_moving(true)
 
+	# Initialize cluster finding
 	follow_largest_cluster()
 
+# Find largest cluster of enemies
 func follow_largest_cluster():
 	var enemy_positions = Constants.get_group_positions("enemies")
 	if enemy_positions.size() > 0:
@@ -25,12 +27,14 @@ func follow_largest_cluster():
 	else:
 		current_cluster_center = Vector3.ZERO  # No enemies to follow
 
+# Update position
 func _physics_process(delta):
 	update_timer += delta
 	if (update_timer >= update_interval):
 		update_timer = 0.0
 		follow_largest_cluster()
 
+	# If cluster is available, override movement to follow new center cluster point
 	if (current_cluster_center != Vector3.ZERO):
 		movement_manager._set_independent_movement(true)
 		movement_manager._set_target_position(current_cluster_center)
