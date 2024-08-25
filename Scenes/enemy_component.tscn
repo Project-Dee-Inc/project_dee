@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_twbxi"]
 [ext_resource type="Script" path="res://Scripts/enemy_animation_component.gd" id="4_k2i2y"]
 [ext_resource type="Script" path="res://Scripts/popup_damage_text.gd" id="4_p0m0h"]
-[ext_resource type="PackedScene" uid="uid://bsncnxpbks24v" path="res://Scenes/popup_text.tscn" id="6_j1nkb"]
+[ext_resource type="PackedScene" uid="uid://desmwb6tmldjy" path="res://Scenes/popup_text.tscn" id="6_j1nkb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xqdho"]
 

@@ -26,6 +26,8 @@ material = SubResource("StandardMaterial3D_p14lb")
 
 [node name="Level" type="Node2D"]
 
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999826, 0.0157296, -0.010019, 0.000468336, 0.51588, 0.85666, 0.0186436, -0.856516, 0.515783, 0.220719, 14.5581, 14.1367)
 current = true
