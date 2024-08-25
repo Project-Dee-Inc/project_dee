@@ -48,7 +48,6 @@ navigation_mesh = SubResource("NavigationMesh_3c5ep")
 transform = Transform3D(1.88317, 0, -5.96046e-08, 0, 3.37622, 0, -5.96046e-08, 0, 2.02642, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_06ei6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/Ground/CollisionShape3D"]

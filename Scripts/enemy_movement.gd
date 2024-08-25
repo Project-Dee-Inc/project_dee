@@ -55,7 +55,7 @@ func _set_line_of_sight(value:bool):
 # Set state to following or not
 func _state_moving(value:bool):
 	if(value && target == null):
-		target = GameManager.player.movement_component.character_body_3d
+		target = GameManager.player
 
 	state_is_moving = value
 
