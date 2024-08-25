@@ -1209,7 +1209,7 @@ script = ExtResource("1_bxs8n")
 isPlayer = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0486946, 0.962153, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, 0)
 shape = SubResource("CapsuleShape3D_46t1g")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("regen_timer") instance=ExtResource("3_wrmso")]
@@ -1242,6 +1242,7 @@ stat_dict = {
 [node name="LongSword2" parent="WeaponManager" instance=ExtResource("5_sfnps")]
 
 [node name="AnimationComponent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738802, 0)
 script = ExtResource("4_3f8co")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
