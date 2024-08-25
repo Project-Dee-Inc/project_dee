@@ -30,8 +30,8 @@ stat_dict = {
 "ATK": 5,
 "CD": 3,
 "EXP_GAIN": 1,
-"HP": 10,
-"MOVE_SPD": 5
+"HP": 15,
+"MOVE_SPD": 4
 }
 
 [node name="DamageOnContact" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
