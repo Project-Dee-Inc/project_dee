@@ -1,6 +1,7 @@
 extends Node
 class_name HealthComponent
 signal on_death
+signal on_enemy_damaged
 
 @export var regen_timer: Timer
 var is_player:bool = false
@@ -29,6 +30,8 @@ func _damage(value:int):
 	current_health = clamp(current_health - value, 0, max_health)
 	if(current_health == 0):
 		_die()
+	if(!is_player):
+		on_enemy_damaged.emit(value)
 
 # Heals!
 func _heal(value:int):
