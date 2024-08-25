@@ -1240,8 +1240,6 @@ stat_dict = {
 [node name="WeaponManager" type="Node3D" parent="."]
 
 [node name="LongSword2" parent="WeaponManager" instance=ExtResource("5_sfnps")]
-attack_interval = 20.0
-damage_amount = 0
 
 [node name="AnimationComponent" type="Node3D" parent="."]
 script = ExtResource("4_3f8co")
