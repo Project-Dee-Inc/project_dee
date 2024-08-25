@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsncnxpbks24v"]
+[gd_scene load_steps=2 format=3 uid="uid://desmwb6tmldjy"]
 
 [ext_resource type="Script" path="res://Scripts/popup_text.gd" id="1_f8mp0"]
 
 [node name="PopupText" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 0.52909, 0.848566, 0, -0.848566, 0.52909, 0, 0, 0)
+pixel_size = 0.025
+outline_modulate = Color(0, 0, 0, 0.486275)
+text = "HELLO
+"
+font_size = 25
+outline_size = 5
 script = ExtResource("1_f8mp0")

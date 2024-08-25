@@ -1,14 +1,11 @@
 extends Label3D
 
-var popup_duration:float = 0.5
+var tween:Tween
 
-func animate_popup(popup_instance:Label3D):
-	var tween = Tween.new()
-	popup_instance.add_child(tween)
-	
-	# Animate the popup to move up and fade out
-	tween.tween_property(popup_instance, "transform.origin:y", popup_instance.transform.origin.y + 1.0, popup_duration)
-	tween.tween_property(popup_instance, "modulate:a", 0, popup_duration)
+func _ready():
+	tween = create_tween()
+
+func _animate_popup_text(popup_instance:Label3D, popup_duration:float):
+	tween.tween_property(popup_instance, "global_position:y", popup_instance.global_position.y + 2.0, popup_duration/2)
+	tween.tween_property(popup_instance, "modulate:a", 0.0, popup_duration/2)
 	tween.tween_callback(Callable(popup_instance, "queue_free"))
-	
-	tween.start()
