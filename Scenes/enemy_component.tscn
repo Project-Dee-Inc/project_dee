@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b60cqbceg1qah"]
+[gd_scene load_steps=11 format=3 uid="uid://b60cqbceg1qah"]
 
 [ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_akqr4"]
 [ext_resource type="Script" path="res://Scripts/skill_manager_component.gd" id="2_ue3mf"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="2_v4c1i"]
 [ext_resource type="Script" path="res://Scripts/statemachine_component.gd" id="3_nq5ko"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_twbxi"]
+[ext_resource type="Script" path="res://Scripts/enemy_animation_component.gd" id="4_k2i2y"]
+[ext_resource type="Script" path="res://Scripts/popup_damage_text.gd" id="4_p0m0h"]
+[ext_resource type="PackedScene" uid="uid://bsncnxpbks24v" path="res://Scenes/popup_text.tscn" id="6_j1nkb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xqdho"]
 
@@ -21,14 +24,18 @@ shape = SubResource("SphereShape3D_xqdho")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("regen_timer") instance=ExtResource("2_uv2xj")]
-regen_timer = NodePath("")
+[node name="HealthComponent" parent="." instance=ExtResource("2_uv2xj")]
 
 [node name="StatComponents" type="Node" parent="."]
 
 [node name="StatManager" parent="StatComponents" instance=ExtResource("3_twbxi")]
 
 [node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("4_k2i2y")
+
+[node name="PopupDamageText" type="Node" parent="AnimationComponent"]
+script = ExtResource("4_p0m0h")
+damage_popup_scene = ExtResource("6_j1nkb")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("2_v4c1i")
@@ -40,3 +47,4 @@ script = ExtResource("2_ue3mf")
 script = ExtResource("3_nq5ko")
 
 [connection signal="on_death" from="HealthComponent" to="StateMachineComponent" method="_on_death"]
+[connection signal="on_enemy_damaged" from="HealthComponent" to="AnimationComponent/PopupDamageText" method="_on_enemy_damaged"]
