@@ -26,6 +26,7 @@ func _set_regen(value:int):
 
 # Damages!
 func _damage(value:int):
+	
 	current_health = clamp(current_health - value, 0, max_health)
 	if(current_health == 0):
 		_die()

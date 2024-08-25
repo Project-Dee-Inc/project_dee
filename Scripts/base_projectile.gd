@@ -40,7 +40,7 @@ func _set_collision_layer(target_type:Constants.TARGETS):
 
 func _shoot(base:Node3D, value:Node3D):
 	body = base
-	base_target = value.movement_component.character_body_3d
+	base_target = value
 	target = value.health_component
 
 	if(!is_homing):

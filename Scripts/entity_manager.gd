@@ -27,6 +27,7 @@ func _assign_values(_params):
 
 func _assign_movement(child:Node):
 	if(movement_component != null):
+		#movement_component.player_component = self
 		var index = Constants.get_enum_name_by_value(Constants.STATS.MOVE_SPD)
 		if(child.stat_dict.has(index)):
 			movement_component._set_speed(child.stat_dict[index])
