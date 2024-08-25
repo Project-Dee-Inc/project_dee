@@ -93,7 +93,7 @@ func _on_body_entered(_body):
 func _deal_damage_to_target(target_node):
 	var collision_target
 	if(target_node is CharacterBody3D):
-		collision_target = target_node.get_parent().get_parent()
+		collision_target = target_node
 	elif(target_node is Area3D):
 		collision_target = target_node.get_parent()
 
