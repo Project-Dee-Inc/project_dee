@@ -1,0 +1,321 @@
+[gd_scene load_steps=22 format=3 uid="uid://cwmr6lhfr8m0v"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="1_r1glk"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/long_sword.gd" id="2_wgy1y"]
+[ext_resource type="Texture2D" uid="uid://v2dfxhr3000v" path="res://Assets/TestCharacter/Iicon_32_32.png" id="3_o7k62"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="4_m45oj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_32p2n"]
+animation = &"reach"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wyphc"]
+animation = &"reset"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tr27o"]
+animation = &"retract"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_frttl"]
+animation = &"speen"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oppa0"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nbe0y"]
+xfade_time = 0.3
+advance_mode = 2
+advance_condition = &"attacking_stopped"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_psuk4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jak5v"]
+advance_mode = 2
+advance_condition = &"attacking_start"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xqk6l"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fk8x1"]
+states/End/position = Vector2(978, 144)
+states/Start/position = Vector2(36, 177)
+states/reach/node = SubResource("AnimationNodeAnimation_32p2n")
+states/reach/position = Vector2(320, 144)
+states/reset/node = SubResource("AnimationNodeAnimation_wyphc")
+states/reset/position = Vector2(179, 177)
+states/retract/node = SubResource("AnimationNodeAnimation_tr27o")
+states/retract/position = Vector2(295, 256)
+states/speen/node = SubResource("AnimationNodeAnimation_frttl")
+states/speen/position = Vector2(446, 200)
+transitions = ["reach", "speen", SubResource("AnimationNodeStateMachineTransition_oppa0"), "speen", "retract", SubResource("AnimationNodeStateMachineTransition_nbe0y"), "Start", "reset", SubResource("AnimationNodeStateMachineTransition_psuk4"), "reset", "reach", SubResource("AnimationNodeStateMachineTransition_jak5v"), "retract", "reset", SubResource("AnimationNodeStateMachineTransition_xqk6l")]
+graph_offset = Vector2(-164, 85)
+
+[sub_resource type="Animation" id="Animation_4jvxi"]
+resource_name = "display_swords"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Blades/Node3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3qguk"]
+resource_name = "reach"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Blades/Node3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hjs3l"]
+resource_name = "reset"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Blades/Node3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tclg5"]
+resource_name = "retract"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Blades/Node3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_agh6w"]
+resource_name = "speen"
+length = 0.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Blades/Node3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gcb0b"]
+_data = {
+"display_swords": SubResource("Animation_4jvxi"),
+"reach": SubResource("Animation_3qguk"),
+"reset": SubResource("Animation_hjs3l"),
+"retract": SubResource("Animation_tclg5"),
+"speen": SubResource("Animation_agh6w")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5f3fy"]
+radius = 0.145
+height = 1.81
+
+[node name="LongSword" instance=ExtResource("1_r1glk")]
+
+[node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("blades_areas")]
+script = ExtResource("2_wgy1y")
+is_test = true
+damage = 50.0
+blades_areas = [NodePath("../Blades/Node3D/sword1/Area3D"), NodePath("../Blades/Node3D/sword2/Area3D2"), NodePath("../Blades/Node3D/sword3/Area3D3"), NodePath("../Blades/Node3D/sword4/Area3D4")]
+blade_reach = 0.5
+blade_reach_multiplier = 1.0
+attack_length = 3.0
+base_cooldown = 3.0
+
+[node name="Attack Timer" type="Timer" parent="." index="2"]
+wait_time = 6.0
+one_shot = true
+
+[node name="Cooldown Timer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[node name="Animation Component" type="Node3D" parent="." index="4"]
+
+[node name="AnimationTree" type="AnimationTree" parent="Animation Component" index="0"]
+tree_root = SubResource("AnimationNodeStateMachine_fk8x1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attacking_start = false
+parameters/conditions/attacking_stopped = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation Component" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_gcb0b")
+}
+autoplay = "reset"
+
+[node name="Blades" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Node3D" type="Node3D" parent="Blades" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="sword1" type="Sprite3D" parent="Blades/Node3D" index="0"]
+transform = Transform3D(1.41421, -1.41421, -6.18172e-08, 0, -8.74228e-08, 2, -1.41421, -1.41421, -6.18172e-08, 0, 0, -2.87356)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="Area3D" type="Area3D" parent="Blades/Node3D/sword1" index="0"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 4
+script = ExtResource("4_m45oj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword1/Area3D" index="0"]
+shape = SubResource("CapsuleShape3D_5f3fy")
+
+[node name="sword2" type="Sprite3D" parent="Blades/Node3D" index="1"]
+transform = Transform3D(-1.41421, 1.41421, 6.18172e-08, 0, -8.74228e-08, 2, 1.41421, 1.41421, 6.18172e-08, 0, 0, 2.874)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="Area3D2" type="Area3D" parent="Blades/Node3D/sword2" index="0"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 4
+script = ExtResource("4_m45oj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword2/Area3D2" index="0"]
+shape = SubResource("CapsuleShape3D_5f3fy")
+
+[node name="sword3" type="Sprite3D" parent="Blades/Node3D" index="2"]
+transform = Transform3D(1.41421, 1.41421, 6.18172e-08, 0, -8.74228e-08, 2, 1.41421, -1.41421, -6.18172e-08, 2.874, 0, 0)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="Area3D3" type="Area3D" parent="Blades/Node3D/sword3" index="0"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 4
+script = ExtResource("4_m45oj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword3/Area3D3" index="0"]
+shape = SubResource("CapsuleShape3D_5f3fy")
+
+[node name="sword4" type="Sprite3D" parent="Blades/Node3D" index="3"]
+transform = Transform3D(-1.41421, -1.41421, -6.18172e-08, 0, -8.74228e-08, 2, -1.41421, 1.41421, 6.18172e-08, -2.90413, 2.38419e-05, 0.000525951)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="Area3D4" type="Area3D" parent="Blades/Node3D/sword4" index="0"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 4
+script = ExtResource("4_m45oj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword4/Area3D4" index="0"]
+shape = SubResource("CapsuleShape3D_5f3fy")
+
+[node name="Node3D2" type="Node3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0186789, 0.652067, 0.0446985)
+visible = false
+
+[node name="sword1" type="Sprite3D" parent="Node3D2" index="0"]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0, 0, -1.57381)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="sword2" type="Sprite3D" parent="Node3D2" index="1"]
+transform = Transform3D(-0.707107, 0.707107, -3.09086e-08, -3.82137e-15, 4.37114e-08, 1, 0.707107, 0.707107, -3.09086e-08, 0, 0, 1.574)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="sword3" type="Sprite3D" parent="Node3D2" index="2"]
+transform = Transform3D(0.707107, 0.707107, -3.09086e-08, 4.37114e-08, 1.91069e-15, 1, 0.707107, -0.707107, -3.09086e-08, 1.574, 0, 0)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[node name="sword4" type="Sprite3D" parent="Node3D2" index="3"]
+transform = Transform3D(-0.707107, -0.707107, 3.09086e-08, 3.82137e-15, 4.37114e-08, 1, -0.707107, 0.707107, -3.09086e-08, -1.574, 0, 0)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("3_o7k62")
+
+[connection signal="timeout" from="Attack Timer" to="WeaponSkill" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Cooldown Timer" to="WeaponSkill" method="_on_timer_timeout"]
