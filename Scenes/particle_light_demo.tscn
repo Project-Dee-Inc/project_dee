@@ -1,0 +1,215 @@
+[gd_scene load_steps=26 format=3 uid="uid://c5dw7s423mhmd"]
+
+[ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_36rbv"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_j7its"]
+[ext_resource type="Shader" path="res://Shaders/light_volume.gdshader" id="4_5rbwp"]
+[ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="4_ce73g"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="5_rx8yc"]
+[ext_resource type="Script" path="res://Scripts/player_movement_snapped.gd" id="9_p8fob"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art.gdshader" id="10_3i2hf"]
+[ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="11_88smi"]
+[ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="12_xxt5m"]
+[ext_resource type="Script" path="res://Display.gd" id="13_xaj2k"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="14_jyajy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
+material = ExtResource("5_rx8yc")
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1a2g4"]
+margin = 0.0
+size = Vector3(20, 20, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2xap"]
+render_priority = 0
+shader = ExtResource("4_5rbwp")
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/light_bands = 3
+shader_parameter/light_range = 5.0
+shader_parameter/use_vertex_color = true
+shader_parameter/halo_size = 20.0
+shader_parameter/halo_bands = 3
+shader_parameter/use_contact_shadow = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_frhrx"]
+material = SubResource("ShaderMaterial_m2xap")
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Gradient" id="Gradient_uqnfe"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2i1nb"]
+gradient = SubResource("Gradient_uqnfe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tlj8l"]
+emission_shape_offset = Vector3(0, 0.01, 0)
+emission_shape = 3
+emission_box_extents = Vector3(10, 0, 10)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0
+radial_accel_max = 1.0
+color = Color(0, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_2i1nb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y242u"]
+render_priority = 0
+shader = ExtResource("4_5rbwp")
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/light_bands = 3
+shader_parameter/light_range = 5.0
+shader_parameter/use_vertex_color = true
+shader_parameter/halo_size = 10.0
+shader_parameter/halo_bands = 3
+shader_parameter/use_contact_shadow = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_1hlq4"]
+material = SubResource("ShaderMaterial_y242u")
+radius = 5.0
+height = 10.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8w744"]
+material = ExtResource("5_rx8yc")
+size = Vector3(1, 5, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbq03"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gb0qe"]
+render_priority = 0
+shader = ExtResource("10_3i2hf")
+shader_parameter/sprite = ExtResource("12_xxt5m")
+shader_parameter/normal_map = ExtResource("11_88smi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
+shader = ExtResource("14_jyajy")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
+viewport_path = NodePath("Main")
+
+[node name="ParticleLightDemo" type="Node"]
+
+[node name="Main" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="Main" node_paths=PackedStringArray("following")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = ExtResource("1_36rbv")
+following = NodePath("../../Player")
+move_speed = 2.0
+adjust_speed = 1.0
+
+[node name="MainCamera" type="Camera3D" parent="Main/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("2_j7its")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("4_ce73g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment"]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.001
+shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 50.0
+
+[node name="Room" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Room"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="LightVolume" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.001, 0)
+visible = false
+mesh = SubResource("SphereMesh_frhrx")
+skeleton = NodePath("../Room")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="World"]
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_tlj8l")
+draw_pass_1 = SubResource("SphereMesh_1hlq4")
+
+[node name="Cube1" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube3" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube4" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube5" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube6" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube7" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube8" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera") groups=["snap"]]
+floor_constant_speed = true
+script = ExtResource("9_p8fob")
+speed = 5.0
+camera = NodePath("../Main/Node3D/MainCamera")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_vbq03")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_gb0qe")
+cast_shadow = 2
+pixel_size = 0.0625
+shaded = true
+double_sided = false
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("12_xxt5m")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("13_xaj2k")
+viewport = NodePath("../Main")
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_yxmub")
+texture = SubResource("ViewportTexture_ub6g4")
+centered = false
