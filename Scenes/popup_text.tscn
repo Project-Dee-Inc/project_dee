@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsncnxpbks24v"]
+
+[ext_resource type="Script" path="res://Scripts/popup_text.gd" id="1_f8mp0"]
+
+[node name="PopupText" type="Label3D"]
+script = ExtResource("1_f8mp0")
