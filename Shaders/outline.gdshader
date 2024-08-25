@@ -1,120 +1,106 @@
 shader_type spatial;
-render_mode depth_prepass_alpha;
+render_mode unshaded;
 
-uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
-uniform sampler2D normal_roughness_texture : hint_normal_roughness_texture, repeat_disable, filter_nearest;
+// MIT License. Made by Leo Peltola
+// Inspired by https://threejs.org/examples/webgl_postprocessing_pixel.html
 
-group_uniforms color;
-uniform vec4 albedo : source_color = vec4(0.75, 0.75, 0.75, 1.0);
-uniform vec3 outline_color : source_color = vec3(0, 0, 1);
-uniform vec3 edge_color : source_color = vec3(1, 0, 0);
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_nearest_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest_mipmap;
+uniform sampler2D NORMAL_TEXTURE : hint_normal_roughness_texture, filter_nearest;
 
-group_uniforms outline;
-uniform float depth_threshold : hint_range(0.0, 1.0, 0.01) = 0.25;
-uniform float depth_normal_threshold : hint_range(0.0, 1.0, 0.01) = 0.5;
-uniform float depth_normal_threshold_scale = 2.0;
+uniform bool shadows_enabled = true;
+uniform bool highlights_enabled = true;
+uniform float shadow_strength : hint_range(0.0, 1.0, 0.01) = 0.6;
+uniform float highlight_strength : hint_range(0.0, 1.0, 0.01) = 0.4;
+uniform vec3 highlight_color : source_color = vec3(1.0);
+uniform vec3 shadow_color : source_color = vec3(0.0);
 
-group_uniforms edge;
-uniform float convex_threshold = 0.5;
-uniform float convex_normal_threshold : hint_range(0.0, 1.0, 0.01) = 0.5;
-uniform float convex_normal_threshold_scale = 2.0;
+varying mat4 model_view_matrix;
 
-// a little function/macro to encapsulate getting the view position
-vec3 _view_from_screen(vec2 _uv, float _depth, mat4 _inv_proj) {
-	vec4 _upos = _inv_proj * vec4(_uv * 2.0 - 1.0, _depth, 1.0);
-	return _upos.xyz / _upos.w;
+
+float getDepth(vec2 screen_uv, sampler2D depth_texture, mat4 inv_projection_matrix){
+//	Credit: https://godotshaders.com/shader/depth-modulated-pixel-outline-in-screen-space/
+	float raw_depth = texture(depth_texture, screen_uv)[0];
+	vec3 normalized_device_coordinates = vec3(screen_uv * 2.0 - 1.0, raw_depth);
+    vec4 view_space = inv_projection_matrix * vec4(normalized_device_coordinates, 1.0);	
+	view_space.xyz /= view_space.w;	
+	return -view_space.z;
 }
-#define view_from_screen(uv, depth_tex) _view_from_screen((uv), textureLod((depth_tex), (uv), 0.0).r, INV_PROJECTION_MATRIX)
 
-float remap(float value, float low1, float high1, float low2, float high2) {
-    return low2 + (value - low1) * (high2 - low2) / (high1 - low1);
+vec3 getPos(float depth, mat4 mvm, mat4 ipm, vec2 suv, mat4 wm, mat4 icm){
+  vec4 pos = inverse(mvm) * ipm * vec4((suv * 2.0 - 1.0), depth * 2.0 - 1.0, 1.0);
+  pos.xyz /= (pos.w+0.0001*(1.-abs(sign(pos.w))));
+  return (pos*icm).xyz+wm[3].xyz;
+}
+
+float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, float depth_diff){
+	// Credit: https://threejs.org/examples/webgl_postprocessing_pixel.html
+	float normalDiff = dot(baseNormal - newNormal, normalEdgeBias);
+	float normalIndicator = clamp(smoothstep(-.01, .01, normalDiff), 0.0, 1.0);
+	float depthIndicator = clamp(sign(depth_diff * .25 + .0025), 0.0, 1.0);
+	return (1.0 - dot(baseNormal, newNormal)) * depthIndicator * normalIndicator;
+}
+
+void vertex(){
+    model_view_matrix = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 }
 
 void fragment() {
-	ALBEDO = vec3(0.0);
+	vec2 e = vec2(1./VIEWPORT_SIZE.xy);
 	
-	vec2 texel_size = 1.0 / VIEWPORT_SIZE;
-	
-	vec2 offset[5] = {
-					 vec2(-1, 0),
-		vec2(0, -1), vec2( 0, 0), vec2(0, 1),
-					 vec2( 1, 0)
-	};
-	vec3 pos[5];
-	vec3 norm[5];
-	
-	// loop over offsets
-	for (int i = 0; i < 5; i++) {
-		// fragment uv + neighbour offset
-		vec2 uv = SCREEN_UV + offset[i] * texel_size;
-		// fragment position in view space
-		pos[i] = view_from_screen(uv, depth_texture);
-		// fragment normal in view space
-		norm[i] = texture(normal_roughness_texture, uv).xyz * 2.0 - 1.0;
+//	Shadows
+	float depth_diff = 0.0;
+	float neg_depth_diff = .5;
+	if (shadows_enabled) {
+		float depth = 	getDepth(SCREEN_UV, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+		float du = 		getDepth(SCREEN_UV+vec2( 0.0, -1.0) * e, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+		float dr =	 	getDepth(SCREEN_UV+vec2( 1.0,  0.0) * e, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+		float dd = 		getDepth(SCREEN_UV+vec2( 0.0,  1.0) * e, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+		float dl = 		getDepth(SCREEN_UV+vec2(-1.0,  0.0) * e, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+		depth_diff += clamp(du - depth, 0.0, 1.0);
+		depth_diff += clamp(dd - depth, 0.0, 1.0);
+		depth_diff += clamp(dr - depth, 0.0, 1.0);
+		depth_diff += clamp(dl - depth, 0.0, 1.0);
+		neg_depth_diff += depth - du;
+		neg_depth_diff += depth - dd;
+		neg_depth_diff += depth - dr;
+		neg_depth_diff += depth - dl;
+		neg_depth_diff = clamp(neg_depth_diff, 0.0, 1.0);
+		neg_depth_diff = clamp(smoothstep(0.5, 0.5, neg_depth_diff) * 10.0, 0.0, 1.0);
+		depth_diff = smoothstep(0.2, 0.3, depth_diff);
+//		ALBEDO = vec3(neg_depth_diff);
 	}
 	
-	// scale depth threshold based on view normal; remap normal from min..1 -> 1..max
-	float depth_threshold_normal_bias = remap(
-		// NOTE(david): in orthogonal projections, normal.z is equivalent to dot(normal, -view_forward)
-		max(depth_normal_threshold, 1.0 - norm[2].z),
-		depth_normal_threshold, 1.0,
-		1.0, depth_normal_threshold_scale
-	);
-	
-	// final depth threshold
-	float depth_thresh = depth_threshold * depth_threshold_normal_bias;
-	float is_edge = 0.0;
-	if (length(edge_color) > 0.01) {
-		// same for convexity; remap normal from 0..max -> low..1
-		float convex_threshold_normal_bias = remap(
-			min(norm[2].z, convex_normal_threshold),
-			0.0, convex_normal_threshold,
-			convex_normal_threshold_scale, 1.0
-		);
-		float convex_thresh = convex_threshold * convex_threshold_normal_bias;
-	
-		// ===== edge ===== //
-		for (int i = 0; i < 5; i++) {
-			if (i == 2) continue;
-			// cross product gets convexity/concavity (mostly)
-			vec3 cp = cross(norm[2], norm[i]);
-			float convexity = dot(cp, vec3(offset[i].yx, 0));
-			float norm_bias = i < 2 ? 1e-5 : 0.0;
-			is_edge +=
-				// is this below the depth threshold
-				abs(pos[i].z - pos[2].z) < depth_thresh
-				// is the normal more oblique; less aligned with the camera (up/left takes priority when even)
-				&& norm[i].z + norm_bias > norm[2].z
-				// is this a convex edge
-				&& convexity > convex_thresh
-				? 1.0 : 0.0;
-		}
-		ALBEDO = is_edge > 0.0 ? edge_color : ALBEDO;
+//	Highlights
+	float normal_diff = 0.;
+	if (highlights_enabled) {
+		vec3 normal = texture(NORMAL_TEXTURE, SCREEN_UV).rgb * 2.0 - 1.0;
+		vec3 nu = texture(NORMAL_TEXTURE, SCREEN_UV+vec2(0., -1.)*e).rgb * 2.0 - 1.0;
+		vec3 nr = texture(NORMAL_TEXTURE, SCREEN_UV+vec2(1., 0.)*e).rgb * 2.0 - 1.0;
+		vec3 nd = texture(NORMAL_TEXTURE, SCREEN_UV+vec2(0., 1.)*e).rgb * 2.0 - 1.0;
+		vec3 nl = texture(NORMAL_TEXTURE, SCREEN_UV+vec2(-1., 0.)*e).rgb * 2.0 - 1.0;
+		vec3 normal_edge_bias = (vec3(1., 1., 1.));
+		normal_diff += normalIndicator(normal_edge_bias, normal, nu, depth_diff);
+		normal_diff += normalIndicator(normal_edge_bias, normal, nr, depth_diff);
+		normal_diff += normalIndicator(normal_edge_bias, normal, nd, depth_diff);
+		normal_diff += normalIndicator(normal_edge_bias, normal, nl, depth_diff);
+		normal_diff = smoothstep(0.2, 0.8, normal_diff);
+		normal_diff = clamp(normal_diff-neg_depth_diff, 0., 1.);
 	}
 	
-	// ===== outline ===== //
-	bool is_outline = pos[2].z - pos[0].z > depth_thresh ||
-		pos[2].z - pos[1].z > depth_thresh ||
-		pos[2].z - pos[3].z > depth_thresh ||
-		pos[2].z - pos[4].z > depth_thresh;
-	
-	ALBEDO = is_outline ? outline_color : ALBEDO;
-	
-	if (is_edge <= 0.0 && !is_outline)
+	float alpha_mask = (depth_diff * shadow_strength) * float(shadows_enabled) + (normal_diff * highlight_strength) * float(highlights_enabled);
+	if (alpha_mask <= 1e-5)
 		discard;
-	//ALPHA = 1.0;
 	
-	// ===== DEBUGS ===== //
-	float depth = texture(depth_texture, SCREEN_UV).r;
-	// make it easier to see
-	depth = remap(depth, 0.12, 1.0, 0.0, 1.0);
-	//EMISSION = vec3(depth);
-	//EMISSION = texture(normal_roughness_texture, SCREEN_UV).xyz * 2.0 - 1.0;
+	vec3 final = shadow_color;
 	
-	//EMISSION = vec3(mix(1.0, norm[2].z, convex_normal_threshold_scale));
-	//EMISSION = vec3(norm[2].z);
-	//EMISSION = vec3(remap(min(norm[2].z, 0.5), 0.0, 0.5, 0.1, 1.0));
+	if (highlights_enabled) {
+		final = mix(final, highlight_color, normal_diff);
+	}
+	if (shadows_enabled) {
+		final = mix(final, shadow_color, depth_diff);
+	}
 	
-	//EMISSION = vec3(mix(1.0, 1.0 - norm[2].z, depth_normal_threshold_scale));
-	//EMISSION = vec3(depth_thresh);
+	ALBEDO = final;
+	ALPHA = clamp(alpha_mask, 0.0, 1.0);
 }
