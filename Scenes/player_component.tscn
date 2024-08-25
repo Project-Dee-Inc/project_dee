@@ -1,9 +1,9 @@
-[gd_scene load_steps=113 format=3 uid="uid://dalwb0ioih62a"]
+[gd_scene load_steps=112 format=3 uid="uid://dalwb0ioih62a"]
 
 [ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_bxs8n"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_n1od8"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ojsv5"]
-[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/weapon.tscn" id="2_y5aq2"]
+[ext_resource type="PackedScene" path="res://Scenes/weapon.tscn" id="2_y5aq2"]
 [ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="3_wrmso"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="4_3f8co"]
 [ext_resource type="Texture2D" uid="uid://dw46qbofvqrtl" path="res://Assets/TestCharacter/Small-8-Direction-Characters_by_AxulArt.png" id="7_ts3nl"]
@@ -1203,7 +1203,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerComponent" type="CharacterBody3D"]
+[node name="PlayerComponent" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_bxs8n")
 isPlayer = true
 
