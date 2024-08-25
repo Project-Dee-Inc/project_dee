@@ -69,8 +69,6 @@ func get_attack_direction() -> Vector3:
 # Called every frame to update the attack timer
 func _process(delta: float) -> void:
 	time_since_last_attack += delta
-	if Input.is_action_just_pressed("attack"):
-		_skill_activate()
 		
 	if time_since_last_attack >= attack_interval:
 		time_since_last_attack = 0.0

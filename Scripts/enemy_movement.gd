@@ -99,4 +99,3 @@ func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var z = kill_circle_centre.z + sin(angle) * kill_radius
 
 	return Vector3(x, kill_circle_centre.y, z)
-

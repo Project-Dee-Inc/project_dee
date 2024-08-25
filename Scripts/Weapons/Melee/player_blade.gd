@@ -3,14 +3,8 @@ extends Area3D
 var damage = 0
 
 func _ready():
-	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 
-func _on_body_entered(body: Node3D):
-	body.health_component._damage(damage)
+func _on_area_entered(body: Node3D):
+	body.get_parent().health_component._damage(damage)
 	print("Damage! ", damage," ", body)
-	#print(body.get_groups())
-	#for enemy in enemies:
-
-	#if(enemies.is_empty()):
-		#print("not enemy")
-	#enemy.health_component._damage(damage)

@@ -20,6 +20,7 @@ func _set_dash_multiplier(value: float):
 
 func _physics_process(delta):
 	if player_component == null :
+		player_component = get_parent()
 		print("player_component not found")
 		return
 	# Add the gravity.
@@ -28,7 +29,6 @@ func _physics_process(delta):
 
 	# Handle dash.
 	if Input.is_action_just_pressed("dash") and dash_timer.is_stopped():
-		print("dash")
 		dash_timer.start()
 		speed_multiplier = dash_multiplier
 		return
@@ -39,7 +39,6 @@ func _physics_process(delta):
 		direction = face_direction
 	else:
 		var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		print(input_dir)
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		face_direction = direction
 	
@@ -53,7 +52,6 @@ func _physics_process(delta):
 		
 # sends to animation fo reflect movement
 	if(animation_component != null):
-		print("animationfound")
 		animation_component.change_idle_animation(direction, !dash_timer.is_stopped())
 		
 #if player needs to move, moves on screen
