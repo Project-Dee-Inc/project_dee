@@ -8,7 +8,7 @@ extends CharacterBody3D
 var target_velocity = Vector3.ZERO
 
 func _ready():
-	floor_snap_length = camera._texel_size * 4.0
+	floor_snap_length = camera._texel_size * 2.0
 
 func _process(delta):
 	# We create a local variable to store the input direction.
@@ -37,7 +37,7 @@ func _process(delta):
 	velocity = target_velocity
 	move_and_slide()
 	# snap position to nearest texel
-	global_position = global_position.snapped(Vector3(
-	camera._texel_size, 
-	camera._texel_size,
-	camera._texel_size))
+	#global_position = global_position.snapped(Vector3(
+	#camera._texel_size * 0.5, 
+	#camera._texel_size * 0.5 * 1.15470053838,
+	#camera._texel_size))
