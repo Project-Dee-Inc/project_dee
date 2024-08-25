@@ -17,7 +17,7 @@ var _dir := Vector3.FORWARD
 
 
 func _ready() -> void:
-	RenderingServer.frame_post_draw.connect(_snap_objects_revert)
+	#RenderingServer.frame_post_draw.connect(_snap_objects_revert)
 	_dir = transform.basis.z
 	near = -far
 	_follow_target()
@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 		# error in screen texels (will be used later)
 		_texel_error = Vector2(snap_error.x, -snap_error.y) / _texel_size
 		if snap_objects:
-			_snap_objects.call_deferred()
+			_snap_objects()
 	else:
 		_texel_error = Vector2.ZERO
 
@@ -54,10 +54,10 @@ func _snap_objects() -> void:
 		var node := _snap_nodes[i] as Node3D
 		var pos := node.global_position
 		_pre_snapped_positions[i] = pos
-		var snap_space_pos := pos * _snap_space
-		#var angle = sin(deg_to_rad(30.0))
-		var snapped_snap_space_pos := snap_space_pos.snapped(Vector3(_texel_size, _texel_size, 0.0))
-		node.global_position = _snap_space * snapped_snap_space_pos
+		#var snap_space_pos := pos * _snap_space
+		#var snapped_snap_space_pos := snap_space_pos.snapped(Vector3(_texel_size, _texel_size, 0.0))
+		#node.global_position = _snap_space * snapped_snap_space_pos
+		node.global_position = pos.snapped(Vector3(_texel_size, _texel_size * 0.5 * 1.15470053838, _texel_size))
 		
 	if target:
 		_follow_target()
