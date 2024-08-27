@@ -9,6 +9,9 @@ var current_health:int = 0
 func _ready():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), self, "_set_current_health")
 
+func _exit_tree():
+	EventManager.remove_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), self, "_set_current_health")
+
 # Set max health.
 func _cache_max_health(value:int):
 	max_health = value

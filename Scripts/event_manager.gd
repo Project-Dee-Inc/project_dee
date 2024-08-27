@@ -5,7 +5,9 @@ enum EVENT_NAMES{
 	ON_PLAYER_BASE_STATS_READY,
 	ON_PLAYER_HEALTH_CHANGED,
 	ON_PLAYER_INITIALIZED,
-	ON_PLAYER_DEATH
+	ON_PLAYER_DEATH,
+	ON_WEAPON_EQUIP,
+	ON_WEAPON_UNEQUIP
 }
 
 # Dynamically add a signal
@@ -18,6 +20,7 @@ func add_listener(eventName: String, target: Object, methodName: String):
 	add_event(eventName)
 	var callable = Callable(target, methodName)
 	connect(eventName, callable)
+	print("Adding %s as listener to %s" % [methodName, eventName])
 
 # Remove a listener from an event
 func remove_listener(eventName: String, target: Object, methodName: String):

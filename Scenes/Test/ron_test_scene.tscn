@@ -1,55 +1,109 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxdgm65ro8wr5"]
+[gd_scene load_steps=14 format=3 uid="uid://cptgmge6xjtam"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_or335"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_i7bq7"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_nrexk"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_nffdr"]
-[ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="5_0w5qq"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="5_mwtam"]
+[ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="6_qogws"]
+[ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="7_w438e"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_3c5ep"]
+vertices = PackedVector3Array(0.799408, 0.383481, -3.95625, 1.04941, 0.383481, -8.70625, 0.299408, 0.383481, -8.95625, -10.2006, 0.383481, -3.95625, -13.9506, 0.383481, 2.04375, -12.9506, 0.383481, 1.79375, -10.4506, 0.383481, -2.95625, -10.2006, 0.383481, -3.95625, -78.4506, 0.383481, 4.04375, 0.299408, 0.383481, -9.95625, 2.04941, 0.383481, -10.2063, 1.79941, 0.383481, -84.4563, -78.4506, 0.383481, 4.04375, -10.2006, 0.383481, -3.95625, 0.299408, 0.383481, -9.95625, 1.79941, 0.383481, -84.4563, -78.4506, 0.383481, -84.4563, -10.2006, 0.383481, -3.95625, 0.299408, 0.383481, -8.95625, 0.299408, 0.383481, -9.95625, -78.4506, 0.383481, 4.04375, -13.9506, 0.383481, 4.04375, -13.9506, 0.383481, 2.04375, 2.04941, 0.383481, -10.2063, 10.7994, 0.383481, -10.2063, 11.0494, 0.383481, -84.4563, 1.79941, 0.383481, -84.4563, 12.2994, 0.383481, -10.2063, 12.5494, 0.383481, -9.45625, 78.5494, 0.383481, -9.45625, 78.5494, 0.383481, -84.4563, 11.0494, 0.383481, -84.4563, 11.0494, 0.383481, -84.4563, 10.7994, 0.383481, -10.2063, 12.2994, 0.383481, -10.2063, 1.04941, 0.383481, -8.70625, 0.799408, 0.383481, -3.95625, 1.79941, 0.383481, -3.70625, 12.2994, 0.383481, -8.70625, 12.5494, 0.383481, -9.45625, 12.2994, 0.383481, -8.70625, 6.04941, 0.383481, 11.5437, 78.5494, 0.383481, 11.5437, 78.5494, 0.383481, -9.45625, 12.2994, 0.383481, -8.70625, 1.79941, 0.383481, -3.70625, 1.79941, 0.383481, -2.70625, 5.79941, 0.383481, 10.7937, 6.04941, 0.383481, 11.5437, 1.79941, 0.383481, -2.70625, 0.049408, 0.383481, -2.45625, 0.299408, 0.383481, 10.7937, 5.79941, 0.383481, 10.7937, -10.2006, 0.383481, -2.45625, -10.4506, 0.383481, -2.95625, -12.9506, 0.383481, 1.79375, -12.4506, 0.383481, 2.04375, 0.049408, 0.383481, -2.45625, -10.2006, 0.383481, -2.45625, -12.4506, 0.383481, 2.04375, -12.4506, 0.383481, 10.7937, 0.299408, 0.383481, 10.7937, -78.4506, 0.383481, 18.7937, -13.9506, 0.383481, 18.7937, -13.9506, 0.383481, 4.04375, -78.4506, 0.383481, 4.04375, 5.79941, 0.383481, 12.2937, -12.4506, 0.383481, 12.2937, -12.4506, 0.383481, 20.7937, -12.4506, 0.383481, 20.7937, -13.2006, 0.383481, 21.0437, -13.2006, 0.383481, 84.5437, 78.5494, 0.383481, 11.5437, 6.04941, 0.383481, 11.5437, 5.79941, 0.383481, 12.2937, 5.79941, 0.383481, 12.2937, -12.4506, 0.383481, 20.7937, -13.2006, 0.383481, 84.5437, 78.5494, 0.383481, 84.5437, 78.5494, 0.383481, 11.5437, -13.2006, 0.383481, 84.5437, -13.2006, 0.383481, 21.0437, -13.9506, 0.383481, 20.7937, -78.4506, 0.383481, 18.7937, -78.4506, 0.383481, 84.5437, -13.9506, 0.383481, 20.7937, -13.9506, 0.383481, 18.7937, -78.4506, 0.383481, 18.7937)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 16), PackedInt32Array(19, 18, 17), PackedInt32Array(22, 21, 20), PackedInt32Array(23, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(30, 27, 31), PackedInt32Array(34, 33, 32), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 43), PackedInt32Array(41, 43, 42), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 47), PackedInt32Array(47, 44, 48), PackedInt32Array(50, 49, 51), PackedInt32Array(51, 49, 52), PackedInt32Array(56, 55, 53), PackedInt32Array(53, 55, 54), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 57), PackedInt32Array(60, 57, 61), PackedInt32Array(65, 64, 62), PackedInt32Array(62, 64, 63), PackedInt32Array(68, 67, 66), PackedInt32Array(71, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(76, 75, 77), PackedInt32Array(77, 75, 79), PackedInt32Array(77, 79, 78), PackedInt32Array(81, 80, 82), PackedInt32Array(82, 80, 84), PackedInt32Array(82, 84, 83), PackedInt32Array(87, 86, 85)]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p14lb"]
+albedo_color = Color(0, 0, 0.415686, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_kpxl2"]
+material = SubResource("StandardMaterial3D_p14lb")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2a5kc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m15dl"]
 
-[node name="TestPlayer" type="Node2D"]
+[node name="Level" type="Node2D"]
 
-[node name="Ground" type="StaticBody3D" parent="."]
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("WorldBoundaryShape3D_06ei6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(41.9243, 0, 0, 0, 41.9243, 0, 0, 0, 41.9243, 0, 0, 0)
-layers = 3
-mesh = SubResource("PlaneMesh_kpxl2")
-
-[node name="Player" parent="." instance=ExtResource("1_or335")]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999877, -0.0130896, 0.00861529, 0, 0.549782, 0.835308, -0.0156704, -0.835206, 0.549714, 0.42317, 9.13995, 9.56504)
+transform = Transform3D(0.999826, 0.0157296, -0.010019, 0.000468336, 0.51588, 0.85666, 0.0186436, -0.856516, 0.515783, 0.220719, 14.5581, 14.1367)
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.74278, 0.0426831, 0.668173, -0.113842, 0.991486, 0.0632169, -0.659786, -0.123022, 0.741315, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(2.40753, 0, 0, 0, 2.40753, 0, 0, 0, 2.40753, 0.258462, 1.29761, -3.21893)
+[node name="Player" parent="." instance=ExtResource("1_or335")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="MobSpawner" parent="." instance=ExtResource("2_i7bq7")]
+spawn_table = {
+ExtResource("3_nrexk"): 10,
+ExtResource("4_nffdr"): 8,
+ExtResource("5_mwtam"): 2,
+ExtResource("6_qogws"): 3,
+ExtResource("7_w438e"): 1
+}
+spawn_delay = 2.0
+
+[node name="MapNavMesh" type="NavigationRegion3D" parent="."]
+transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, 0, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_3c5ep")
+
+[node name="Ground" type="StaticBody3D" parent="MapNavMesh"]
+transform = Transform3D(1.88317, 0, -5.96046e-08, 0, 3.37622, 0, -5.96046e-08, 0, 2.02642, 0, 0, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/Ground"]
+shape = SubResource("WorldBoundaryShape3D_06ei6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/Ground/CollisionShape3D"]
+transform = Transform3D(41.9243, 0, 0, 0, 41.9243, 0, 0, 0, 41.9243, 0, 5.68381e-07, 0)
+layers = 3
+mesh = SubResource("PlaneMesh_kpxl2")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MapNavMesh"]
+transform = Transform3D(11.0512, 0, 0, 0, 1.46821, 0, 4.76837e-07, 0, 0.232188, -4.294, 0.683983, -3.219)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D"]
 shape = SubResource("BoxShape3D_2a5kc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/StaticBody3D/CollisionShape3D"]
 mesh = SubResource("BoxMesh_m15dl")
 skeleton = NodePath("../..")
 
-[node name="TestSpawner" parent="." instance=ExtResource("2_i7bq7")]
-spawn_table = {
-ExtResource("3_nrexk"): 2,
-ExtResource("4_nffdr"): 3
-}
-spawn_delay = 1.0
+[node name="StaticBody3D2" type="StaticBody3D" parent="MapNavMesh"]
+transform = Transform3D(11.0512, 0, 0, 0, 1.41994, 0, 4.76837e-07, 0, 0.232188, 6.48027, 0.653183, -9.55591)
+collision_mask = 0
 
-[node name="HealthBar" parent="." instance=ExtResource("5_0w5qq")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D2"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/StaticBody3D2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="MapNavMesh"]
+transform = Transform3D(-1.90735e-06, 0, 0.232188, 0, 1.60272, 0, -18.1714, 0, 0, -13.307, 0.684841, 11.438)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D3"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/StaticBody3D3/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="MapNavMesh"]
+transform = Transform3D(18.1656, 0, 0, 0, 1.80338, 0, 0, 0, 0.232188, -3.705, 0.822879, 11.438)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapNavMesh/StaticBody3D4"]
+shape = SubResource("BoxShape3D_2a5kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapNavMesh/StaticBody3D4/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m15dl")
+skeleton = NodePath("../..")
