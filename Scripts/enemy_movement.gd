@@ -102,10 +102,11 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
 	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
 
-	if(body.velocity.x > 0):
-		animation_component._flip_anim(true)
-	else:
-		animation_component._flip_anim(false)
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
+		if(body.velocity.x > 0):
+			animation_component._flip_anim(true)
+		else:
+			animation_component._flip_anim(false)
 
 	body.move_and_slide()
 
