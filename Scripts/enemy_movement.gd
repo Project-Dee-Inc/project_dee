@@ -1,5 +1,6 @@
 extends Node
 
+@onready var animation_component: Node = $"../AnimationComponent"
 @onready var nav_agent = $"../NavigationAgent3D"
 @onready var parent_component = $".."
 var raycast:RayCast3D
@@ -93,6 +94,7 @@ func _on_start_move(target_pos:Vector3, delta:float):
 # Stop movement and stay stationary
 func _on_stop_move():
 	body.velocity = Vector3.ZERO  # Stop moving if within follow range
+	_face_player()
 
 # Move to Vector3 position
 func _move_to_pos(target_pos:Vector3, delta:float):
@@ -100,7 +102,21 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
 	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
 
+	if(body.velocity.x > 0):
+		animation_component._flip_anim(true)
+	else:
+		animation_component._flip_anim(false)
+
 	body.move_and_slide()
+
+func _face_player():
+	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
+
+	# Flip the sprite based on the direction to the player
+	if (direction.x > 0):
+		animation_component._flip_anim(true)
+	elif (direction.x < 0):
+		animation_component._flip_anim(false)
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos
@@ -110,3 +126,9 @@ func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var z = kill_circle_centre.z + sin(angle) * kill_radius
 
 	return Vector3(x, kill_circle_centre.y, z)
+
+func _is_moving() -> bool:
+	if(body.velocity != Vector3.ZERO):
+		return true
+	else:
+		return false

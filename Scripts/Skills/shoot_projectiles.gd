@@ -8,6 +8,7 @@ var skill_is_active:bool = false
 var can_activate:bool = true
 var is_homing:bool = false
 var has_stats:bool = false
+var attacking:bool = false
 
 func _ready():
 	_get_values()
@@ -37,13 +38,14 @@ func _physics_process(_delta: float):
 
 # Instantiate a copy of the base projectile scene
 func _spawn_projectile():
+	attacking = true
 	can_activate = false
 	var projectile = projectile_obj.instantiate() as Node3D
 	var base_node = get_parent().parent_component
 
 	get_parent().add_child(projectile)
 	projectile.global_transform.origin = base_node.global_transform.origin
-	projectile.scale = Vector3(0.5, 0.5, 0.5)
+	#projectile.scale = Vector3(0.5, 0.5, 0.5)
 
 	# Set collision layer to 1, the same as environment
 	projectile._set_collision_layer(Constants.TARGETS.NEUTRAL)
@@ -56,5 +58,6 @@ func _spawn_projectile():
 	projectile._shoot(projectile, target)
 
 	# Await for cd interval before looping and creating another instance
+	attacking = false
 	await get_tree().create_timer(cd).timeout
 	can_activate = true
