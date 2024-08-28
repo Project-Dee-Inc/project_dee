@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://df8ns5ndpg708"]
+
+[ext_resource type="Texture2D" uid="uid://c3b75oy4skdc2" path="res://Assets/Enemies/Imp Sprite Sheet.png" id="1_sthum"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ywii"]
+atlas = ExtResource("1_sthum")
+region = Rect2(145, 160, 20, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ywii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
