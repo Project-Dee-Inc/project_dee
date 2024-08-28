@@ -199,7 +199,7 @@ height = 1.81
 [node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("blades_areas")]
 script = ExtResource("2_wgy1y")
 is_test = true
-damage = 50.0
+damage = 5.0
 blades_areas = [NodePath("../Blades/Node3D/sword1/Area3D"), NodePath("../Blades/Node3D/sword2/Area3D2"), NodePath("../Blades/Node3D/sword3/Area3D3"), NodePath("../Blades/Node3D/sword4/Area3D4")]
 blade_reach = 0.5
 blade_reach_multiplier = 1.0
@@ -228,7 +228,6 @@ libraries = {
 autoplay = "reset"
 
 [node name="Blades" type="Node3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="Node3D" type="Node3D" parent="Blades" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
@@ -242,7 +241,10 @@ texture = ExtResource("3_o7k62")
 [node name="Area3D" type="Area3D" parent="Blades/Node3D/sword1" index="0"]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 4
+monitoring = false
 script = ExtResource("4_m45oj")
+knockback = true
+knockback_strength = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword1/Area3D" index="0"]
 shape = SubResource("CapsuleShape3D_5f3fy")
@@ -256,7 +258,10 @@ texture = ExtResource("3_o7k62")
 [node name="Area3D2" type="Area3D" parent="Blades/Node3D/sword2" index="0"]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 4
+monitoring = false
 script = ExtResource("4_m45oj")
+knockback = true
+knockback_strength = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword2/Area3D2" index="0"]
 shape = SubResource("CapsuleShape3D_5f3fy")
@@ -270,7 +275,10 @@ texture = ExtResource("3_o7k62")
 [node name="Area3D3" type="Area3D" parent="Blades/Node3D/sword3" index="0"]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 4
+monitoring = false
 script = ExtResource("4_m45oj")
+knockback = true
+knockback_strength = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword3/Area3D3" index="0"]
 shape = SubResource("CapsuleShape3D_5f3fy")
@@ -284,7 +292,10 @@ texture = ExtResource("3_o7k62")
 [node name="Area3D4" type="Area3D" parent="Blades/Node3D/sword4" index="0"]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 4
+monitoring = false
 script = ExtResource("4_m45oj")
+knockback = true
+knockback_strength = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword4/Area3D4" index="0"]
 shape = SubResource("CapsuleShape3D_5f3fy")
