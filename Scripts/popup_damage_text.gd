@@ -1,7 +1,7 @@
 extends Node
 
 @export var damage_popup_scene:PackedScene
-@export var popup_duration:float = 1
+@export var popup_duration:float = 0.5
 var base_node:Node3D
 
 # Called when the node enters the scene tree for the first time.

@@ -1,5 +1,12 @@
 extends Node
 
+enum ANIM_STATE {
+	IDLE,
+	WALK,
+	ATTACK,
+	DEATH
+}
+
 enum TARGETS { 
 	NEUTRAL,
 	PLAYER,

@@ -1,13 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://desmwb6tmldjy"]
+[gd_scene load_steps=3 format=3 uid="uid://desmwb6tmldjy"]
 
 [ext_resource type="Script" path="res://Scripts/popup_text.gd" id="1_f8mp0"]
+[ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="1_khymg"]
 
 [node name="PopupText" type="Label3D"]
 transform = Transform3D(1, 0, 0, 0, 0.52909, 0.848566, 0, -0.848566, 0.52909, 0, 0, 0)
 pixel_size = 0.025
 outline_modulate = Color(0, 0, 0, 0.486275)
-text = "HELLO
-"
+text = "100"
+font = ExtResource("1_khymg")
 font_size = 25
 outline_size = 5
 script = ExtResource("1_f8mp0")
