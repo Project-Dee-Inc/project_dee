@@ -9,4 +9,5 @@ func enter():
 	print(movement_manager.body.name, " enemy died.")
 	movement_manager._set_surround(false)
 	movement_manager._state_moving(false)
+	await get_tree().create_timer(0.2).timeout
 	movement_manager.body.queue_free()

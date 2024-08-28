@@ -5,6 +5,7 @@ class_name StateMachine
 @onready var skill_manager = $"../SkillManagerComponent"
 
 var current_state: Object
+var is_dead:bool = false
 
 var history = []
 var states = {}
@@ -38,3 +39,7 @@ func set_state(state_name):
 func _on_death():
 	if(current_state.has_method("exit")):
 		current_state.exit("OnDeath")
+		is_dead = true
+
+func _is_dead() -> bool:
+	return is_dead

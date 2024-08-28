@@ -35,3 +35,6 @@ func _attack(value:bool):
 		current_skill._activate_skill()
 	else:
 		current_skill._deactivate_skill()
+
+func _is_attacking() -> bool:
+	return current_skill.attacking

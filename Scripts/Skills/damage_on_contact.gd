@@ -4,6 +4,7 @@ class_name DamageOnContact
 var damage:int = 0
 var cd:float = 0
 var skill_is_active:bool = false
+var attacking:bool = false
 
 func _ready():
 	_get_values()
@@ -24,6 +25,7 @@ func _activate_skill():
 # On deactivate, wait for cd seconds
 # If node is still in scene, reactivate skill so that it goes on a loop
 func _deactivate_skill():
+	attacking = false
 	skill_is_active = false
 	await get_tree().create_timer(cd).timeout
 	if (is_instance_valid(self)):
@@ -32,5 +34,6 @@ func _deactivate_skill():
 # If target is hit by the collider, deal damage
 func _on_hit_collider_component_body_entered(_body):
 	if(skill_is_active):
+		attacking = true
 		target._damage(damage)
 		_deactivate_skill()
