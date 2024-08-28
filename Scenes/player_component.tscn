@@ -11,7 +11,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
 radius = 0.424336
-height = 1.8182
+height = 1.47922
 
 [sub_resource type="Animation" id="Animation_4fks7"]
 length = 0.001
@@ -1204,12 +1204,13 @@ animations = [{
 }]
 
 [node name="PlayerComponent" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.918052, 0)
 collision_layer = 2
 script = ExtResource("1_bxs8n")
 isPlayer = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00906679, -0.176848, 0)
 shape = SubResource("CapsuleShape3D_46t1g")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("regen_timer") instance=ExtResource("3_wrmso")]
@@ -1240,6 +1241,7 @@ stat_dict = {
 [node name="WeaponManager" type="Node3D" parent="."]
 
 [node name="LongSword2" parent="WeaponManager" instance=ExtResource("5_sfnps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.338628, 0)
 
 [node name="AnimationComponent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738802, 0)
@@ -1260,8 +1262,8 @@ parameters/Idle/blend_position = Vector2(-0.550179, 0.502645)
 parameters/Walk/blend_position = Vector2(0.00160003, 0.994012)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimationComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0884709, 0.847818, 0)
-pixel_size = 0.054
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0705616, 0.677099, 0)
+pixel_size = 0.084
 billboard = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_ghmpq")

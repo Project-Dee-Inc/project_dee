@@ -26,6 +26,7 @@ func _process(delta):
 
 func _activate_skill():
 	if cooldown_timer.is_stopped() and attack_timer.is_stopped():
+		_set_areas_monitoring(true)
 		var blades_scale = blade_reach * blade_reach_multiplier
 		blades.scale = Vector3(blades_scale, blades_scale, blades_scale)
 		animation_tree["parameters/conditions/attacking_start"] = true
@@ -35,6 +36,7 @@ func _activate_skill():
 		attack_timer.start()
 
 func _deactivate_skill():
+	_set_areas_monitoring(false)
 	animation_tree["parameters/conditions/attacking_stopped"] = true
 	animation_tree["parameters/conditions/attacking_start"] = false
 	cooldown_timer.wait_time = base_cooldown
@@ -42,3 +44,7 @@ func _deactivate_skill():
 
 func _on_attack_timer_timeout():
 	_deactivate_skill()
+	
+func _set_areas_monitoring(value:bool):
+	for area in blades_areas:
+		area.monitoring = value
