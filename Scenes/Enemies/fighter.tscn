@@ -26,8 +26,8 @@ shape = SubResource("SphereShape3D_d8med")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_420u7")
-animation = &"attack"
-frame_progress = 0.934901
+animation = &"idle"
+autoplay = "idle"
 
 [node name="MeshInstance3D" parent="." index="3"]
 visible = false
