@@ -34,11 +34,13 @@ func _deactivate_skill():
 func _physics_process(_delta: float):
 	if (projectile_obj):
 		if(skill_is_active && can_activate):
+			attacking = true
 			_spawn_projectile()
+		else:
+			attacking = false
 
 # Instantiate a copy of the base projectile scene
 func _spawn_projectile():
-	attacking = true
 	can_activate = false
 	var projectile = projectile_obj.instantiate() as Node3D
 	var base_node = get_parent().parent_component
@@ -58,6 +60,5 @@ func _spawn_projectile():
 	projectile._shoot(projectile, target)
 
 	# Await for cd interval before looping and creating another instance
-	attacking = false
 	await get_tree().create_timer(cd).timeout
 	can_activate = true

@@ -13,7 +13,7 @@ func enter():
 
 	# Start moving but make sure it stays in range of player and has line of sight
 	movement_manager._set_surround(false)
-	movement_manager._set_stay_in_range(true, 10)
+	movement_manager._set_stay_in_range(true, 15)
 	movement_manager._set_line_of_sight(true)
 	movement_manager._state_moving(true)
 

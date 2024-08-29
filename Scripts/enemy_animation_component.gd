@@ -37,6 +37,8 @@ func _handle_damage(value:float):
 
 func _set_anim_state(new_state: Constants.ANIM_STATE):
 	if current_state != new_state:
+		if(current_state == Constants.ANIM_STATE.ATTACK):
+			await get_tree().create_timer(0.5).timeout
 		current_state = new_state
 		_play_animation(_state_to_animation(new_state))
 
