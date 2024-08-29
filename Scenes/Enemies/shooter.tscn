@@ -28,6 +28,8 @@ shape = SubResource("SphereShape3D_ymmlb")
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_g3dwm")
 animation = &"attack"
+autoplay = "idle"
+frame_progress = 0.631726
 
 [node name="MeshInstance3D" parent="." index="3"]
 visible = false
@@ -36,7 +38,7 @@ mesh = SubResource("SphereMesh_llxdu")
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
 "ATK": 3,
-"CD": 2.0,
+"CD": 3.0,
 "EXP_GAIN": 1,
 "HP": 20,
 "MOVE_SPD": 5
