@@ -43,8 +43,8 @@ func damage_enemies_in_cone(direction: Vector3):
 
 # Function to get the direction towards the cursor
 func get_attack_direction() -> Vector3:
-	var camera = get_viewport().get_camera_3d()
-	var mouse_position = get_viewport().get_mouse_position()
+	var camera = GameManager.camera
+	var mouse_position = camera.get_viewport().get_mouse_position()
 	var ray_origin = camera.project_ray_origin(mouse_position)
 	var ray_target = ray_origin + camera.project_ray_normal(mouse_position) * 1000.0
 	

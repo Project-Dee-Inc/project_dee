@@ -1,0 +1,196 @@
+[gd_scene load_steps=29 format=3 uid="uid://dpl6faerfh1hc"]
+
+[ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
+[ext_resource type="Script" path="res://Scripts/Camera/refraction_camera.gd" id="3_w7ffo"]
+[ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="4_xfqyt"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="5_hoobr"]
+[ext_resource type="Shader" path="res://Shaders/water.gdshader" id="6_8ft04"]
+[ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="7_sjia8"]
+[ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="8_pkapr"]
+[ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="10_1ccqu"]
+[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="11_7cm13"]
+[ext_resource type="PackedScene" uid="uid://daifk7eq6ap26" path="res://Scenes/jasmine_player_component.tscn" id="11_blqyx"]
+[ext_resource type="Script" path="res://Display.gd" id="12_hpr5k"]
+[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="12_v21if"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="13_y4thg"]
+[ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="14_4d7hr"]
+[ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="15_85utg"]
+[ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
+vertices = PackedVector3Array(19.7072, 13, -5.33043, 21.9572, 13, -0.0804272, 22.7072, 13, 0.169573, 15.2072, 13, -14.5804, 17.7072, 12.75, -5.33043, 18.4572, 13, -5.83043, 14.2072, 13, -17.3304, 39.2072, 13, -7.58043, 39.4572, 13, -8.58043, 31.4572, 13, -25.3304, 12.9572, 12.5, -13.0804, 7.7072, 11, -10.8304, 10.2072, 10.5, -1.58043, 10.4572, 10.5, -2.08043, 12.4572, 10.5, 4.91957, 12.7072, 10.5, 4.16957, 10.2072, 10.5, -0.580427, 5.9572, 10.5, -10.3304, 4.4572, 10.5, -12.8304, -10.0428, 10.5, -6.08043, -12.7928, 10.5, -4.33043, -4.7928, 10.5, 12.6696)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(5, 3, 0), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 2, 8), PackedInt32Array(8, 2, 0), PackedInt32Array(8, 0, 6), PackedInt32Array(8, 6, 9), PackedInt32Array(10, 3, 4), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 10, 13), PackedInt32Array(13, 10, 4), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 11, 12), PackedInt32Array(12, 16, 17), PackedInt32Array(17, 16, 18), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 16), PackedInt32Array(20, 16, 14), PackedInt32Array(20, 14, 21)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
+material = ExtResource("5_hoobr")
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1a2g4"]
+margin = 0.0
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g6wm3"]
+material = ExtResource("5_hoobr")
+size = Vector3(1, 5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mu3l8"]
+size = Vector3(1, 5, 10)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
+viewport_path = NodePath("RefractionViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7k3n"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_8ft04")
+shader_parameter/refraction = 0.5
+shader_parameter/ripple_speed = 0.125
+shader_parameter/ripple_scale = 16.0
+shader_parameter/use_refraction = true
+shader_parameter/refraction_texture = SubResource("ViewportTexture_wb723")
+shader_parameter/noise_map = ExtResource("7_sjia8")
+shader_parameter/normal_map = ExtResource("8_pkapr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vpq21"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_y7k3n")
+size = Vector2(100, 100)
+subdivide_width = 128
+subdivide_depth = 128
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
+shader = ExtResource("13_xuteu")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
+viewport_path = NodePath("MainViewport")
+
+[node name="Level" type="Node"]
+
+[node name="MainViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="MainViewport" node_paths=PackedStringArray("following")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = ExtResource("1_s1kct")
+following = NodePath("../../Player")
+move_speed = 2.0
+adjust_speed = 1.0
+
+[node name="MainCamera" type="Camera3D" parent="MainViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("2_i754v")
+
+[node name="RefractionViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="RefractionViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+
+[node name="RefractionCam" type="Camera3D" parent="RefractionViewport/Node3D" node_paths=PackedStringArray("main_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 0, 50)
+cull_mask = 1048573
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("3_w7ffo")
+main_camera = NodePath("../../../MainViewport/Node3D/MainCamera")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("4_xfqyt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment"]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.02
+directional_shadow_mode = 0
+directional_shadow_max_distance = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+shadow_enabled = true
+omni_attenuation = 1e-05
+
+[node name="MapNavMesh" type="NavigationRegion3D" parent="World"]
+transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, 0, -10, 0)
+navigation_mesh = SubResource("NavigationMesh_hhg2n")
+
+[node name="Room1" type="StaticBody3D" parent="World/MapNavMesh"]
+transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 0, 0, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/MapNavMesh/Room1"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Room1"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room2" type="StaticBody3D" parent="World/MapNavMesh"]
+transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 26.8356, 2.575, -12.5376)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/MapNavMesh/Room2"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Room2"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Ramp" type="MeshInstance3D" parent="World/MapNavMesh"]
+transform = Transform3D(0.234489, 1.75025, 0.423283, -0.965926, 0.517638, 0, -0.109554, -0.817718, 0.905997, 12.7084, 10.802, -8.05651)
+mesh = SubResource("BoxMesh_g6wm3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/MapNavMesh/Ramp"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Ramp/StaticBody3D"]
+shape = SubResource("BoxShape3D_mu3l8")
+
+[node name="Water" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_vpq21")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("12_hpr5k")
+viewport = NodePath("../MainViewport")
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_yxmub")
+texture = SubResource("ViewportTexture_ub6g4")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("11_blqyx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500536, 0)
+
+[node name="MobSpawner" parent="." instance=ExtResource("10_1ccqu")]
+spawn_table = {
+ExtResource("11_7cm13"): 5,
+ExtResource("12_v21if"): 5,
+ExtResource("13_y4thg"): 0,
+ExtResource("14_4d7hr"): 0,
+ExtResource("15_85utg"): 0
+}
+spawn_delay = 2.0
+
+[node name="HealthBar" parent="." instance=ExtResource("16_m0gkr")]
