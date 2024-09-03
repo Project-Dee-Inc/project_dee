@@ -35,6 +35,12 @@ func _handle_damage(value:float):
 	tween.tween_property(animated_sprite, "modulate", end_color, flash_duration)
 	tween.tween_callback(Callable(tween, "queue_free"))
 
+func _handle_warning(value:float):
+	var tween = base_node.create_tween()
+	tween.tween_property(animated_sprite, "modulate", start_color, 0)
+	tween.tween_property(animated_sprite, "modulate", end_color, flash_duration)
+	tween.tween_callback(Callable(tween, "queue_free"))
+
 func _set_anim_state(new_state: Constants.ANIM_STATE):
 	if current_state != new_state:
 		if(current_state == Constants.ANIM_STATE.ATTACK):
