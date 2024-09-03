@@ -19,6 +19,10 @@ func _set_health(value:int):
 	max_health = value
 	current_health = max_health
 
+func _update_health(value:int):
+	max_health += value
+	current_health += max_health
+
 # Set initial hp regen if entity has it
 func _set_regen(value:int):
 	hp_regen = value

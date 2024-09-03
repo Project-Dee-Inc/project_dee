@@ -106,21 +106,6 @@ func _on_deal_aoe_damage(aoe_target):
 	if(is_damage_or_debuff):
 		aoe_target.health_component._damage(damage)
 	else:
-		var target_stats = aoe_target.stat_components.get_child(0).stat_dict
-		var stat_value = target_stats[Constants.get_enum_name_by_value(stat_to_debuff)]
-		#print("HERE INITIAL ", target_stats[Constants.get_enum_name_by_value(stat_to_debuff)])
-
-		var reduction_amount: float = stat_value * damage
-		stat_value -= reduction_amount
-		target_stats[Constants.get_enum_name_by_value(stat_to_debuff)] = stat_value
-		#print("HERE NEW ", target_stats[Constants.get_enum_name_by_value(stat_to_debuff)])
-
-	#if (is_damage_over_time):
-		#var total_time: float = 0
-		#while total_time < cd_time:  # total_duration is the time over which the DOT should apply
-			#await get_tree().create_timer(cd_interval).timeout
-			#_on_deal_aoe_damage(aoe_target)
-			#total_time += cd_interval
-		#queue_free()  # After the total time has passed, free the object
-	#else:
-		#queue_free()
+		var target_status = aoe_target.stat_components
+		var string_name = Constants.get_enum_name_by_value(stat_to_debuff) + " Debuff"
+		target_status._apply_status_effect(Constants.StatusEffect.new(string_name, cd_time, false, {stat_to_debuff: damage}))

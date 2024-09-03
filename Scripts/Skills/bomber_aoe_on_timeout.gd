@@ -2,6 +2,7 @@ extends "res://Scripts/Skills/aoe_on_timeout.gd"
 class_name BomberAoeOnTimeout
 
 func _set_aoe_values(hit_collider:Area3D):
+	attacking = true
 	# Default targets to both player and enemies
 	var targets = Constants.TARGETS.BOTH
 	# If bomber's killed before it reached full cd, only damage enemies
