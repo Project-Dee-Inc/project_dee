@@ -14,6 +14,10 @@ func _ready():
 
 	current_skill = skills[0]
 
+func _reassign_values(new_stats:Dictionary):
+	for skill in skills:
+		skill._assign_new_values(new_stats)
+
 # Set if state is changed to attacking
 # If target is still null, assign it
 func _state_attacking(value:bool):

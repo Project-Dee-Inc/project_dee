@@ -7,13 +7,23 @@ class_name BuffOnAoe
 var buff_stat_dict:Dictionary = {}
 var cd:float = 0
 var heal:float = 0
-var attack_buff:float = 0
+var buff_value:float = 0
+var buff_cd:float = 0
 var radius:float = 0
 var skill_is_active:bool = false
+var stat_to_buff:Constants.STATS
 
 func _ready():
 	_get_values()
 	_set_values()
+	_set_collider_radius(radius)
+
+func _assign_new_values(new_stat_dict:Dictionary):
+	_get_new_values(new_stat_dict)
+	_set_values()
+
+func _get_new_values(new_stat_dict:Dictionary):
+	stat_dict = new_stat_dict
 
 func _get_values():
 	super._get_values()
@@ -21,11 +31,14 @@ func _get_values():
 
 # Get needed values
 func _set_values():
+	stat_to_buff = Constants.STATS.ATK
+
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 	radius = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.AOE)]
+
 	heal = buff_stat_dict[Constants.get_enum_name_by_value(Constants.STATS.HP)]
-	attack_buff = buff_stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
-	_set_collider_radius(radius)
+	buff_value = buff_stat_dict[Constants.get_enum_name_by_value(stat_to_buff)]
+	buff_cd = buff_stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 
 # Set collider shape radius based on AOE
 func _set_collider_radius(value:float):
@@ -35,6 +48,7 @@ func _set_collider_radius(value:float):
 # Enable or disable skill and wait for cd before next
 func _activate_skill():
 	skill_is_active = true
+	attacking = true
 
 	await get_tree().create_timer(0.2).timeout
 	if (is_instance_valid(self)):
@@ -42,6 +56,7 @@ func _activate_skill():
 
 func _deactivate_skill():
 	skill_is_active = false
+	attacking = false
 
 	await get_tree().create_timer(cd).timeout
 	if (is_instance_valid(self)):
@@ -50,12 +65,16 @@ func _deactivate_skill():
 # If ally within collider, buff
 func _on_aoe_hit_collider_area_entered(area: Area3D):
 	if(skill_is_active):
-		var target = area.get_parent()
-		_buff_allies(target)
+		var area_target = area.get_parent()
+		if(area_target != get_parent().parent_component):
+			_buff_allies(area_target)
 
-func _buff_allies(target:Node3D):
-	var heal_amount = target.health_component.max_health * heal
-	target.health_component._heal(heal_amount)
-	print("HEALING ", target.name, " FOR ", heal_amount)
+func _buff_allies(buff_target:Node3D):
+	var heal_amount = buff_target.health_component.max_health * heal
+	buff_target.health_component._heal(heal_amount)
+	#print("HERE HEALING ", buff_target.name, " FOR ", heal_amount)
 
-	print("BUFFING ", target.name)
+	var target_status = buff_target.stat_components
+	var string_name = Constants.get_enum_name_by_value(stat_to_buff) + " Buff"
+	target_status._apply_status_effect(Constants.StatusEffect.new(string_name, buff_cd, false, {stat_to_buff: buff_value}))
+	#print("HERE BUFFING ", buff_target.name)

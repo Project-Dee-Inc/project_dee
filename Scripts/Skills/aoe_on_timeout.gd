@@ -5,7 +5,7 @@ class_name AoeOnTimeout
 @export var hit_body:PackedScene
 @export var warning_color:Color = Color.RED
 
-var original_material:StandardMaterial3D 
+signal _on_warning_state
 
 var damage:int = 0
 var radius:float = 0
@@ -20,6 +20,13 @@ func _ready():
 	_get_values()
 	_set_values()
 
+func _assign_new_values(new_stat_dict:Dictionary):
+	_get_new_values(new_stat_dict)
+	_set_values()
+
+func _get_new_values(new_stat_dict:Dictionary):
+	stat_dict = new_stat_dict
+
 # Get common variables needed
 func _set_values():
 	if(stat_dict.has(Constants.get_enum_name_by_value(Constants.STATS.ATK))):
@@ -29,7 +36,6 @@ func _set_values():
 
 	# Warning time set to default at 30% of cd time
 	warning_time = int(cd * 0.3)
-	original_material = mesh_instance.get_active_material(0).duplicate()
 
 # Raise flag if cd is completed fully
 # Mainly for bomber, if cd is completed that means player hasn't killed it 
@@ -44,13 +50,9 @@ func _deactivate_skill():
 	skill_is_active = false
 
 # Start simple warning visual effects
-# Change material color
 func _start_warning():
+	_on_warning_state.emit(1)
 	entered_warning_state = true
-	var new_material = original_material as StandardMaterial3D
-	if (new_material):
-		new_material.albedo_color = warning_color
-		mesh_instance.material_override = new_material
 
 # Instantiate a copy of the base AoeHitCollider scene
 func _set_off_aoe():

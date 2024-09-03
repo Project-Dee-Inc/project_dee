@@ -25,6 +25,7 @@ func _set_values():
 		#print("STAT IS ", debuff_stat)
 
 func _set_aoe_values(hit_collider:Area3D):
+	attacking = true
 	# Get final value needed, if normal attack store damage, if debuff store debuff_value
 	var value 
 	if(is_attack_or_debuff):
@@ -41,7 +42,7 @@ func _set_aoe_values(hit_collider:Area3D):
 	# Store base node
 	hit_collider._set_base_node(get_parent().parent_component)
 	# Set cd to despawn collider and the value it deals for damage or debuff
-	hit_collider._set_values(cd, value)
+	hit_collider._set_values(cd, value, true, 0, 5)
 	# Collision layer set to enemy
 	hit_collider._set_collision_layer(Constants.TARGETS.NEUTRAL)
 	# Should only scan player layer
