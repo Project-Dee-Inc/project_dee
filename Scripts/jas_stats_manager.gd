@@ -1,5 +1,5 @@
 extends "res://Scripts/status_manager.gd"
-class_name WeaponStatusManager
+class_name WeaponStatManager
 
 @export var melee_stat: StatComponent
 @export var magic_stat: StatComponent
