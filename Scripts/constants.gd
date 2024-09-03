@@ -62,6 +62,18 @@ var stats_enum_mapping = {
 	"GOLD_GAIN": STATS.GOLD_GAIN
 }
 
+class StatusEffect:
+	var name: String
+	var duration: float
+	var stackable: bool
+	var stat_modifiers: Dictionary
+
+	func _init(_name: String, _duration: float, _stackable: bool, _stat_modifiers: Dictionary):
+		name = _name
+		duration = _duration
+		stackable = _stackable
+		stat_modifiers = _stat_modifiers
+
 var reverse_stats_enum_mapping = {}
 
 func _ready():
