@@ -4,11 +4,17 @@ class_name DamageOnContact
 var damage:int = 0
 var cd:float = 0
 var skill_is_active:bool = false
-var attacking:bool = false
 
 func _ready():
 	_get_values()
 	_set_values()
+
+func _assign_new_values(new_stat_dict:Dictionary):
+	_get_new_values(new_stat_dict)
+	_set_values()
+
+func _get_new_values(new_stat_dict:Dictionary):
+	stat_dict = new_stat_dict
 
 # Get needed values
 func _set_values():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d03xwmlrcr687"]
+[gd_scene load_steps=10 format=3 uid="uid://d03xwmlrcr687"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_dex7l"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_g780y"]
@@ -10,12 +10,6 @@
 [ext_resource type="Script" path="res://Scripts/States/basic_death.gd" id="7_8wu7u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymmlb"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d33qm"]
-albedo_color = Color(0.513726, 1, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_llxdu"]
-material = SubResource("StandardMaterial3D_d33qm")
 
 [node name="Shooter" instance=ExtResource("1_dex7l")]
 
@@ -30,10 +24,6 @@ sprite_frames = ExtResource("3_g3dwm")
 animation = &"attack"
 autoplay = "idle"
 frame_progress = 0.631726
-
-[node name="MeshInstance3D" parent="." index="3"]
-visible = false
-mesh = SubResource("SphereMesh_llxdu")
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {

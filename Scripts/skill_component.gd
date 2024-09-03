@@ -5,6 +5,7 @@ class_name BaseSkill
 @export var passive: bool
 var stat_dict: Dictionary = {}
 var target:Node
+var attacking:bool = false
 
 # Init
 func _ready():

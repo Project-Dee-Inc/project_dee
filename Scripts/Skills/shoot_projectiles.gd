@@ -8,11 +8,17 @@ var skill_is_active:bool = false
 var can_activate:bool = true
 var is_homing:bool = false
 var has_stats:bool = false
-var attacking:bool = false
 
 func _ready():
 	_get_values()
 	_set_values()
+
+func _assign_new_values(new_stat_dict:Dictionary):
+	_get_new_values(new_stat_dict)
+	_set_values()
+
+func _get_new_values(new_stat_dict:Dictionary):
+	stat_dict = new_stat_dict
 
 func _set_values():
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
