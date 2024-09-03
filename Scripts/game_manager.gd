@@ -1,6 +1,8 @@
 extends Node
 
 var player:Node3D
+var camera:Camera3D
+var viewport:SubViewport
 
 func _ready():
 	_on_subscribe_events()
@@ -19,10 +21,14 @@ func _on_game_start():
 # Once player is initialized, find player node
 func _player_initialized(_params):
 	player = _find_player_node()
+	camera = _find_camera_node()
 
 # Find player in all nested scenes to store global value
 func _find_player_node() -> Node3D:
 	return _find_node_recursive(get_tree().current_scene, "Player")
+
+func _find_camera_node() -> Camera3D:
+	return _find_node_recursive(get_tree().current_scene, "MainCamera")
 
 func _find_node_recursive(parent: Node, nodeName: String) -> Node3D:
 	if parent.name == nodeName and parent is Node3D:

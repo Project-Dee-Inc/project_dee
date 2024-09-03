@@ -32,8 +32,8 @@ func shoot_projectile() -> void:
 		get_parent().add_child(projectile)
 		
 		# Get the cursor position in 3D world space
-		var camera = get_viewport().get_camera_3d()
-		var mouse_position = get_viewport().get_mouse_position()
+		var camera = GameManager.camera
+		var mouse_position = camera.get_viewport().get_mouse_position()
 		var ray_origin = camera.project_ray_origin(mouse_position)
 		var ray_target = ray_origin + camera.project_ray_normal(mouse_position) * 1000.0
 		var param = PhysicsRayQueryParameters3D.new()
