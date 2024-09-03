@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dnyu6pkwningf"]
 
-[ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_aidch"]
+[ext_resource type="PackedScene" uid="uid://daifk7eq6ap26" path="res://Scenes/jasmine_player_component.tscn" id="1_l8cpm"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
@@ -28,14 +28,14 @@ material = SubResource("StandardMaterial3D_p14lb")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.999826, 0.0157296, -0.010019, 0.000468336, 0.51588, 0.85666, 0.0186436, -0.856516, 0.515783, 0.220719, 14.5581, 14.1367)
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.74278, 0.0426831, 0.668173, -0.113842, 0.991486, 0.0632169, -0.659786, -0.123022, 0.741315, 0, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("1_aidch")]
+[node name="Player" parent="." instance=ExtResource("1_l8cpm")]
 
 [node name="MobSpawner" parent="." instance=ExtResource("2_quged")]
 spawn_table = {
