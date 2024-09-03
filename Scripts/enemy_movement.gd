@@ -9,6 +9,7 @@ var target:Node3D
 var body:Node3D
 
 var speed:int = 0
+var current_speed:float
 var state_is_moving:bool = false
 
 var is_surround:bool = false
@@ -24,6 +25,7 @@ var randomnum:float
 
 func _ready():
 	body = get_parent()
+	current_speed = speed
 
 func _get_rand() -> float:
 	var rng = RandomNumberGenerator.new()
@@ -33,6 +35,7 @@ func _get_rand() -> float:
 # Set initial movement speed for mob
 func _set_speed(value:int):
 	speed = value
+	current_speed = speed
 
 # Set if movement type surrounds or not
 func _set_surround(value:bool):
@@ -76,8 +79,7 @@ func _physics_process(delta):
 	if (state_is_moving && target != null):
 		if(!override_follow_target):
 			target_position = target.global_transform.origin
-
-		if(is_stay_in_range):
+		if(is_stay_in_range and !override_follow_target):
 			if((!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked) && !Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin, 1.5)):
 				_on_start_move(target_position, delta)
 			else:
@@ -103,7 +105,7 @@ func _on_stop_move():
 func _move_to_pos(target_pos:Vector3, delta:float):
 	nav_agent.target_position = target_pos
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
-	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
+	body.velocity = body.velocity.lerp(direction * current_speed, 20 * delta)
 
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
 		_face_player(body.velocity)
