@@ -35,7 +35,7 @@ stat_dict = {
 }
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0323321, 0.921656, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0323321, -0.0605073, 0)
 pixel_size = 0.005
 billboard = 1
 texture_filter = 0
