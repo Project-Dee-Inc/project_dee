@@ -1,7 +1,6 @@
 extends "res://Scripts/skill_component.gd"
 class_name AoeOnTimeout
 
-@export var mesh_instance:MeshInstance3D 
 @export var hit_body:PackedScene
 @export var warning_color:Color = Color.RED
 
@@ -15,6 +14,7 @@ var cd:float = 0
 var entered_warning_state:bool = false
 var cd_completed:bool = false
 var skill_is_active:bool = false
+var parent_base:bool = false
 
 func _ready():
 	_get_values()
@@ -36,6 +36,10 @@ func _set_values():
 
 	# Warning time set to default at 30% of cd time
 	warning_time = int(cd * 0.3)
+
+# Set to true if you want to add this component as a child of the parent node instead of just the scene
+func _set_parent_base(value:bool):
+	parent_base = value
 
 # Raise flag if cd is completed fully
 # Mainly for bomber, if cd is completed that means player hasn't killed it 
@@ -59,8 +63,12 @@ func _set_off_aoe():
 	var bomb_hit_collider = hit_body.instantiate() as Area3D
 	var base_node = get_parent().parent_component
 
-	var root_node = get_tree().current_scene
-	root_node.add_child(bomb_hit_collider)
+	if(parent_base):
+		base_node.add_child(bomb_hit_collider)
+	else:
+		var root_node = get_tree().current_scene
+		root_node.add_child(bomb_hit_collider)
+
 	bomb_hit_collider.global_transform.origin = base_node.global_transform.origin
 	_set_aoe_values(bomb_hit_collider)
 
