@@ -78,7 +78,7 @@ func _physics_process(delta):
 			target_position = target.global_transform.origin
 
 		if(is_stay_in_range):
-			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked):
+			if((!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked) && !Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin, 1.5)):
 				_on_start_move(target_position, delta)
 			else:
 				_on_stop_move()
