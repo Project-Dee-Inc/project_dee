@@ -20,9 +20,9 @@ shape = SubResource("SphereShape3D_kkr14")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_hjeum")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.932815
+frame_progress = 0.944331
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
