@@ -35,7 +35,7 @@ pixel_size = 0.1
 texture_filter = 0
 sprite_frames = ExtResource("3_14lfv")
 autoplay = "default"
-frame_progress = 0.15364
+frame_progress = 0.0046951
 speed_scale = 1.5
 
 [node name="AnimatedSprite3D" parent="." index="2"]
@@ -61,6 +61,9 @@ stat_dict = {
 "CD": 3.0,
 "HP": 0.2
 }
+
+[node name="MovementComponent" parent="." index="8"]
+override_face_player = true
 
 [node name="BuffAllies" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("animated_sprite", "aoe_collision_shape", "buff_stat_component", "stat_component")]
 script = ExtResource("4_mogws")
