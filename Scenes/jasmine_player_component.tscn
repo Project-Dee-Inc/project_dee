@@ -1261,7 +1261,7 @@ parameters/Walk/blend_position = Vector2(0.00160003, 0.994012)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimationComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0884709, 0.847818, 0)
-sorting_offset = 1.0
+sorting_offset = 10.0
 pixel_size = 0.054
 billboard = 1
 texture_filter = 2
