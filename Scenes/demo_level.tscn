@@ -186,8 +186,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500536, 0)
 [node name="MobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
 navigation = NodePath("../World/MapNavMesh")
 spawn_table = {
-ExtResource("11_7cm13"): 5,
-ExtResource("12_v21if"): 5,
+ExtResource("11_7cm13"): 1,
+ExtResource("12_v21if"): 1,
 ExtResource("13_y4thg"): 1,
 ExtResource("14_4d7hr"): 1,
 ExtResource("15_85utg"): 1

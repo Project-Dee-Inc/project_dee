@@ -55,7 +55,9 @@ func _deactivate_skill():
 
 # Start simple warning visual effects
 func _start_warning():
-	_on_warning_state.emit(1)
+	if(warning_time == 0):
+		warning_time = 1
+	_on_warning_state.emit(warning_time)
 	entered_warning_state = true
 
 # Instantiate a copy of the base AoeHitCollider scene
