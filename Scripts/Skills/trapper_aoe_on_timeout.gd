@@ -1,6 +1,7 @@
 extends "res://Scripts/Skills/aoe_on_timeout.gd"
 class_name TrapperAoeOnTimeout
 
+@export var sprite_frames:SpriteFrames
 @export var debuff_stat_component:Node
 @export var is_attack_or_debuff:bool
 var debuff_stat_dict:Dictionary = {}
@@ -26,6 +27,7 @@ func _set_values():
 
 func _set_aoe_values(hit_collider:Area3D):
 	attacking = true
+
 	# Get final value needed, if normal attack store damage, if debuff store debuff_value
 	var value 
 	if(is_attack_or_debuff):
@@ -37,6 +39,9 @@ func _set_aoe_values(hit_collider:Area3D):
 		# Set to debuff damage type and attach which stat it debuffs
 		hit_collider._set_aoe_damage_type(false, debuff_stat)
 
+	# Set sprite frames and pixel size for aoe vfx
+	hit_collider._set_sprite_frames_size(radius * 0.045)
+	hit_collider._set_sprite_frames(sprite_frames)
 	# Create and set sphere collider radius
 	hit_collider._create_collider(radius)
 	# Store base node
