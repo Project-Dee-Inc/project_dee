@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://h7ocenncgjo7"]
+[gd_scene load_steps=11 format=3 uid="uid://h7ocenncgjo7"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_llo2n"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_gg8an"]
-[ext_resource type="SpriteFrames" uid="uid://dusv7tyam0jun" path="res://Assets/Enemies/shooter_test_frames.tres" id="3_v4j3k"]
+[ext_resource type="SpriteFrames" uid="uid://pxydv6jbnp1b" path="res://Assets/Enemies/SpriteFrames/trapper_frames.tres" id="3_uv33s"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="3_yxusj"]
 [ext_resource type="Script" path="res://Scripts/Skills/trapper_aoe_on_timeout.gd" id="4_y1b44"]
 [ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="5_haxcj"]
+[ext_resource type="SpriteFrames" uid="uid://b0aqfjrwlpgvd" path="res://Assets/Enemies/SpriteFrames/trapper_aoe_frames.tres" id="6_ggodn"]
 [ext_resource type="Script" path="res://Scripts/States/trapper_basic_state.gd" id="6_ysqso"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="7_73sed"]
 
@@ -20,9 +21,10 @@ collision_layer = 4
 shape = SubResource("SphereShape3D_r76uq")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
-sprite_frames = ExtResource("3_v4j3k")
-animation = &"idle"
+sprite_frames = ExtResource("3_uv33s")
+animation = &"attack"
 autoplay = "idle"
+frame_progress = 0.779756
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
@@ -41,6 +43,7 @@ stat_dict = {
 
 [node name="TrapperAoeOnTimeout" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("debuff_stat_component", "stat_component")]
 script = ExtResource("4_y1b44")
+sprite_frames = ExtResource("6_ggodn")
 debuff_stat_component = NodePath("../../StatComponents/DebuffStatComponent")
 hit_body = ExtResource("5_haxcj")
 warning_color = Color(1, 1, 1, 1)
