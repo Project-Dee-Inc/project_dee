@@ -1,5 +1,6 @@
 extends Node
 
+@export var navigation:NavigationRegion3D
 @export var spawn_table: Dictionary = {}
 @export var spawn_delay: float = 0
 @export var spawn_range: float = 10
@@ -40,16 +41,30 @@ func _on_object_destroyed(scene: PackedScene):
 	active_spawns[scene] -= 1
 
 func _get_random_position_around_object(object_position: Vector3, radius: float) -> Vector3:
+	var position_found = false
+	var spawn_position = Vector3()
+
+	while (!position_found):
 	# Randomly pick a direction in 3D space (spherical coordinates)
-	var theta = randf_range(0.0, PI * 2)   # Random angle around Y-axis
-	var phi = randf_range(0.0, PI * 2)     # Random angle around XZ-plane
-	var r = randf_range(0.0, radius)       # Random distance from the object within the radius
-	
-	# Convert spherical coordinates to Cartesian coordinates
-	var x = r * sin(phi) * cos(theta)
-	var z = r * cos(phi)
-	
-	# Add this offset to the object's position
-	var spawn_position = object_position + Vector3(x, 1, z)
-	
+		var theta = randf_range(0.0, PI * 2)   # Random angle around Y-axis
+		var phi = randf_range(0.0, PI)         # Random angle around XZ-plane
+		var r = randf_range(0.0, radius)       # Random distance from the object within the radius
+
+		# Convert spherical coordinates to Cartesian coordinates
+		var x = r * sin(phi) * cos(theta)
+		var z = r * sin(phi) * sin(theta)
+
+		# Add this offset to the object's position
+		var tentative_position = object_position + Vector3(x, 0, z)
+		spawn_position = NavigationServer3D.map_get_closest_point(navigation.get_navigation_map(), tentative_position)
+
+		# Check if the generated position is walkable
+		if _is_position_walkable(spawn_position):
+			position_found = true
+
 	return spawn_position
+
+func _is_position_walkable(position: Vector3) -> bool:
+	var navigation_map = navigation.get_navigation_map()
+	var path = NavigationServer3D.map_get_path(navigation_map, position, position, false)
+	return path.size() > 0

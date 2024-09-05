@@ -37,13 +37,14 @@ transform = Transform3D(0.74278, 0.0426831, 0.668173, -0.113842, 0.991486, 0.063
 
 [node name="Player" parent="." instance=ExtResource("1_l8cpm")]
 
-[node name="MobSpawner" parent="." instance=ExtResource("2_quged")]
+[node name="MobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("2_quged")]
+navigation = NodePath("../MapNavMesh")
 spawn_table = {
-ExtResource("3_6dflm"): 5,
-ExtResource("4_cjhxe"): 5,
+ExtResource("3_6dflm"): 0,
+ExtResource("4_cjhxe"): 0,
 ExtResource("5_rrvo8"): 0,
-ExtResource("6_pgqk8"): 0,
-ExtResource("7_5eul4"): 0
+ExtResource("6_pgqk8"): 1,
+ExtResource("7_5eul4"): 1
 }
 spawn_delay = 2.0
 
