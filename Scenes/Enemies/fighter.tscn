@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/States/fighter_basic_state.gd" id="4_p3r6b"]
 [ext_resource type="Script" path="res://Scripts/States/basic_death.gd" id="5_msati"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_d8med"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s718p"]
 
 [node name="Fighter" instance=ExtResource("1_dqm61")]
 
@@ -15,7 +15,7 @@
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
-shape = SubResource("SphereShape3D_d8med")
+shape = SubResource("CapsuleShape3D_s718p")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_420u7")

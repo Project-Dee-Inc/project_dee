@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Skills/bomber_aoe_on_timeout.gd" id="5_7yuud"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="5_d6d8m"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_kkr14"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f8tmk"]
 
 [node name="Bomber" instance=ExtResource("1_ee11d")]
 
@@ -16,7 +16,8 @@
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
-shape = SubResource("SphereShape3D_kkr14")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314207, 0)
+shape = SubResource("CapsuleShape3D_f8tmk")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_hjeum")

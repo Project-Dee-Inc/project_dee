@@ -29,6 +29,7 @@ sprite_frames = SubResource("SpriteFrames_euj06")
 speed_scale = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("SphereShape3D_xqdho")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
