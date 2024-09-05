@@ -7,5 +7,12 @@
 monitorable = false
 script = ExtResource("2_cn2kc")
 
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+pixel_size = 0.1
+texture_filter = 0
+speed_scale = 1.5
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
