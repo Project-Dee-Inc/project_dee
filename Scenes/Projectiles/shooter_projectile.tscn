@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c3wag756q0vfk"]
 
 [ext_resource type="PackedScene" uid="uid://dl3cvpkcyjywk" path="res://Scenes/Projectiles/base_projectile.tscn" id="1_jc1sw"]
-[ext_resource type="SpriteFrames" uid="uid://df8ns5ndpg708" path="res://Assets/Enemies/shooter_projectile_frames.tres" id="2_wfn1u"]
+[ext_resource type="SpriteFrames" uid="uid://df8ns5ndpg708" path="res://Assets/Enemies/SpriteFrames/shooter_projectile_frames.tres" id="2_wfn1u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y0ugj"]
 
