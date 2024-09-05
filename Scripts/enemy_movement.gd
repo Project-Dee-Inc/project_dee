@@ -95,8 +95,9 @@ func _on_start_move(target_pos:Vector3, delta:float):
 # Stop movement and stay stationary
 func _on_stop_move():
 	body.velocity = Vector3.ZERO  # Stop moving if within follow range
+	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
 	if(!override_face_player):
-		_face_player()
+		_face_player(direction)
 
 # Move to Vector3 position
 func _move_to_pos(target_pos:Vector3, delta:float):
@@ -104,17 +105,12 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
 	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
 
-	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
-		if(body.velocity.x > 0):
-			animation_component._flip_anim(false)
-		else:
-			animation_component._flip_anim(true)
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
+		_face_player(body.velocity)
 
 	body.move_and_slide()
 
-func _face_player():
-	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
-
+func _face_player(direction:Vector3):
 	# Flip the sprite based on the direction to the player
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
 		if (direction.x > 0):

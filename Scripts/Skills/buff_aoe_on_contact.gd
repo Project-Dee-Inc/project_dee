@@ -53,7 +53,7 @@ func _activate_skill():
 	attacking = true
 	animated_sprite.visible = attacking
 
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.45).timeout
 	if (is_instance_valid(self)):
 		_deactivate_skill()
 
