@@ -104,9 +104,9 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
 		if(body.velocity.x > 0):
-			animation_component._flip_anim(true)
-		else:
 			animation_component._flip_anim(false)
+		else:
+			animation_component._flip_anim(true)
 
 	body.move_and_slide()
 
