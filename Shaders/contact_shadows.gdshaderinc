@@ -1,4 +1,4 @@
-const uint  g_sss_max_steps                     = uint(32);
+const uint  g_sss_max_steps                     = uint(64);
 const float g_sss_ray_max_distance              = 1.0;
 const highp float g_sss_step_length             = g_sss_ray_max_distance / float(g_sss_max_steps);
 
@@ -40,9 +40,10 @@ float compute_contact_shadows(sampler2D depth_texture, vec2 screen_uv, vec4 frag
 
 	vec2 startUV = rayStartCS.xy * 0.5 + 0.5;
 	vec3 rayStart = vec3(startUV, rayStartCS.z);
-	vec3 rayDir = vec3(rayDirCS.x * 0.5, rayDirCS.y * 0.5, rayDirCS.z);
+	vec3 rayDir = vec3(rayDirCS.xy * 0.5, rayDirCS.z);
 
 	float t = steps + steps;
+	bool halfRes = true;
 
 	for (uint i = uint(0); i < g_sss_max_steps; i++)
 	{
@@ -55,10 +56,17 @@ float compute_contact_shadows(sampler2D depth_texture, vec2 screen_uv, vec4 frag
 
 		float depthDiff = sampleDepth - sampleAlongRay.z;
 
-		if (depthDiff > 0.0 && depthDiff < compareThreshold && sampleAlongRay.z > 0.0)
+		if (depthDiff > 0.0 && sampleAlongRay.z > 0.0)
 		{
-			occluded = 0.0;
-			break;
+			if (halfRes)
+			{
+				halfRes = false;
+			}
+			else
+			{
+				occluded = 0.0;
+				break;
+			}
 		}
 
 		t += steps;

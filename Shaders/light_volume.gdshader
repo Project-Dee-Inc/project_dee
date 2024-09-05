@@ -3,8 +3,8 @@ render_mode unshaded, blend_add, depth_draw_never;
 
 #include "contact_shadows.gdshaderinc"
 
-uniform sampler2D depth_tex : hint_depth_texture, filter_nearest;
-uniform sampler2D normal_tex : hint_normal_roughness_texture, filter_nearest;
+uniform sampler2D depth_tex : hint_depth_texture;
+uniform sampler2D normal_tex : hint_normal_roughness_texture;
 
 group_uniforms light;
 uniform vec3 light_color : source_color = vec3(1.0);
