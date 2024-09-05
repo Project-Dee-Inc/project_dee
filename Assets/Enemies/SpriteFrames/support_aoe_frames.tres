@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d1idfrrolchuy"]
+
+[ext_resource type="Texture2D" uid="uid://cph34phngwiwn" path="res://Assets/Enemies/Sprites/aoe_spread.png" id="1_b168p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vvwo"]
+atlas = ExtResource("1_b168p")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2es78"]
+atlas = ExtResource("1_b168p")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hbhf"]
+atlas = ExtResource("1_b168p")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uua12"]
+atlas = ExtResource("1_b168p")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38noa"]
+atlas = ExtResource("1_b168p")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcpvf"]
+atlas = ExtResource("1_b168p")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk4c8"]
+atlas = ExtResource("1_b168p")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7hrh"]
+atlas = ExtResource("1_b168p")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_diqln"]
+atlas = ExtResource("1_b168p")
+region = Rect2(512, 192, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vvwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2es78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hbhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uua12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38noa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcpvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk4c8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7hrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_diqln")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]

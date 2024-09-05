@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df87278iwk50t"
-path.s3tc="res://.godot/imported/fireballMovinl.png-3e2d168cd5cf3ba5c2403844e5d1f5b1.s3tc.ctex"
+uid="uid://bn5tupdmlvjgj"
+path.s3tc="res://.godot/imported/trapper.png-f085240be89fd670d398a11b1c191915.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Enemies/fireballMovinl.png"
-dest_files=["res://.godot/imported/fireballMovinl.png-3e2d168cd5cf3ba5c2403844e5d1f5b1.s3tc.ctex"]
+source_file="res://Assets/Enemies/Sprites/trapper.png"
+dest_files=["res://.godot/imported/trapper.png-f085240be89fd670d398a11b1c191915.s3tc.ctex"]
 
 [params]
 
