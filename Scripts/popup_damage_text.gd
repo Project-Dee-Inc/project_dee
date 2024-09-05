@@ -18,7 +18,7 @@ func show_damage_popup(damage_amount:int):
 
 	# Position it slightly above the enemy
 	get_tree().current_scene.add_child(popup_instance)
-	popup_instance.global_transform.origin = base_node.global_transform.origin + Vector3(0, 1.5, 0)
+	popup_instance.global_transform.origin = base_node.global_transform.origin + Vector3(0, 2, 0)
 
 	# Animate
 	popup_instance._animate_popup_text(popup_instance, popup_duration)
