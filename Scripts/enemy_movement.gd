@@ -115,9 +115,9 @@ func _face_player():
 
 	# Flip the sprite based on the direction to the player
 	if (direction.x > 0):
-		animation_component._flip_anim(true)
-	elif (direction.x < 0):
 		animation_component._flip_anim(false)
+	elif (direction.x < 0):
+		animation_component._flip_anim(true)
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos
