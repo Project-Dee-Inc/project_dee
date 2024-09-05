@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_ee11d"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_yvnni"]
-[ext_resource type="SpriteFrames" uid="uid://dusv7tyam0jun" path="res://Assets/Enemies/shooter_test_frames.tres" id="3_73rci"]
+[ext_resource type="SpriteFrames" uid="uid://dr5o87ge376em" path="res://Assets/Enemies/SpriteFrames/bomber_frames.tres" id="3_hjeum"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_basic_state.gd" id="4_0rifu"]
 [ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="4_nf6sv"]
 [ext_resource type="Script" path="res://Scripts/Skills/bomber_aoe_on_timeout.gd" id="5_7yuud"]
@@ -19,8 +19,10 @@ collision_layer = 4
 shape = SubResource("SphereShape3D_kkr14")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
-sprite_frames = ExtResource("3_73rci")
-animation = &"attack"
+sprite_frames = ExtResource("3_hjeum")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.932815
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
