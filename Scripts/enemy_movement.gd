@@ -3,6 +3,7 @@ extends Node
 @onready var animation_component: Node = $"../AnimationComponent"
 @onready var nav_agent = $"../NavigationAgent3D"
 @onready var parent_component = $".."
+@export var override_face_player:bool = false
 var raycast:RayCast3D
 var target:Node3D
 var body:Node3D
@@ -94,7 +95,8 @@ func _on_start_move(target_pos:Vector3, delta:float):
 # Stop movement and stay stationary
 func _on_stop_move():
 	body.velocity = Vector3.ZERO  # Stop moving if within follow range
-	_face_player()
+	if(!override_face_player):
+		_face_player()
 
 # Move to Vector3 position
 func _move_to_pos(target_pos:Vector3, delta:float):
@@ -114,10 +116,11 @@ func _face_player():
 	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
 
 	# Flip the sprite based on the direction to the player
-	if (direction.x > 0):
-		animation_component._flip_anim(false)
-	elif (direction.x < 0):
-		animation_component._flip_anim(true)
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
+		if (direction.x > 0):
+			animation_component._flip_anim(false)
+		elif (direction.x < 0):
+			animation_component._flip_anim(true)
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos
