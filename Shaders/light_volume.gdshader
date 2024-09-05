@@ -1,10 +1,10 @@
 shader_type spatial;
-render_mode unshaded, blend_add, depth_draw_never;
+render_mode unshaded, depth_draw_never;
 
 #include "contact_shadows.gdshaderinc"
 
 uniform sampler2D depth_tex : hint_depth_texture;
-uniform sampler2D normal_tex : hint_normal_roughness_texture;
+uniform sampler2D normal_tex : hint_normal_roughness_texture, filter_nearest_mipmap;
 
 group_uniforms light;
 uniform vec3 light_color : source_color = vec3(1.0);
@@ -35,52 +35,50 @@ float get_omni_attenuation(float dist, float inv_range, float decay) {
 }
 
 void fragment() {
-	float depth = texture(depth_tex, SCREEN_UV).r;
+	float depth = 1.0 - texture(depth_tex, vec2(SCREEN_UV.x, SCREEN_UV.y)).r;
+
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
-	vec4 world = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
-	vec3 behind_pos = (INV_VIEW_MATRIX * world).rgb;
-	//behind_pos = world.xyz / world.w;
-	
-	vec4 world_pos = _MODEL_MATRIX * vec4(VERTEX, 1.0);
-	vec4 center = _MODEL_MATRIX * vec4(vec3(0.0), 1.0);
-	
-	vec3 light_rel_vec = behind_pos - center.xyz;
-	float dist = distance(behind_pos, center.rgb);
-	float inv_dist = 1.0 / dist;
-	float light_length = length(light_rel_vec);
-	vec3 light_dir = normalize(light_rel_vec);
-	float radius = max(0.001, light_range);
-	float omni_atten = get_omni_attenuation(light_length, 1.0 / radius, 0.0);
-	
-	vec3 normal = texture(normal_tex, SCREEN_UV).xyz;
-	float NdotL = max(0.0, dot(-light_dir, normal));
-	
-	ALBEDO = vec3(ceil(omni_atten * float(light_bands)) / float(light_bands));
-	ALBEDO *= (use_vertex_color ? COLOR.rgb : light_color) / PI;
-	
-	center = _MODEL_MATRIX *  vec4(vec3(0.0), 1.0);
-	center = VIEW_MATRIX * center;
-	center = PROJECTION_MATRIX * center;
-	
-	vec2 ndc_center = center.xy / center.w;
-	ndc_center = ndc_center * 0.5 + 0.5;
-	ndc_center *= VIEWPORT_SIZE;
-	
-	float frag_dist = distance(ndc_center, FRAGCOORD.xy);
-	if (frag_dist < halo_size)
+	vec4 view_pos = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view_pos.xyz = view_pos.xyz / view_pos.w;
+	vec4 world_pos = (INV_VIEW_MATRIX * view_pos);
+
+	vec4 center = (_MODEL_MATRIX * vec4(vec3(0.0), 1.0));
+
+	vec3 rayDirWS = -((world_pos - center).xyz);
+
+	vec3 rayStartWS = world_pos.xyz;
+	vec3 rayEndWS = rayStartWS + (rayDirWS);
+
+	vec4 rayStartVS = VIEW_MATRIX * vec4(rayStartWS, 1.0);
+	vec4 rayEndVS = VIEW_MATRIX * vec4(rayEndWS, 1.0);
+
+	vec3 rayDirVS = rayEndVS.xyz - rayStartVS.xyz;
+
+	vec3 rayStep = rayDirVS * float(g_sss_step_length);
+
+	vec4 rayPos = rayStartVS;
+
+	bool occ = false;
+
+	uint j = uint(0);
+	ALBEDO = vec3(0.0);
+	for (uint i = uint(0); i < g_sss_max_steps; i++)
 	{
-		float d = frag_dist / halo_size;
-		float inv_d = 1.0 - d;
-		inv_d = round(inv_d * float(halo_bands)) / float(halo_bands);
-		ALBEDO += ((use_vertex_color ? COLOR.rgb : light_color) / PI * inv_d);
+		rayPos += vec4(rayStep, 0.0);
+		vec4 rayPosCS = PROJECTION_MATRIX * rayPos;
+		rayPosCS.xyz = rayPosCS.xyz / rayPosCS.w;
+		vec2 rayUV = abs(rayPosCS.xy * 0.5 + 0.5);
+
+		float depthSample = 1.0 - texture(depth_tex, rayUV).r;
+
+		float depth_delta = (pow(rayPosCS.z, 1.0) - depthSample);
+		//ALBEDO = vec3(depth_delta);
+
+		if (depth_delta > 0.0)
+		{
+			occ = true;
+			break;
+		}
 	}
-	
-	if (use_contact_shadow)
-	{
-		float omni_shadow = CONTACT_SHADOW(depth_tex, _MODEL_MATRIX);
-		if (omni_shadow <= 0.0)
-			discard;
-	}
-	
-  	ALPHA = 1.0 * COLOR.a;
+	ALBEDO = vec3(float(!occ));
 }

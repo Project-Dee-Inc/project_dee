@@ -1,20 +1,21 @@
 const uint  g_sss_max_steps                     = uint(64); 
 const float g_sss_ray_max_distance              = 1.0;
+const float g_sss_thickness        				= 0.02f;  // Depth testing thickness.
 const highp float g_sss_step_length             = g_sss_ray_max_distance / float(g_sss_max_steps);
 
 #define CONTACT_SHADOW(depth, model) (compute_contact_shadows(depth, SCREEN_UV, model, VIEW_MATRIX, INV_VIEW_MATRIX, PROJECTION_MATRIX, INV_PROJECTION_MATRIX)) 
 
 float compute_contact_shadows(sampler2D depth_texture, vec2 screen_uv, mat4 model, mat4 view, mat4 inv_view, mat4 proj, mat4 inv_proj)
 {
-	float depth = texture(depth_texture, screen_uv).r;
+	float depth = 1.0 - texture(depth_texture, screen_uv).r;
 	
-	vec3 ndc = vec3(screen_uv * 2.0 - 1.0, depth);
-	vec4 world = inv_proj * vec4(ndc, 1.0);
-	vec4 world_pos = (inv_view * world);
+	vec4 ndc = vec4(screen_uv * 2.0 - 1.0, depth, 1.0);
+	vec4 view_pos = inv_proj * ndc;
+	view_pos.xyz /= view_pos.w;
+	vec4 world_pos = (inv_view * view_pos);
 	
 	vec4 center = (model * vec4(vec3(0.0), 1.0));
 	
-	vec3 rayDirWS = -(world_pos.xyz - center.xyz);
 	
 	vec3 rayStartWS = world_pos.xyz;
 	vec3 rayEndWS = rayStartWS + (rayDirWS);
@@ -37,10 +38,7 @@ float compute_contact_shadows(sampler2D depth_texture, vec2 screen_uv, mat4 mode
 		rayPosCS.xyz /= rayPosCS.w;
 		vec2 rayUV = rayPosCS.xy * 0.5 + 0.5;
 		
-		if (rayUV.x < 0.0 || rayUV.x > 1.0 || rayUV.y < 0.0 || rayUV.y > 1.0)
-			return 1.0;
-		
-		float depthSample = texture(depth_texture, rayUV).r;
+		float depthSample = 1.0 - texture(depth_texture, rayUV).r;
 		
 		if (depthSample < rayPosCS.z)
 		{
