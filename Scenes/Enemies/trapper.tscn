@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/States/trapper_basic_state.gd" id="6_ysqso"]
 [ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="7_73sed"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_r76uq"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1lpvk"]
 
 [node name="Trapper" instance=ExtResource("1_llo2n")]
 
@@ -18,7 +18,8 @@
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
-shape = SubResource("SphereShape3D_r76uq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246545, 0)
+shape = SubResource("CapsuleShape3D_1lpvk")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_uv33s")
