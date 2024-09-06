@@ -1,0 +1,135 @@
+[gd_scene load_steps=21 format=3 uid="uid://dicr6xtus5jxm"]
+
+[ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_wx3u8"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_fd2b4"]
+[ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="3_m21wo"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="4_gtu7y"]
+[ext_resource type="Shader" path="res://Shaders/fade.gdshader" id="6_j3tlb"]
+[ext_resource type="Script" path="res://Scripts/player_movement_snapped.gd" id="7_bweci"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art.gdshader" id="8_inljn"]
+[ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="9_pnsgm"]
+[ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="10_6lvh5"]
+[ext_resource type="Script" path="res://Display.gd" id="11_saa8e"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="12_uwt4t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
+material = ExtResource("4_gtu7y")
+size = Vector3(30, 20, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1a2g4"]
+margin = 0.0
+size = Vector3(30, 20, 30)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lilyt"]
+render_priority = -1
+shader = ExtResource("6_j3tlb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8w744"]
+material = SubResource("ShaderMaterial_lilyt")
+size = Vector3(10, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nd741"]
+flip_faces = true
+size = Vector3(10, 5, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbq03"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gb0qe"]
+render_priority = 0
+shader = ExtResource("8_inljn")
+shader_parameter/sprite = ExtResource("10_6lvh5")
+shader_parameter/normal_map = ExtResource("9_pnsgm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
+shader = ExtResource("12_uwt4t")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
+viewport_path = NodePath("Main")
+
+[node name="WallFadeDemo" type="Node"]
+
+[node name="Main" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="Main" node_paths=PackedStringArray("following")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = ExtResource("1_wx3u8")
+following = NodePath("../../Player/Sprite3D")
+
+[node name="MainCamera" type="Camera3D" parent="Main/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("2_fd2b4")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("3_m21wo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment"]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 50.0
+
+[node name="Room" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Room"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Cube1" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.605)
+mesh = SubResource("BoxMesh_8w744")
+
+[node name="Cube2" type="MeshInstance3D" parent="World/Cube1"]
+cast_shadow = 3
+mesh = SubResource("BoxMesh_nd741")
+skeleton = NodePath("../..")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+floor_constant_speed = true
+script = ExtResource("7_bweci")
+speed = 5.0
+camera = NodePath("../Main/Node3D/MainCamera")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_vbq03")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.583915, 0)
+material_override = SubResource("ShaderMaterial_gb0qe")
+cast_shadow = 2
+pixel_size = 0.0625
+shaded = true
+double_sided = false
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("10_6lvh5")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("11_saa8e")
+viewport = NodePath("../Main")
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_yxmub")
+texture = SubResource("ViewportTexture_ub6g4")
+centered = false
