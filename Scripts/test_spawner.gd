@@ -1,4 +1,5 @@
 extends Node
+class_name Spawner
 
 @export var navigation:NavigationRegion3D
 
@@ -14,12 +15,17 @@ extends Node
 var active_spawns: Dictionary = {}
 
 func _ready():
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_SPAWN_OBJECT),self,"_spawn_enemy_from_event")
 	_start_level_timer()
 
 	for scene in spawn_table.keys():
 		active_spawns[scene] = 0 
 
 	_start_spawning()
+
+func _spawn_enemy_from_event(params:Array):
+	if(params[0] == "Enemy"):
+		_spawn_object(params[1], params[2], false)
 
 func _start_spawning():
 	while true:
@@ -43,7 +49,7 @@ func _spawn_object(scene: PackedScene, location: Vector3, include_active_numbers
 
 	if(include_active_numbers):
 		active_spawns[scene] += 1
-	instance.connect("tree_exited", Callable(self, "_on_object_destroyed").bind(scene))
+		instance.connect("tree_exited", Callable(self, "_on_object_destroyed").bind(scene))
 
 func _on_object_destroyed(scene: PackedScene):
 	# When an object is destroyed, decrement the active count

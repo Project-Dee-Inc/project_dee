@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=31 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="14_4d7hr"]
 [ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="15_85utg"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
+[ext_resource type="PackedScene" uid="uid://boucrwj3tlp60" path="res://Scenes/chest.tscn" id="20_vpqv1"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
 vertices = PackedVector3Array(19.7072, 13, -5.3304, 21.9572, 13, -0.0803986, 22.7072, 13, 0.169601, 15.2072, 13, -14.5804, 17.7072, 12.75, -5.3304, 18.4572, 13, -5.8304, 14.2072, 13, -17.3304, 39.2072, 13, -7.5804, 39.4572, 13, -8.5804, 31.4572, 13, -25.3304, 12.9572, 12.5, -13.0804, 7.7072, 11, -10.8304, 10.2072, 10.5, -1.5804, 10.4572, 10.5, -2.0804, 12.4572, 10.5, 4.9196, 12.7072, 10.5, 4.1696, 10.2072, 10.5, -0.580399, 5.9572, 10.5, -10.3304, 4.4572, 10.5, -12.8304, -10.0428, 10.5, -6.0804, -12.7928, 10.5, -4.3304, -4.7928, 10.5, 12.6696)
@@ -194,7 +195,8 @@ ExtResource("11_7cm13"): 1,
 ExtResource("12_v21if"): 1,
 ExtResource("13_y4thg"): 1,
 ExtResource("14_4d7hr"): 1,
-ExtResource("15_85utg"): 1
+ExtResource("15_85utg"): 1,
+ExtResource("20_vpqv1"): 1
 }
 spawn_delay = 2.0
 
