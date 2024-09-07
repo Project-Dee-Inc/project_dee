@@ -1,13 +1,21 @@
 extends Node
 
 @export var navigation:NavigationRegion3D
+
+@export var reaper_scene: PackedScene
+@export var reaper_spawn_time: float = 10
+
 @export var spawn_table: Dictionary = {}
 @export var spawn_delay: float = 0
 @export var spawn_range: float = 10
 
+@onready var level_timer: Timer = $LevelTimer
+
 var active_spawns: Dictionary = {}
 
 func _ready():
+	_start_level_timer()
+
 	for scene in spawn_table.keys():
 		active_spawns[scene] = 0 
 
@@ -27,13 +35,14 @@ func _spawn_objects():
 			var spawn_position = _get_random_position_around_object(target, spawn_range)
 			_spawn_object(scene, spawn_position)
 
-func _spawn_object(scene: PackedScene, location: Vector3):
+func _spawn_object(scene: PackedScene, location: Vector3, include_active_numbers:bool = true):
 	var instance = scene.instantiate()
 	add_child(instance)  
 
 	instance.global_transform.origin = location
 
-	active_spawns[scene] += 1
+	if(include_active_numbers):
+		active_spawns[scene] += 1
 	instance.connect("tree_exited", Callable(self, "_on_object_destroyed").bind(scene))
 
 func _on_object_destroyed(scene: PackedScene):
@@ -68,3 +77,16 @@ func _is_position_walkable(position: Vector3) -> bool:
 	var navigation_map = navigation.get_navigation_map()
 	var path = NavigationServer3D.map_get_path(navigation_map, position, position, false)
 	return path.size() > 0
+
+# Start timer for regen countdown and connect to receiving method
+func _start_level_timer():
+	level_timer.wait_time = reaper_spawn_time
+	level_timer.connect("timeout", _on_level_timer_timeout)
+	level_timer.start()
+
+# Listen for timer timeout and heal
+func _on_level_timer_timeout():
+	level_timer.stop()
+	print("TIME'S UP. SPAWNING REAPER.")
+	var spawn_position = _get_random_position_around_object(GameManager.player.global_transform.origin, spawn_range)
+	_spawn_object(reaper_scene, spawn_position, false)
