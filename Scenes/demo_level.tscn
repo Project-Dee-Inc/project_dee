@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=30 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://daifk7eq6ap26" path="res://Scenes/jasmine_player_component.tscn" id="11_blqyx"]
 [ext_resource type="Script" path="res://Display.gd" id="12_hpr5k"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="12_v21if"]
+[ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="13_3hg34"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
 [ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="13_y4thg"]
 [ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="14_4d7hr"]
@@ -49,6 +50,7 @@ shader_parameter/refraction = 0.5
 shader_parameter/ripple_speed = 0.125
 shader_parameter/ripple_scale = 16.0
 shader_parameter/use_refraction = true
+shader_parameter/use_dither = null
 shader_parameter/refraction_texture = SubResource("ViewportTexture_wb723")
 shader_parameter/noise_map = ExtResource("7_sjia8")
 shader_parameter/normal_map = ExtResource("8_pkapr")
@@ -183,8 +185,10 @@ centered = false
 [node name="Player" parent="." instance=ExtResource("11_blqyx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500536, 0)
 
-[node name="MobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
+[node name="LevelMobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
 navigation = NodePath("../World/MapNavMesh")
+reaper_scene = ExtResource("13_3hg34")
+reaper_spawn_time = 15.0
 spawn_table = {
 ExtResource("11_7cm13"): 1,
 ExtResource("12_v21if"): 1,
@@ -193,5 +197,7 @@ ExtResource("14_4d7hr"): 1,
 ExtResource("15_85utg"): 1
 }
 spawn_delay = 2.0
+
+[node name="LevelTimer" type="Timer" parent="LevelMobSpawner"]
 
 [node name="HealthBar" parent="." instance=ExtResource("16_m0gkr")]
