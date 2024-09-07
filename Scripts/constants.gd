@@ -39,6 +39,7 @@ enum STATS {
 	PROJ_COUNT,
 	EXP_GAIN,
 	GOLD_GAIN,
+	RNG
 }
 
 var stats_enum_mapping = {
@@ -59,7 +60,8 @@ var stats_enum_mapping = {
 	"SKILL_DURATION": STATS.SKILL_DURATION,
 	"PROJ_COUNT": STATS.PROJ_COUNT,
 	"EXP_GAIN": STATS.EXP_GAIN,
-	"GOLD_GAIN": STATS.GOLD_GAIN
+	"GOLD_GAIN": STATS.GOLD_GAIN,
+	"RNG": STATS.RNG
 }
 
 class StatusEffect:
