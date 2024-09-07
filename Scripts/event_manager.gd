@@ -9,6 +9,7 @@ enum EVENT_NAMES{
 	ON_PLAYER_DEATH,
 	ON_WEAPON_EQUIP,
 	ON_WEAPON_UNEQUIP,
+	ON_SPAWN_OBJECT
 }
 
 # Dynamically add a signal
