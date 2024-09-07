@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://rp8q8beots4f"]
+
+[ext_resource type="Texture2D" uid="uid://cuwkc0nytc6r8" path="res://Assets/Enemies/Sprites/Fantasy RPG (Toony) 32x32.png" id="1_2i60v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhnmk"]
+atlas = ExtResource("1_2i60v")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbpnk"]
+atlas = ExtResource("1_2i60v")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udcwu"]
+atlas = ExtResource("1_2i60v")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir0dw"]
+atlas = ExtResource("1_2i60v")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwawh"]
+atlas = ExtResource("1_2i60v")
+region = Rect2(96, 224, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhnmk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbpnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udcwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir0dw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwawh")
+}],
+"loop": false,
+"name": &"open",
+"speed": 8.0
+}]
