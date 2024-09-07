@@ -80,7 +80,7 @@ func _enable_area_bodies():
 # Enable collider to take effect and despawn after cd
 func _enable_collider(value:bool):
 	var visible_value = !value
-	hit_collider.disabled = visible_value
+	hit_collider.set_deferred("disabled", visible_value)
 
 	if(!visible_value):
 		await get_tree().create_timer(cd_collider).timeout
