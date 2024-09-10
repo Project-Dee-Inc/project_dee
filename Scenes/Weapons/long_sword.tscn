@@ -199,7 +199,7 @@ height = 1.81
 [node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("blades_areas")]
 script = ExtResource("2_wgy1y")
 is_test = true
-damage = 5.0
+damage = 1.0
 blades_areas = [NodePath("../Blades/Node3D/sword1/Area3D"), NodePath("../Blades/Node3D/sword2/Area3D2"), NodePath("../Blades/Node3D/sword3/Area3D3"), NodePath("../Blades/Node3D/sword4/Area3D4")]
 blade_reach_multiplier = 1.5
 attack_length = 3.0
@@ -242,8 +242,9 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 collision_mask = 4
 monitoring = false
 script = ExtResource("4_m45oj")
-knockback_strength = 2.0
-override_knockback_speed_multiplier = 2.0
+knockback = true
+knockback_strength = 4.0
+override_knockback_speed_multiplier = 3.0
 player_root_location = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword1/Area3D" index="0"]
@@ -260,8 +261,9 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 collision_mask = 4
 monitoring = false
 script = ExtResource("4_m45oj")
-knockback_strength = 1.5
-override_knockback_speed_multiplier = 5.0
+knockback = true
+knockback_strength = 4.0
+override_knockback_speed_multiplier = 3.0
 player_root_location = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword2/Area3D2" index="0"]
@@ -278,8 +280,9 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 collision_mask = 4
 monitoring = false
 script = ExtResource("4_m45oj")
-knockback_strength = 2.0
-override_knockback_speed_multiplier = 2.0
+knockback = true
+knockback_strength = 4.0
+override_knockback_speed_multiplier = 3.0
 player_root_location = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword3/Area3D3" index="0"]
@@ -296,8 +299,9 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 collision_mask = 4
 monitoring = false
 script = ExtResource("4_m45oj")
-knockback_strength = 2.0
-override_knockback_speed_multiplier = 2.0
+knockback = true
+knockback_strength = 4.0
+override_knockback_speed_multiplier = 3.0
 player_root_location = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blades/Node3D/sword4/Area3D4" index="0"]
