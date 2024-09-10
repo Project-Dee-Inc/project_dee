@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://xc2yr1gio7p6"]
+[gd_scene load_steps=18 format=3 uid="uid://xc2yr1gio7p6"]
 
 [ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="1_xwmef"]
 [ext_resource type="Script" path="res://Scenes/hammer.gd" id="2_pmtwx"]
@@ -142,10 +142,6 @@ states/Strike/node = SubResource("AnimationNodeAnimation_5vatp")
 states/Strike/position = Vector2(481, 54)
 transitions = ["RESET", "Strike", SubResource("AnimationNodeStateMachineTransition_ax0do"), "Strike", "RESET", SubResource("AnimationNodeStateMachineTransition_4fvt4"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_xr8hr")]
 
-[sub_resource type="SphereMesh" id="SphereMesh_rqsp2"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_itoy0"]
-
 [node name="Hammer" instance=ExtResource("1_xwmef")]
 
 [node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("hands")]
@@ -185,8 +181,8 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("../../../MeshInstance3D")
-mesh2 = NodePath("../../../MeshInstance3D2")
+mesh1 = NodePath("")
+mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
@@ -236,8 +232,8 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("../../../MeshInstance3D")
-mesh2 = NodePath("../../../MeshInstance3D2")
+mesh1 = NodePath("")
+mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
@@ -264,13 +260,3 @@ texture = ExtResource("5_45m2b")
 hframes = 3
 vframes = 6
 frame = 11
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="6"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-top_level = true
-mesh = SubResource("SphereMesh_rqsp2")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="7"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-top_level = true
-mesh = SubResource("SphereMesh_itoy0")
