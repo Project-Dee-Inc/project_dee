@@ -60,7 +60,7 @@ func _apply_knockback(body: Node3D):
 		destination = result.position
 	#print("Final: ", final_position, " Current: ", body.get_parent().global_position)
 
-	_display_location(source, destination)
+	#_display_location(source, destination)
 	_assign_knockback_target_pos(parent.movement_component, destination)
 	
 func _assign_knockback_target_pos(movement_component,final_position:Vector3):
