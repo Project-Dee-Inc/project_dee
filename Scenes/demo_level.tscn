@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="8_pkapr"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="10_1ccqu"]
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="11_7cm13"]
-[ext_resource type="PackedScene" uid="uid://daifk7eq6ap26" path="res://Scenes/jasmine_player_component.tscn" id="11_blqyx"]
+[ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="11_7q2wg"]
 [ext_resource type="Script" path="res://Display.gd" id="12_hpr5k"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="12_v21if"]
 [ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="13_3hg34"]
@@ -183,8 +183,7 @@ material = SubResource("ShaderMaterial_yxmub")
 texture = SubResource("ViewportTexture_ub6g4")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("11_blqyx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500536, 0)
+[node name="Player" parent="." instance=ExtResource("11_7q2wg")]
 
 [node name="LevelMobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
 navigation = NodePath("../World/MapNavMesh")

@@ -1320,12 +1320,12 @@ regen_timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="HealthComponent"]
 
-[node name="StatComponents" type="Node" parent="." node_paths=PackedStringArray("base_stat", "melee_stat", "magic_stat", "range_stat")]
+[node name="StatComponents" type="Node" parent="." node_paths=PackedStringArray("melee_stat", "magic_stat", "range_stat", "base_stat")]
 script = ExtResource("2_n1od8")
-base_stat = NodePath("StatManager")
 melee_stat = NodePath("Melee")
 magic_stat = NodePath("Magic")
 range_stat = NodePath("Range")
+base_stat = NodePath("StatManager")
 
 [node name="StatManager" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 stat_dict = {
@@ -1334,11 +1334,11 @@ stat_dict = {
 "MOVE_SPD": 4.0
 }
 
+[node name="Melee" parent="StatComponents" instance=ExtResource("2_ojsv5")]
+
 [node name="Magic" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
 [node name="Range" parent="StatComponents" instance=ExtResource("2_ojsv5")]
-
-[node name="Melee" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
 [node name="WeaponManager" type="Node3D" parent="."]
 
@@ -1350,7 +1350,8 @@ script = ExtResource("4_3f8co")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="AnimationComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0705616, 0.677099, 0)
-pixel_size = 0.084
+sorting_offset = 10.0
+pixel_size = 0.06
 billboard = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_ghmpq")
@@ -1376,3 +1377,5 @@ animation_component = NodePath("../AnimationComponent")
 [node name="DashTimer" type="Timer" parent="MovementComponent"]
 wait_time = 0.2
 one_shot = true
+
+[connection signal="_entity_stats_updated" from="StatComponents" to="." method="_reassign_values"]
