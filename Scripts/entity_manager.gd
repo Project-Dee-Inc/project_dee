@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var stat_components = $StatComponents
 
 @export var isPlayer: bool = false
+@export var isBoss: bool = false
 var player_initialized:bool = false
 
 func _ready():
@@ -47,6 +48,8 @@ func _assign_health(base_stat_dict:Dictionary):
 	if(health_component != null):
 		if(isPlayer):
 			health_component._set_is_player()
+		if(isBoss):
+			health_component._set_is_boss(self.name)
 
 		var hpIndex = Constants.get_enum_name_by_value(Constants.STATS.HP)
 		if (base_stat_dict.has(hpIndex) && health_component.max_health != base_stat_dict[hpIndex]):
