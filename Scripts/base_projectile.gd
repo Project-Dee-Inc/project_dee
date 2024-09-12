@@ -5,9 +5,11 @@ class_name Projectile
 @onready var stat_component = $StatComponent
 var hit_collider:Area3D 
 var stat_dict: Dictionary = {}
+var base_node:Node3D
 var base_target:Node3D
 var target:Node
 var body:Node
+var target_tag:Constants.TARGETS
 
 var speed:int = 0
 var damage:int = 0
@@ -33,20 +35,22 @@ func _set_values():
 	speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.MOVE_SPD)]
 
 func _set_collision_masks(target_type:Constants.TARGETS):
+	target_tag = target_type
 	Constants.set_collision_masks(hit_collider, target_type)
 
 func _set_collision_layer(target_type:Constants.TARGETS):
 	Constants.set_collision_layer(hit_collider, target_type)
 
 # Get target and direction for projectile to go
-func _shoot(base:Node3D, value:Node3D):
+func _shoot(base:Node3D, starting_node:Node3D , ending_node:Node3D, direction:Vector3 = Vector3(0,0,0)):
 	body = base
-	base_target = value
-	target = value.health_component
+	base_node = starting_node
+	base_target = ending_node
+	target = base_target.health_component
 
 	# If not homing, just get general direction
 	if(!is_homing):
-		manual_dir = _get_direction(base_target.global_transform.origin, body.global_transform.origin)
+		manual_dir = direction
 
 	is_shooting = true
 
@@ -86,6 +90,16 @@ func _home_to_target(delta:float):
 
 # On collide, damage and despawn
 func _on_hit_collider_component_body_entered(_body):
+	if(target_tag == Constants.TARGETS.PLAYER || target_tag == Constants.TARGETS.BOTH):
+		if(_body != base_node):
+			_on_target_hit()
+
+func _on_hit_collider_component_area_entered(_area: Area3D):
+	if(target_tag == Constants.TARGETS.ENEMY || target_tag == Constants.TARGETS.BOTH):
+		if(_area.get_parent() != base_node):
+			_on_target_hit()
+
+func _on_target_hit():
 	target._damage(damage)
 	queue_free()
 

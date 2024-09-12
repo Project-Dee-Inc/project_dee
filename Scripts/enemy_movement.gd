@@ -3,11 +3,13 @@ extends Node
 @onready var animation_component: Node = $"../AnimationComponent"
 @onready var nav_agent = $"../NavigationAgent3D"
 @onready var parent_component = $".."
+@export var override_face_player:bool = false
 var raycast:RayCast3D
 var target:Node3D
 var body:Node3D
 
 var speed:int = 0
+var current_speed:float
 var state_is_moving:bool = false
 
 var is_surround:bool = false
@@ -23,6 +25,7 @@ var randomnum:float
 
 func _ready():
 	body = get_parent()
+	current_speed = speed
 
 func _get_rand() -> float:
 	var rng = RandomNumberGenerator.new()
@@ -32,6 +35,7 @@ func _get_rand() -> float:
 # Set initial movement speed for mob
 func _set_speed(value:int):
 	speed = value
+	current_speed = speed
 
 # Set if movement type surrounds or not
 func _set_surround(value:bool):
@@ -75,9 +79,8 @@ func _physics_process(delta):
 	if (state_is_moving && target != null):
 		if(!override_follow_target):
 			target_position = target.global_transform.origin
-
-		if(is_stay_in_range):
-			if(!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked):
+		if(is_stay_in_range and !override_follow_target):
+			if((!Constants.is_close_to_destination(body.global_transform.origin, target_position, follow_range) || is_blocked) && !Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin, 1)):
 				_on_start_move(target_position, delta)
 			else:
 				_on_stop_move()
@@ -94,30 +97,28 @@ func _on_start_move(target_pos:Vector3, delta:float):
 # Stop movement and stay stationary
 func _on_stop_move():
 	body.velocity = Vector3.ZERO  # Stop moving if within follow range
-	_face_player()
+	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
+	if(!override_face_player):
+		_face_player(direction)
 
 # Move to Vector3 position
 func _move_to_pos(target_pos:Vector3, delta:float):
 	nav_agent.target_position = target_pos
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
-	body.velocity = body.velocity.lerp(direction * speed, 20 * delta)
+	body.velocity = body.velocity.lerp(direction * current_speed, 20 * delta)
 
-	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
-		if(body.velocity.x > 0):
-			animation_component._flip_anim(true)
-		else:
-			animation_component._flip_anim(false)
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
+		_face_player(body.velocity)
 
 	body.move_and_slide()
 
-func _face_player():
-	var direction = (target.global_transform.origin - body.global_transform.origin).normalized()
-
+func _face_player(direction:Vector3):
 	# Flip the sprite based on the direction to the player
-	if (direction.x > 0):
-		animation_component._flip_anim(true)
-	elif (direction.x < 0):
-		animation_component._flip_anim(false)
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
+		if (direction.x > 0):
+			animation_component._flip_anim(false)
+		elif (direction.x < 0):
+			animation_component._flip_anim(true)
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos

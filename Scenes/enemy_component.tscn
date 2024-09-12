@@ -21,6 +21,7 @@ script = ExtResource("1_akqr4")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675445, 0)
+sorting_offset = 10.0
 pixel_size = 0.07
 billboard = 1
 texture_filter = 0
@@ -28,6 +29,7 @@ sprite_frames = SubResource("SpriteFrames_euj06")
 speed_scale = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("SphereShape3D_xqdho")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

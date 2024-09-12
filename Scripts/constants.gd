@@ -39,6 +39,7 @@ enum STATS {
 	PROJ_COUNT,
 	EXP_GAIN,
 	GOLD_GAIN,
+	RNG
 }
 
 var stats_enum_mapping = {
@@ -59,7 +60,8 @@ var stats_enum_mapping = {
 	"SKILL_DURATION": STATS.SKILL_DURATION,
 	"PROJ_COUNT": STATS.PROJ_COUNT,
 	"EXP_GAIN": STATS.EXP_GAIN,
-	"GOLD_GAIN": STATS.GOLD_GAIN
+	"GOLD_GAIN": STATS.GOLD_GAIN,
+	"RNG": STATS.RNG
 }
 
 class StatusEffect:
@@ -91,7 +93,6 @@ func is_close_to_destination(current_position: Vector3, destination: Vector3, th
 	return distance <= threshold
 
 func set_collision_masks(collider_component:Area3D, target_type:Constants.TARGETS):
-	#print("HERE MASK ", collider_component)
 	match target_type:
 		Constants.TARGETS.PLAYER:
 			collider_component.collision_mask = (1 << 1)
@@ -126,3 +127,7 @@ func find_group_center(group_positions: Array) -> Vector3:
 	for pos in group_positions:
 		total_position += pos
 	return total_position / group_positions.size() 
+
+func _get_direction(start:Vector3, end:Vector3) -> Vector3:
+	var dir = (start - end).normalized()
+	return dir

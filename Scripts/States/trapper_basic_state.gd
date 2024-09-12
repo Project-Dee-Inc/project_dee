@@ -10,6 +10,7 @@ func enter():
 
 	# Start moving
 	movement_manager._set_surround(false)
+	movement_manager._set_stay_in_range(true, 1)
 	movement_manager._state_moving(true)
 
 func exit(next_state):

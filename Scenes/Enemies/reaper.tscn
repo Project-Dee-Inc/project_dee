@@ -1,5 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://hefn2l5lkm68"]
+[gd_scene load_steps=3 format=3 uid="uid://drkvq62rj5vkl"]
 
-[ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_lsk5h"]
+[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="1_6e4ah"]
+[ext_resource type="SpriteFrames" uid="uid://d4dyr8f2s0y5t" path="res://Assets/Enemies/SpriteFrames/reaper_frames.tres" id="2_oquth"]
 
-[node name="Reaper" instance=ExtResource("1_lsk5h")]
+[node name="Reaper" instance=ExtResource("1_6e4ah")]
+
+[node name="BodyHitCollider" parent="." index="0"]
+collision_layer = 0
+
+[node name="AnimatedSprite3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26416, 0)
+sprite_frames = ExtResource("2_oquth")
+frame_progress = 0.328504
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"ATK": 10000000,
+"CD": 2,
+"EXP_GAIN": 0,
+"HP": 10000000000,
+"MOVE_SPD": 2
+}

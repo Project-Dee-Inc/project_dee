@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://nlbl1psg1kdr"]
+
+[ext_resource type="Texture2D" uid="uid://wa36xpw86kx7" path="res://Assets/Enemies/Sprites/poof_01.png" id="1_tf656"]
+[ext_resource type="Texture2D" uid="uid://celtev56k2aug" path="res://Assets/Enemies/Sprites/poof_02.png" id="2_xa6pf"]
+[ext_resource type="Texture2D" uid="uid://bj5cw23kqq6ov" path="res://Assets/Enemies/Sprites/poof_03.png" id="3_a7ico"]
+[ext_resource type="Texture2D" uid="uid://vopp217la56y" path="res://Assets/Enemies/Sprites/poof_04.png" id="4_ktxms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wil70"]
+atlas = ExtResource("1_tf656")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6telt"]
+atlas = ExtResource("2_xa6pf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqwr"]
+atlas = ExtResource("3_a7ico")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvtiy"]
+atlas = ExtResource("4_ktxms")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wil70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6telt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvtiy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

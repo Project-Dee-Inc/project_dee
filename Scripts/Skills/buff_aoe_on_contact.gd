@@ -1,6 +1,7 @@
 extends "res://Scripts/skill_component.gd"
 class_name BuffOnAoe
 
+@export var animated_sprite:AnimatedSprite3D
 @export var aoe_collision_shape:CollisionShape3D
 @export var buff_stat_component:Node
 
@@ -17,6 +18,7 @@ func _ready():
 	_get_values()
 	_set_values()
 	_set_collider_radius(radius)
+	animated_sprite.pixel_size = radius * 0.035
 
 func _assign_new_values(new_stat_dict:Dictionary):
 	_get_new_values(new_stat_dict)
@@ -49,14 +51,16 @@ func _set_collider_radius(value:float):
 func _activate_skill():
 	skill_is_active = true
 	attacking = true
+	animated_sprite.visible = attacking
 
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.45).timeout
 	if (is_instance_valid(self)):
 		_deactivate_skill()
 
 func _deactivate_skill():
 	skill_is_active = false
 	attacking = false
+	animated_sprite.visible = attacking
 
 	await get_tree().create_timer(cd).timeout
 	if (is_instance_valid(self)):

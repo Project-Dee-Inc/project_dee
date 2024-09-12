@@ -1,6 +1,7 @@
 extends Area3D
 class_name AoeCollider
 
+@onready var animated_sprite: AnimatedSprite3D = $AnimatedSprite3D
 @export var allow_character_bodies:bool = false
 @export var allow_area_bodies:bool = false
 
@@ -21,6 +22,16 @@ var stat_to_debuff:Constants.STATS
 # Get reference to collider body
 func _ready():
 	hit_body = self
+
+# Set sprite frames if you need it
+func _set_sprite_frames(value:SpriteFrames):
+	animated_sprite.sprite_frames = value
+	animated_sprite.visible = true
+	animated_sprite.play("default")
+
+# Customize sprite frames pixel size
+func _set_sprite_frames_size(value:float):
+	animated_sprite.pixel_size = value
 
 # Instantiate own sphere collider and disable it
 func _create_collider(value:float):
@@ -69,7 +80,7 @@ func _enable_area_bodies():
 # Enable collider to take effect and despawn after cd
 func _enable_collider(value:bool):
 	var visible_value = !value
-	hit_collider.disabled = visible_value
+	hit_collider.set_deferred("disabled", visible_value)
 
 	if(!visible_value):
 		await get_tree().create_timer(cd_collider).timeout

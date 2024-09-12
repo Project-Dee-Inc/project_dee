@@ -5,7 +5,7 @@
 
 [node name="PopupText" type="Label3D"]
 transform = Transform3D(1, 0, 0, 0, 0.52909, 0.848566, 0, -0.848566, 0.52909, 0, 0, 0)
-pixel_size = 0.025
+pixel_size = 0.02
 outline_modulate = Color(0, 0, 0, 0.486275)
 text = "100"
 font = ExtResource("1_khymg")

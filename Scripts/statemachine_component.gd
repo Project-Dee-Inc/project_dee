@@ -36,6 +36,22 @@ func set_state(state_name):
 	add_child(current_state)
 	current_state.enter()
 
+func _get_random_activatable_state() -> String:
+	var activatable_states = {}
+
+	for key in states:
+		if (states[key].include_in_state_rand == true):
+			activatable_states[key] = states[key]
+
+	if activatable_states.size() == 0:
+		return ""
+
+	var keys = activatable_states.keys()
+
+	randomize()
+	var random_index = randi() % keys.size()
+	return activatable_states[keys[random_index]].name
+
 func _on_death():
 	if(current_state.has_method("exit")):
 		current_state.exit("OnDeath")

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkf0e45p6lwnw"
-path.s3tc="res://.godot/imported/Spider Sprite Sheet.png-5200737e3e4778664eb9b44382ce9953.s3tc.ctex"
+uid="uid://c3b75oy4skdc2"
+path.s3tc="res://.godot/imported/Imp Sprite Sheet.png-165e91cb8db154a7ad036bb500e7a846.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Enemies/Spider Sprite Sheet.png"
-dest_files=["res://.godot/imported/Spider Sprite Sheet.png-5200737e3e4778664eb9b44382ce9953.s3tc.ctex"]
+source_file="res://Assets/Enemies/Sprites/Imp Sprite Sheet.png"
+dest_files=["res://.godot/imported/Imp Sprite Sheet.png-165e91cb8db154a7ad036bb500e7a846.s3tc.ctex"]
 
 [params]
 
