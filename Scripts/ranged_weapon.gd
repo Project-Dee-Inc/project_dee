@@ -109,6 +109,7 @@ func _spawn_projectile():
 	var nearest_enemy = get_nearest_enemies(10, 1) #Get the nearest enemy only
 	if nearest_enemy.size() > 0:
 		target = nearest_enemy[0]
+		var nearest_enemy_direction = (target.global_transform.origin - global_transform.origin).normalized() #Get the normalized direction
 		var projectile = projectile_obj.instantiate() as Node3D
 	
 		get_tree().root.add_child(projectile)
@@ -123,10 +124,8 @@ func _spawn_projectile():
 		# Set behavior if projectile is homing or not
 		projectile.is_homing = is_homing
 		# Start moving to target
-		projectile._shoot(projectile, target)
+		projectile._shoot(projectile, get_parent(), target, nearest_enemy_direction)
 	
-	
-
 func get_nearest_enemies(max_distance: float, max_count: int) -> Array:
 	var nearby_enemies = []
 	
