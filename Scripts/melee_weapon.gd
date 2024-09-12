@@ -7,11 +7,13 @@ var player_stat_dict: Dictionary = {}
 var time_since_last_attack: float = 0.0
 @export var attack_interval: float = 3.0
 @export var attack_range: float = 10.0
+@export var is_cone_attack: bool = false
 @export var attack_angle_degrees: float = 90.0
 @export var damage_amount: int = 10
 @export var max_enemies_damaged: int = 3
 
 @onready var weapon_skill = $WeaponSkill
+var enemies = []
 	
 func _on_ready():
 	cooldown = weapon_skill.stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
@@ -24,23 +26,7 @@ func _skill_activate():
 	weapon_skill.player_stats = player_stat_dict
 	weapon_skill._activate_skill()
  
-# Placeholder method to handle enemies
-func damage_enemies_in_cone():
-	# Get all potential enemies in the scene
-	#var enemies = get_tree().get_nodes_in_group("enemies")
-	#
-	#for enemy in enemies:
-		## Calculate the vector from the player to the enemy
-		#var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
-		#to_enemy.y = 0  # Ignore Y component to maintain horizontal plane
-		## Calculate the angle between the attack direction and the vector to the enemy
-		#var angle = rad_to_deg(direction.angle_to(to_enemy))
-		## Check if the enemy is within the attack cone
-		#if angle <= attack_angle_degrees / 2 and is_enemy_in_range(enemy):
-			## Access the health component of the enemy
-			##enemy.apply_damage(damage_amount)
-			#enemy.health_component._damage(damage_amount)
-			#print(enemy)
+func damage_nearest_enemies():
 	var nearest_enemies = get_nearest_enemies(attack_range, max_enemies_damaged)
 	
 	if nearest_enemies.size() > 0:
@@ -50,34 +36,22 @@ func damage_enemies_in_cone():
 	else:
 		print("No enemies found within the distance.")
 
-# Function to get the direction towards the cursor
-#func get_attack_direction() -> Vector3:
-	#var camera = GameManager.camera
-	#var mouse_position = camera.get_viewport().get_mouse_position()
-	#var ray_origin = camera.project_ray_origin(mouse_position)
-	#var ray_target = ray_origin + camera.project_ray_normal(mouse_position) * 10000.0
-	#
-	## Cast the ray and get the intersection point with the ground (assuming Y = 0)
-	#var space_state = get_world_3d().direct_space_state
-	#var param = PhysicsRayQueryParameters3D.new()
-	#param.from = ray_origin
-	#param.to = ray_target
-	#param.collision_mask = 1
-#
-	#var result = space_state.intersect_ray(param)
-	#
-	#print("result: " + str(result))
-	#if result:
-		#var intersection_point = result.position
-		## Ignore Y component for the direction vector
-		#var direction = (intersection_point - global_transform.origin).normalized()
-		#direction.y = 0
-		#return direction.normalized()
-	#
-	#return Vector3.ZERO
+func damage_enemies_in_cone():
+	var nearest_enemy = get_nearest_enemies(attack_range, 1) #Get the nearest enemy only
+	var nearest_enemy_direction: Vector3 = Vector3.ZERO
+	if nearest_enemy.size() > 0:
+		nearest_enemy_direction = (nearest_enemy[0].global_transform.origin - global_transform.origin).normalized() #Get the normalized direction
+	
+	for enemy in enemies:
+		var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
+		to_enemy.y = 0
+		var angle = rad_to_deg(nearest_enemy_direction.angle_to(to_enemy))
+		if (angle <= attack_angle_degrees / 2 and is_enemy_in_range(enemy)) or enemy.global_transform.origin.distance_to(global_transform.origin) <= 0.5:
+			enemy.health_component._damage(damage_amount)
+			print("Dealing damage in a cone")
+	
 	
 func get_nearest_enemies(max_distance: float, max_count: int) -> Array:
-	var enemies = get_tree().get_nodes_in_group("enemies")
 	var nearby_enemies = []
 	
 	# Filter enemies within the given max_distance
@@ -102,7 +76,11 @@ func _process(delta: float) -> void:
 		
 	if time_since_last_attack >= attack_interval:
 		time_since_last_attack = 0.0
-		damage_enemies_in_cone()
+		enemies = get_tree().get_nodes_in_group("enemies")
+		if not is_cone_attack:
+			damage_nearest_enemies()
+		else:
+			damage_enemies_in_cone()
 		
 		# Get the direction of the attack
 		#var attack_direction = get_attack_direction()
