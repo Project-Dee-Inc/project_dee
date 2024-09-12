@@ -3,6 +3,7 @@ extends Node
 var fsm: StateMachine
 var movement_manager
 var skill_manager
+var include_in_state_rand:bool = false
 
 # On death, stop moving and despawn
 func enter():
