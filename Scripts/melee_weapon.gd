@@ -7,7 +7,7 @@ var player_stat_dict: Dictionary = {}
 var time_since_last_attack: float = 0.0
 @export var attack_interval: float = 3.0
 @export var attack_range: float = 10.0
-@export var is_cone_attack: bool = false
+@export var is_cone_attack: bool = false #If cone attack, ignores max number of enemies damaged limit
 @export var attack_angle_degrees: float = 90.0
 @export var damage_amount: int = 10
 @export var max_enemies_damaged: int = 3
@@ -50,7 +50,6 @@ func damage_enemies_in_cone():
 			enemy.health_component._damage(damage_amount)
 			print("Dealing damage in a cone")
 	
-	
 func get_nearest_enemies(max_distance: float, max_count: int) -> Array:
 	var nearby_enemies = []
 	
@@ -81,13 +80,6 @@ func _process(delta: float) -> void:
 			damage_nearest_enemies()
 		else:
 			damage_enemies_in_cone()
-		
-		# Get the direction of the attack
-		#var attack_direction = get_attack_direction()
-		
-		# If there's a valid direction, perform the attack
-		#if attack_direction != Vector3.ZERO:
-			#damage_enemies_in_cone(attack_direction)
 
 # Helper method to check if an enemy is within range
 func is_enemy_in_range(enemy: Node3D) -> bool:
