@@ -5,6 +5,9 @@ class_name ShootProjectiles
 
 var projectile_count:int = 1
 var cd:float = 0
+var damage:int = 0
+var proj_speed:int = 0
+
 var skill_is_active:bool = false
 var can_activate:bool = true
 var is_homing:bool = false
@@ -26,6 +29,8 @@ func _get_new_values(new_stat_dict:Dictionary):
 func _set_values():
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 	projectile_count = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.PROJ_COUNT)]
+	damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
+	proj_speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.PROJ_SPD)]
 
 func _set_target(value:Node):
 	target = value
@@ -49,13 +54,15 @@ func _physics_process(_delta: float):
 		else:
 			attacking = false
 
-# Instantiate a copy of the base projectile scene
+# Instantiate a copy of the base projectile scene based on how many projectiles to create at once
 func _start_projectiles():
 	can_activate = false
 	var base_node = get_parent().parent_component
 	var direction = Constants._get_direction(target.global_transform.origin, base_node.global_transform.origin)
+	# Store base direction in case there's multiple projectiles
 	var base_direction = direction
 
+	# If more than 1 projectiles, create with offsets
 	if(projectile_count > 1):
 		# Total spread angle (in radians) - Adjust as needed
 		var total_spread_angle = 0.5
@@ -76,6 +83,7 @@ func _start_projectiles():
 				direction = base_direction
 
 			_spawn_projectile(base_node.global_transform.origin, target, direction)
+	# Else, just spawn one normally
 	else:
 		_spawn_projectile(base_node.global_transform.origin, target, direction)
 
@@ -83,6 +91,7 @@ func _start_projectiles():
 	await get_tree().create_timer(cd).timeout
 	can_activate = true
 
+# Spawn one instance of projectile towards a target node and position
 func _spawn_projectile(location:Vector3, target_node:Node3D, target_pos:Vector3 = Vector3(0,0,0)):
 	var projectile = projectile_obj.instantiate() as Node3D
 
@@ -93,6 +102,9 @@ func _spawn_projectile(location:Vector3, target_node:Node3D, target_pos:Vector3 
 	projectile._set_collision_layer(Constants.TARGETS.NEUTRAL)
 	# Set collision mask so that it only detects player
 	projectile._set_collision_masks(Constants.TARGETS.PLAYER)
+	# Set projectile damage and speed values
+	projectile._set_damage(damage)
+	projectile._set_speed(proj_speed)
 
 	# Set behavior if projectile is homing or not
 	projectile.is_homing = is_homing

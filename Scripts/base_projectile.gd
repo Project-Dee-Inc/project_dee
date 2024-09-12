@@ -2,7 +2,6 @@ extends Node3D
 class_name Projectile
 
 @onready var camera: Camera3D = get_viewport().get_camera_3d()
-@onready var stat_component = $StatComponent
 var hit_collider:Area3D 
 var stat_dict: Dictionary = {}
 var base_node:Node3D
@@ -21,18 +20,13 @@ var manual_dir:Vector3
 
 # Init
 func _ready():
-	_get_values()
-	_set_values()
-
-# Get copy of dictionary from referenced stats
-func _get_values():
 	hit_collider = get_node("HitColliderComponent")
-	stat_dict = stat_component.stat_dict
 
-# Override method to get neccessary values from stat dictionary
-func _set_values():
-	damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
-	speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.MOVE_SPD)]
+func _set_damage(value:int):
+	damage = value
+
+func _set_speed(value:int):
+	speed = value
 
 func _set_collision_masks(target_type:Constants.TARGETS):
 	target_tag = target_type
@@ -42,6 +36,10 @@ func _set_collision_layer(target_type:Constants.TARGETS):
 	Constants.set_collision_layer(hit_collider, target_type)
 
 # Get target and direction for projectile to go
+# Base = projectile object
+# Starting_node = parent node where the projectile is fired from
+# Ending_node = target node where the projectile should hit
+# Direction = now calculated in the script that calls for this
 func _shoot(base:Node3D, starting_node:Node3D , ending_node:Node3D, direction:Vector3 = Vector3(0,0,0)):
 	body = base
 	base_node = starting_node
