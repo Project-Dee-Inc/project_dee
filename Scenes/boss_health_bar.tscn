@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwcroypoqwkw7"]
+
+[ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="1_mfgvy"]
+
+[node name="BossHealthBar" instance=ExtResource("1_mfgvy")]
+
+[node name="HealthBar" parent="." index="0"]
+offset_top = 11.0
+offset_bottom = 34.0

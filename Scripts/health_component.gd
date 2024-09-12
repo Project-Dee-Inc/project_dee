@@ -5,6 +5,9 @@ signal on_enemy_damaged
 
 @export var regen_timer: Timer
 var is_player:bool = false
+var is_boss:bool = false
+var boss_name:String
+
 var hp_regen:int = 0
 var max_health:int = 0
 var current_health:int = 0:
@@ -12,7 +15,8 @@ var current_health:int = 0:
 		current_health = value
 		if(is_player):
 			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), current_health)
-			print("PLAYER HEALTH: ", current_health)
+		if(is_boss):
+			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_BOSS_HEALTH_CHANGED), [boss_name, current_health])
 
 # Set initial health
 func _set_health(value:int):
@@ -31,7 +35,6 @@ func _set_regen(value:int):
 
 # Damages!
 func _damage(value:int):
-	
 	current_health = clamp(current_health - value, 0, max_health)
 	if(current_health == 0):
 		_die()
@@ -64,3 +67,8 @@ func _die():
 # Set if this health component is for player to raise the event of on_health_changed
 func _set_is_player():
 	is_player = true
+
+# Set if this health component is for boss to raise the event of on_health_changed
+func _set_is_boss(value:String):
+	boss_name = value
+	is_boss = true
