@@ -43,3 +43,5 @@ sprite_frames = ExtResource("2_wfn1u")
 autoplay = "default"
 frame_progress = 0.446583
 speed_scale = 1.5
+
+[connection signal="area_entered" from="HitColliderComponent" to="." method="_on_hit_collider_component_area_entered"]

@@ -31,7 +31,8 @@ stat_dict = {
 "CD": 3.0,
 "EXP_GAIN": 1,
 "HP": 20,
-"MOVE_SPD": 5
+"MOVE_SPD": 5,
+"PROJ_COUNT": 1
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="MovementComponent" index="0"]
