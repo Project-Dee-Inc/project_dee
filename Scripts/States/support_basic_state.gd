@@ -14,6 +14,7 @@ func enter():
 	skill_manager._state_attacking(true)
 
 	movement_manager._set_surround(false)
+	movement_manager._set_stay_in_range(true, 1)
 	movement_manager._state_moving(true)
 
 	# Initialize cluster finding
