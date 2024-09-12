@@ -1,7 +1,7 @@
-extends Area3D  # Change to Area3D for easier collision detection
+extends Area3D
 
 # Speed of the projectile
-var speed: float = 20.0
+var speed: float = 1.0
 var damage_amount: int = 50 
 var penetrating_shot: bool = false
 
@@ -11,12 +11,11 @@ func _ready() -> void:
 	# Connect the signal for collision detection
 	self.connect("body_entered", Callable(self, "_on_body_entered"))
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
-		# Move the projectile in the given direction
-		translate(direction * speed * delta)
+		global_translate(direction * speed * delta)
 		
-		# Optionally, check if the projectile is out of bounds and remove it
+		#Check if the projectile is out of bounds and remove it
 		if is_out_of_bounds():
 			queue_free()
 
@@ -42,9 +41,10 @@ func _on_body_entered(body: Node3D) -> void:
 	var enemy = body.get_parent_node_3d()
 	if enemy.is_in_group("enemies"):
 		print(enemy.name)
-		# Access the enemy's method to apply damage
-		if enemy.has_method("apply_damage"):
-			enemy.apply_damage(damage_amount)
+		# Access the enemy's method to apply damage"res://Scenes/ranged_weapon_projectile.tscn"
+		#if enemy.has_method("apply_damage"):
+			#enemy.apply_damage(damage_amount)
+		enemy.health_component._damage(damage_amount)
 	# Destroy the projectile after collision
 	if not penetrating_shot:
 		queue_free()

@@ -65,9 +65,9 @@ extends Node3D
 @export var projectile_obj:PackedScene
 
 var cd:float = 0
-var is_homing:bool = false
+@export var is_homing:bool = false
 var has_stats:bool = false
-var shoot_interval: float = 3.0
+@export var shoot_interval: float = 3.0
 
 var enemies = []
 var _shoot_timer: float = 0.0
