@@ -48,7 +48,8 @@ stat_dict = {
 stat_dict = {
 "ATK": 10,
 "CD": 2,
-"PROJ_COUNT": 3
+"PROJ_COUNT": 3,
+"PROJ_SPD": 10
 }
 
 [node name="BullRushStats" parent="StatComponents" index="2" instance=ExtResource("5_4greh")]
