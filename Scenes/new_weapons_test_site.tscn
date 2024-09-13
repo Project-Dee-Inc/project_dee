@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=3 uid="uid://ushhmujigoi5"]
+[gd_scene load_steps=142 format=3 uid="uid://ushhmujigoi5"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_hn4cf"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_51guk"]
@@ -18,12 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="13_q5snc"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="14_hkm71"]
 [ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="14_mrf3s"]
-[ext_resource type="Script" path="res://Scripts/ranged_weapon.gd" id="15_5crv5"]
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="15_s3w8r"]
 [ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="15_wusn2"]
-[ext_resource type="PackedScene" uid="uid://c3wag756q0vfk" path="res://Scenes/Projectiles/shooter_projectile.tscn" id="16_mierh"]
 [ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="16_qek1j"]
 [ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="17_l7rvb"]
-[ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_skill.tscn" id="17_m0dj7"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="17_ykeeo"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="18_cuhys"]
 [ext_resource type="Texture2D" uid="uid://dw46qbofvqrtl" path="res://Assets/TestCharacter/Small-8-Direction-Characters_by_AxulArt.png" id="18_nl4po"]
@@ -1526,14 +1524,7 @@ stat_dict = {
 
 [node name="WeaponManager" type="Node3D" parent="Player"]
 
-[node name="RangedWeapon" type="Node3D" parent="Player/WeaponManager"]
-script = ExtResource("15_5crv5")
-projectile_obj = ExtResource("16_mierh")
-
-[node name="StatManager" parent="Player/WeaponManager/RangedWeapon" instance=ExtResource("14_hkm71")]
-
-[node name="WeaponSkill" parent="Player/WeaponManager/RangedWeapon" node_paths=PackedStringArray("stat_component") instance=ExtResource("17_m0dj7")]
-stat_component = NodePath("../StatManager")
+[node name="MeleeWeapon" parent="Player/WeaponManager" instance=ExtResource("15_s3w8r")]
 
 [node name="AnimationComponent" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738802, 0)

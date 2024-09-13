@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" path="res://Scripts/melee_weapon.gd" id="1_d4cwx"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_j23p5"]
-[ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_skill.tscn" id="3_o6mr4"]
+[ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_active_skill.tscn" id="3_o6mr4"]
 
 [node name="MeleeWeapon" type="Node3D"]
-script = ExtResource("1_d4cwx")
 
 [node name="StatManager" parent="." instance=ExtResource("2_j23p5")]
 
-[node name="WeaponSkill" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("3_o6mr4")]
+[node name="WeaponActiveSkill" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("3_o6mr4")]
 stat_component = NodePath("../StatManager")
+
+[node name="WeaponPassiveSkill" type="Node3D" parent="."]
+script = ExtResource("1_d4cwx")
