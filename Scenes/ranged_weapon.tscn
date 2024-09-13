@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccnft7u3md2kk"]
+[gd_scene load_steps=5 format=3 uid="uid://ccnft7u3md2kk"]
 
 [ext_resource type="Script" path="res://Scripts/ranged_weapon.gd" id="1_5wb6o"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_yikeu"]
 [ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_active_skill.tscn" id="3_xm44l"]
+[ext_resource type="PackedScene" uid="uid://c3wag756q0vfk" path="res://Scenes/Projectiles/shooter_projectile.tscn" id="4_4bb4h"]
 
 [node name="RangedWeapon" type="Node3D"]
-script = ExtResource("1_5wb6o")
 
 [node name="StatManager" parent="." instance=ExtResource("2_yikeu")]
 
@@ -14,3 +14,4 @@ stat_component = NodePath("../StatManager")
 
 [node name="WeaponPassiveSkill" type="Node3D" parent="."]
 script = ExtResource("1_5wb6o")
+projectile_obj = ExtResource("4_4bb4h")
