@@ -57,8 +57,8 @@ func _physics_process(_delta: float):
 # Instantiate a copy of the base projectile scene based on how many projectiles to create at once
 func _start_projectiles():
 	can_activate = false
-	var base_node = get_parent().parent_component
-	var direction = Constants._get_direction(target.global_transform.origin, base_node.global_transform.origin)
+	var projectile_node = get_parent().parent_component
+	var direction = Constants._get_direction(target.global_transform.origin, projectile_node.global_transform.origin)
 	# Store base direction in case there's multiple projectiles
 	var base_direction = direction
 
@@ -82,10 +82,10 @@ func _start_projectiles():
 			else:
 				direction = base_direction
 
-			_spawn_projectile(base_node.global_transform.origin, target, direction)
+			_spawn_projectile(projectile_node.global_transform.origin, target, direction)
 	# Else, just spawn one normally
 	else:
-		_spawn_projectile(base_node.global_transform.origin, target, direction)
+		_spawn_projectile(projectile_node.global_transform.origin, target, direction)
 
 	# Await for cd interval before looping and creating another instance
 	await get_tree().create_timer(cd).timeout
