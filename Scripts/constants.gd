@@ -135,3 +135,8 @@ func find_group_center(group_positions: Array) -> Vector3:
 func _get_direction(start:Vector3, end:Vector3) -> Vector3:
 	var dir = (start - end).normalized()
 	return dir
+
+func _get_health_percentage(current: float, max: float) -> float:
+	if max == 0:
+		return 0  # Avoid division by zero
+	return (current / max) * 100
