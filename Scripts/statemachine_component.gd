@@ -1,0 +1,61 @@
+extends Node
+class_name StateMachine
+
+@onready var movement_manager = $"../MovementComponent"
+@onready var skill_manager = $"../SkillManagerComponent"
+
+var current_state: Object
+var is_dead:bool = false
+
+var history = []
+var states = {}
+
+func _ready():
+	for state in get_children():
+		state.fsm = self
+		state.movement_manager = movement_manager
+		state.skill_manager = skill_manager
+		states[state.name] = state
+		if current_state:
+			remove_child(state)
+		else:
+			current_state = state
+	current_state.enter()
+
+func change_to(state_name):
+	history.append(current_state.name)
+	set_state(state_name)
+
+func back():
+	if history.size() > 0:
+		set_state(history.pop_back())
+
+func set_state(state_name):
+	remove_child(current_state)
+	current_state = states[state_name]
+	add_child(current_state)
+	current_state.enter()
+
+func _get_random_activatable_state() -> String:
+	var activatable_states = {}
+
+	for key in states:
+		if (states[key].include_in_state_rand == true):
+			activatable_states[key] = states[key]
+
+	if activatable_states.size() == 0:
+		return ""
+
+	var keys = activatable_states.keys()
+
+	randomize()
+	var random_index = randi() % keys.size()
+	return activatable_states[keys[random_index]].name
+
+func _on_death():
+	if(current_state.has_method("exit")):
+		current_state.exit("OnDeath")
+		is_dead = true
+
+func _is_dead() -> bool:
+	return is_dead

@@ -1,0 +1,110 @@
+[gd_scene load_steps=18 format=3 uid="uid://bpawloyv75ew5"]
+
+[ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_w2d4g"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_kuwfn"]
+[ext_resource type="PackedScene" uid="uid://cwcroypoqwkw7" path="res://Scenes/boss_health_bar.tscn" id="2_yv0vo"]
+[ext_resource type="SpriteFrames" uid="uid://dusv7tyam0jun" path="res://Assets/Enemies/SpriteFrames/shooter_frames.tres" id="3_83sid"]
+[ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="4_gs1pe"]
+[ext_resource type="Script" path="res://Scripts/Skills/shoot_projectiles.gd" id="5_0ut5g"]
+[ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="5_4greh"]
+[ext_resource type="Script" path="res://Scripts/States/gagamboy_projectile_state.gd" id="7_nnp4l"]
+[ext_resource type="Script" path="res://Scripts/States/basic_death.gd" id="8_5fbak"]
+[ext_resource type="PackedScene" uid="uid://t0vyy4r3dvdh" path="res://Scenes/Projectiles/gagamboy_projectile.tscn" id="8_hy7ws"]
+[ext_resource type="Script" path="res://Scripts/Skills/bull_rush.gd" id="9_p8y83"]
+[ext_resource type="Script" path="res://Scripts/States/gagamboy_bullrush_state.gd" id="10_1mcj8"]
+[ext_resource type="Script" path="res://Scripts/Skills/buff_and_spawn.gd" id="10_gukbb"]
+[ext_resource type="Script" path="res://Scripts/Skills/devour.gd" id="11_rbth5"]
+[ext_resource type="Script" path="res://Scripts/States/gagamboy_secondphase_state.gd" id="11_wshir"]
+[ext_resource type="Script" path="res://Scripts/States/gagamboy_devour_state.gd" id="12_irnnt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkcxh"]
+
+[node name="Gagamboy" instance=ExtResource("1_w2d4g")]
+isBoss = true
+
+[node name="BossHealthBar" parent="." index="0" instance=ExtResource("2_yv0vo")]
+boss_name = "Gagamboy"
+
+[node name="BodyHitCollider" parent="." index="1" instance=ExtResource("2_kuwfn")]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
+shape = SubResource("CapsuleShape3D_xkcxh")
+
+[node name="AnimatedSprite3D" parent="." index="2"]
+sprite_frames = ExtResource("3_83sid")
+animation = &"attack"
+autoplay = "idle"
+frame_progress = 0.631726
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"EXP_GAIN": 1000,
+"HP": 1000,
+"MOVE_SPD": 3
+}
+
+[node name="ProjectileStats" parent="StatComponents" index="1" instance=ExtResource("5_4greh")]
+stat_dict = {
+"ATK": 10,
+"CD": 2,
+"PROJ_COUNT": 3
+}
+
+[node name="BullRushStats" parent="StatComponents" index="2" instance=ExtResource("5_4greh")]
+stat_dict = {
+"ATK": 50,
+"CD": 5
+}
+
+[node name="BuffAndSpawnStats" parent="StatComponents" index="3" instance=ExtResource("5_4greh")]
+stat_dict = {
+"ATK": 0.5,
+"CD": 0.3,
+"PROJ_COUNT": 2.0
+}
+
+[node name="DevourStats" parent="StatComponents" index="4" instance=ExtResource("5_4greh")]
+stat_dict = {
+"ATK": 100,
+"CD": 5
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="MovementComponent" index="0"]
+target_position = Vector3(0, 0, 5)
+collision_mask = 3
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("4_gs1pe")
+
+[node name="ShootProjectiles" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("5_0ut5g")
+projectile_obj = ExtResource("8_hy7ws")
+stat_component = NodePath("../../StatComponents/ProjectileStats")
+
+[node name="BullRush" type="Node" parent="SkillManagerComponent" index="1" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("9_p8y83")
+stat_component = NodePath("../../StatComponents/BullRushStats")
+
+[node name="BuffAndSpawn" type="Node" parent="SkillManagerComponent" index="2" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("10_gukbb")
+stat_component = NodePath("../../StatComponents/BuffAndSpawnStats")
+
+[node name="Devour" type="Node" parent="SkillManagerComponent" index="3" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("11_rbth5")
+stat_component = NodePath("../../StatComponents/DevourStats")
+
+[node name="ProjectileState" type="Node" parent="StateMachineComponent" index="0"]
+script = ExtResource("7_nnp4l")
+
+[node name="BullRushState" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("10_1mcj8")
+
+[node name="SecondPhaseState" type="Node" parent="StateMachineComponent" index="2"]
+script = ExtResource("11_wshir")
+
+[node name="DevourState" type="Node" parent="StateMachineComponent" index="3"]
+script = ExtResource("12_irnnt")
+
+[node name="OnDeath" type="Node" parent="StateMachineComponent" index="4"]
+script = ExtResource("8_5fbak")

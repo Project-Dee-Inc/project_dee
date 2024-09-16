@@ -1,0 +1,18 @@
+[gd_scene load_steps=7 format=3 uid="uid://bliuhjx1k1i26"]
+
+[ext_resource type="Script" path="res://Scripts/mimic_control.gd" id="1_jgylo"]
+[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="2_1s8kx"]
+[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="3_218ef"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="4_nlvkb"]
+[ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="5_8n1qy"]
+[ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="6_msdij"]
+
+[node name="Mimic" type="Node"]
+script = ExtResource("1_jgylo")
+enemy_spawn_table = {
+ExtResource("2_1s8kx"): 30,
+ExtResource("3_218ef"): 20,
+ExtResource("4_nlvkb"): 35,
+ExtResource("5_8n1qy"): 10,
+ExtResource("6_msdij"): 5
+}

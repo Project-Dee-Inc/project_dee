@@ -1,0 +1,262 @@
+[gd_scene load_steps=18 format=3 uid="uid://xc2yr1gio7p6"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="1_xwmef"]
+[ext_resource type="Script" path="res://Scenes/hammer.gd" id="2_pmtwx"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="3_rgxri"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Melee/attack_references.gd" id="3_u1ndy"]
+[ext_resource type="Material" uid="uid://si7ro3gfjtbk" path="res://Materials/transparent_hit_indicator.tres" id="4_x4tyg"]
+[ext_resource type="Texture2D" uid="uid://bldyuk0enbel5" path="res://Assets/HammerFist/Untitled-ezgif.com-gif-to-sprite-converter.png" id="5_45m2b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5xwsc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_drws4"]
+
+[sub_resource type="Animation" id="Animation_mwgbc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackEffect/Area3D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.229952, 2.65571, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6ve1d"]
+resource_name = "Strike"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.5, 0.566667, 0.633333, 0.7, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.03526),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.566667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(0.001, 0.001, 0.001), Vector3(10, 10, 10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackEffect/Area3D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.466667, 0.566667, 0.633333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.83674, 0), Vector3(0, 3.837, 0), Vector3(0.23, 4.59896, 0), Vector3(0.23, 4.59896, 0), Vector3(0, 2.656, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fm7i7"]
+_data = {
+"RESET": SubResource("Animation_mwgbc"),
+"Strike": SubResource("Animation_6ve1d")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5bu25"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5vatp"]
+animation = &"Strike"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ax0do"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4fvt4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xr8hr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pnwky"]
+states/RESET/node = SubResource("AnimationNodeAnimation_5bu25")
+states/RESET/position = Vector2(481, 183)
+states/Start/position = Vector2(219, 110)
+states/Strike/node = SubResource("AnimationNodeAnimation_5vatp")
+states/Strike/position = Vector2(481, 54)
+transitions = ["RESET", "Strike", SubResource("AnimationNodeStateMachineTransition_ax0do"), "Strike", "RESET", SubResource("AnimationNodeStateMachineTransition_4fvt4"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_xr8hr")]
+
+[node name="Hammer" instance=ExtResource("1_xwmef")]
+
+[node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("hands")]
+script = ExtResource("2_pmtwx")
+radius_multiplier = 1.0
+is_test = true
+hits = 3
+hands = [NodePath("../Hand1"), NodePath("../Hand2")]
+base_damage = 5
+
+[node name="Attack Intervals Timer" type="Timer" parent="." index="2"]
+wait_time = 0.5
+
+[node name="Cooldown Timer" type="Timer" parent="." index="3"]
+wait_time = 3.0
+one_shot = true
+
+[node name="Hand1" type="Node3D" parent="." index="4" node_paths=PackedStringArray("animation_player", "animation_tree", "animation_sprite", "area_3d")]
+transform = Transform3D(0.516253, 0, 0, 0, 0.516253, 0, 0, 0, 0.516253, 0, 0, 0)
+top_level = true
+visible = false
+script = ExtResource("3_u1ndy")
+animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
+animation_sprite = NodePath("Sprite3D")
+area_3d = NodePath("AttackEffect/Area3D")
+
+[node name="AttackEffect" type="Node3D" parent="Hand1" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Hand1/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = ExtResource("3_rgxri")
+knockback = true
+knockback_strength = 3.0
+override_knockback_speed_multiplier = 8.0
+player_root_location = NodePath("../..")
+mesh1 = NodePath("")
+mesh2 = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1/AttackEffect/Area3D" index="0"]
+shape = SubResource("SphereShape3D_5xwsc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hand1/AttackEffect" index="1"]
+material_override = ExtResource("4_x4tyg")
+mesh = SubResource("SphereMesh_drws4")
+skeleton = NodePath("../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hand1" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_fm7i7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Hand1" index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_pnwky")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Sprite3D" type="Sprite3D" parent="Hand1" index="3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.229952, 2.65571, 0)
+modulate = Color(1, 1, 1, 0.784314)
+billboard = 1
+texture = ExtResource("5_45m2b")
+hframes = 3
+vframes = 6
+frame = 11
+
+[node name="Hand2" type="Node3D" parent="." index="5" node_paths=PackedStringArray("animation_player", "animation_tree", "animation_sprite", "area_3d")]
+transform = Transform3D(0.516253, 0, 0, 0, 0.516253, 0, 0, 0, 0.516253, 0, 0, 0)
+top_level = true
+visible = false
+script = ExtResource("3_u1ndy")
+animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
+animation_sprite = NodePath("Sprite3D")
+area_3d = NodePath("AttackEffect/Area3D")
+
+[node name="AttackEffect" type="Node3D" parent="Hand2" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Hand2/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = ExtResource("3_rgxri")
+knockback = true
+knockback_strength = 3.0
+override_knockback_speed_multiplier = 8.0
+player_root_location = NodePath("../..")
+mesh1 = NodePath("")
+mesh2 = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2/AttackEffect/Area3D" index="0"]
+shape = SubResource("SphereShape3D_5xwsc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hand2/AttackEffect" index="1"]
+material_override = ExtResource("4_x4tyg")
+mesh = SubResource("SphereMesh_drws4")
+skeleton = NodePath("../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hand2" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_fm7i7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Hand2" index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_pnwky")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Sprite3D" type="Sprite3D" parent="Hand2" index="3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.229952, 2.65571, 0)
+modulate = Color(1, 1, 1, 0.784314)
+billboard = 1
+texture = ExtResource("5_45m2b")
+hframes = 3
+vframes = 6
+frame = 11

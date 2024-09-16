@@ -1,0 +1,122 @@
+extends Area3D
+class_name AoeCollider
+
+@onready var animated_sprite: AnimatedSprite3D = $AnimatedSprite3D
+@export var allow_character_bodies:bool = false
+@export var allow_area_bodies:bool = false
+
+var hit_collider:CollisionShape3D
+var base_node:Node
+var hit_body:Area3D
+
+var cd_collider:float = 0
+var damage:float = 0
+
+var is_damage_over_time:bool = false
+var cd_time:float = 0
+var cd_interval:float = 0
+
+var is_damage_or_debuff:bool = false
+var stat_to_debuff:Constants.STATS
+
+# Get reference to collider body
+func _ready():
+	hit_body = self
+
+# Set sprite frames if you need it
+func _set_sprite_frames(value:SpriteFrames):
+	animated_sprite.sprite_frames = value
+	animated_sprite.visible = true
+	animated_sprite.play("default")
+
+# Customize sprite frames pixel size
+func _set_sprite_frames_size(value:float):
+	animated_sprite.pixel_size = value
+
+# Instantiate own sphere collider and disable it
+func _create_collider(value:float):
+	var collision_shape = CollisionShape3D.new()
+	var sphere_shape = SphereShape3D.new()
+	sphere_shape.radius = value
+
+	collision_shape.shape = sphere_shape
+	collision_shape.transform.origin = Vector3(0, 0, 0)
+	add_child(collision_shape)
+	hit_collider = collision_shape
+	_enable_collider(false)
+
+# Store base node in case we need to reference it
+func _set_base_node(value:Node):
+	base_node = value
+
+# Set basic collider values
+# cd_value = cd to despawn collider
+# damage_value = value for damage or debuff
+# over_time = set to true if status effect overtime
+# interval = interval to continue effect overtime
+# full_time = full duration of the status effect overtime
+func _set_values(cd_value:float, damage_value:float, over_time:bool = false, interval:float = 0, full_time:float = 0):
+	cd_collider = cd_value
+	damage = damage_value
+	is_damage_over_time = over_time
+	cd_interval = interval
+	cd_time = full_time
+
+# Set damage type
+# If normal damage, set to false
+# If stat debuff, set to true and reference the stat needed
+func _set_aoe_damage_type(normal:bool = false, stat_name:Constants.STATS = Constants.STATS.ATK):
+	is_damage_or_debuff = normal
+	stat_to_debuff = stat_name
+
+# Enable if we want to detect CharacterBody3D
+func _enable_character_bodies():
+	allow_character_bodies = true
+
+# Enable if we want to detect Area3D
+func _enable_area_bodies():
+	allow_area_bodies = true
+
+# Enable collider to take effect and despawn after cd
+func _enable_collider(value:bool):
+	var visible_value = !value
+	hit_collider.set_deferred("disabled", visible_value)
+
+	if(!visible_value):
+		await get_tree().create_timer(cd_collider).timeout
+		queue_free()
+
+func _set_collision_masks(target_type:Constants.TARGETS):
+	Constants.set_collision_masks(hit_body, target_type)
+
+func _set_collision_layer(target_type:Constants.TARGETS):
+	Constants.set_collision_layer(hit_body, target_type)
+
+func _on_area_entered(_area):
+	if(allow_area_bodies):
+		_deal_damage_to_target(_area)
+
+func _on_body_entered(_body):
+	if(allow_character_bodies):
+		_deal_damage_to_target(_body)
+
+# Get targets and reference their parent nodes
+func _deal_damage_to_target(target_node):
+	var collision_target
+	if(target_node is CharacterBody3D):
+		collision_target = target_node
+	elif(target_node is Area3D):
+		collision_target = target_node.get_parent()
+
+	if(collision_target && collision_target != base_node):
+		_on_deal_aoe_damage(collision_target)
+
+# If normal damage, get their health component and minus health
+# If debuff, get debuff stats and reduce target stats
+func _on_deal_aoe_damage(aoe_target):
+	if(is_damage_or_debuff):
+		aoe_target.health_component._damage(damage)
+	else:
+		var target_status = aoe_target.stat_components
+		var string_name = Constants.get_enum_name_by_value(stat_to_debuff) + " Debuff"
+		target_status._apply_status_effect(Constants.StatusEffect.new(string_name, cd_time, false, {stat_to_debuff: damage}))

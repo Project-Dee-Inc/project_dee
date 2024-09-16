@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dywouwhmsh8aa"]
+
+[ext_resource type="Script" path="res://Scripts/ranged_weapon_projectile.gd" id="1_i7ocd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_060ji"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hx884"]
+
+[node name="RangedWeaponProjectile" type="Area3D"]
+script = ExtResource("1_i7ocd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_060ji")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00332326, -0.00103772, -0.00203127)
+shape = SubResource("SphereShape3D_hx884")

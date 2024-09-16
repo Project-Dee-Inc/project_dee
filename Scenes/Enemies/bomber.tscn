@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl323oqwjtsf2"]
+
+[ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_ee11d"]
+[ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_yvnni"]
+[ext_resource type="SpriteFrames" uid="uid://dr5o87ge376em" path="res://Assets/Enemies/SpriteFrames/bomber_frames.tres" id="3_hjeum"]
+[ext_resource type="Script" path="res://Scripts/States/bomber_basic_state.gd" id="4_0rifu"]
+[ext_resource type="PackedScene" uid="uid://ct7a6n0tb25m8" path="res://Scenes/aoe_hit_collider_component.tscn" id="4_nf6sv"]
+[ext_resource type="Script" path="res://Scripts/Skills/bomber_aoe_on_timeout.gd" id="5_7yuud"]
+[ext_resource type="Script" path="res://Scripts/States/bomber_death.gd" id="5_d6d8m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f8tmk"]
+
+[node name="Bomber" instance=ExtResource("1_ee11d")]
+
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_yvnni")]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314207, 0)
+shape = SubResource("CapsuleShape3D_f8tmk")
+
+[node name="AnimatedSprite3D" parent="." index="1"]
+sprite_frames = ExtResource("3_hjeum")
+animation = &"attack"
+autoplay = "idle"
+frame_progress = 0.944331
+
+[node name="StatManager" parent="StatComponents" index="0"]
+stat_dict = {
+"AOE": 5,
+"ATK": 10,
+"CD": 7.0,
+"EXP_GAIN": 1,
+"HP": 10,
+"MOVE_SPD": 2
+}
+
+[node name="BomberAoeOnTimeout" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("5_7yuud")
+hit_body = ExtResource("4_nf6sv")
+stat_component = NodePath("../../StatComponents/StatManager")
+
+[node name="BasicAttack" type="Node" parent="StateMachineComponent" index="0"]
+script = ExtResource("4_0rifu")
+
+[node name="OnDeath" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("5_d6d8m")
+
+[connection signal="_on_warning_state" from="SkillManagerComponent/BomberAoeOnTimeout" to="AnimationComponent" method="_handle_warning"]

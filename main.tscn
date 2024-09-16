@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfvyvbrad7cx5"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1rp61"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_1rp61")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 580.0
+offset_top = 398.0
+offset_right = 700.0
+offset_bottom = 448.0
+text = "Quit"
+
+[node name="Credits" type="Button" parent="."]
+offset_left = 451.0
+offset_top = 399.0
+offset_right = 571.0
+offset_bottom = 449.0
+text = "Credits"
+
+[node name="New Game" type="Button" parent="."]
+offset_left = 451.0
+offset_top = 208.0
+offset_right = 701.0
+offset_bottom = 258.0
+text = "New Game"
+
+[node name="Load Game" type="Button" parent="."]
+offset_left = 451.0
+offset_top = 271.0
+offset_right = 701.0
+offset_bottom = 321.0
+text = "Load Game"
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 451.0
+offset_top = 336.0
+offset_right = 701.0
+offset_bottom = 386.0
+text = "Settings"
+
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="New Game" to="." method="_on_new_game_pressed"]

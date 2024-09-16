@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bkqxbp7bjoysp"]
+
+[node name="Difficulty_Select" type="Node2D"]
+
+[node name="Easy" type="Button" parent="."]
+offset_left = 3.0
+offset_top = 31.0
+offset_right = 247.0
+offset_bottom = 88.0
+text = "Easy
+"
+
+[node name="Normal" type="Button" parent="."]
+offset_left = 1.0
+offset_top = 121.0
+offset_right = 245.0
+offset_bottom = 178.0
+text = "Normal"
+
+[node name="Hard" type="Button" parent="."]
+offset_top = 208.0
+offset_right = 244.0
+offset_bottom = 265.0
+text = "Hard"

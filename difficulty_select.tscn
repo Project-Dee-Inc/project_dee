@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4cy08byu7jsu"]
+
+[ext_resource type="Script" path="res://Easy.gd" id="1_jvumt"]
+[ext_resource type="Script" path="res://Normal.gd" id="2_qhkdx"]
+[ext_resource type="Script" path="res://Hard.gd" id="3_fjfqm"]
+
+[node name="Difficulty_Select" type="Node2D"]
+
+[node name="Easy" type="Button" parent="."]
+offset_left = 3.0
+offset_top = 31.0
+offset_right = 247.0
+offset_bottom = 88.0
+text = "Easy
+"
+script = ExtResource("1_jvumt")
+
+[node name="Normal" type="Button" parent="."]
+offset_left = 1.0
+offset_top = 121.0
+offset_right = 245.0
+offset_bottom = 178.0
+text = "Normal"
+script = ExtResource("2_qhkdx")
+
+[node name="Hard" type="Button" parent="."]
+offset_top = 208.0
+offset_right = 244.0
+offset_bottom = 265.0
+text = "Hard"
+script = ExtResource("3_fjfqm")
+
+[connection signal="pressed" from="Easy" to="Easy" method="_on_pressed"]
+[connection signal="pressed" from="Normal" to="Normal" method="_on_pressed"]
+[connection signal="pressed" from="Hard" to="Hard" method="_on_pressed"]
