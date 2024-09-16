@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://xc2yr1gio7p6"]
+[gd_scene load_steps=17 format=3 uid="uid://xc2yr1gio7p6"]
 
 [ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_xwmef"]
-[ext_resource type="Script" path="res://Scenes/hammer.gd" id="2_pmtwx"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="3_rgxri"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Melee/attack_references.gd" id="3_u1ndy"]
 [ext_resource type="Material" uid="uid://si7ro3gfjtbk" path="res://Materials/transparent_hit_indicator.tres" id="4_x4tyg"]
@@ -144,14 +143,6 @@ transitions = ["RESET", "Strike", SubResource("AnimationNodeStateMachineTransiti
 
 [node name="Hammer" instance=ExtResource("1_xwmef")]
 
-[node name="WeaponSkill" parent="." index="1" node_paths=PackedStringArray("hands")]
-script = ExtResource("2_pmtwx")
-radius_multiplier = 1.0
-is_test = true
-hits = 3
-hands = [NodePath("../Hand1"), NodePath("../Hand2")]
-base_damage = 5
-
 [node name="Attack Intervals Timer" type="Timer" parent="." index="2"]
 wait_time = 0.5
 
@@ -172,7 +163,7 @@ area_3d = NodePath("AttackEffect/Area3D")
 [node name="AttackEffect" type="Node3D" parent="Hand1" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="Hand1/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+[node name="Area3D" type="Area3D" parent="Hand1/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
@@ -181,8 +172,6 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("")
-mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
@@ -223,7 +212,7 @@ area_3d = NodePath("AttackEffect/Area3D")
 [node name="AttackEffect" type="Node3D" parent="Hand2" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="Hand2/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+[node name="Area3D" type="Area3D" parent="Hand2/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
@@ -232,8 +221,6 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("")
-mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
