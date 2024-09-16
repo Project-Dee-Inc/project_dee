@@ -1,0 +1,202 @@
+[gd_scene load_steps=21 format=3 uid="uid://dw6o21xpbg0vi"]
+
+[ext_resource type="Texture2D" uid="uid://br4mb2xcxb2vn" path="res://Assets/Tentacles/tentacle-ezgif.com-gif-to-sprite-converter.png" id="1_g77hf"]
+[ext_resource type="Script" path="res://Scenes/tentacle_animation_helper.gd" id="1_hwqss"]
+[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="2_ltpep"]
+[ext_resource type="Texture2D" uid="uid://ddubeq2rkvdb3" path="res://Assets/Tentacles/tentacleidle-ezgif.com-gif-to-sprite-converter (1).png" id="2_urrry"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vhf1l"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y43wu"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j6bdk"]
+animation = &"tentacle_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_taik4"]
+animation = &"tentacle_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0dlfo"]
+animation = &"tentacle_retract"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_csysv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pol2w"]
+advance_mode = 2
+advance_condition = &"attack_finished"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xbyhp"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c2m7r"]
+advance_mode = 2
+advance_condition = &"attack_start"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_shnq8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ebm7c"]
+states/RESET/node = SubResource("AnimationNodeAnimation_y43wu")
+states/RESET/position = Vector2(302, 131)
+states/Start/position = Vector2(145, 91)
+states/tentacle_attack/node = SubResource("AnimationNodeAnimation_j6bdk")
+states/tentacle_attack/position = Vector2(352, 37)
+states/tentacle_idle/node = SubResource("AnimationNodeAnimation_taik4")
+states/tentacle_idle/position = Vector2(548, 59)
+states/tentacle_retract/node = SubResource("AnimationNodeAnimation_0dlfo")
+states/tentacle_retract/position = Vector2(489, 152)
+transitions = ["tentacle_attack", "tentacle_idle", SubResource("AnimationNodeStateMachineTransition_csysv"), "tentacle_idle", "tentacle_retract", SubResource("AnimationNodeStateMachineTransition_pol2w"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_xbyhp"), "RESET", "tentacle_attack", SubResource("AnimationNodeStateMachineTransition_c2m7r"), "tentacle_retract", "RESET", SubResource("AnimationNodeStateMachineTransition_shnq8")]
+graph_offset = Vector2(-21, 1)
+
+[sub_resource type="Animation" id="Animation_i5uyw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_jq4g8"]
+resource_name = "tentacle_attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_g77hf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_xtyko"]
+resource_name = "tentacle_idle"
+length = 0.9
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_urrry")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_knche"]
+resource_name = "tentacle_retract"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_g77hf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evqry"]
+_data = {
+"RESET": SubResource("Animation_i5uyw"),
+"tentacle_attack": SubResource("Animation_jq4g8"),
+"tentacle_idle": SubResource("Animation_xtyko"),
+"tentacle_retract": SubResource("Animation_knche")
+}
+
+[node name="Tentacle" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+top_level = true
+script = ExtResource("1_hwqss")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.59118, 0, 0, 0, 0.00999558, 0, 0, 0, 4.59118, 0, 0.0605993, 0)
+material_override = ExtResource("2_ltpep")
+mesh = SubResource("CylinderMesh_vhf1l")
+skeleton = NodePath("../Sprite3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.991675, 0.0800778, -0.100836, 0, 0.783103, 0.621893, 0.128765, 0.616715, -0.776583, -0.169028, 2.66125, -3.39043)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00337768, 2.56115, -0.000770569)
+billboard = 1
+texture_filter = 0
+hframes = 3
+vframes = 2
+frame = 2
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ebm7c")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack_finished = true
+parameters/conditions/attack_start = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_evqry")
+}
+
+[node name="TentacleLingerTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DOTTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpmcy8seq6g7j"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_etm3u"]
+
+[node name="TestSpawnedObject" type="MeshInstance3D"]
+top_level = true
+visible = false
+mesh = SubResource("SphereMesh_etm3u")

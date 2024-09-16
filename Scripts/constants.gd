@@ -121,11 +121,20 @@ func set_collision_layer(collider_component:Area3D, target_type:Constants.TARGET
 		_:
 			pass
 
+#find enemies
 func get_group_positions(group_value:String) -> Array:
 	var group_positions = []
 	for group in get_tree().get_nodes_in_group(group_value):
 		if group and group.is_inside_tree():
 			group_positions.append(group.global_transform.origin)
+	return group_positions
+
+#find enemies
+func get_group_nodes(group_value:String) -> Array[Node]:
+	var group_positions:Array[Node]
+	for group in get_tree().get_nodes_in_group(group_value):
+		if group and group.is_inside_tree():
+			group_positions.append(group)
 	return group_positions
 
 func find_group_center(group_positions: Array) -> Vector3:

@@ -172,7 +172,7 @@ area_3d = NodePath("AttackEffect/Area3D")
 [node name="AttackEffect" type="Node3D" parent="Hand1" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="Hand1/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+[node name="Area3D" type="Area3D" parent="Hand1/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
@@ -181,8 +181,6 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("")
-mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand1/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
@@ -223,7 +221,7 @@ area_3d = NodePath("AttackEffect/Area3D")
 [node name="AttackEffect" type="Node3D" parent="Hand2" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="Hand2/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location", "mesh1", "mesh2")]
+[node name="Area3D" type="Area3D" parent="Hand2/AttackEffect" index="0" node_paths=PackedStringArray("player_root_location")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
@@ -232,8 +230,6 @@ knockback = true
 knockback_strength = 3.0
 override_knockback_speed_multiplier = 8.0
 player_root_location = NodePath("../..")
-mesh1 = NodePath("")
-mesh2 = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand2/AttackEffect/Area3D" index="0"]
 shape = SubResource("SphereShape3D_5xwsc")
