@@ -5,19 +5,23 @@ var player_stat_dict: Dictionary = {}
 
 # Variables to control the attack
 var time_since_last_attack: float = 0.0
-@export var attack_interval: float = 3.0
+
+@export var attack_interval: float = 3
 @export var attack_range: float = 10.0
 @export var is_cone_attack: bool = false #If cone attack, ignores max number of enemies damaged limit
 @export var attack_angle_degrees: float = 90.0
-@export var damage_amount: int = 10
 @export var max_enemies_damaged: int = 3
 
+@onready var stat_component = $"../StatManager"
 @onready var weapon_skill = $WeaponSkill
+
 var enemies = []
+var stat_dict: Dictionary = {}
+var damage_amount: int
 	
-func _on_ready():
-	cooldown = weapon_skill.stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_BASE_STATS_READY), self, "_get_player_stat") # Todo: Change this so it listens to "on weapon equipped" instead of "on player base stats ready"
+func _ready():
+	stat_dict = stat_component.stat_dict
+	damage_amount = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
 
 func _get_player_stat(value: Dictionary):
 	player_stat_dict = value

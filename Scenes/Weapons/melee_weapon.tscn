@@ -7,6 +7,9 @@
 [node name="MeleeWeapon" type="Node3D"]
 
 [node name="StatManager" parent="." instance=ExtResource("2_j23p5")]
+stat_dict = {
+"ATK": 20
+}
 
 [node name="WeaponActiveSkill" parent="." node_paths=PackedStringArray("stat_component") instance=ExtResource("3_o6mr4")]
 stat_component = NodePath("../StatManager")

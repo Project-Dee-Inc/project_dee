@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://xc2yr1gio7p6"]
 
-[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/melee_weapon.tscn" id="1_xwmef"]
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_xwmef"]
 [ext_resource type="Script" path="res://Scenes/hammer.gd" id="2_pmtwx"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="3_rgxri"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Melee/attack_references.gd" id="3_u1ndy"]
