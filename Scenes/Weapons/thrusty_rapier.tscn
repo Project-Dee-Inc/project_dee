@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://boylgkym2nxih"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_tcmoe"]
+
+[node name="ThrustyRapier" instance=ExtResource("1_tcmoe")]
+
+[node name="StatManager" parent="." index="0"]
+stat_dict = {
+"ATK": 8
+}
+
+[node name="WeaponPassiveSkill" parent="." index="2"]
+attack_interval = 1.0
+attack_range = 3.0
+attack_angle_degrees = 10.0
+max_enemies_damaged = 1

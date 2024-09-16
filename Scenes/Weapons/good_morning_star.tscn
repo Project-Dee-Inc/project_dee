@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyb8bb5hgoken"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_dlynr"]
+
+[node name="GoodMorningStar" instance=ExtResource("1_dlynr")]
+
+[node name="WeaponPassiveSkill" parent="." index="2"]
+attack_interval = 4.0
+attack_range = 7.0
+is_cone_attack = true
+attack_angle_degrees = 45.0

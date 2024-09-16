@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctjrjay5rgmph"]
+
+[ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_upwan"]
+
+[node name="LimpFlail" instance=ExtResource("1_upwan")]
+
+[node name="StatManager" parent="." index="0"]
+stat_dict = {
+"ATK": 40
+}
+
+[node name="WeaponPassiveSkill" parent="." index="2"]
+attack_interval = 6.0
+attack_range = 12.0
+is_cone_attack = true
+attack_angle_degrees = 120.0
