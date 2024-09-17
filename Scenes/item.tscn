@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnk50cnnfkv20"]
+[gd_scene load_steps=2 format=3 uid="uid://dnk50cnnfkv20"]
 
-[ext_resource type="Script" path="res://Scripts/item.gd" id="1_p6e1h"]
-[ext_resource type="Texture2D" uid="uid://wbnvagstqx7u" path="res://Images/8.png" id="2_6bhvi"]
+[ext_resource type="Script" path="res://Scripts/item.gd" id="1_8mxkb"]
 
 [node name="Item" type="Node2D"]
-script = ExtResource("1_p6e1h")
+script = ExtResource("1_8mxkb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-texture = ExtResource("2_6bhvi")
