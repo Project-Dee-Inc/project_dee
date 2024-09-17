@@ -1,7 +1,7 @@
 extends Node2D
 
-func _ready() -> void:
-	if randi() % 2 == 0:
-		$TextureRect.texture = load("res://Images/8.png")
-	else:
-		$TextureRect.texture = load("res://Images/14.png")
+@export var item_name: String
+		
+func _display_item_icon(name: String, image: Texture2D):
+	item_name = name
+	$TextureRect.texture = image

@@ -76,6 +76,8 @@ class StatusEffect:
 
 var reverse_stats_enum_mapping = {}
 
+const item_class = preload("res://Scenes/item.tscn")
+
 func _ready():
 	for key in stats_enum_mapping.keys():
 		reverse_stats_enum_mapping[stats_enum_mapping[key]] = key
