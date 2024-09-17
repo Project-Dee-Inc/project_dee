@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnk50cnnfkv20"]
+[gd_scene load_steps=3 format=3 uid="uid://dnk50cnnfkv20"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_8mxkb"]
+[ext_resource type="Texture2D" uid="uid://wbnvagstqx7u" path="res://Images/8.png" id="2_6bhvi"]
 
 [node name="Item" type="Node2D"]
 script = ExtResource("1_8mxkb")
@@ -9,3 +10,16 @@ script = ExtResource("1_8mxkb")
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+texture = ExtResource("2_6bhvi")
+
+[node name="Quantity" type="Label" parent="TextureRect"]
+clip_contents = true
+offset_left = 1.0
+offset_right = 41.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 2
+vertical_alignment = 2

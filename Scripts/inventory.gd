@@ -3,17 +3,11 @@ extends Node2D
 const slot_class = preload("res://Scripts/slot.gd")
 @onready var grid_container: GridContainer = $GridContainer
 var selected_item = null
-
-var test_image = preload("res://Images/8.png")
+var added_items = []
 
 func _ready():
 	for inv_slot in grid_container.get_children():
 		inv_slot.connect("gui_input", Callable(self, "_slot_gui_input").bind(inv_slot))
-		
-	var item_instance = Constants.item_class.instantiate()
-	item_instance._display_item_icon("Test Item", test_image)
-	add_child(item_instance)
-	_store_item(item_instance)
 		
 func _slot_gui_input(event: InputEvent, slot: slot_class):
 	if event is InputEventMouseButton:
@@ -38,8 +32,18 @@ func _input(event):
 		selected_item.global_position = get_global_mouse_position()
 		
 func _store_item(item):
+	var item_name = item.item_name
+	if _check_for_item_dup(item_name):
+		return
 	for inv_slot in grid_container.get_children():
 		if !inv_slot.item:
 			inv_slot._drop_item(item)
+			added_items.append(item)
 			break
 			
+func _check_for_item_dup(name: String) -> bool:
+	for existing_item in added_items:
+		if existing_item.item_name == name:
+			existing_item._increment()
+			return true
+	return false
