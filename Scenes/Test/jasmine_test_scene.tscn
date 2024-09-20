@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://dnyu6pkwningf"]
 
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_quged"]
-[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_6dflm"]
-[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_cjhxe"]
-[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="5_rrvo8"]
-[ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/trapper.tscn" id="6_pgqk8"]
-[ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/support.tscn" id="7_5eul4"]
+[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/Base/fighter.tscn" id="3_6dflm"]
+[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/Base/shooter.tscn" id="4_cjhxe"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/Base/bomber.tscn" id="5_rrvo8"]
+[ext_resource type="PackedScene" uid="uid://h7ocenncgjo7" path="res://Scenes/Enemies/Base/trapper.tscn" id="6_pgqk8"]
+[ext_resource type="PackedScene" uid="uid://bvjogvdjqi50" path="res://Scenes/Enemies/Base/support.tscn" id="7_5eul4"]
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="7_25j1a"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_3c5ep"]
