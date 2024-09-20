@@ -185,3 +185,8 @@ func _calculate_navigation_mesh_bounds(navigation_mesh: NavigationMesh) -> AABB:
 func _is_position_walkable(navigation_map, position: Vector3) -> bool:
 	var path = NavigationServer3D.map_get_path(navigation_map, position, position, false)
 	return path.size() > 0
+
+func _get_rand() -> float:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	return rng.randf()
