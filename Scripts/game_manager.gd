@@ -2,7 +2,11 @@ extends Node
 
 var player:Node3D
 var camera:Camera3D
+var navregion:NavigationRegion3D
+var nav_mesh_bounds:AABB = AABB()
 var viewport:SubViewport
+
+var marker
 
 func _ready():
 	_on_subscribe_events()
@@ -22,6 +26,12 @@ func _on_game_start():
 func _player_initialized(_params):
 	player = _find_player_node()
 	camera = _find_camera_node()
+	navregion = _find_navmesh_node()
+	nav_mesh_bounds = Constants._calculate_navigation_mesh_bounds(navregion.navmesh)
+	marker = _find_marker_node()
+
+func _find_marker_node() -> Node3D:
+	return _find_node_recursive(get_tree().current_scene, "Marker")
 
 # Find player in all nested scenes to store global value
 func _find_player_node() -> Node3D:
@@ -29,6 +39,9 @@ func _find_player_node() -> Node3D:
 
 func _find_camera_node() -> Camera3D:
 	return _find_node_recursive(get_tree().current_scene, "MainCamera")
+
+func _find_navmesh_node() -> NavigationRegion3D:
+	return _find_node_recursive(get_tree().current_scene, "LevelNavMesh")
 
 func _find_node_recursive(parent: Node, nodeName: String) -> Node3D:
 	if parent.name == nodeName and parent is Node3D:
