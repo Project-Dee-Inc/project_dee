@@ -6,11 +6,18 @@ class_name StateMachine
 
 var current_state: Object
 var is_dead:bool = false
+var entity_health_percentage:float = 100
 
 var history = []
 var states = {}
+var state_weights = {}
+var last_picked_state:String = ""
 
 func _ready():
+	init_states()
+	current_state.enter()
+
+func init_states():
 	for state in get_children():
 		state.fsm = self
 		state.movement_manager = movement_manager
@@ -20,9 +27,13 @@ func _ready():
 			remove_child(state)
 		else:
 			current_state = state
-	current_state.enter()
+
+func init_state_weights():
+	for key in states:
+		state_weights[key] = 1  # Default weight
 
 func change_to(state_name):
+	last_picked_state = current_state.name
 	history.append(current_state.name)
 	set_state(state_name)
 
@@ -46,11 +57,27 @@ func _get_random_activatable_state() -> String:
 	if activatable_states.size() == 0:
 		return ""
 
-	var keys = activatable_states.keys()
+	# If last picked state exists, reduce weight/percentage
+	if last_picked_state in state_weights:
+		state_weights[last_picked_state] = max(0.1, state_weights[last_picked_state] * 0.5)  # Reduce by 50% (minimum weight 0.1)
+
+	var total_weight = 0.0
+	for key in activatable_states.keys():
+		total_weight += state_weights.get(key, 1)
 
 	randomize()
-	var random_index = randi() % keys.size()
-	return activatable_states[keys[random_index]].name
+	var pick = randf() * total_weight
+	var cumulative_weight = 0.0
+
+	for key in activatable_states.keys():
+		cumulative_weight += state_weights.get(key, 1)
+		if pick <= cumulative_weight:
+			# Reset picked state's weight
+			state_weights[key] = 1.0
+			last_picked_state = key
+			return activatable_states[key].name
+	
+	return ""
 
 func _on_death():
 	if(current_state.has_method("exit")):
@@ -59,3 +86,6 @@ func _on_death():
 
 func _is_dead() -> bool:
 	return is_dead
+
+func _check_health(max_health:int, cur_health:int):
+	entity_health_percentage = Constants._get_health_percentage(cur_health, max_health)
