@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://clq7iktob6kph"]
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_1mufe"]
-[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/bomber.tscn" id="2_gmnwx"]
+[ext_resource type="PackedScene" uid="uid://cl323oqwjtsf2" path="res://Scenes/Enemies/Base/bomber.tscn" id="2_gmnwx"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]
 

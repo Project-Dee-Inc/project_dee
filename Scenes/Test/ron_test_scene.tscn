@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="1_or335"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="2_i7bq7"]
-[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/fighter.tscn" id="3_nrexk"]
-[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/shooter.tscn" id="4_nffdr"]
+[ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/Base/fighter.tscn" id="3_nrexk"]
+[ext_resource type="PackedScene" uid="uid://d03xwmlrcr687" path="res://Scenes/Enemies/Base/shooter.tscn" id="4_nffdr"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="5_0w5qq"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_06ei6"]

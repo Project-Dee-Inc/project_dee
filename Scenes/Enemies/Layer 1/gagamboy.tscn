@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpawloyv75ew5"]
+[gd_scene load_steps=19 format=3 uid="uid://bpawloyv75ew5"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_w2d4g"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_kuwfn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/Skills/bull_rush.gd" id="9_p8y83"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_bullrush_state.gd" id="10_1mcj8"]
 [ext_resource type="Script" path="res://Scripts/Skills/buff_and_spawn.gd" id="10_gukbb"]
+[ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="11_odroy"]
 [ext_resource type="Script" path="res://Scripts/Skills/devour.gd" id="11_rbth5"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_secondphase_state.gd" id="11_wshir"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_devour_state.gd" id="12_irnnt"]
@@ -61,9 +62,11 @@ stat_dict = {
 
 [node name="BuffAndSpawnStats" parent="StatComponents" index="3" instance=ExtResource("5_4greh")]
 stat_dict = {
-"ATK": 0.5,
-"CD": 0.3,
-"PROJ_COUNT": 2.0
+"ATK": 0.3,
+"CD": 0.4,
+"MOVE_SPD": 0.3,
+"PROJ_COUNT": 4.0,
+"PROJ_SPD": 0.5
 }
 
 [node name="DevourStats" parent="StatComponents" index="4" instance=ExtResource("5_4greh")]
@@ -90,6 +93,7 @@ stat_component = NodePath("../../StatComponents/BullRushStats")
 
 [node name="BuffAndSpawn" type="Node" parent="SkillManagerComponent" index="2" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_gukbb")
+spawn_scene = ExtResource("11_odroy")
 stat_component = NodePath("../../StatComponents/BuffAndSpawnStats")
 
 [node name="Devour" type="Node" parent="SkillManagerComponent" index="3" node_paths=PackedStringArray("stat_component")]
