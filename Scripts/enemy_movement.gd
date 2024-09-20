@@ -97,7 +97,7 @@ func _physics_process(delta):
 			else:
 				_on_stop_move()
 		else: 
-			if(is_static_movement && Constants.is_close_to_destination(body.global_transform.origin, target_position, 1)):
+			if(is_static_movement && Constants.is_close_to_destination(body.global_transform.origin, target_position)):
 				_on_stop_move()
 
 			_on_start_move(target_position, delta)
@@ -107,10 +107,7 @@ func _on_start_move(target_pos:Vector3, delta:float):
 	if(is_surround):
 		target_pos = _get_circle_position(target_pos, randomnum)
 
-	if(!is_static_movement):
-		_move_to_pos(target_pos, delta)
-	else:
-		_on_static_movement(target_pos, delta)
+	_move_to_pos(target_pos, delta)
 
 # Stop movement and stay stationary
 func _on_stop_move():
@@ -120,24 +117,16 @@ func _on_stop_move():
 	if(!override_face_player):
 		_face_player(direction)
 
-# Start movement on one direction only
-func _on_static_movement(target_dir:Vector3, delta:float):
-	body.velocity = body.velocity.lerp(target_dir * current_speed, 20 * delta)
-	body.move_and_slide()
-
-	if(!Constants.is_close_to_destination(body.global_transform.origin, target_dir) && !override_face_player):
-		_face_player(body.velocity)
-
 # Move to Vector3 position
 func _move_to_pos(target_pos:Vector3, delta:float):
 	nav_agent.target_position = target_pos
+
 	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
 	body.velocity = body.velocity.lerp(direction * current_speed, 20 * delta)
+	body.move_and_slide()
 
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
 		_face_player(body.velocity)
-
-	body.move_and_slide()
 
 func _face_player(direction:Vector3):
 	# Flip the sprite based on the direction to the player

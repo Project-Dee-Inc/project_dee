@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=33 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -23,8 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/gagamboy.tscn" id="21_vkkk4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
-vertices = PackedVector3Array(19.7072, 13, -5.3304, 21.9572, 13, -0.0803986, 22.7072, 13, 0.169601, 15.2072, 13, -14.5804, 17.7072, 12.75, -5.3304, 18.4572, 13, -5.8304, 14.2072, 13, -17.3304, 39.2072, 13, -7.5804, 39.4572, 13, -8.5804, 31.4572, 13, -25.3304, 12.9572, 12.5, -13.0804, 7.7072, 11, -10.8304, 10.2072, 10.5, -1.5804, 10.4572, 10.5, -2.0804, 12.4572, 10.5, 4.9196, 12.7072, 10.5, 4.1696, 10.2072, 10.5, -0.580399, 5.9572, 10.5, -10.3304, 4.4572, 10.5, -12.8304, -10.0428, 10.5, -6.0804, -12.7928, 10.5, -4.3304, -4.7928, 10.5, 12.6696)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(5, 3, 0), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 2, 8), PackedInt32Array(8, 2, 0), PackedInt32Array(8, 0, 6), PackedInt32Array(8, 6, 9), PackedInt32Array(10, 3, 4), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 10, 13), PackedInt32Array(13, 10, 4), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 11, 12), PackedInt32Array(12, 16, 17), PackedInt32Array(17, 16, 18), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 16), PackedInt32Array(20, 16, 14), PackedInt32Array(20, 14, 21)]
+vertices = PackedVector3Array(20.2072, 13, -5.5804, 22.2072, 13, -0.580399, 22.9572, 13, -0.330399, 15.7072, 13, -14.5804, 18.9572, 13, -6.0804, 14.9572, 13, -17.0804, 38.2072, 13, -7.5804, 38.2072, 13, -8.0804, 30.7072, 13, -24.3304, 6.4572, 10.5, -9.3304, 9.2072, 10.5, -1.5804, 9.4572, 10.5, -2.0804, 6.9572, 10.5, -9.5804, 11.7072, 11, -2.3304, 15.2072, 13, -13.8304, 13.9572, 12.75, -13.8304, 6.9572, 10.75, -10.5804, 5.4572, 10.5, -9.3304, 4.4572, 10.5, -11.8304, 3.7072, 10.5, -11.8304, -11.7928, 10.5, -4.5804, -4.5428, 10.5, 12.1696, 11.7072, 10.5, 4.6696)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 0), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 2, 7), PackedInt32Array(7, 2, 0), PackedInt32Array(7, 0, 5), PackedInt32Array(7, 5, 8), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 11), PackedInt32Array(11, 14, 13), PackedInt32Array(13, 14, 4), PackedInt32Array(12, 16, 15), PackedInt32Array(4, 14, 3), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 9, 10), PackedInt32Array(17, 10, 19), PackedInt32Array(19, 10, 22), PackedInt32Array(19, 22, 20), PackedInt32Array(20, 22, 21)]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
 material = ExtResource("5_hoobr")
@@ -63,6 +63,8 @@ material = SubResource("ShaderMaterial_y7k3n")
 size = Vector2(100, 100)
 subdivide_width = 128
 subdivide_depth = 128
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t1f3q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
 shader = ExtResource("13_xuteu")
@@ -127,50 +129,168 @@ directional_shadow_mode = 0
 directional_shadow_max_distance = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shadow_enabled = true
 omni_attenuation = 1e-05
 
-[node name="MapNavMesh" type="NavigationRegion3D" parent="World"]
+[node name="LevelNavMesh" type="NavigationRegion3D" parent="World"]
+unique_name_in_owner = true
 transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, 0, -10, 0)
 navigation_mesh = SubResource("NavigationMesh_hhg2n")
 
-[node name="Room1" type="StaticBody3D" parent="World/MapNavMesh"]
+[node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
 transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 0, 0, 0)
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/MapNavMesh/Room1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
 mesh = SubResource("BoxMesh_wyeyq")
 skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Room1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room1"]
 shape = SubResource("BoxShape3D_1a2g4")
 
-[node name="Room2" type="StaticBody3D" parent="World/MapNavMesh"]
+[node name="Room2" type="StaticBody3D" parent="World/LevelNavMesh"]
 transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 26.8356, 2.575, -12.5376)
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/MapNavMesh/Room2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room2"]
 mesh = SubResource("BoxMesh_wyeyq")
 skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Room2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room2"]
 shape = SubResource("BoxShape3D_1a2g4")
 
-[node name="Ramp" type="MeshInstance3D" parent="World/MapNavMesh"]
+[node name="Ramp" type="MeshInstance3D" parent="World/LevelNavMesh"]
 transform = Transform3D(0.234489, 1.75025, 0.423283, -0.965926, 0.517638, 0, -0.109554, -0.817718, 0.905997, 12.7084, 10.802, -8.05651)
 mesh = SubResource("BoxMesh_g6wm3")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/MapNavMesh/Ramp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/LevelNavMesh/Ramp"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MapNavMesh/Ramp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Ramp/StaticBody3D"]
 shape = SubResource("BoxShape3D_mu3l8")
+
+[node name="Room3" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, -4.17376, 11.3054, -8.91462)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room3"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room3"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room8" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 22.5267, 14.0031, -21.3891)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room8"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room8"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room9" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 30.9415, 14.0031, -3.32233)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room9"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room9"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room4" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 4.18925, 11.3054, 8.98562)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room4"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room4"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room5" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.403525, 0, 0.00993521, 0, 0.147678, 0, -0.896963, 0, -0.00446965, -8.8126, 11.3054, 4.38896)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room5"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room5"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room12" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.403525, 0, 0.00993521, 0, 0.147678, 0, -0.896963, 0, -0.00446965, 35.2595, 14.0557, -16.3001)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room12"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room12"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room6" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.145293, 0, 0.00993522, 0, 0.147678, 0, -0.322959, 0, -0.00446965, 11.4321, 11.4992, 1.83113)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room6"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room6"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room10" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.145293, 0, 0.00993522, 0, 0.147678, 0, -0.322959, 0, -0.00446965, 20.6194, 14.0135, -2.30205)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room10"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room10"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room7" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.0682061, 0, 0.00993521, 0, 0.147678, 0, -0.15161, 0, -0.00446965, 5.46173, 11.4992, -11.4399)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room7"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room7"]
+shape = SubResource("BoxShape3D_1a2g4")
+
+[node name="Room11" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(-0.0682061, 0, 0.00993521, 0, 0.147678, 0, -0.15161, 0, -0.00446965, 14.2248, 13.9708, -16.0971)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room11"]
+mesh = SubResource("BoxMesh_wyeyq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room11"]
+shape = SubResource("BoxShape3D_1a2g4")
 
 [node name="Water" type="MeshInstance3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 layers = 2
 mesh = SubResource("PlaneMesh_vpq21")
+
+[node name="Marker" type="StaticBody3D" parent="World"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Marker"]
+shape = SubResource("SphereShape3D_t1f3q")
 
 [node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 layout_mode = 3
@@ -187,9 +307,9 @@ centered = false
 [node name="Player" parent="." instance=ExtResource("11_7q2wg")]
 
 [node name="LevelMobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
-navigation = NodePath("../World/MapNavMesh")
+navigation = NodePath("../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
-reaper_spawn_time = 120.0
+reaper_spawn_time = 600.0
 spawn_table = {
 ExtResource("11_7cm13"): 0,
 ExtResource("12_v21if"): 0,
