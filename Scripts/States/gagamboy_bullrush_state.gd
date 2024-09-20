@@ -120,7 +120,7 @@ func _randomize_next_attack():
 func _check_if_past_second_phase():
 	if(!is_second_phase && check_phase):
 		if(fsm.entity_health_percentage <= 50):
-			print("STARTING SECOND PHASE PAST ", fsm.entity_health_percentage)
+			print("STARTING SECOND PHASE FROM BULLRUSH PAST ", fsm.entity_health_percentage)
 
 func _check_if_moving_to_starting_point():
 	if(moving_to_starting_point):

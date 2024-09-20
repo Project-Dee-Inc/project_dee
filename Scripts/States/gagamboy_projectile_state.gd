@@ -51,8 +51,7 @@ func _prep_randomize_next_attack():
 func _randomize_next_attack():
 	if(is_instance_valid(self)):
 		Constants._stop_timer_and_remove_listener(fsm_timer, Callable(self, "_randomize_next_attack"))
-		#var next_state = fsm._get_random_activatable_state()
-		var next_state = "BullRushState"
+		var next_state = fsm._get_random_activatable_state()
 		print("NEXT STATE IS ", next_state)
 
 		if(next_state != self.name):
@@ -63,7 +62,7 @@ func _randomize_next_attack():
 func _check_if_past_second_phase():
 	if(!is_second_phase && check_phase):
 		if(fsm.entity_health_percentage <= 50):
-			print("STARTING SECOND PHASE PAST ", fsm.entity_health_percentage)
+			print("STARTING SECOND PHASE FROM PROJECTILE PAST ", fsm.entity_health_percentage)
 
 func _check_if_los():
 	if(check_los):
