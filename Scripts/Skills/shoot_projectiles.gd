@@ -6,7 +6,7 @@ class_name ShootProjectiles
 var projectile_count:int = 1
 var cd:float = 0
 var damage:int = 0
-var proj_speed:int = 0
+var projectile_speed:int = 0
 
 var skill_is_active:bool = false
 var can_activate:bool = true
@@ -30,7 +30,7 @@ func _set_values():
 	cd = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 	projectile_count = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.PROJ_COUNT)]
 	damage = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.ATK)]
-	proj_speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.PROJ_SPD)]
+	projectile_speed = stat_dict[Constants.get_enum_name_by_value(Constants.STATS.PROJ_SPD)]
 
 func _set_target(value:Node):
 	target = value
@@ -104,7 +104,7 @@ func _spawn_projectile(location:Vector3, target_node:Node3D, target_pos:Vector3 
 	projectile._set_collision_masks(Constants.TARGETS.PLAYER)
 	# Set projectile damage and speed values
 	projectile._set_damage(damage)
-	projectile._set_speed(proj_speed)
+	projectile._set_speed(projectile_speed)
 
 	# Set behavior if projectile is homing or not
 	projectile.is_homing = is_homing

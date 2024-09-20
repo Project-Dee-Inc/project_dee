@@ -7,6 +7,7 @@ var skill_manager
 var include_in_state_rand:bool = true
 
 @export var state_timeout:float = 15
+var skill_num:int = 0
 var state_active:bool = false
 var check_phase:bool = false
 var check_los:bool = false
@@ -18,7 +19,7 @@ func enter():
 
 	# Set that movement is blocked on spawn to make sure it has correct sight of player
 	movement_manager.is_blocked = true
-	skill_manager._change_skill(0)
+	skill_manager._change_skill(skill_num)
 	skill_manager._state_attacking(true)
 	skill_manager.current_skill._set_homing(false)
 
@@ -36,6 +37,11 @@ func _physics_process(_delta: float):
 	_check_if_past_second_phase()
 	_check_if_los()
 
+func _buff_state(atk_buff:float, spd_buff:float, proj_buff:float):
+	skill_manager.skills[skill_num].damage += skill_manager.skills[skill_num].damage * atk_buff
+	skill_manager.skills[skill_num].projectile_speed += skill_manager.skills[skill_num].projectile_speed * spd_buff
+	skill_manager.skills[skill_num].projectile_count += proj_buff
+
 func _cancel_state_mechanics():
 	Constants._remove_all_timer_listeners(fsm_timer)
 	movement_manager._set_stay_in_range(false)
@@ -49,7 +55,7 @@ func _prep_randomize_next_attack():
 		Constants._start_timer_with_listener(fsm_timer, state_timeout, Callable(self, "_randomize_next_attack"))
 
 func _randomize_next_attack():
-	if(is_instance_valid(self)):
+	if(is_instance_valid(self) && state_active):
 		Constants._stop_timer_and_remove_listener(fsm_timer, Callable(self, "_randomize_next_attack"))
 		var next_state = fsm._get_random_activatable_state()
 		print("NEXT STATE IS ", next_state)
@@ -63,6 +69,8 @@ func _check_if_past_second_phase():
 	if(!is_second_phase && check_phase):
 		if(fsm.entity_health_percentage <= 50):
 			print("STARTING SECOND PHASE FROM PROJECTILE PAST ", fsm.entity_health_percentage)
+			check_phase = false
+			exit("SecondPhaseState")
 
 func _check_if_los():
 	if(check_los):

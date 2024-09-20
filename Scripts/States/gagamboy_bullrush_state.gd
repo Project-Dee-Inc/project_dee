@@ -8,6 +8,7 @@ var skill_manager
 var include_in_state_rand:bool = true
 
 @export var state_timeout:float = 20
+var skill_num:int = 1
 var state_active:bool = false
 var check_phase:bool = false
 var is_second_phase:bool = false
@@ -19,7 +20,7 @@ var target_pos:Vector3 = Vector3(0,0,0)
 
 func enter():
 	print("In GAGAMBOY BULLRUSH state!")
-	skill_manager._change_skill(1)
+	skill_manager._change_skill(skill_num)
 
 	_move_to_starting_point()
 
@@ -96,6 +97,11 @@ func _physics_process(_delta: float):
 	_check_if_moving_to_starting_point()
 	_check_if_rush_active()
 
+func _buff_state(cd_buff:float, atk_buff:float, spd_buff:float):
+	skill_manager.skills[skill_num].cd -= skill_manager.skills[skill_num].cd * cd_buff
+	skill_manager.skills[skill_num].damage += skill_manager.skills[skill_num].damage * atk_buff
+	skill_manager.skills[skill_num].speed_multiplier += skill_manager.skills[skill_num].speed_multiplier * spd_buff
+
 func _cancel_state_mechanics():
 	Constants._remove_all_timer_listeners(skill_timer)
 	Constants._remove_all_timer_listeners(fsm_timer)
@@ -107,7 +113,7 @@ func _prep_randomize_next_attack():
 		Constants._start_timer_with_listener(fsm_timer, state_timeout, Callable(self, "_randomize_next_attack"))
 
 func _randomize_next_attack():
-	if(is_instance_valid(self)):
+	if(is_instance_valid(self) && state_active):
 		Constants._stop_timer_and_remove_listener(fsm_timer, Callable(self, "_randomize_next_attack"))
 		var next_state = fsm._get_random_activatable_state()
 		print("NEXT STATE IS ", next_state)
@@ -121,6 +127,8 @@ func _check_if_past_second_phase():
 	if(!is_second_phase && check_phase):
 		if(fsm.entity_health_percentage <= 50):
 			print("STARTING SECOND PHASE FROM BULLRUSH PAST ", fsm.entity_health_percentage)
+			check_phase = false
+			exit("SecondPhaseState")
 
 func _check_if_moving_to_starting_point():
 	if(moving_to_starting_point):
