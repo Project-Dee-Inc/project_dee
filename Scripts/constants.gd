@@ -140,3 +140,48 @@ func _get_health_percentage(current: float, max: float) -> float:
 	if max == 0:
 		return 0  # Avoid division by zero
 	return (current / max) * 100
+
+# Start the timer and connect a listener dynamically
+func _start_timer_with_listener(reusable_timer:Timer, wait_time: float, listener_func: Callable):
+	_remove_all_timer_listeners(reusable_timer)
+	reusable_timer.stop()
+	reusable_timer.wait_time = wait_time
+	reusable_timer.connect("timeout", listener_func)
+	reusable_timer.start()
+
+# Stop the timer and disconnect a listener dynamically
+func _stop_timer_and_remove_listener(reusable_timer:Timer, listener_func: Callable):
+	if reusable_timer.is_connected("timeout", listener_func):
+		reusable_timer.disconnect("timeout", listener_func)
+	reusable_timer.stop()
+
+# Remove all current listeners for a specific timer
+func _remove_all_timer_listeners(reusable_timer:Timer):
+	var connections = reusable_timer.get_signal_connection_list("timeout")
+
+	for connection in connections:
+		var method = connection.callable
+		if (method):
+			reusable_timer.disconnect("timeout", method)
+
+# Calculate the bounds (AABB) of a NavigationMesh and cache them
+func _calculate_navigation_mesh_bounds(navigation_mesh: NavigationMesh) -> AABB:
+	var vertices = navigation_mesh.get_vertices()
+	var min_extents = Vector3(INF, INF, INF)
+	var max_extents = Vector3(-INF, -INF, -INF)
+
+	# Loop through each vertex to find the min and max extents
+	for vertex in vertices:
+		min_extents.x = min(min_extents.x, vertex.x)
+		min_extents.y = min(min_extents.y, vertex.y)
+		min_extents.z = min(min_extents.z, vertex.z)
+
+		max_extents.x = max(max_extents.x, vertex.x)
+		max_extents.y = max(max_extents.y, vertex.y)
+		max_extents.z = max(max_extents.z, vertex.z)
+
+	return AABB(min_extents, max_extents - min_extents)
+
+func _is_position_walkable(navigation_map, position: Vector3) -> bool:
+	var path = NavigationServer3D.map_get_path(navigation_map, position, position, false)
+	return path.size() > 0
