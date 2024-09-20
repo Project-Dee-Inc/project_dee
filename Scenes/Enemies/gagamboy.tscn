@@ -41,7 +41,7 @@ frame_progress = 0.631726
 stat_dict = {
 "EXP_GAIN": 1000,
 "HP": 1000,
-"MOVE_SPD": 3
+"MOVE_SPD": 2
 }
 
 [node name="ProjectileStats" parent="StatComponents" index="1" instance=ExtResource("5_4greh")]
@@ -49,13 +49,14 @@ stat_dict = {
 "ATK": 10,
 "CD": 2,
 "PROJ_COUNT": 3,
-"PROJ_SPD": 10
+"PROJ_SPD": 7
 }
 
 [node name="BullRushStats" parent="StatComponents" index="2" instance=ExtResource("5_4greh")]
 stat_dict = {
-"ATK": 50,
-"CD": 5
+"ATK": 30,
+"CD": 5,
+"MOVE_SPD": 10.0
 }
 
 [node name="BuffAndSpawnStats" parent="StatComponents" index="3" instance=ExtResource("5_4greh")]
@@ -109,3 +110,14 @@ script = ExtResource("12_irnnt")
 
 [node name="OnDeath" type="Node" parent="StateMachineComponent" index="4"]
 script = ExtResource("8_5fbak")
+
+[node name="Timers" type="Node" parent="." index="11"]
+
+[node name="StateMachineTimer" type="Timer" parent="Timers" index="0"]
+unique_name_in_owner = true
+
+[node name="SkillTimer" type="Timer" parent="Timers" index="1"]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="BodyHitCollider" to="SkillManagerComponent/BullRush" method="_on_hit_collider_component_body_entered"]
+[connection signal="check_enemy_health" from="HealthComponent" to="StateMachineComponent" method="_check_health"]

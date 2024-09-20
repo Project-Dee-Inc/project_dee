@@ -35,14 +35,15 @@ func _physics_process(delta):
 		update_timer = 0.0
 		follow_largest_cluster()
 
-	# If cluster is available, override movement to follow new center cluster point
-	if (current_cluster_center != Vector3.ZERO):
-		movement_manager._set_independent_movement(true)
-		movement_manager._set_target_position(current_cluster_center)
-	else:
-		# Reevaluate clusters if no valid cluster is found
-		movement_manager._set_independent_movement(false)
-		follow_largest_cluster()
+	if(!movement_manager.is_static_movement):
+		# If cluster is available, override movement to follow new center cluster point
+		if (current_cluster_center != Vector3.ZERO):
+			movement_manager._set_independent_movement(true)
+			movement_manager._set_target_position(current_cluster_center)
+		else:
+			# Reevaluate clusters if no valid cluster is found
+			movement_manager._set_independent_movement(false)
+			follow_largest_cluster()
 
 func exit(next_state):
 	fsm.change_to(next_state)
