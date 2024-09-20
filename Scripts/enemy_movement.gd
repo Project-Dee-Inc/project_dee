@@ -28,11 +28,6 @@ func _ready():
 	body = get_parent()
 	current_speed = speed
 
-func _get_rand() -> float:
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randf()
-
 # Set initial movement speed for mob
 func _set_speed(value:int):
 	speed = value
@@ -41,7 +36,7 @@ func _set_speed(value:int):
 # Set if movement type surrounds or not
 func _set_surround(value:bool):
 	if(value):
-		randomnum = _get_rand()
+		randomnum = Constants._get_rand()
 
 	is_surround = value
 
