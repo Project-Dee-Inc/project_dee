@@ -28,5 +28,5 @@ billboard = 1
 texture_filter = 0
 sprite_frames = ExtResource("1_oj5r3")
 autoplay = "default"
-frame_progress = 0.542521
+frame_progress = 0.063949
 speed_scale = 1.5
