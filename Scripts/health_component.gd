@@ -9,6 +9,7 @@ var is_player:bool = false
 var is_boss:bool = false
 var boss_name:String
 
+var can_damage:bool = true
 var hp_regen:int = 0
 var max_health:int = 0
 var current_health:int = 0:
@@ -36,12 +37,13 @@ func _set_regen(value:int):
 
 # Damages!
 func _damage(value:int):
-	current_health = clamp(current_health - value, 0, max_health)
-	if(current_health == 0):
-		_die()
-	if(!is_player):
-		on_enemy_damaged.emit(value)
-		check_enemy_health.emit(max_health, current_health)
+	if(can_damage):
+		current_health = clamp(current_health - value, 0, max_health)
+		if(current_health == 0):
+			_die()
+		if(!is_player):
+			on_enemy_damaged.emit(value)
+			check_enemy_health.emit(max_health, current_health)
 
 # Heals!
 func _heal(value:int):
@@ -74,3 +76,13 @@ func _set_is_player():
 func _set_is_boss(value:String):
 	boss_name = value
 	is_boss = true
+
+func _set_can_damage(value:bool):
+	can_damage = value
+
+var pressed = false
+func _physics_process(delta):
+	if Input.is_key_pressed(KEY_J) && is_boss && !pressed:
+		pressed = true
+		_damage(500)
+		print("J key was pressed!")
