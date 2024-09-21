@@ -1,10 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dicr6xtus5jxm"]
+[gd_scene load_steps=22 format=3 uid="uid://dicr6xtus5jxm"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_wx3u8"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_fd2b4"]
 [ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="3_m21wo"]
 [ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="4_gtu7y"]
-[ext_resource type="Shader" path="res://Shaders/fade.gdshader" id="6_j3tlb"]
+[ext_resource type="Shader" path="res://Shaders/toon.gdshader" id="6_hskcd"]
 [ext_resource type="Script" path="res://Scripts/player_movement_snapped.gd" id="7_bweci"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art.gdshader" id="8_inljn"]
 [ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="9_pnsgm"]
@@ -20,12 +20,29 @@ size = Vector3(30, 20, 30)
 margin = 0.0
 size = Vector3(30, 20, 30)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lilyt"]
-render_priority = -1
-shader = ExtResource("6_j3tlb")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r26f0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3cdmg"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_r26f0")
+shader = ExtResource("6_hskcd")
+shader_parameter/albedo = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = true
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = true
+shader_parameter/rim_width = 8.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_fade = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_8w744"]
-material = SubResource("ShaderMaterial_lilyt")
+material = SubResource("ShaderMaterial_3cdmg")
 size = Vector3(10, 5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_nd741"]
@@ -79,6 +96,7 @@ environment = ExtResource("3_m21wo")
 transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
 shadow_enabled = true
 shadow_reverse_cull_face = true
+shadow_blur = 0.0
 directional_shadow_mode = 0
 directional_shadow_max_distance = 50.0
 
@@ -93,7 +111,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_1a2g4")
 
 [node name="Cube1" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.605)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_8w744")
 
 [node name="Cube2" type="MeshInstance3D" parent="World/Cube1"]
@@ -112,7 +130,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_vbq03")
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.583915, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_gb0qe")
 cast_shadow = 2
 pixel_size = 0.0625
