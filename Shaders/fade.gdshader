@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode depth_draw_never;
+render_mode unshaded, depth_draw_never, blend_mul;
 
 #include "dither.gdshaderinc"
 
@@ -20,8 +20,9 @@ void fragment() {
 
 	float dist = length(node_pos.xy);
 	dist = clamp(smoothstep(0.3, 0.7, dist), 0.5, 1.0);
-	if (DITHER(dist - 0.01) <= 0.0)
-		discard;
+	
+	ALPHA = DITHER(dist - 0.01);
+	ALPHA_SCISSOR_THRESHOLD = 0.5;
 	//if (dist < 256.0)
 	//{
 		//float d = dist / 256.0;
