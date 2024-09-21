@@ -53,7 +53,7 @@ func _start_rushing_to_target():
 		movement_manager._set_static_movement(true)
 		movement_manager._set_stay_in_range(false)
 
-		target_pos = _get_extended_position(skill_manager.target, movement_manager.body, 5)
+		target_pos = skill_manager.current_skill._get_extended_position(skill_manager.target, movement_manager.body, 5)
 		movement_manager._set_target_position(target_pos)
 		movement_manager._state_moving(true)
 
@@ -75,22 +75,6 @@ func _continue_rushing_to_target():
 	if(is_instance_valid(self)):
 		Constants._stop_timer_and_remove_listener(skill_timer, Callable(self, "_continue_rushing_to_target"))
 		_wait_before_rushing_to_target(true)
-
-func _get_extended_position(player: Node3D, body:Node3D, offset_distance: float = 100) -> Vector3:
-	var initial_direction = (player.global_transform.origin - body.global_transform.origin).normalized()
-
-	# Extend the target position by the offset distance along the initial direction
-	var extended_target_position = player.global_transform.origin + (initial_direction * offset_distance)
-
-	# Check for closest walkable position
-	var nav_map = GameManager.navregion.get_navigation_map()
-	var closest_position = NavigationServer3D.map_get_closest_point(nav_map, extended_target_position)
-
-	# Check if the generated position is walkable
-	if !Constants._is_position_walkable(nav_map, closest_position):
-		closest_position = initial_direction
-
-	return closest_position
 
 func _physics_process(_delta: float):
 	_check_if_past_second_phase()

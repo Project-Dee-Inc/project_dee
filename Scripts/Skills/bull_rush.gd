@@ -42,3 +42,19 @@ func _on_hit_collider_component_body_entered(_body):
 	if(skill_is_active):
 		target._damage(damage)
 		skill_is_active = false
+
+func _get_extended_position(player: Node3D, body:Node3D, offset_distance: float = 100) -> Vector3:
+	var initial_direction = (player.global_transform.origin - body.global_transform.origin).normalized()
+
+	# Extend the target position by the offset distance along the initial direction
+	var extended_target_position = player.global_transform.origin + (initial_direction * offset_distance)
+
+	# Check for closest walkable position
+	var nav_map = GameManager.navregion.get_navigation_map()
+	var closest_position = NavigationServer3D.map_get_closest_point(nav_map, extended_target_position)
+
+	# Check if the generated position is walkable
+	if !Constants._is_position_walkable(nav_map, closest_position):
+		closest_position = initial_direction
+
+	return closest_position

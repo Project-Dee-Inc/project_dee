@@ -2,7 +2,7 @@ extends "res://Scripts/skill_component.gd"
 class_name BuffAndSpawnMinions
 
 @export var spawn_scene:PackedScene
-@export var spawns_count:int = 15
+@export var spawns_count:int = 30
 var atk_buff:float = 0
 var cd_buff:float = 0
 var spd_buff:float = 0
@@ -45,7 +45,7 @@ func _spawn_minions():
 	var half_past = false
 	var base_node = get_parent().get_parent()
 	for i in range(spawns_count):
-		if(i < spawns_count/2 && !half_past):
+		if(i%10 == 0):
 			half_past = true
 			await get_tree().create_timer(1.5).timeout
 
