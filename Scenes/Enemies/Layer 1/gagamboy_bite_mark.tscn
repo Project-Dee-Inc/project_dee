@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d361qtqndjlvl"]
+
+[ext_resource type="SpriteFrames" uid="uid://b8rvrhko5aqks" path="res://Assets/Enemies/SpriteFrames/gagamboy_bitemark_frames.tres" id="1_oj5r3"]
+[ext_resource type="Script" path="res://Scripts/bite_marker.gd" id="1_xt82g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2pwhv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1chi2"]
+
+[node name="Gagamboy_BiteMarker" type="StaticBody3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_xt82g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape3D_2pwhv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
+mesh = SubResource("CapsuleMesh_1chi2")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0323321, -0.0605073, 0)
+sorting_offset = 20.0
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+sprite_frames = ExtResource("1_oj5r3")
+autoplay = "default"
+frame_progress = 0.542521
+speed_scale = 1.5
