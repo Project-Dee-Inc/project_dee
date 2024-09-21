@@ -27,7 +27,7 @@ func enter():
 func _enable_2nd_phase_state():
 	fsm.states["ProjectileState"].is_second_phase = true
 	fsm.states["BullRushState"].is_second_phase = true
-	#fsm.states["DevourState"].include_in_state_rand = true
+	fsm.states["DevourState"].include_in_state_rand = true
 
 func _move_to_starting_point():
 	moving_to_starting_point = true
@@ -52,13 +52,11 @@ func _check_if_moving_to_starting_point():
 			_stationary_buff()
 
 func _buff_states():
-	print("BUFFING")
 	movement_manager._set_speed(movement_manager.current_speed + (movement_manager.current_speed * skill_manager.current_skill.spd_buff))
 	fsm.states["ProjectileState"]._buff_state(skill_manager.current_skill.atk_buff, skill_manager.current_skill.proj_spd_buff, skill_manager.current_skill.proj_count_buff)
 	fsm.states["BullRushState"]._buff_state(skill_manager.current_skill.cd_buff, skill_manager.current_skill.atk_buff, skill_manager.current_skill.spd_buff)
 
 func _spawn_minions():
-	print("SPAWNING")
 	skill_manager._state_attacking(true)
 
 func _prep_randomize_next_attack():
@@ -68,7 +66,8 @@ func _prep_randomize_next_attack():
 func _randomize_next_attack():
 	if(is_instance_valid(self) && state_active):
 		Constants._stop_timer_and_remove_listener(fsm_timer, Callable(self, "_randomize_next_attack"))
-		var next_state = fsm._get_random_activatable_state()
+		#var next_state = fsm._get_random_activatable_state()
+		var next_state = "DevourState"
 		print("NEXT STATE IS ", next_state)
 
 		if(next_state != self.name):
