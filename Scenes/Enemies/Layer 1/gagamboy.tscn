@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpawloyv75ew5"]
+[gd_scene load_steps=21 format=3 uid="uid://bpawloyv75ew5"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_w2d4g"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_kuwfn"]
 [ext_resource type="PackedScene" uid="uid://cwcroypoqwkw7" path="res://Scenes/boss_health_bar.tscn" id="2_yv0vo"]
 [ext_resource type="SpriteFrames" uid="uid://dusv7tyam0jun" path="res://Assets/Enemies/SpriteFrames/shooter_frames.tres" id="3_83sid"]
+[ext_resource type="PackedScene" uid="uid://d361qtqndjlvl" path="res://Scenes/Enemies/Layer 1/gagamboy_bite_mark.tscn" id="3_g6vkf"]
 [ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="4_gs1pe"]
 [ext_resource type="Script" path="res://Scripts/Skills/shoot_projectiles.gd" id="5_0ut5g"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="5_4greh"]
@@ -17,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/Skills/devour.gd" id="11_rbth5"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_secondphase_state.gd" id="11_wshir"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_devour_state.gd" id="12_irnnt"]
+[ext_resource type="PackedScene" uid="uid://byg8mmnl4tnth" path="res://Scenes/Enemies/Layer 1/gagamboy_spire.tscn" id="13_hv7xa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkcxh"]
 
@@ -26,13 +28,17 @@ isBoss = true
 [node name="BossHealthBar" parent="." index="0" instance=ExtResource("2_yv0vo")]
 boss_name = "Gagamboy"
 
-[node name="BodyHitCollider" parent="." index="1" instance=ExtResource("2_kuwfn")]
+[node name="BiteMarker" parent="." index="1" instance=ExtResource("3_g6vkf")]
+unique_name_in_owner = true
+visible = false
+
+[node name="BodyHitCollider" parent="." index="2" instance=ExtResource("2_kuwfn")]
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("CapsuleShape3D_xkcxh")
 
-[node name="AnimatedSprite3D" parent="." index="2"]
+[node name="AnimatedSprite3D" parent="." index="3"]
 sprite_frames = ExtResource("3_83sid")
 animation = &"attack"
 autoplay = "idle"
@@ -71,8 +77,10 @@ stat_dict = {
 
 [node name="DevourStats" parent="StatComponents" index="4" instance=ExtResource("5_4greh")]
 stat_dict = {
-"ATK": 100,
-"CD": 5
+"AOE": 5.0,
+"ATK": 70,
+"CD": 2,
+"MOVE_SPD": 10.0
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="MovementComponent" index="0"]
@@ -98,6 +106,7 @@ stat_component = NodePath("../../StatComponents/BuffAndSpawnStats")
 
 [node name="Devour" type="Node" parent="SkillManagerComponent" index="3" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("11_rbth5")
+temple_scene = ExtResource("13_hv7xa")
 stat_component = NodePath("../../StatComponents/DevourStats")
 
 [node name="ProjectileState" type="Node" parent="StateMachineComponent" index="0"]
@@ -115,7 +124,7 @@ script = ExtResource("12_irnnt")
 [node name="OnDeath" type="Node" parent="StateMachineComponent" index="4"]
 script = ExtResource("8_5fbak")
 
-[node name="Timers" type="Node" parent="." index="11"]
+[node name="Timers" type="Node" parent="." index="12"]
 
 [node name="StateMachineTimer" type="Timer" parent="Timers" index="0"]
 unique_name_in_owner = true
