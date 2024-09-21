@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://b8rvrhko5aqks"]
+
+[ext_resource type="Texture2D" uid="uid://b7x6funxqgo3u" path="res://Assets/Enemies/Sprites/FireFang.png" id="1_ctq1o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2sbw"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(0, 0, 249, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jtlh"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(249, 0, 249, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hxnv"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(747, 0, 249, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np7xk"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(498, 0, 249, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt73c"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(1992, 0, 249, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46njm"]
+atlas = ExtResource("1_ctq1o")
+region = Rect2(2241, 0, 249, 177)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2sbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jtlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hxnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np7xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt73c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46njm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
