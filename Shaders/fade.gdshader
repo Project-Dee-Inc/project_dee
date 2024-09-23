@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_never, blend_mul;
+render_mode unshaded, depth_draw_never;
 
 #include "dither.gdshaderinc"
 
