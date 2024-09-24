@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dknkvbhnupiw4"]
+[gd_scene load_steps=10 format=3 uid="uid://dknkvbhnupiw4"]
 
 [ext_resource type="PackedScene" uid="uid://bqfdfpwuxatc5" path="res://Scenes/magic_weapon.tscn" id="1_3re6v"]
+[ext_resource type="Script" path="res://Scenes/tentacle_weapon_skill.gd" id="2_hk55g"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/tentacle_passive.gd" id="2_mo4ju"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Magic/aoe_area.gd" id="3_j8h3v"]
 [ext_resource type="PackedScene" uid="uid://dw6o21xpbg0vi" path="res://Scenes/Weapons/Tentacle.tscn" id="3_ledoj"]
+[ext_resource type="Script" path="res://Scenes/Weapons/tentacle_pool_manager.gd" id="7_74crw"]
+[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="7_ok81n"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jphd8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dqbip"]
 
 [node name="Kraquael\'s Grasp" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_3re6v")]
 passive_skill = NodePath("WeaponPassive")
@@ -12,17 +20,47 @@ active_passive = true
 wait_time = 2.0
 one_shot = true
 
-[node name="WeaponSkill" parent="." index="2" node_paths=PackedStringArray("stat_component")]
+[node name="SkillTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="WeaponSkill" parent="." index="3" node_paths=PackedStringArray("aoe_sphere", "tentacle_pool", "stat_component")]
+script = ExtResource("2_hk55g")
+aoe_sphere = NodePath("../AOESphere")
+is_test = true
+radius_modifier = 1.5
+tentacle_pool = NodePath("../Tentacle_Pool")
+damage_over_time_interval = 0.1
+skill_duration = 5.0
+damage = 1
 stat_component = NodePath("../StatManager")
 
-[node name="WeaponPassive" parent="." index="3" node_paths=PackedStringArray("tentacle_pool_container", "stat_component")]
+[node name="WeaponPassive" parent="." index="4" node_paths=PackedStringArray("tentacle_pool", "stat_component")]
 script = ExtResource("2_mo4ju")
-tentacle_object = ExtResource("3_ledoj")
-tentacle_pool_container = NodePath("../Tentacle_Pool")
+tentacle_pool = NodePath("../Tentacle_Pool")
 tentacle_hold_length = 2.0
 damage = 1
 damage_over_time_interval = 0.5
 stat_component = NodePath("../StatManager")
 passive = true
 
-[node name="Tentacle_Pool" type="Node3D" parent="." index="4"]
+[node name="Tentacle_Pool" type="Node3D" parent="." index="5"]
+script = ExtResource("7_74crw")
+object_reference = ExtResource("3_ledoj")
+
+[node name="AOESphere" type="Node3D" parent="." index="6"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+visible = false
+script = ExtResource("3_j8h3v")
+
+[node name="Area3D" type="Area3D" parent="AOESphere" index="0"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AOESphere/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("7_ok81n")
+mesh = SubResource("CylinderMesh_jphd8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AOESphere/Area3D" index="1"]
+shape = SubResource("SphereShape3D_dqbip")

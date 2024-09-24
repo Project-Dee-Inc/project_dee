@@ -4,7 +4,13 @@ extends Node3D
 @onready var tentacle_linger_timer: Timer = $TentacleLingerTimer
 @onready var dot_timer: Timer = $DOTTimer
 
-func _activate_tentacle():
+
+func _move_tentacle(enemy_position:Vector3):
+	position = enemy_position
+	
+func _activate_tentacle(duration:float):
+	if(duration != -1):
+		tentacle_linger_timer.wait_time = duration
 	set_visible(true)
 	tentacle_linger_timer.start()
 	_activate_animation()

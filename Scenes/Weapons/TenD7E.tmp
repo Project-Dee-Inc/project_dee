@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dknkvbhnupiw4"]
+
+[ext_resource type="PackedScene" uid="uid://bqfdfpwuxatc5" path="res://Scenes/magic_weapon.tscn" id="1_3re6v"]
+[ext_resource type="Script" path="res://Scenes/tentacle_weapon_skill.gd" id="2_hk55g"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Magic/tentacle_passive.gd" id="2_mo4ju"]
+[ext_resource type="Material" uid="uid://si7ro3gfjtbk" path="res://Materials/transparent_hit_indicator.tres" id="3_h3jtc"]
+[ext_resource type="PackedScene" uid="uid://dw6o21xpbg0vi" path="res://Scenes/Weapons/Tentacle.tscn" id="3_ledoj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dtkfq"]
+
+[node name="Kraquael\'s Grasp" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_3re6v")]
+passive_skill = NodePath("WeaponPassive")
+active_passive = true
+
+[node name="PassiveTimer" type="Timer" parent="." index="0"]
+wait_time = 2.0
+one_shot = true
+
+[node name="WeaponSkill" parent="." index="2" node_paths=PackedStringArray("stat_component")]
+script = ExtResource("2_hk55g")
+is_test = true
+stat_component = NodePath("../StatManager")
+passive = null
+
+[node name="AOESphere" type="Node3D" parent="WeaponSkill" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponSkill/AOESphere" index="0"]
+material_override = ExtResource("3_h3jtc")
+mesh = SubResource("SphereMesh_dtkfq")
+
+[node name="WeaponPassive" parent="." index="3" node_paths=PackedStringArray("tentacle_pool_container", "stat_component")]
+script = ExtResource("2_mo4ju")
+tentacle_object = ExtResource("3_ledoj")
+tentacle_pool_container = NodePath("../Tentacle_Pool")
+tentacle_hold_length = 2.0
+damage = 1
+damage_over_time_interval = 0.5
+stat_component = NodePath("../StatManager")
+passive = true
+
+[node name="Tentacle_Pool" type="Node3D" parent="." index="4"]
