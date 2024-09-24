@@ -84,7 +84,7 @@ func _physics_process(_delta: float):
 func _buff_state(cd_buff:float, atk_buff:float, spd_buff:float):
 	skill_manager.skills[skill_num].cd -= skill_manager.skills[skill_num].cd * cd_buff
 	skill_manager.skills[skill_num].damage += skill_manager.skills[skill_num].damage * atk_buff
-	skill_manager.skills[skill_num].speed_multiplier += skill_manager.skills[skill_num].speed_multiplier * spd_buff
+	skill_manager.skills[skill_num].speed_multiplier = skill_manager.skills[skill_num].speed_multiplier * (spd_buff * 10)
 
 func _cancel_state_mechanics():
 	Constants._remove_all_timer_listeners(skill_timer)
