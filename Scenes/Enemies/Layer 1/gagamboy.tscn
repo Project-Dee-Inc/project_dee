@@ -25,20 +25,13 @@
 [node name="Gagamboy" instance=ExtResource("1_w2d4g")]
 isBoss = true
 
-[node name="BossHealthBar" parent="." index="0" instance=ExtResource("2_yv0vo")]
-boss_name = "Gagamboy"
-
-[node name="BiteMarker" parent="." index="1" instance=ExtResource("3_g6vkf")]
-unique_name_in_owner = true
-visible = false
-
-[node name="BodyHitCollider" parent="." index="2" instance=ExtResource("2_kuwfn")]
+[node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_kuwfn")]
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("CapsuleShape3D_xkcxh")
 
-[node name="AnimatedSprite3D" parent="." index="3"]
+[node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_83sid")
 animation = &"attack"
 autoplay = "idle"
@@ -124,13 +117,22 @@ script = ExtResource("12_irnnt")
 [node name="OnDeath" type="Node" parent="StateMachineComponent" index="4"]
 script = ExtResource("8_5fbak")
 
-[node name="Timers" type="Node" parent="." index="12"]
+[node name="Timers" type="Node" parent="." index="10"]
 
 [node name="StateMachineTimer" type="Timer" parent="Timers" index="0"]
 unique_name_in_owner = true
 
 [node name="SkillTimer" type="Timer" parent="Timers" index="1"]
 unique_name_in_owner = true
+
+[node name="Misc" type="Node" parent="." index="11"]
+
+[node name="BossHealthBar" parent="Misc" index="0" instance=ExtResource("2_yv0vo")]
+boss_name = "Gagamboy"
+
+[node name="BiteMarker" parent="Misc" index="1" instance=ExtResource("3_g6vkf")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="body_entered" from="BodyHitCollider" to="SkillManagerComponent/BullRush" method="_on_hit_collider_component_body_entered"]
 [connection signal="check_enemy_health" from="HealthComponent" to="StateMachineComponent" method="_check_health"]

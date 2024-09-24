@@ -3,7 +3,7 @@ class_name Devour
 
 @onready var bite_marker:Node3D = %BiteMarker
 
-@export var jump_height: float = 0.2
+@export var jump_height: float = 0.5
 @export var jump_duration: float = 1.0 
 
 @export var temple_scene:PackedScene
@@ -21,6 +21,7 @@ var move_timer:float = 0
 var target_pos:Vector3 = Vector3(0,0,0)
 var done_attacks:bool = false
 
+var temples:Array = []
 var positions:Array = []
 var a_pattern_positions:Array = []
 var b_pattern_positions:Array = []
@@ -31,6 +32,7 @@ func _ready():
 
 	base = get_parent().get_parent()
 	_calculate_spawn_positions()
+	_spawn_temples_around_center()
 	_set_pattern_positions()
 
 func _assign_new_values(new_stat_dict:Dictionary):
@@ -53,7 +55,7 @@ func _set_target(value:Node):
 
 func _prep_skill():
 	done_attacks = false
-	_spawn_temples_around_center()
+	_make_temples_visible(true)
 	_start_marker_patterns()
 
 func _activate_skill():
@@ -101,7 +103,12 @@ func _spawn_temples_around_center():
 		new_object.position = positions[i]
 
 		# Add the object to the current scene
+		temples.append(new_object)
 		add_child(new_object)
+
+func _make_temples_visible(value:bool):
+	for i in range(temples.size()):
+		temples[i].visible = value
 
 func _start_marker_patterns():
 	bite_marker._set_speed(speed)
@@ -134,6 +141,7 @@ func _execute_pattern(is_pattern_a:bool, is_marker:bool):
 		await get_tree().create_timer(cd).timeout
 		_execute_pattern(is_pattern_a, false)
 	else:
+		_make_temples_visible(false)
 		done_attacks = true
 
 func _set_target_position(position:Vector3):

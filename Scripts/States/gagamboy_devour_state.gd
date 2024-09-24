@@ -75,6 +75,7 @@ func _randomize_next_attack():
 
 func _cancel_state_mechanics():
 	_set_collider_radius(initial_collider_radius)
+	movement_manager._set_independent_movement(false)
 	health_manager._set_can_damage(true)
 	Constants._remove_all_timer_listeners(skill_timer)
 	Constants._remove_all_timer_listeners(fsm_timer)
