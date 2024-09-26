@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bcv7k32xatdjt"]
+
+[ext_resource type="Texture2D" uid="uid://674lbtm7php8" path="res://Assets/Enemies/Sprites/Red-Circle-Small-PNG-File.png" id="1_yrrg4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqoqc"]
+atlas = ExtResource("1_yrrg4")
+region = Rect2(0, 0, 600, 600)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqoqc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
