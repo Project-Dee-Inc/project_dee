@@ -12,11 +12,11 @@ pixel_size = 0.0001
 sprite_frames = ExtResource("1_m3cp5")
 script = ExtResource("2_irtfm")
 start_size = 0.0
-target_size = 0.016
+target_size = 0.02
 sprite = NodePath(".")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.454902)
-pixel_size = 0.016
+pixel_size = 0.02
 texture = ExtResource("3_k2dr2")

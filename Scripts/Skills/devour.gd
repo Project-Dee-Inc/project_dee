@@ -2,8 +2,9 @@ extends "res://Scripts/skill_component.gd"
 class_name Devour
 
 @onready var bite_marker:Node3D = %BiteMarker
+@onready var devour_aoe:Node3D = %DevourAoe
 
-@export var jump_height: float = 0.5
+@export var jump_height: float = 1.0
 @export var jump_duration: float = 1.0 
 
 @export var temple_scene:PackedScene
@@ -34,6 +35,7 @@ func _ready():
 	_calculate_spawn_positions()
 	_spawn_temples_around_center()
 	_set_pattern_positions()
+	devour_aoe._set_cd(jump_duration + 1)
 
 func _assign_new_values(new_stat_dict:Dictionary):
 	_get_new_values(new_stat_dict)
@@ -131,10 +133,12 @@ func _execute_pattern(is_pattern_a:bool, is_marker:bool):
 
 		if(is_marker):
 			bite_marker._set_target_position(next_pos)
+			await get_tree().create_timer(cd).timeout
 		else:
+			devour_aoe._move_to_position(next_pos)
+			await get_tree().create_timer(1).timeout
 			_set_target_position(next_pos)
-
-		await get_tree().create_timer(cd).timeout
+			await get_tree().create_timer(cd - 1).timeout
 
 	if(is_marker):
 		_set_marker_visible(false)

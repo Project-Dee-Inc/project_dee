@@ -66,7 +66,6 @@ func _prep_randomize_next_attack():
 func _randomize_next_attack():
 	if(is_instance_valid(self) && state_active):
 		Constants._stop_timer_and_remove_listener(fsm_timer, Callable(self, "_randomize_next_attack"))
-		#var next_state = fsm._get_random_activatable_state()
 		var next_state = "DevourState"
 		print("NEXT STATE IS ", next_state)
 
