@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpawloyv75ew5"]
+[gd_scene load_steps=22 format=3 uid="uid://bpawloyv75ew5"]
 
 [ext_resource type="PackedScene" uid="uid://b60cqbceg1qah" path="res://Scenes/enemy_component.tscn" id="1_w2d4g"]
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_kuwfn"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_secondphase_state.gd" id="11_wshir"]
 [ext_resource type="Script" path="res://Scripts/States/gagamboy_devour_state.gd" id="12_irnnt"]
 [ext_resource type="PackedScene" uid="uid://byg8mmnl4tnth" path="res://Scenes/Enemies/Layer 1/gagamboy_spire.tscn" id="13_hv7xa"]
+[ext_resource type="PackedScene" uid="uid://bvxvdculydttu" path="res://Scenes/Enemies/Layer 1/gagamboy_devour_aoe.tscn" id="19_7hebs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkcxh"]
 
@@ -130,7 +131,10 @@ unique_name_in_owner = true
 [node name="BossHealthBar" parent="Misc" index="0" instance=ExtResource("2_yv0vo")]
 boss_name = "Gagamboy"
 
-[node name="BiteMarker" parent="Misc" index="1" instance=ExtResource("3_g6vkf")]
+[node name="DevourAoe" parent="Misc" index="1" instance=ExtResource("19_7hebs")]
+unique_name_in_owner = true
+
+[node name="BiteMarker" parent="Misc" index="2" instance=ExtResource("3_g6vkf")]
 unique_name_in_owner = true
 visible = false
 
