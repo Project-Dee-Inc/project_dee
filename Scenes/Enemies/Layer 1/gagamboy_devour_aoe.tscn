@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvxvdculydttu"]
+
+[ext_resource type="SpriteFrames" uid="uid://bcv7k32xatdjt" path="res://Assets/Enemies/SpriteFrames/devour_aoe_frames.tres" id="1_m3cp5"]
+[ext_resource type="Script" path="res://Scripts/Skills/devour_aoe.gd" id="2_irtfm"]
+[ext_resource type="Texture2D" uid="uid://674lbtm7php8" path="res://Assets/Enemies/Sprites/Red-Circle-Small-PNG-File.png" id="3_k2dr2"]
+
+[node name="Gagamboy_DevourAoe" type="AnimatedSprite3D" node_paths=PackedStringArray("sprite")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+modulate = Color(1, 1, 1, 0.156863)
+pixel_size = 0.0001
+sprite_frames = ExtResource("1_m3cp5")
+script = ExtResource("2_irtfm")
+start_size = 0.0
+target_size = 0.016
+sprite = NodePath(".")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.454902)
+pixel_size = 0.016
+texture = ExtResource("3_k2dr2")
