@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3y62hbi1l5w6"
-path.s3tc="res://.godot/imported/Cyber Floor 2_Cyber Floor 2.png-15aad81ea11ab042f6ebc91ebe7354db.s3tc.ctex"
+path.s3tc="res://.godot/imported/Cyber Floor 2_Cyber Floor 2.png-33b9c2b6746b9efc929d62120213aab1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Environment/Cyber Floor 2_Cyber Floor 2.png"
-dest_files=["res://.godot/imported/Cyber Floor 2_Cyber Floor 2.png-15aad81ea11ab042f6ebc91ebe7354db.s3tc.ctex"]
+source_file="res://Assets/Environment/1_Layer/Cyber Floor 2_Cyber Floor 2.png"
+dest_files=["res://.godot/imported/Cyber Floor 2_Cyber Floor 2.png-33b9c2b6746b9efc929d62120213aab1.s3tc.ctex"]
 
 [params]
 

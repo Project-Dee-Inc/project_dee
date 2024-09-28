@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3jgetm42keyj"
-path.s3tc="res://.godot/imported/Cyber Floor 1_Pillar_texture Base Color.png-67834ba3e9de9e6225a906ef6691f356.s3tc.ctex"
+uid="uid://dbr6d77b42ull"
+path.s3tc="res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-85ea4c5c92dd873600eb39b3c3acaae1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ceb089ddd88c49b04f5974bc90f009f6"
+"md5": "b31bbfbf3f081ac9b89251d4fd2f5224"
 }
 
 [deps]
 
-source_file="res://Assets/Environment/Cyber Floor 1_Pillar_texture Base Color.png"
-dest_files=["res://.godot/imported/Cyber Floor 1_Pillar_texture Base Color.png-67834ba3e9de9e6225a906ef6691f356.s3tc.ctex"]
+source_file="res://Assets/Environment/1_Layer/Cyber Floor 4_Cyber Floor 4 Texture.png"
+dest_files=["res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-85ea4c5c92dd873600eb39b3c3acaae1.s3tc.ctex"]
 
 [params]
 

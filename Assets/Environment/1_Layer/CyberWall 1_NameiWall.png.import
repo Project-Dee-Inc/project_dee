@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbr6d77b42ull"
-path.s3tc="res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-172a51bb6773d4f4826725d7525d72aa.s3tc.ctex"
+uid="uid://dcj2nrblfqoy4"
+path.s3tc="res://.godot/imported/CyberWall 1_NameiWall.png-cc7d8b2fa4dfb6ca4f3d23d65d4509d0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b31bbfbf3f081ac9b89251d4fd2f5224"
+"md5": "58df2f35db7ea97bd87b320cc1658fcc"
 }
 
 [deps]
 
-source_file="res://Assets/Environment/Cyber Floor 4_Cyber Floor 4 Texture.png"
-dest_files=["res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-172a51bb6773d4f4826725d7525d72aa.s3tc.ctex"]
+source_file="res://Assets/Environment/1_Layer/CyberWall 1_NameiWall.png"
+dest_files=["res://.godot/imported/CyberWall 1_NameiWall.png-cc7d8b2fa4dfb6ca4f3d23d65d4509d0.s3tc.ctex"]
 
 [params]
 
