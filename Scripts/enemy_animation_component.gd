@@ -18,6 +18,8 @@ func _physics_process(_delta: float):
 	if(is_active):
 		if(state_machine_component._is_dead()):
 			_handle_death()
+		elif(skill_manager_component._is_cue_active()):
+			_set_anim_state(Constants.ANIM_STATE.CUE)
 		elif(skill_manager_component._is_attacking()):
 			_set_anim_state(Constants.ANIM_STATE.ATTACK)
 		elif(movement_component._is_moving()):
