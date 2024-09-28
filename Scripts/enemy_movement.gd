@@ -7,6 +7,7 @@ extends Node
 var raycast:RayCast3D
 var target:Node3D
 var body:Node3D
+var dir_suffix:String
 
 var speed:int = 0
 var current_speed:float
@@ -77,6 +78,7 @@ func _state_moving(value:bool):
 # Move to position if in following state
 func _physics_process(delta):
 	if (state_is_moving && target != null):
+		_get_direction(body.velocity)
 		# If normal target following, get target's position at all times
 		if(!override_follow_target):
 			target_position = target.global_transform.origin
@@ -126,10 +128,23 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 func _face_player(direction:Vector3):
 	# Flip the sprite based on the direction to the player
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
-		if (direction.x > 0):
+		# Determine direction based on the x axis
+		var abs_x = abs(direction.x)
+
+		# Horizontal movement (left/right)
+		if direction.x >= 0:
 			animation_component._flip_anim(false)
-		elif (direction.x < 0):
+		else:
 			animation_component._flip_anim(true)
+
+func _get_direction(direction:Vector3):
+	# Determine direction based on the z axis
+	var abs_z = abs(direction.z)
+
+	if direction.z >= 0:
+		dir_suffix = "_d"
+	else:
+		dir_suffix = "_u"
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos

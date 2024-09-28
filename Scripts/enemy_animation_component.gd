@@ -12,7 +12,9 @@ var is_active:bool = true
 var start_color = Color.RED
 var end_color = Color.WHITE
 
-func _physics_process(delta: float):
+var current_state_string:String
+
+func _physics_process(_delta: float):
 	if(is_active):
 		if(state_machine_component._is_dead()):
 			_handle_death()
@@ -28,12 +30,10 @@ func _flip_anim(value:bool):
 
 func _handle_death():
 	is_active = false
+	_set_anim_state(Constants.ANIM_STATE.DEATH)
 
-func _handle_damage(value:float):
-	var tween = base_node.create_tween()
-	tween.tween_property(animated_sprite, "modulate", start_color, 0)
-	tween.tween_property(animated_sprite, "modulate", end_color, flash_duration)
-	tween.tween_callback(Callable(tween, "queue_free"))
+func _handle_damage(_value:float):
+	_set_anim_state(Constants.ANIM_STATE.HIT)
 
 func _handle_warning(value:float):
 	var flash = 0.1
@@ -48,13 +48,25 @@ func _handle_warning(value:float):
 	tween.tween_interval(value * flash)  # Stop after warning state
 
 func _set_anim_state(new_state: Constants.ANIM_STATE):
-	if current_state != new_state:
-		if(current_state == Constants.ANIM_STATE.ATTACK):
+	var suffix = movement_component.dir_suffix
+	var new_state_string = _state_to_animation_string(new_state) 
+
+	if(current_state == Constants.ANIM_STATE.ATTACK):
+		new_state_string += skill_manager_component.attack_suffix
+	new_state_string += suffix
+
+	if current_state_string && current_state_string != new_state_string:
+		if(current_state == Constants.ANIM_STATE.ATTACK || current_state == Constants.ANIM_STATE.HIT || current_state == Constants.ANIM_STATE.DEATH):
 			await get_tree().create_timer(0.5).timeout
 		current_state = new_state
-		_play_animation(_state_to_animation(new_state))
+		current_state_string = new_state_string
+		_play_animation(current_state_string)
+	else:
+		current_state = new_state
+		current_state_string = new_state_string
+		_play_animation(current_state_string)
 
-func _state_to_animation(state: Constants.ANIM_STATE) -> String:
+func _state_to_animation_string(state: Constants.ANIM_STATE) -> String:
 	match state:
 		Constants.ANIM_STATE.IDLE:
 			return "idle"
@@ -64,9 +76,13 @@ func _state_to_animation(state: Constants.ANIM_STATE) -> String:
 			return "attack"
 		Constants.ANIM_STATE.DEATH:
 			return "death"
+		Constants.ANIM_STATE.HIT:
+			return "hit"
 		_:
 			return ""
 
 func _play_animation(animation_name: String):
 	if animated_sprite.animation != animation_name:
+		if(animation_name.find("_") == -1):
+			animation_name += "_d"
 		animated_sprite.play(animation_name)

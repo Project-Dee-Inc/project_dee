@@ -3,3 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/Base/fighter.tscn" id="1_iy6bd"]
 
 [node name="Fighter" instance=ExtResource("1_iy6bd")]
+
+[node name="AnimatedSprite3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+pixel_size = 0.015
+animation = &"attack0_d"
+frame_progress = 0.236841
