@@ -14,6 +14,7 @@ var state_active:bool = false
 var started_attack:bool = false
 var moving_to_starting_point:bool = false
 
+var from_second_phase:bool = true
 var initial_collider_radius:float
 var target_pos:Vector3 = Vector3(0,0,0)
 
@@ -25,7 +26,11 @@ func enter():
 
 	_set_invulnerable()
 	_set_collider_radius(skill_manager.current_skill.aoe)
-	_move_to_starting_point()
+
+	if(!from_second_phase):
+		_move_to_starting_point()
+	else:
+		_start_skill()
 
 func _set_invulnerable():
 	health_manager = get_parent().get_parent().health_component
@@ -48,16 +53,20 @@ func _move_to_starting_point():
 
 func _physics_process(_delta: float):
 	_check_if_moving_to_starting_point()
+	_check_skill_finished()
 
 func _check_if_moving_to_starting_point():
 	if(moving_to_starting_point):
 		if(Constants.is_close_to_destination(movement_manager.body.global_transform.origin, target_pos, 1)):
 			moving_to_starting_point = false
 			movement_manager._state_moving(false)
+			_start_skill()
 
-			skill_manager.current_skill._prep_skill()
-			started_attack = true
+func _start_skill():
+	skill_manager.current_skill._prep_skill()
+	started_attack = true
 
+func _check_skill_finished():
 	if(started_attack && skill_manager.current_skill._finished_skill()):
 		started_attack = false
 		_randomize_next_attack()
@@ -74,6 +83,7 @@ func _randomize_next_attack():
 			_randomize_next_attack()
 
 func _cancel_state_mechanics():
+	from_second_phase = false
 	_set_collider_radius(initial_collider_radius)
 	movement_manager._set_independent_movement(false)
 	health_manager._set_can_damage(true)

@@ -44,3 +44,8 @@ func _attack(value:bool):
 
 func _is_attacking() -> bool:
 	return current_skill.attacking
+
+func _is_cue_active() -> bool:
+	if(current_skill.has("cue_active")):
+		return current_skill.cue_active
+	return false

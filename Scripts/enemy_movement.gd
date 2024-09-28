@@ -156,7 +156,7 @@ func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	return Vector3(x, kill_circle_centre.y, z)
 
 func _is_moving() -> bool:
-	if(body.velocity != Vector3.ZERO):
+	if(body.velocity != Vector3.ZERO && state_is_moving):
 		return true
 	else:
 		return false

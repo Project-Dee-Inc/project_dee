@@ -38,12 +38,14 @@ func _move_to_starting_point():
 func _wait_before_rushing_to_target(is_start:bool):
 	movement_manager._state_moving(false)
 	if(is_start):
+		skill_manager.current_skill.cue_active = true
 		Constants._start_timer_with_listener(skill_timer, rush_cd, Callable(self, "_start_rushing_to_target"))
 	else:
 		Constants._start_timer_with_listener(skill_timer, rush_cd, Callable(self, "_stop_rushing_to_target"))
 
 func _start_rushing_to_target():
 	if(is_instance_valid(self)):
+		skill_manager.current_skill.cue_active = false
 		Constants._stop_timer_and_remove_listener(skill_timer, Callable(self, "_start_rushing_to_target"))
 		is_rushing_active = true
 		skill_manager._state_attacking(true)
