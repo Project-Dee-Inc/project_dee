@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dpym3twuvh1wt" path="res://Scenes/hit_collider_component.tscn" id="2_kuwfn"]
 [ext_resource type="PackedScene" uid="uid://cwcroypoqwkw7" path="res://Scenes/boss_health_bar.tscn" id="2_yv0vo"]
 [ext_resource type="PackedScene" uid="uid://d361qtqndjlvl" path="res://Scenes/Enemies/Layer 1/gagamboy_bite_mark.tscn" id="3_g6vkf"]
-[ext_resource type="SpriteFrames" uid="uid://bmookmfsgju4w" path="res://Assets/Enemies/SpriteFrames/gagamboy_frames.tres" id="3_w0u8t"]
+[ext_resource type="SpriteFrames" uid="uid://bmookmfsgju4w" path="res://Assets/Enemies/SpriteFrames/1_gagamboy_frames.tres" id="3_w0u8t"]
 [ext_resource type="Script" path="res://Scripts/line_of_sight.gd" id="4_gs1pe"]
 [ext_resource type="Script" path="res://Scripts/Skills/shoot_projectiles.gd" id="5_0ut5g"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="5_4greh"]

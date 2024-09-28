@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://t0vyy4r3dvdh"]
 
 [ext_resource type="PackedScene" uid="uid://dl3cvpkcyjywk" path="res://Scenes/Projectiles/base_projectile.tscn" id="1_0706s"]
-[ext_resource type="SpriteFrames" uid="uid://qp5tfw4v41l" path="res://Assets/Enemies/SpriteFrames/gagamboy_projectile_frames.tres" id="2_ngk6t"]
+[ext_resource type="SpriteFrames" uid="uid://qp5tfw4v41l" path="res://Assets/Enemies/SpriteFrames/1_gagamboy_projectile_frames.tres" id="2_ngk6t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y0ugj"]
 
