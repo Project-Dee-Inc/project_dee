@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://glmj233vxdgd"
-path="res://.godot/imported/Cyber Floor 2.glb-a236c86b3a16dce1776e75b8b4135cb8.scn"
+path="res://.godot/imported/Cyber Floor 2.glb-1cd07ac483eafb0f687f01e54f897bf6.scn"
 
 [deps]
 
-source_file="res://Assets/Environment/Cyber Floor 2.glb"
-dest_files=["res://.godot/imported/Cyber Floor 2.glb-a236c86b3a16dce1776e75b8b4135cb8.scn"]
+source_file="res://Assets/Environment/1_Layer/Cyber Floor 2.glb"
+dest_files=["res://.godot/imported/Cyber Floor 2.glb-1cd07ac483eafb0f687f01e54f897bf6.scn"]
 
 [params]
 
