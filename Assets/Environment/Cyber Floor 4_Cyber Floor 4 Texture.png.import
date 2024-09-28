@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dbr6d77b42ull"
+path.s3tc="res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-172a51bb6773d4f4826725d7525d72aa.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b31bbfbf3f081ac9b89251d4fd2f5224"
+}
+
+[deps]
+
+source_file="res://Assets/Environment/Cyber Floor 4_Cyber Floor 4 Texture.png"
+dest_files=["res://.godot/imported/Cyber Floor 4_Cyber Floor 4 Texture.png-172a51bb6773d4f4826725d7525d72aa.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

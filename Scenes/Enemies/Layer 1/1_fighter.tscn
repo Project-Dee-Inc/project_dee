@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqw4pg61po5rm"]
+[gd_scene load_steps=3 format=3 uid="uid://dqw4pg61po5rm"]
 
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/Base/fighter.tscn" id="1_iy6bd"]
+[ext_resource type="Script" path="res://Scripts/stat_component.gd" id="2_lvqlv"]
 
 [node name="Fighter" instance=ExtResource("1_iy6bd")]
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 pixel_size = 0.015
+shaded = false
 animation = &"attack0_d"
-frame_progress = 0.236841
+frame_progress = 0.822791
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationAgent3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675445, 0)
+radius = 1.0
+
+[node name="StatManager" parent="StatComponents" index="0"]
+script = ExtResource("2_lvqlv")

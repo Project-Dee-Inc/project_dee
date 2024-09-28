@@ -1,39 +1,26 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=31 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
 [ext_resource type="Script" path="res://Scripts/Camera/refraction_camera.gd" id="3_w7ffo"]
 [ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="4_xfqyt"]
 [ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="5_hoobr"]
+[ext_resource type="PackedScene" uid="uid://b0whkip26r1t7" path="res://Assets/Environment/Cyber Floor 1.glb" id="5_nlpcj"]
 [ext_resource type="Shader" path="res://Shaders/water.gdshader" id="6_8ft04"]
+[ext_resource type="PackedScene" uid="uid://glmj233vxdgd" path="res://Assets/Environment/Cyber Floor 2.glb" id="6_abobc"]
+[ext_resource type="PackedScene" uid="uid://cpowngu0pe2xa" path="res://Assets/Environment/Cyber Floor 3.glb" id="7_djrq8"]
 [ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="7_sjia8"]
 [ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="8_pkapr"]
+[ext_resource type="PackedScene" uid="uid://dqifyk4gytlce" path="res://Assets/Environment/Cyber Floor 4.glb" id="8_ta6d1"]
+[ext_resource type="PackedScene" uid="uid://cn4gto53bgmjt" path="res://Assets/Environment/CyberPillar 1.glb" id="9_fq6nb"]
 [ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="10_1ccqu"]
+[ext_resource type="PackedScene" uid="uid://crbekeke4cj7o" path="res://Assets/Environment/CyberWall 1.glb" id="10_jdldf"]
 [ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="11_7q2wg"]
 [ext_resource type="Script" path="res://Display.gd" id="12_hpr5k"]
 [ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="13_3hg34"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
 [ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="14_7qa7u"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
-vertices = PackedVector3Array(20.2072, 13, -5.5804, 22.2072, 13, -0.580399, 22.9572, 13, -0.330399, 15.7072, 13, -14.5804, 18.9572, 13, -6.0804, 14.9572, 13, -17.0804, 38.2072, 13, -7.5804, 38.2072, 13, -8.0804, 30.7072, 13, -24.3304, 6.4572, 10.5, -9.3304, 9.2072, 10.5, -1.5804, 9.4572, 10.5, -2.0804, 6.9572, 10.5, -9.5804, 11.7072, 11, -2.3304, 15.2072, 13, -13.8304, 13.9572, 12.75, -13.8304, 6.9572, 10.75, -10.5804, 5.4572, 10.5, -9.3304, 4.4572, 10.5, -11.8304, 3.7072, 10.5, -11.8304, -11.7928, 10.5, -4.5804, -4.5428, 10.5, 12.1696, 11.7072, 10.5, 4.6696)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 0), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 2, 7), PackedInt32Array(7, 2, 0), PackedInt32Array(7, 0, 5), PackedInt32Array(7, 5, 8), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 11), PackedInt32Array(11, 14, 13), PackedInt32Array(13, 14, 4), PackedInt32Array(12, 16, 15), PackedInt32Array(4, 14, 3), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 9, 10), PackedInt32Array(17, 10, 19), PackedInt32Array(19, 10, 22), PackedInt32Array(19, 22, 20), PackedInt32Array(20, 22, 21)]
-
-[sub_resource type="BoxMesh" id="BoxMesh_wyeyq"]
-material = ExtResource("5_hoobr")
-size = Vector3(20, 20, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1a2g4"]
-margin = 0.0
-size = Vector3(20, 20, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_g6wm3"]
-material = ExtResource("5_hoobr")
-size = Vector3(1, 5, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mu3l8"]
-size = Vector3(1, 5, 10)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
 viewport_path = NodePath("RefractionViewport")
@@ -59,6 +46,18 @@ subdivide_width = 128
 subdivide_depth = 128
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1f3q"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
+vertices = PackedVector3Array(-11.8979, 10.5, -4.40463, -4.39785, 10.5, 11.8454, 11.8521, 10.5, 4.34537, 4.35215, 10.5, -11.9046)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3ewq"]
+material = ExtResource("5_hoobr")
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwtq1"]
+margin = 0.0
+size = Vector3(20, 20, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
 shader = ExtResource("13_xuteu")
@@ -123,168 +122,360 @@ directional_shadow_mode = 0
 directional_shadow_max_distance = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(40.3762, 0, 0, 0, 40.3762, 0, 0, 0, 40.3762, 0, 1, 0)
 shadow_enabled = true
+omni_range = 10.0
 omni_attenuation = 1e-05
 
-[node name="LevelNavMesh" type="NavigationRegion3D" parent="World"]
-unique_name_in_owner = true
-transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, 0, -10, 0)
-navigation_mesh = SubResource("NavigationMesh_hhg2n")
+[node name="LevelDesign" type="Node3D" parent="World"]
 
-[node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 0, 0, 0)
-collision_mask = 0
+[node name="Floors" type="Node3D" parent="World/LevelDesign"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 1" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -8.9918)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room1"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 2" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -5.99024)
 
-[node name="Room2" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.905997, 0, 0.423283, 0, 1, 0, -0.423283, 0, 0.905997, 26.8356, 2.575, -12.5376)
-collision_mask = 0
+[node name="Cyber Floor 3" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -2.99328)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room2"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 4" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 0.0300508)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room2"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 5" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 3.01182)
 
-[node name="Ramp" type="MeshInstance3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.234489, 1.75025, 0.423283, -0.965926, 0.517638, 0, -0.109554, -0.817718, 0.905997, 12.7084, 10.802, -8.05651)
-mesh = SubResource("BoxMesh_g6wm3")
-skeleton = NodePath("../..")
+[node name="Cyber Floor 6" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 6.01338)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/LevelNavMesh/Ramp"]
+[node name="Cyber Floor 43" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 9.0266)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Ramp/StaticBody3D"]
-shape = SubResource("BoxShape3D_mu3l8")
+[node name="Cyber Floor 7" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -8.9918)
 
-[node name="Room3" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, -4.17376, 11.3054, -8.91462)
-collision_mask = 0
+[node name="Cyber Floor 8" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -5.99024)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room3"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 9" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -2.99328)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room3"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 10" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 0.0300505)
 
-[node name="Room8" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 22.5267, 14.0031, -21.3891)
-collision_mask = 0
+[node name="Cyber Floor 11" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 3.01182)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room8"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 12" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 6.01338)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room8"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 13" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -8.9918)
 
-[node name="Room9" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 30.9415, 14.0031, -3.32233)
-collision_mask = 0
+[node name="Cyber Floor 14" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -5.99024)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room9"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 15" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -2.99328)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room9"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 16" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 0.0300511)
 
-[node name="Room4" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.891096, 0, 0.00461138, 0, 0.147678, 0, -0.416321, 0, 0.00987023, 4.18925, 11.3054, 8.98562)
-collision_mask = 0
+[node name="Cyber Floor 17" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 3.01182)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room4"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 18" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, 6.01338)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room4"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 19" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401144, 0, -8.9918)
 
-[node name="Room5" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.403525, 0, 0.00993521, 0, 0.147678, 0, -0.896963, 0, -0.00446965, -8.8126, 11.3054, 4.38896)
-collision_mask = 0
+[node name="Cyber Floor 20" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401139, 0, -5.99024)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room5"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 21" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401142, 0, -2.99328)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room5"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 22" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401142, 0, 0.0300509)
 
-[node name="Room12" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.403525, 0, 0.00993521, 0, 0.147678, 0, -0.896963, 0, -0.00446965, 35.2595, 14.0557, -16.3001)
-collision_mask = 0
+[node name="Cyber Floor 23" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401146, 0, 3.01182)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room12"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 24" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401137, 0, 6.01338)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room12"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 25" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -8.9918)
 
-[node name="Room6" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.145293, 0, 0.00993522, 0, 0.147678, 0, -0.322959, 0, -0.00446965, 11.4321, 11.4992, 1.83113)
-collision_mask = 0
+[node name="Cyber Floor 26" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -5.99024)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room6"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 27" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -2.99328)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room6"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 28" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 0.0300509)
 
-[node name="Room10" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.145293, 0, 0.00993522, 0, 0.147678, 0, -0.322959, 0, -0.00446965, 20.6194, 14.0135, -2.30205)
-collision_mask = 0
+[node name="Cyber Floor 29" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 3.01182)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room10"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 30" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 6.01338)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room10"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 31" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -8.9918)
 
-[node name="Room7" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.0682061, 0, 0.00993521, 0, 0.147678, 0, -0.15161, 0, -0.00446965, 5.46173, 11.4992, -11.4399)
-collision_mask = 0
+[node name="Cyber Floor 32" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -5.99024)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room7"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 33" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -2.99328)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room7"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 34" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 0.030051)
 
-[node name="Room11" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(-0.0682061, 0, 0.00993521, 0, 0.147678, 0, -0.15161, 0, -0.00446965, 14.2248, 13.9708, -16.0971)
-collision_mask = 0
+[node name="Cyber Floor 35" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.97909, 0, 3.01182)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room11"]
-mesh = SubResource("BoxMesh_wyeyq")
-skeleton = NodePath("../../..")
+[node name="Cyber Floor 36" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 6.01338)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room11"]
-shape = SubResource("BoxShape3D_1a2g4")
+[node name="Cyber Floor 37" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -8.9918)
 
-[node name="Water" type="MeshInstance3D" parent="World"]
+[node name="Cyber Floor 38" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -5.99024)
+
+[node name="Cyber Floor 39" parent="World/LevelDesign/Floors" instance=ExtResource("7_djrq8")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -2.99328)
+
+[node name="Cyber Floor 40" parent="World/LevelDesign/Floors" instance=ExtResource("8_ta6d1")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 0.0300508)
+
+[node name="Cyber Floor 41" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 3.01182)
+
+[node name="Cyber Floor 42" parent="World/LevelDesign/Floors" instance=ExtResource("6_abobc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 6.01338)
+
+[node name="Cyber Floor 44" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 9.02232)
+
+[node name="Cyber Floor 45" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 9.01338)
+
+[node name="Cyber Floor 46" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401144, 0, 9.04296)
+
+[node name="Cyber Floor 47" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 9.03316)
+
+[node name="Cyber Floor 48" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 9.04215)
+
+[node name="Cyber Floor 49" parent="World/LevelDesign/Floors" instance=ExtResource("5_nlpcj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 8.99557)
+
+[node name="Walls" type="Node3D" parent="World/LevelDesign"]
+
+[node name="CyberPillar 1" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, -10.0156)
+
+[node name="CyberWall 1" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, -10.126)
+
+[node name="CyberPillar 2" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, -10.0156)
+
+[node name="CyberWall 2" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, -10.126)
+
+[node name="CyberPillar 3" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, -10.0156)
+
+[node name="CyberWall 3" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, -10.126)
+
+[node name="CyberPillar 4" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, -10.0156)
+
+[node name="CyberWall 4" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, -10.126)
+
+[node name="CyberPillar 5" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, -10.0156)
+
+[node name="CyberWall 5" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, -10.126)
+
+[node name="CyberPillar 6" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, -10.0156)
+
+[node name="CyberWall 6" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, -10.126)
+
+[node name="CyberPillar 7" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6848, 0, -10.0156)
+
+[node name="CyberPillar 8" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 7" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 9" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 8" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 10" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 9" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 11" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 10" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 12" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 11" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 13" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 12" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 14" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6848, 0, 10.2183)
+
+[node name="CyberWall 13" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -8.30923)
+
+[node name="CyberPillar 15" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, -5.01386)
+
+[node name="CyberWall 14" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -4.93853)
+
+[node name="CyberPillar 16" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, -1.64316)
+
+[node name="CyberWall 15" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -1.55652)
+
+[node name="CyberPillar 17" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 1.73885)
+
+[node name="CyberWall 16" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 1.78157)
+
+[node name="CyberPillar 18" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 5.07693)
+
+[node name="CyberWall 17" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 5.1455)
+
+[node name="CyberPillar 19" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 8.44086)
+
+[node name="CyberWall 18" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 8.54426)
+
+[node name="CyberWall 19" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98434, 0, -8.30923)
+visible = false
+
+[node name="CyberPillar 20" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, -5.01386)
+visible = false
+
+[node name="CyberWall 20" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, -4.93853)
+visible = false
+
+[node name="CyberPillar 21" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, -1.64316)
+visible = false
+
+[node name="CyberWall 21" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, -1.55652)
+visible = false
+
+[node name="CyberPillar 22" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 1.73885)
+visible = false
+
+[node name="CyberWall 22" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, 1.78157)
+visible = false
+
+[node name="CyberPillar 23" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 5.07693)
+visible = false
+
+[node name="CyberWall 23" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, 5.1455)
+visible = false
+
+[node name="CyberPillar 24" parent="World/LevelDesign/Walls" instance=ExtResource("9_fq6nb")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 8.44086)
+visible = false
+
+[node name="CyberWall 24" parent="World/LevelDesign/Walls" instance=ExtResource("10_jdldf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98434, 0, 8.54426)
+visible = false
+
+[node name="Water" type="MeshInstance3D" parent="World/LevelDesign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 layers = 2
 mesh = SubResource("PlaneMesh_vpq21")
+skeleton = NodePath("../..")
 
-[node name="Marker" type="StaticBody3D" parent="World"]
+[node name="Marker" type="StaticBody3D" parent="World/LevelDesign"]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Marker"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelDesign/Marker"]
 shape = SubResource("SphereShape3D_t1f3q")
+
+[node name="LevelNavMesh" type="NavigationRegion3D" parent="World"]
+unique_name_in_owner = true
+transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, -0.0499423, -10.0229, 0.0156233)
+navigation_mesh = SubResource("NavigationMesh_hhg2n")
+
+[node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.844595, 0, 0.39519, 0, 1, 0, -0.394596, 0, 0.845867, 0, 0, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
+visible = false
+mesh = SubResource("BoxMesh_w3ewq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room1"]
+shape = SubResource("BoxShape3D_qwtq1")
 
 [node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 layout_mode = 3
@@ -305,7 +496,7 @@ navigation = NodePath("../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 1
+ExtResource("14_7qa7u"): 5
 }
 spawn_delay = 2.0
 
