@@ -9,7 +9,6 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 pixel_size = 0.015
 shaded = false
-animation = &"death_d"
 
 [node name="StatManager" parent="StatComponents" index="0"]
 script = ExtResource("2_lvqlv")
