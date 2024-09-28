@@ -49,8 +49,8 @@ subdivide_depth = 128
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1f3q"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
-vertices = PackedVector3Array(-11.8979, 9.87235, -4.40463, -4.39785, 9.87235, 11.8454, 11.8521, 9.87235, 4.34537, 4.35215, 9.87235, -11.9046)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(-3.89402, 9.87235, 10.8944, -2.39402, 9.87235, 10.6444, 10.856, 9.87235, 4.39436, 3.85598, 9.87235, -11.1056, -10.894, 9.87235, -4.35564)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3)]
 cell_height = 0.01
 
 [sub_resource type="BoxMesh" id="BoxMesh_w3ewq"]
@@ -468,7 +468,7 @@ transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, 
 navigation_mesh = SubResource("NavigationMesh_hhg2n")
 
 [node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.844595, 0, 0.39519, 0, 1, 0, -0.394596, 0, 0.845867, 0, -0.147654, 0)
+transform = Transform3D(0.763934, 0, 0.375468, 0, 1, 0, -0.356911, 0, 0.803653, 0, -0.147654, 0)
 collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
