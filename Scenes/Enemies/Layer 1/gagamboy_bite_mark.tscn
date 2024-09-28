@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d361qtqndjlvl"]
 
-[ext_resource type="SpriteFrames" uid="uid://b8rvrhko5aqks" path="res://Assets/Enemies/SpriteFrames/gagamboy_bitemark_frames.tres" id="1_oj5r3"]
+[ext_resource type="SpriteFrames" uid="uid://b8rvrhko5aqks" path="res://Assets/Enemies/SpriteFrames/1_gagamboy_bitemark_frames.tres" id="1_oj5r3"]
 [ext_resource type="Script" path="res://Scripts/bite_marker.gd" id="1_xt82g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2pwhv"]

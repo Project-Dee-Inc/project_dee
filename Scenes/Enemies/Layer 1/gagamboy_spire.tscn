@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://byg8mmnl4tnth"]
 
-[ext_resource type="SpriteFrames" uid="uid://co45ftmvb7s74" path="res://Assets/Enemies/SpriteFrames/gagamboy_spire_frames.tres" id="1_hiksp"]
+[ext_resource type="SpriteFrames" uid="uid://co45ftmvb7s74" path="res://Assets/Enemies/SpriteFrames/1_gagamboy_spire_frames.tres" id="1_hiksp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2pwhv"]
 
