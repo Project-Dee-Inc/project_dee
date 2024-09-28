@@ -38,9 +38,8 @@ shape = SubResource("CapsuleShape3D_xkcxh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46845, 0)
 pixel_size = 0.05
 sprite_frames = ExtResource("3_w0u8t")
-animation = &"attack1_u"
+animation = &"death_u"
 autoplay = "idle_d"
-frame_progress = 0.689331
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
@@ -107,11 +106,11 @@ script = ExtResource("11_rbth5")
 temple_scene = ExtResource("13_hv7xa")
 stat_component = NodePath("../../StatComponents/DevourStats")
 
-[node name="BullRushState" type="Node" parent="StateMachineComponent" index="0"]
-script = ExtResource("10_1mcj8")
-
-[node name="ProjectileState" type="Node" parent="StateMachineComponent" index="1"]
+[node name="ProjectileState" type="Node" parent="StateMachineComponent" index="0"]
 script = ExtResource("7_nnp4l")
+
+[node name="BullRushState" type="Node" parent="StateMachineComponent" index="1"]
+script = ExtResource("10_1mcj8")
 
 [node name="SecondPhaseState" type="Node" parent="StateMachineComponent" index="2"]
 script = ExtResource("11_wshir")
