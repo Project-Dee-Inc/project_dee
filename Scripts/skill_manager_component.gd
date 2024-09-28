@@ -6,6 +6,7 @@ var skills:Array[BaseSkill]
 var current_skill:BaseSkill
 var state_is_attacking:bool = false
 var target:Node
+var attack_suffix:String = "0"
 
 # Set initial skill
 func _ready():
@@ -31,6 +32,7 @@ func _state_attacking(value:bool):
 
 # Change skill to activate
 func _change_skill(value:int):
+	attack_suffix = str(value)
 	current_skill = skills[value]
 
 # Activate skill

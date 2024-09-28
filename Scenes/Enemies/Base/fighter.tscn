@@ -19,8 +19,8 @@ shape = SubResource("CapsuleShape3D_s718p")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
 sprite_frames = ExtResource("3_420u7")
-animation = &"idle"
-autoplay = "idle"
+animation = &"idle_d"
+autoplay = "idle_d"
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {
