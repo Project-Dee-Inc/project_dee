@@ -159,8 +159,8 @@ func _jump_to_target_position(delta: float):
 		move_timer += delta
 		var t = move_timer / jump_duration
 
-		if (t >= 1.0):
-			t = 1.0
+		if (t >= jump_duration):
+			t = jump_duration
 			_stop_movement()
 
 		# Get the current position directly
@@ -179,9 +179,6 @@ func _stop_movement():
 
 func _set_marker_visible(value:bool):
 	bite_marker.visible = value
-
-func _show_aoe_marker():
-	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):

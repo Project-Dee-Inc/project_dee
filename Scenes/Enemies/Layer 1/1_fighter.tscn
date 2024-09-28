@@ -9,12 +9,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 pixel_size = 0.015
 shaded = false
-animation = &"attack0_d"
-frame_progress = 0.822791
-
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationAgent3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675445, 0)
-radius = 1.0
+animation = &"death_d"
 
 [node name="StatManager" parent="StatComponents" index="0"]
 script = ExtResource("2_lvqlv")

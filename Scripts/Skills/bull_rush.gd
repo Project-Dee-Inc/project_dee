@@ -5,6 +5,7 @@ var damage:int = 0
 var cd:float = 0
 var skill_is_active:bool = false
 var speed_multiplier:float = 0
+var cue_active:bool = false
 
 func _ready():
 	_get_values()

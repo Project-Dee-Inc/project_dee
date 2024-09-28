@@ -5,6 +5,7 @@ enum ANIM_STATE {
 	WALK,
 	ATTACK,
 	HIT,
+	CUE,
 	DEATH
 }
 

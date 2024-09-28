@@ -51,7 +51,7 @@ func _set_anim_state(new_state: Constants.ANIM_STATE):
 	var suffix = movement_component.dir_suffix
 	var new_state_string = _state_to_animation_string(new_state) 
 
-	if(current_state == Constants.ANIM_STATE.ATTACK):
+	if(new_state == Constants.ANIM_STATE.ATTACK || new_state == Constants.ANIM_STATE.CUE):
 		new_state_string += skill_manager_component.attack_suffix
 	new_state_string += suffix
 
@@ -72,6 +72,8 @@ func _state_to_animation_string(state: Constants.ANIM_STATE) -> String:
 			return "idle"
 		Constants.ANIM_STATE.WALK:
 			return "walk"
+		Constants.ANIM_STATE.CUE:
+			return "cue"
 		Constants.ANIM_STATE.ATTACK:
 			return "attack"
 		Constants.ANIM_STATE.DEATH:

@@ -22,20 +22,25 @@
 [ext_resource type="PackedScene" uid="uid://bvxvdculydttu" path="res://Scenes/Enemies/Layer 1/gagamboy_devour_aoe.tscn" id="19_7hebs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkcxh"]
+radius = 0.8
 
 [node name="Gagamboy" instance=ExtResource("1_w2d4g")]
 isBoss = true
 
 [node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_kuwfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59044, 0)
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitCollider" index="0"]
 shape = SubResource("CapsuleShape3D_xkcxh")
 
 [node name="AnimatedSprite3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46845, 0)
+pixel_size = 0.05
 sprite_frames = ExtResource("3_w0u8t")
-animation = &"idle"
-autoplay = "idle"
+animation = &"idle_u"
+autoplay = "idle_d"
+frame_progress = 0.380179
 
 [node name="StatManager" parent="StatComponents" index="0"]
 stat_dict = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=32 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -21,6 +21,7 @@
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
 [ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="14_7qa7u"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
+[ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/Layer 1/gagamboy.tscn" id="21_vkkk4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
 viewport_path = NodePath("RefractionViewport")
@@ -48,8 +49,9 @@ subdivide_depth = 128
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1f3q"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
-vertices = PackedVector3Array(-11.8979, 10.5, -4.40463, -4.39785, 10.5, 11.8454, 11.8521, 10.5, 4.34537, 4.35215, 10.5, -11.9046)
+vertices = PackedVector3Array(-11.8979, 9.87235, -4.40463, -4.39785, 9.87235, 11.8454, 11.8521, 9.87235, 4.34537, 4.35215, 9.87235, -11.9046)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.01
 
 [sub_resource type="BoxMesh" id="BoxMesh_w3ewq"]
 material = ExtResource("5_hoobr")
@@ -462,11 +464,11 @@ shape = SubResource("SphereShape3D_t1f3q")
 
 [node name="LevelNavMesh" type="NavigationRegion3D" parent="World"]
 unique_name_in_owner = true
-transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, -0.0499423, -10.0229, 0.0156233)
+transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, -0.0499423, -9.68456, 0.0156233)
 navigation_mesh = SubResource("NavigationMesh_hhg2n")
 
 [node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
-transform = Transform3D(0.844595, 0, 0.39519, 0, 1, 0, -0.394596, 0, 0.845867, 0, 0, 0)
+transform = Transform3D(0.844595, 0, 0.39519, 0, 1, 0, -0.394596, 0, 0.845867, 0, -0.147654, 0)
 collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
@@ -496,7 +498,8 @@ navigation = NodePath("../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 5
+ExtResource("14_7qa7u"): 0,
+ExtResource("21_vkkk4"): 1
 }
 spawn_delay = 2.0
 

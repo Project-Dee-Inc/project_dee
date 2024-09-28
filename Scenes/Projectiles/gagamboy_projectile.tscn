@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://t0vyy4r3dvdh"]
 
 [ext_resource type="PackedScene" uid="uid://dl3cvpkcyjywk" path="res://Scenes/Projectiles/base_projectile.tscn" id="1_0706s"]
-[ext_resource type="SpriteFrames" uid="uid://df8ns5ndpg708" path="res://Assets/Enemies/SpriteFrames/shooter_projectile_frames.tres" id="2_ur0ds"]
+[ext_resource type="SpriteFrames" uid="uid://qp5tfw4v41l" path="res://Assets/Enemies/SpriteFrames/gagamboy_projectile_frames.tres" id="2_ngk6t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y0ugj"]
 
@@ -28,20 +28,14 @@ mesh = SubResource("SphereMesh_v1bra")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
 shape = SubResource("SphereShape3D_8qyfv")
 
-[node name="StatComponent" parent="." index="2"]
-stat_dict = {
-"ATK": 2,
-"MOVE_SPD": 10
-}
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="3"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0323321, -0.0605073, 0)
-pixel_size = 0.005
+pixel_size = 0.04
 billboard = 1
 texture_filter = 0
-sprite_frames = ExtResource("2_ur0ds")
+sprite_frames = ExtResource("2_ngk6t")
 autoplay = "default"
-frame_progress = 0.446583
+frame_progress = 0.991618
 speed_scale = 1.5
 
 [connection signal="area_entered" from="HitColliderComponent" to="." method="_on_hit_collider_component_area_entered"]
