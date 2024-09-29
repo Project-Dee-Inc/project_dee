@@ -23,7 +23,7 @@ func _entangle_enemy(enemy_chosen):
 	print(tentacle_ref)
 	if(tentacle_ref):
 		_hold_enemy(enemy_chosen)
-		tentacle_ref.position = enemy_chosen.global_position
+		tentacle_ref.global_position = enemy_chosen.global_position
 		tentacle_ref._activate_tentacle(tentacle_hold_length)
 		_start_damage_over_time(enemy_chosen.health_component, tentacle_ref)
 		await(tentacle_ref.tentacle_linger_timer.timeout)
