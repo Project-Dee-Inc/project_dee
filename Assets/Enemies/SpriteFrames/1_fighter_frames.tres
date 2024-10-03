@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=65 format=3 uid="uid://c08824hnc2h8c"]
+[gd_resource type="SpriteFrames" load_steps=66 format=3 uid="uid://c08824hnc2h8c"]
 
 [ext_resource type="Texture2D" uid="uid://7bcgn4gv3kba" path="res://Assets/Enemies/Sprites/1_Fighter/3_Cyber_AttackFront_SpriteSheet.png" id="1_bhjg8"]
 [ext_resource type="Texture2D" uid="uid://dioj20hyp15et" path="res://Assets/Enemies/Sprites/1_Fighter/3_Cyber_AttackBack_SpriteSheet.png" id="2_vxn8q"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dubv7850etqcl" path="res://Assets/Enemies/Sprites/1_Fighter/4_CyberSpider_HitFront_SpriteSheet.png" id="5_tolqs"]
 [ext_resource type="Texture2D" uid="uid://cg748mfl3yce8" path="res://Assets/Enemies/Sprites/1_Fighter/4_CyberSpider_HitBack_SpriteSheet.png" id="6_2c4ij"]
 [ext_resource type="Texture2D" uid="uid://dbn3or4p266a8" path="res://Assets/Enemies/Sprites/1_Fighter/1_Cyber_Idle_SpriteSheet.png" id="7_8fopd"]
+[ext_resource type="Texture2D" uid="uid://d04vva5jj4xh3" path="res://Assets/Enemies/Sprites/1_Fighter/1_Cyber_IdleBack_SpriteSheet.png" id="8_2gac8"]
 [ext_resource type="Texture2D" uid="uid://dw2rwlpwsmqap" path="res://Assets/Enemies/Sprites/1_Fighter/2_Cyber_WalkingFront_SpriteSheet.png" id="8_40qvc"]
 [ext_resource type="Texture2D" uid="uid://lb8vkpm11400" path="res://Assets/Enemies/Sprites/1_Fighter/2_Cyber_WalkingBack_SpriteSheet.png" id="9_qnal5"]
 
@@ -190,21 +191,21 @@ region = Rect2(64, 0, 64, 64)
 atlas = ExtResource("7_8fopd")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aa7tx"]
-atlas = ExtResource("7_8fopd")
-region = Rect2(192, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k3p1"]
+atlas = ExtResource("8_2gac8")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cpjvn"]
-atlas = ExtResource("7_8fopd")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6adrx"]
-atlas = ExtResource("7_8fopd")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sih2"]
+atlas = ExtResource("8_2gac8")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4wp5s"]
-atlas = ExtResource("7_8fopd")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_btft6"]
+atlas = ExtResource("8_2gac8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n64sv"]
+atlas = ExtResource("8_2gac8")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8878"]
 atlas = ExtResource("8_40qvc")
@@ -404,16 +405,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aa7tx")
+"texture": SubResource("AtlasTexture_2k3p1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cpjvn")
+"texture": SubResource("AtlasTexture_1sih2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6adrx")
+"texture": SubResource("AtlasTexture_btft6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4wp5s")
+"texture": SubResource("AtlasTexture_n64sv")
 }],
 "loop": true,
 "name": &"idle_u",
