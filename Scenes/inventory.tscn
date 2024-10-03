@@ -1,99 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://crptwvamgle73"]
+[gd_scene load_steps=2 format=3 uid="uid://crptwvamgle73"]
 
-[ext_resource type="Script" path="res://Scripts/inventory.gd" id="1_a6sub"]
-[ext_resource type="Texture2D" uid="uid://da2imgr5pgin" path="res://Images/10.png" id="1_gvn1u"]
-[ext_resource type="PackedScene" uid="uid://ishuxbbj8krv" path="res://slot.tscn" id="3_qlhqx"]
+[ext_resource type="Script" path="res://Scripts/weapon_manager.gd" id="1_qdgej"]
 
 [node name="Inventory" type="Node2D"]
-script = ExtResource("1_a6sub")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 172.0
-offset_top = 19.0
-offset_right = 956.0
-offset_bottom = 707.0
-scale = Vector2(0.714934, 0.799453)
-texture = ExtResource("1_gvn1u")
+script = ExtResource("1_qdgej")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 348.0
-offset_top = 203.0
-offset_right = 564.0
-offset_bottom = 419.0
+offset_top = 624.0
+offset_right = 679.0
+offset_bottom = 690.96
 columns = 5
 metadata/_edit_use_anchors_ = true
-
-[node name="Slot" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot2" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot3" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot4" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot5" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot6" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot7" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot8" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot9" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot10" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot11" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot12" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot13" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot14" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot15" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot16" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot17" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot18" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot19" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot20" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot21" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot22" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot23" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot24" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2
-
-[node name="Slot25" parent="GridContainer" instance=ExtResource("3_qlhqx")]
-layout_mode = 2

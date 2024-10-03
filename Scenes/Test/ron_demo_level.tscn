@@ -1,0 +1,531 @@
+[gd_scene load_steps=37 format=3 uid="uid://bcuwrw00qx6y0"]
+
+[ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_ufnxu"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_f5hc5"]
+[ext_resource type="Script" path="res://Scripts/Camera/refraction_camera.gd" id="3_sjvcy"]
+[ext_resource type="Environment" uid="uid://h51645bjnutc" path="res://Resources/Environment.tres" id="4_h62hp"]
+[ext_resource type="PackedScene" uid="uid://b0whkip26r1t7" path="res://Assets/Environment/1_Layer/Cyber Floor 1.glb" id="5_o8g51"]
+[ext_resource type="PackedScene" uid="uid://glmj233vxdgd" path="res://Assets/Environment/1_Layer/Cyber Floor 2.glb" id="6_vsu2o"]
+[ext_resource type="PackedScene" uid="uid://cpowngu0pe2xa" path="res://Assets/Environment/1_Layer/Cyber Floor 3.glb" id="7_f8b1y"]
+[ext_resource type="PackedScene" uid="uid://dqifyk4gytlce" path="res://Assets/Environment/1_Layer/Cyber Floor 4.glb" id="8_j8bot"]
+[ext_resource type="PackedScene" uid="uid://cn4gto53bgmjt" path="res://Assets/Environment/1_Layer/CyberPillar 1.glb" id="9_ii7xh"]
+[ext_resource type="PackedScene" uid="uid://crbekeke4cj7o" path="res://Assets/Environment/1_Layer/CyberWall 1.glb" id="10_pffhi"]
+[ext_resource type="Shader" path="res://Shaders/water.gdshader" id="11_dya4o"]
+[ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="12_702i0"]
+[ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="13_2ufr3"]
+[ext_resource type="Material" uid="uid://ncob2ev0ld2y" path="res://Materials/ToonShaderWithOutline.material" id="14_yqjw8"]
+[ext_resource type="Script" path="res://Display.gd" id="15_1e125"]
+[ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="16_7yvw1"]
+[ext_resource type="PackedScene" uid="uid://dalwb0ioih62a" path="res://Scenes/player_component.tscn" id="17_43lao"]
+[ext_resource type="PackedScene" uid="uid://cklrpxootaipm" path="res://Scenes/test_spawner.tscn" id="18_lkdwp"]
+[ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="19_ukwgk"]
+[ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="20_e1mij"]
+[ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/Layer 1/gagamboy.tscn" id="21_cm7as"]
+[ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="22_ggwop"]
+[ext_resource type="PackedScene" uid="uid://dvu15xy7vgo16" path="res://pool_manager.tscn" id="23_0ljwl"]
+[ext_resource type="PackedScene" uid="uid://c0u7um36r1ybu" path="res://Scenes/pooling_test.tscn" id="24_ithxb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
+viewport_path = NodePath("RefractionViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7k3n"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("11_dya4o")
+shader_parameter/refraction = 0.5
+shader_parameter/ripple_speed = 0.125
+shader_parameter/ripple_scale = 16.0
+shader_parameter/use_refraction = true
+shader_parameter/use_dither = null
+shader_parameter/refraction_texture = SubResource("ViewportTexture_wb723")
+shader_parameter/noise_map = ExtResource("12_702i0")
+shader_parameter/normal_map = ExtResource("13_2ufr3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vpq21"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_y7k3n")
+size = Vector2(100, 100)
+subdivide_width = 128
+subdivide_depth = 128
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t1f3q"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hhg2n"]
+vertices = PackedVector3Array(-3.89402, 9.87235, 10.8944, -2.39402, 9.87235, 10.6444, 10.856, 9.87235, 4.39436, 3.85598, 9.87235, -11.1056, -10.894, 9.87235, -4.35564)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3)]
+cell_height = 0.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3ewq"]
+material = ExtResource("14_yqjw8")
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwtq1"]
+margin = 0.0
+size = Vector3(20, 20, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxmub"]
+shader = ExtResource("16_7yvw1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
+viewport_path = NodePath("MainViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_qamsv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a4gyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbbwm"]
+
+[node name="Level" type="Node"]
+
+[node name="MainViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="MainViewport" node_paths=PackedStringArray("following")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = ExtResource("1_ufnxu")
+following = NodePath("../../Player")
+move_speed = 2.0
+adjust_speed = 1.0
+
+[node name="MainCamera" type="Camera3D" parent="MainViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("2_f5hc5")
+
+[node name="RefractionViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="RefractionViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+
+[node name="RefractionCam" type="Camera3D" parent="RefractionViewport/Node3D" node_paths=PackedStringArray("main_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 0, 50)
+cull_mask = 1048573
+projection = 1
+current = true
+size = 11.25
+near = 0.001
+far = 100.0
+script = ExtResource("3_sjvcy")
+main_camera = NodePath("../../../MainViewport/Node3D/MainCamera")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("4_h62hp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment"]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.02
+directional_shadow_mode = 0
+directional_shadow_max_distance = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
+transform = Transform3D(40.3762, 0, 0, 0, 40.3762, 0, 0, 0, 40.3762, 0, 1, 0)
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 1e-05
+
+[node name="LevelDesign" type="Node3D" parent="World"]
+
+[node name="Floors" type="Node3D" parent="World/LevelDesign"]
+
+[node name="Cyber Floor 1" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -8.9918)
+
+[node name="Cyber Floor 2" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -5.99024)
+
+[node name="Cyber Floor 3" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, -2.99328)
+
+[node name="Cyber Floor 4" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 0.0300508)
+
+[node name="Cyber Floor 5" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 3.01182)
+
+[node name="Cyber Floor 6" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 6.01338)
+
+[node name="Cyber Floor 43" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 8.96245, 0, 9.0266)
+
+[node name="Cyber Floor 7" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -8.9918)
+
+[node name="Cyber Floor 8" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -5.99024)
+
+[node name="Cyber Floor 9" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, -2.99328)
+
+[node name="Cyber Floor 10" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 0.0300505)
+
+[node name="Cyber Floor 11" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 3.01182)
+
+[node name="Cyber Floor 12" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 6.01338)
+
+[node name="Cyber Floor 13" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -8.9918)
+
+[node name="Cyber Floor 14" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -5.99024)
+
+[node name="Cyber Floor 15" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, -2.99328)
+
+[node name="Cyber Floor 16" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 0.0300511)
+
+[node name="Cyber Floor 17" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 3.01182)
+
+[node name="Cyber Floor 18" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03996, 0, 6.01338)
+
+[node name="Cyber Floor 19" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401144, 0, -8.9918)
+
+[node name="Cyber Floor 20" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401139, 0, -5.99024)
+
+[node name="Cyber Floor 21" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401142, 0, -2.99328)
+
+[node name="Cyber Floor 22" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401142, 0, 0.0300509)
+
+[node name="Cyber Floor 23" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401146, 0, 3.01182)
+
+[node name="Cyber Floor 24" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401137, 0, 6.01338)
+
+[node name="Cyber Floor 25" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -8.9918)
+
+[node name="Cyber Floor 26" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -5.99024)
+
+[node name="Cyber Floor 27" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, -2.99328)
+
+[node name="Cyber Floor 28" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 0.0300509)
+
+[node name="Cyber Floor 29" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 3.01182)
+
+[node name="Cyber Floor 30" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 6.01338)
+
+[node name="Cyber Floor 31" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -8.9918)
+
+[node name="Cyber Floor 32" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -5.99024)
+
+[node name="Cyber Floor 33" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, -2.99328)
+
+[node name="Cyber Floor 34" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 0.030051)
+
+[node name="Cyber Floor 35" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.97909, 0, 3.01182)
+
+[node name="Cyber Floor 36" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 6.01338)
+
+[node name="Cyber Floor 37" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -8.9918)
+
+[node name="Cyber Floor 38" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -5.99024)
+
+[node name="Cyber Floor 39" parent="World/LevelDesign/Floors" instance=ExtResource("7_f8b1y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, -2.99328)
+
+[node name="Cyber Floor 40" parent="World/LevelDesign/Floors" instance=ExtResource("8_j8bot")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 0.0300508)
+
+[node name="Cyber Floor 41" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 3.01182)
+
+[node name="Cyber Floor 42" parent="World/LevelDesign/Floors" instance=ExtResource("6_vsu2o")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 6.01338)
+
+[node name="Cyber Floor 44" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.95045, 0, 9.02232)
+
+[node name="Cyber Floor 45" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.03997, 0, 9.01338)
+
+[node name="Cyber Floor 46" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.0401144, 0, 9.04296)
+
+[node name="Cyber Floor 47" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.98861, 0, 9.03316)
+
+[node name="Cyber Floor 48" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.9791, 0, 9.04215)
+
+[node name="Cyber Floor 49" parent="World/LevelDesign/Floors" instance=ExtResource("5_o8g51")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.97036, 0, 8.99557)
+
+[node name="Walls" type="Node3D" parent="World/LevelDesign"]
+
+[node name="CyberPillar 1" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, -10.0156)
+
+[node name="CyberWall 1" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, -10.126)
+
+[node name="CyberPillar 2" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, -10.0156)
+
+[node name="CyberWall 2" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, -10.126)
+
+[node name="CyberPillar 3" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, -10.0156)
+
+[node name="CyberWall 3" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, -10.126)
+
+[node name="CyberPillar 4" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, -10.0156)
+
+[node name="CyberWall 4" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, -10.126)
+
+[node name="CyberPillar 5" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, -10.0156)
+
+[node name="CyberWall 5" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, -10.126)
+
+[node name="CyberPillar 6" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, -10.0156)
+
+[node name="CyberWall 6" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, -10.126)
+
+[node name="CyberPillar 7" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6848, 0, -10.0156)
+
+[node name="CyberPillar 8" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 7" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04144, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 9" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 8" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72791, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 10" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 9" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37367, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 11" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 10" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65582, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 12" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 11" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00253, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 13" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, 10.2183)
+visible = false
+
+[node name="CyberWall 12" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3663, 0, 10.1079)
+visible = false
+
+[node name="CyberPillar 14" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6848, 0, 10.2183)
+
+[node name="CyberWall 13" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -8.30923)
+
+[node name="CyberPillar 15" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, -5.01386)
+
+[node name="CyberWall 14" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -4.93853)
+
+[node name="CyberPillar 16" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, -1.64316)
+
+[node name="CyberWall 15" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, -1.55652)
+
+[node name="CyberPillar 17" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 1.73885)
+
+[node name="CyberWall 16" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 1.78157)
+
+[node name="CyberPillar 18" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 5.07693)
+
+[node name="CyberWall 17" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 5.1455)
+
+[node name="CyberPillar 19" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 9.95669, 0, 8.44086)
+
+[node name="CyberWall 18" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 10.0415, 0, 8.54426)
+
+[node name="CyberWall 19" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98434, 0, -8.30923)
+visible = false
+
+[node name="CyberPillar 20" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, -5.01386)
+visible = false
+
+[node name="CyberWall 20" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, -4.93853)
+visible = false
+
+[node name="CyberPillar 21" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, -1.64316)
+visible = false
+
+[node name="CyberWall 21" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, -1.55652)
+visible = false
+
+[node name="CyberPillar 22" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 1.73885)
+visible = false
+
+[node name="CyberWall 22" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, 1.78157)
+visible = false
+
+[node name="CyberPillar 23" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 5.07693)
+visible = false
+
+[node name="CyberWall 23" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98433, 0, 5.1455)
+visible = false
+
+[node name="CyberPillar 24" parent="World/LevelDesign/Walls" instance=ExtResource("9_ii7xh")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.0691, 0, 8.44086)
+visible = false
+
+[node name="CyberWall 24" parent="World/LevelDesign/Walls" instance=ExtResource("10_pffhi")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9.98434, 0, 8.54426)
+visible = false
+
+[node name="Water" type="MeshInstance3D" parent="World/LevelDesign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_vpq21")
+skeleton = NodePath("../..")
+
+[node name="Marker" type="StaticBody3D" parent="World/LevelDesign"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelDesign/Marker"]
+shape = SubResource("SphereShape3D_t1f3q")
+
+[node name="LevelNavMesh" type="NavigationRegion3D" parent="World"]
+unique_name_in_owner = true
+transform = Transform3D(0.905998, 0, -0.423283, 0, 1, 0, 0.423283, 0, 0.905998, -0.0499423, -9.68456, 0.0156233)
+navigation_mesh = SubResource("NavigationMesh_hhg2n")
+
+[node name="Room1" type="StaticBody3D" parent="World/LevelNavMesh"]
+transform = Transform3D(0.763934, 0, 0.375468, 0, 1, 0, -0.356911, 0, 0.803653, 0, -0.147654, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LevelNavMesh/Room1"]
+visible = false
+mesh = SubResource("BoxMesh_w3ewq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LevelNavMesh/Room1"]
+shape = SubResource("BoxShape3D_qwtq1")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("15_1e125")
+viewport = NodePath("../MainViewport")
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_yxmub")
+texture = SubResource("ViewportTexture_ub6g4")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("17_43lao")]
+
+[node name="LevelMobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("18_lkdwp")]
+navigation = NodePath("../World/LevelNavMesh")
+reaper_scene = ExtResource("19_ukwgk")
+reaper_spawn_time = 600.0
+spawn_table = {
+ExtResource("20_e1mij"): 0,
+ExtResource("21_cm7as"): 1
+}
+spawn_delay = 2.0
+
+[node name="LevelTimer" type="Timer" parent="LevelMobSpawner"]
+
+[node name="HealthBar" parent="." instance=ExtResource("22_ggwop")]
+is_player_or_boss = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.918052, 5.40087)
+mesh = SubResource("BoxMesh_qamsv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+physics_material_override = SubResource("PhysicsMaterial_a4gyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_hbbwm")
+
+[node name="PoolManager" parent="." instance=ExtResource("23_0ljwl")]
+
+[node name="Node" parent="." instance=ExtResource("24_ithxb")]
