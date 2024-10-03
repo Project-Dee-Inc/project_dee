@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cubla6yifiyim"]
+
+[sub_resource type="GDScript" id="GDScript_xet2w"]
+script/source = "extends Node
+
+var poolManager
+
+func _enter_tree():
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_RETURN_POOL_MANAGER_REFERENCE), self, \"_cache_pool_manager\")
+
+func _ready():
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_REFERENCE_POOL_MANAGER), {})
+	
+func _cache_pool_manager(_params):
+	poolManager = _params[0]
+	var instance = poolManager._get_weapon(\"hammer\")
+	instance.get_parent().remove_child(instance)
+	add_child(instance)
+"
+
+[node name="Node" type="Node"]
+script = SubResource("GDScript_xet2w")

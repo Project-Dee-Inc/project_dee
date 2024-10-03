@@ -1,7 +1,9 @@
 extends Node
 
-@export var max_slots: int = 5 # Maximum equipped weapons.
+@export var max_slots: int = 4 # Maximum equipped weapons.
 var weapons: Array = [] # List of weapons equiped.
+@onready var grid_container: GridContainer = $GridContainer
+const SKILL_BAR = preload("res://Scenes/skill_bar.tscn")
 
 func _init():
 	# Initialize weapons slots
@@ -18,13 +20,32 @@ func _exit_tree():
 # - weapon_instance: The weapon instance to equip.
 # - slot: The slot index where the weapon should be equipped.
 func equip_weapon_listener(_params):
+	# Get the weapon instance from parameters
 	var instance = _params[0]
-	var slot = _params[1]
-	equip_weapon(instance, slot)
+	# Initialize the slot variable to hold the first empty slot index
+	var slot = 0
+	# Loop through the weapons array to find the first empty slot
+	for i in range(weapons.size()):
+		# Check if the current slot is empty
+		if weapons[i] == null:
+			# Set the slot variable to the index of the empty slot
+			slot = i
+			# Exit the loop as we've found an empty slot
+			break
+	# Check if the slot variable is still 0
+	if slot == 0:
+		print("choose a slot")
+	else:
+		# Equip the weapon in the identified empty slot
+		equip_weapon(instance, slot)
+		
 func equip_weapon(weapon_instance, slot: int):
 	if(slot >= 0 and slot < max_slots):
 		if(weapons[slot] == null):
 			weapons[slot] = weapon_instance
+			var skill_instance = SKILL_BAR.instantiate()
+			grid_container.add_child(skill_instance)
+			skill_instance.add_child(weapon_instance)
 			print("Equipping %s on slot %d" % [weapon_instance.name, slot])
 			print("Damage = %d" % weapon_instance.damage)
 		else:

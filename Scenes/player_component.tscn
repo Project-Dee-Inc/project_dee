@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://dalwb0ioih62a"]
+[gd_scene load_steps=113 format=3 uid="uid://dalwb0ioih62a"]
 
 [ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_bxs8n"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_n1od8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xc2yr1gio7p6" path="res://Scenes/Weapons/hammer.tscn" id="5_eqkww"]
 [ext_resource type="Texture2D" uid="uid://dw46qbofvqrtl" path="res://Assets/TestCharacter/Small-8-Direction-Characters_by_AxulArt.png" id="7_ts3nl"]
 [ext_resource type="Script" path="res://player_movement.gd" id="8_srmj2"]
+[ext_resource type="PackedScene" uid="uid://crptwvamgle73" path="res://Scenes/inventory.tscn" id="9_o6pcf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
 radius = 0.424336
@@ -1341,6 +1342,7 @@ stat_dict = {
 [node name="Range" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
 [node name="WeaponManager" type="Node3D" parent="."]
+visible = false
 
 [node name="Hammer" parent="WeaponManager" instance=ExtResource("5_eqkww")]
 
@@ -1377,5 +1379,7 @@ animation_component = NodePath("../AnimationComponent")
 [node name="DashTimer" type="Timer" parent="MovementComponent"]
 wait_time = 0.2
 one_shot = true
+
+[node name="Inventory" parent="." instance=ExtResource("9_o6pcf")]
 
 [connection signal="_entity_stats_updated" from="StatComponents" to="." method="_reassign_values"]
