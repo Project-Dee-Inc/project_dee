@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://1jnl5dlh1rmm" path="res://Assets/Player/Run North.png" id="18_0a4qb"]
 [ext_resource type="Texture2D" uid="uid://ct4pok371rri0" path="res://Assets/Player/Run Northwest.png" id="19_ftb32"]
 [ext_resource type="Texture2D" uid="uid://sabkvbsm7yrk" path="res://Assets/Player/Run Northeast.png" id="20_h0v3h"]
+[ext_resource type="Texture2D" uid="uid://cc1msjkhabns5" path="res://Assets/Player/Idle NorthEast.png" id="20_ul2o1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
 radius = 0.15
@@ -85,11 +86,8 @@ region = Rect2(0, 0, 100, 100)
 atlas = ExtResource("12_40kmt")
 region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qpgtn"]
-load_path = "res://.godot/imported/Idle East.png-bd6b9bfae0d11c84e0bcf85110ca988a.s3tc.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6qgr"]
-atlas = SubResource("CompressedTexture2D_qpgtn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyy2w"]
+atlas = ExtResource("20_ul2o1")
 region = Rect2(0, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrdsi"]
@@ -440,7 +438,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h6qgr")
+"texture": SubResource("AtlasTexture_iyy2w")
 }],
 "loop": true,
 "name": &"idle_up_right",
