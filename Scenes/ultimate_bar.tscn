@@ -1,22 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://didk3s6ip6dcs"]
+[gd_scene load_steps=4 format=3 uid="uid://buab3w0ssvl1d"]
 
-[ext_resource type="Script" path="res://Scripts/resource_bar_manager.gd" id="1_ggjwm"]
+[ext_resource type="Script" path="res://Scripts/resource_bar_manager.gd" id="1_4ui3v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vst84"]
-bg_color = Color(0.0412845, 0.685564, 0.767154, 1)
+bg_color = Color(0.832869, 0.973575, 0.999234, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_603po"]
-bg_color = Color(0.913725, 0, 0, 1)
+bg_color = Color(0.0431373, 0.686275, 0.768627, 1)
 
-[node name="HealthBar" type="Node"]
-script = ExtResource("1_ggjwm")
-resource_bar_path = NodePath("HealthBar")
+[node name="UltimateBar" type="Node"]
+script = ExtResource("1_4ui3v")
+resource_bar_path = NodePath("UltimateBar")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="UltimateBar" type="ProgressBar" parent="."]
 offset_left = 40.0
-offset_top = 683.0
+offset_top = 632.0
 offset_right = 1031.0
-offset_bottom = 706.0
+offset_bottom = 655.0
 theme_override_styles/background = SubResource("StyleBoxFlat_vst84")
 theme_override_styles/fill = SubResource("StyleBoxFlat_603po")
 value = 100.0
