@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwcroypoqwkw7"]
+[gd_scene load_steps=4 format=3 uid="uid://cwcroypoqwkw7"]
 
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="1_mfgvy"]
+[ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="2_cid36"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ldyv"]
+font = ExtResource("2_cid36")
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.372549)
 
 [node name="BossHealthBar" instance=ExtResource("1_mfgvy")]
 
 [node name="HealthBar" parent="." index="0"]
 offset_top = 11.0
 offset_bottom = 34.0
+
+[node name="BossLabel" type="Label" parent="." index="3"]
+unique_name_in_owner = true
+offset_left = 345.0
+offset_top = 38.0
+offset_right = 725.0
+offset_bottom = 61.0
+label_settings = SubResource("LabelSettings_5ldyv")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
