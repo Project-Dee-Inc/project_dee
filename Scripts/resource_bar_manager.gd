@@ -5,6 +5,7 @@ var current_health:int = 0
 
 @export var is_player_or_boss:bool = false
 @export var boss_name:String 
+var boss_label:Label
 
 @export var resource_bar_path: NodePath
 
@@ -15,6 +16,7 @@ func _ready():
 	if(is_player_or_boss):
 		EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_HEALTH_CHANGED), self, "_set_current_resource_value")
 	else:
+		boss_label = %BossLabel
 		EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_BOSS_HEALTH_CHANGED), self, "_set_boss_health")
 
 func _exit_tree():
@@ -33,6 +35,8 @@ func _cache_max_health(value:int):
 
 func _set_boss_health(params:Array):
 	if(params[0] == boss_name):
+		if(boss_label.text != boss_name):
+			boss_label.text = boss_name
 		_set_current_resource_value(params[1])
 
 # Set current health.
