@@ -35,7 +35,10 @@ func _handle_death():
 	_set_anim_state(Constants.ANIM_STATE.DEATH)
 
 func _handle_damage(_value:float):
-	_set_anim_state(Constants.ANIM_STATE.HIT)
+	var tween = base_node.create_tween()
+	tween.tween_property(animated_sprite, "modulate", start_color, 0)
+	tween.tween_property(animated_sprite, "modulate", end_color, flash_duration)
+	tween.tween_callback(Callable(tween, "queue_free"))
 
 func _handle_warning(value:float):
 	var flash = 0.1
