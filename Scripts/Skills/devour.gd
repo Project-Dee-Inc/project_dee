@@ -26,6 +26,7 @@ var temples:Array = []
 var positions:Array = []
 var a_pattern_positions:Array = []
 var b_pattern_positions:Array = []
+var aoe_y_offset:float = 0.8
 
 func _ready():
 	_get_values()
@@ -135,7 +136,9 @@ func _execute_pattern(is_pattern_a:bool, is_marker:bool):
 			bite_marker._set_target_position(next_pos)
 			await get_tree().create_timer(cd).timeout
 		else:
-			devour_aoe._move_to_position(next_pos)
+			var aoe_pos = next_pos
+			aoe_pos.y -= aoe_y_offset
+			devour_aoe._move_to_position(aoe_pos)
 			await get_tree().create_timer(1).timeout
 			_set_target_position(next_pos)
 			await get_tree().create_timer(cd - 1).timeout
