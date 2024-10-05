@@ -1,5 +1,6 @@
 extends Node
 
+@export var surround:bool = false
 var fsm: StateMachine
 var movement_manager
 var skill_manager
@@ -10,7 +11,7 @@ func enter():
 	skill_manager._change_skill(0)
 	skill_manager._state_attacking(true)
 
-	movement_manager._set_surround(true)
+	movement_manager._set_surround(surround)
 	movement_manager._set_stay_in_range(true, 1)
 	movement_manager._state_moving(true)
 

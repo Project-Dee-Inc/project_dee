@@ -20,3 +20,6 @@ stat_dict = {
 "HP": 15,
 "MOVE_SPD": 2
 }
+
+[node name="BasicAttack" parent="StateMachineComponent" index="0"]
+surround = true
