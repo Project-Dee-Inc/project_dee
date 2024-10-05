@@ -9,7 +9,7 @@ func enter():
 	skill_manager._change_skill(0)
 
 	# Start moving
-	movement_manager._set_surround(false)
+	movement_manager._set_surround(true)
 	movement_manager._set_stay_in_range(true, 1)
 	movement_manager._state_moving(true)
 

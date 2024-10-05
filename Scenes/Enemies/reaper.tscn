@@ -11,6 +11,8 @@ collision_layer = 0
 [node name="AnimatedSprite3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26416, 0)
 sprite_frames = ExtResource("2_oquth")
+animation = &"attack"
+autoplay = ""
 frame_progress = 0.328504
 
 [node name="StatManager" parent="StatComponents" index="0"]

@@ -14,4 +14,13 @@ sprite_frames = ExtResource("2_o7aq8")
 animation = &"attack0_d"
 
 [node name="StatManager" parent="StatComponents" index="0"]
-script = ExtResource("2_lvqlv")
+stat_dict = {
+"ATK": 5,
+"CD": 3,
+"EXP_GAIN": 1,
+"HP": 15,
+"MOVE_SPD": 2
+}
+
+[node name="BasicAttack" parent="StateMachineComponent" index="0"]
+surround = true
