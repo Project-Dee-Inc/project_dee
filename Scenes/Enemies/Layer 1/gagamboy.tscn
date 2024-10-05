@@ -90,6 +90,7 @@ script = ExtResource("4_gs1pe")
 [node name="ShootProjectiles" type="Node" parent="SkillManagerComponent" index="0" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("5_0ut5g")
 projectile_obj = ExtResource("8_hy7ws")
+spawn_offset = 1.25
 stat_component = NodePath("../../StatComponents/ProjectileStats")
 
 [node name="BullRush" type="Node" parent="SkillManagerComponent" index="1" node_paths=PackedStringArray("stat_component")]

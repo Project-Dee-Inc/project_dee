@@ -2,6 +2,7 @@ extends "res://Scripts/skill_component.gd"
 class_name ShootProjectiles
 
 @export var projectile_obj:PackedScene
+@export var spawn_offset:float = 0
 
 var projectile_count:int = 1
 var cd:float = 0
@@ -58,7 +59,11 @@ func _physics_process(_delta: float):
 func _start_projectiles():
 	can_activate = false
 	var projectile_node = get_parent().parent_component
-	var direction = Constants._get_direction(target.global_transform.origin, projectile_node.global_transform.origin)
+
+	var direction_to_player = (target.global_transform.origin - projectile_node.global_transform.origin).normalized()
+	var projectile_launch_pos = projectile_node.global_transform.origin + direction_to_player *  spawn_offset
+
+	var direction = Constants._get_direction(target.global_transform.origin, projectile_launch_pos)
 	# Store base direction in case there's multiple projectiles
 	var base_direction = direction
 
@@ -82,10 +87,10 @@ func _start_projectiles():
 			else:
 				direction = base_direction
 
-			_spawn_projectile(projectile_node.global_transform.origin, target, direction)
+			_spawn_projectile(projectile_launch_pos, target, direction)
 	# Else, just spawn one normally
 	else:
-		_spawn_projectile(projectile_node.global_transform.origin, target, direction)
+		_spawn_projectile(projectile_launch_pos, target, direction)
 
 	# Await for cd interval before looping and creating another instance
 	await get_tree().create_timer(cd).timeout
