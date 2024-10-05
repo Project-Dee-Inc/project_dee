@@ -19,10 +19,12 @@ var is_blocked:bool = false
 var is_static_movement:bool = false
 var needs_line_of_sight:bool = false
 var override_follow_target:bool = false
+var reset_surround_target:bool = false
 
 var target_position:Vector3
+var surround_timer:float = 0.0
 var follow_range:float = 0
-var kill_radius:float = 2.5
+var kill_radius:float = 1
 var randomnum:float
 
 func _ready():
@@ -37,6 +39,7 @@ func _set_speed(value:int):
 # Set if movement type surrounds or not
 func _set_surround(value:bool):
 	if(value):
+		reset_surround_target = false
 		randomnum = Constants._get_rand()
 
 	is_surround = value
@@ -77,8 +80,13 @@ func _state_moving(value:bool):
 
 # Move to position if in following state
 func _physics_process(delta):
-	#_get_direction(body.velocity)
 	if (state_is_moving && target != null):
+		if(is_surround):
+			surround_timer += delta
+			if (surround_timer >= 2):
+				surround_timer = 0
+				reset_surround_target = true
+
 		# If normal target following, get target's position at all times
 		if(!override_follow_target):
 			target_position = target.global_transform.origin
@@ -102,9 +110,12 @@ func _physics_process(delta):
 # Start movement, check if surround or simple follow movement
 func _on_start_move(target_pos:Vector3, delta:float):
 	if(is_surround):
-		target_pos = _get_circle_position(target_pos, randomnum)
+		if(reset_surround_target):
+			reset_surround_target = false
+			_set_surround(true)
+		target_position = _get_circle_position(target_pos, randomnum)
 
-	_move_to_pos(target_pos, delta)
+	_move_to_pos(target_position, delta)
 
 # Stop movement and stay stationary
 func _on_stop_move():
@@ -126,22 +137,20 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 		_face_player(body.velocity)
 
 func _face_player(direction:Vector3):
-	# Flip the sprite based on the direction to the player
-	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin)):
-		# Determine direction based on the x axis
-		var abs_x = abs(direction.x)
-		var abs_z = abs(direction.z)
+	# Determine direction based on the x axis
+	var abs_x = abs(direction.x)
+	var abs_z = abs(direction.z)
 
-		# Horizontal movement (left/right)
-		if direction.x >= 0:
-			animation_component._flip_anim(false)
-		else:
-			animation_component._flip_anim(true)
-		# Vertical movement (up/down)
-		if direction.z >= 0:
-			dir_suffix = "_d"
-		else:
-			dir_suffix = "_u"
+	# Horizontal movement (left/right)
+	if direction.x >= 0:
+		animation_component._flip_anim(false)
+	else:
+		animation_component._flip_anim(true)
+	# Vertical movement (up/down)
+	if direction.z >= 0:
+		dir_suffix = "_d"
+	else:
+		dir_suffix = "_u"
 
 func _get_circle_position(target_pos:Vector3, random: float) -> Vector3:
 	var kill_circle_centre = target_pos

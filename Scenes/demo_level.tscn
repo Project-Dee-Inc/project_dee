@@ -498,8 +498,8 @@ navigation = NodePath("../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 1,
-ExtResource("21_vkkk4"): 0
+ExtResource("14_7qa7u"): 0,
+ExtResource("21_vkkk4"): 1
 }
 spawn_delay = 2.0
 
