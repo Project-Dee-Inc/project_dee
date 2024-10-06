@@ -17,6 +17,7 @@ var is_shooting:bool = false
 
 var velocity:Vector3 = Vector3.ZERO
 var manual_dir:Vector3
+var as_sword:bool = false
 
 # Init
 func _ready():
@@ -45,7 +46,7 @@ func _shoot(base:Node3D, starting_node:Node3D , ending_node:Node3D, direction:Ve
 	base_node = starting_node
 	base_target = ending_node
 	target = base_target.health_component
-
+			   
 	# If not homing, just get general direction
 	if(!is_homing):
 		manual_dir = direction
@@ -93,13 +94,17 @@ func _on_hit_collider_component_body_entered(_body):
 			_on_target_hit()
 
 func _on_hit_collider_component_area_entered(_area: Area3D):
+	if(as_sword):
+		pass
+	
 	if(target_tag == Constants.TARGETS.ENEMY || target_tag == Constants.TARGETS.BOTH):
 		if(_area.get_parent() != base_node):
 			_on_target_hit()
 
 func _on_target_hit():
 	target._damage(damage)
-	queue_free()
+	if(!as_sword):
+		queue_free()
 
 # If projectile goes outside camera, despawn
 func _is_outside_camera_view() -> bool:

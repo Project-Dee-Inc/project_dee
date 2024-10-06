@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1m2siwfjcan4"]
+
+[ext_resource type="PackedScene" uid="uid://dl3cvpkcyjywk" path="res://Scenes/Projectiles/base_projectile.tscn" id="1_3765u"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lk0bk"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_oxgnf"]
+
+[node name="Sword Projectile" instance=ExtResource("1_3765u")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_lk0bk")
+
+[node name="HitColliderComponent" parent="." index="1"]
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitColliderComponent" index="0"]
+shape = SubResource("SphereShape3D_lk0bk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_oxgnf")
+
+[connection signal="area_entered" from="HitColliderComponent" to="." method="_on_hit_collider_component_area_entered"]
