@@ -1,12 +1,9 @@
 extends Node
 
-@export var skill_action: String = "Skill1"
-
-@onready var skill_icon: TextureProgressBar = $Skill1/SkillIcon
-@onready var key: Label = $Skill1/Key
-@onready var cooldown: Label = $Skill1/Cooldown
-@onready var timer: Timer = $Skill1/Timer
-
+@onready var skill_icon = $SkillIcon
+@onready var key = $Key
+@onready var cooldown = $Cooldown
+@onready var timer = $Timer
 
 var stat_cooldown:float = 0.0
 
@@ -29,10 +26,10 @@ func _activate():
 	set_process(true)
 
 # Methods for testing.
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and Input.is_action_pressed(skill_action):
-			_activate()
+#func _input(event):
+	#if event is InputEventKey:
+		#if event.pressed and event.keycode == Key.KEY_1:
+			#_activate()
 
 # Stop cooldown.
 func _on_timer_timeout():

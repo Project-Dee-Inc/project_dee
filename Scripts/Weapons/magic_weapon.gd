@@ -7,6 +7,8 @@ extends Node3D
 
 
 func _ready():
+	#pass
+	#change to only when the battle starts event
 	_start_passive()
 
 func _start_passive():

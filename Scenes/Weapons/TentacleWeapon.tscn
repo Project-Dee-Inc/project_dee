@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dknkvbhnupiw4"]
+[gd_scene load_steps=10 format=3 uid="uid://dgivevkrr0le2"]
 
-[ext_resource type="PackedScene" uid="uid://bqfdfpwuxatc5" path="res://Scenes/magic_weapon.tscn" id="1_3re6v"]
+[ext_resource type="PackedScene" uid="uid://dupherm0ljakl" path="res://Scenes/magic_weapon.tscn" id="1_3re6v"]
 [ext_resource type="Script" path="res://Scenes/tentacle_weapon_skill.gd" id="2_hk55g"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/tentacle_passive.gd" id="2_mo4ju"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/aoe_area.gd" id="3_j8h3v"]
-[ext_resource type="PackedScene" uid="uid://dw6o21xpbg0vi" path="res://Scenes/Weapons/Tentacle.tscn" id="3_ledoj"]
+[ext_resource type="PackedScene" path="res://Scenes/Weapons/Tentacle.tscn" id="3_ledoj"]
 [ext_resource type="Script" path="res://Scenes/Weapons/tentacle_pool_manager.gd" id="7_74crw"]
-[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="7_ok81n"]
+[ext_resource type="Material" uid="uid://hmoux3i0pti2" path="res://Materials/deep.tres" id="7_ok81n"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jphd8"]
 

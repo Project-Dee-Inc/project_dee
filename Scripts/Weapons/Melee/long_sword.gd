@@ -1,8 +1,8 @@
 extends "res://Scripts/skill_component.gd"
-@onready var animation_tree = $"../Animation Component/AnimationTree"
 @onready var attack_timer = $"../Attack Timer"
 @onready var cooldown_timer = $"../Cooldown Timer"
-@onready var blades = $"../Blades"
+@onready var blades: Node3D = $"../Rotating Swords/Blades"
+@onready var animation_tree: AnimationTree = $"../Rotating Swords/Animation Component/AnimationTree"
 
 @export var is_test:bool
 @export var damage:float
@@ -16,6 +16,7 @@ var player_stats: Dictionary = {}
 var multiplier:float = 1
 
 func _ready():
+	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	for areas in blades_areas:
 		areas.damage = damage
 

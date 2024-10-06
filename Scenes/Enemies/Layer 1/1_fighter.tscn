@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqw4pg61po5rm"]
+[gd_scene load_steps=3 format=3 uid="uid://dqw4pg61po5rm"]
 
 [ext_resource type="PackedScene" uid="uid://falw5inxb8wt" path="res://Scenes/Enemies/Base/fighter.tscn" id="1_iy6bd"]
-[ext_resource type="Script" path="res://Scripts/stat_component.gd" id="2_lvqlv"]
 [ext_resource type="SpriteFrames" uid="uid://c08824hnc2h8c" path="res://Assets/Enemies/SpriteFrames/1_fighter_frames.tres" id="2_o7aq8"]
 
 [node name="Fighter" instance=ExtResource("1_iy6bd")]
@@ -12,6 +11,3 @@ pixel_size = 0.015
 shaded = false
 sprite_frames = ExtResource("2_o7aq8")
 animation = &"attack0_d"
-
-[node name="StatManager" parent="StatComponents" index="0"]
-script = ExtResource("2_lvqlv")

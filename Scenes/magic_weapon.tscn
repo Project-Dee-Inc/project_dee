@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqfdfpwuxatc5"]
+[gd_scene load_steps=4 format=3 uid="uid://dupherm0ljakl"]
 
 [ext_resource type="Script" path="res://Scripts/Weapons/magic_weapon.gd" id="1_l704m"]
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_85u82"]
-[ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_skill.tscn" id="3_arh6o"]
+[ext_resource type="PackedScene" uid="uid://ck4luo4lmbvw6" path="res://Scenes/weapon_active_skill.tscn" id="3_arh6o"]
 
 [node name="MagicWeapon" type="Node3D"]
 script = ExtResource("1_l704m")

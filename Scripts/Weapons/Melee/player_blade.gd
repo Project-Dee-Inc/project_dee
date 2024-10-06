@@ -1,4 +1,6 @@
-extends Area3D
+extends Node3D
+class_name Sword
+var area_3d: Area3D
 
 var immediate_geometry:ImmediateMesh
 var damage = 0
@@ -9,14 +11,24 @@ var damage = 0
 @export var stun:bool
 @export var stun_length:float
 
-@export var mesh1: MeshInstance3D
-@export var mesh2: MeshInstance3D
-
 func _ready():
-	area_shape_entered
-	area_entered.connect(_on_area_entered)
+	set_area_node()
 
+
+func set_area_node():
+	print("marvi setting Area")
+	# Get all children of the current node (or root node)
+	for child in get_children():
+		# Check if the child is of type Area3D
+		if child is Area3D:
+			area_3d = child
+			area_3d.area_entered.connect(_on_area_entered)
+func _process(delta: float) -> void:
+	if(area_3d == null):
+		set_area_node()
+	
 func _on_area_entered(body: Node3D):
+	print("marvi area entered")
 	_apply_damage(body)
 	if(knockback):
 		_apply_knockback(body)
@@ -79,18 +91,7 @@ func _resume_movement(movement_component, nav_agent:NavigationAgent3D):
 		pass
 	movement_component._set_independent_movement(false)
 	movement_component.current_speed = movement_component.speed
-	
-func _display_location(source:Vector3, destination:Vector3):
-	mesh1.global_position = source
-	mesh2.global_position = destination
 
-func draw_ray(start: Vector3, end: Vector3):
-	immediate_geometry.clear()
-	immediate_geometry.begin(Mesh.PRIMITIVE_LINES, null)
-	immediate_geometry.set_color(Color.GREEN)
-	immediate_geometry.add_vertex(start)
-	immediate_geometry.add_vertex(end)
-	immediate_geometry.end()
 
 func _calculate_knockback_location(root_location, target_location) -> Vector3:
 	var direction = (target_location - root_location).normalized()

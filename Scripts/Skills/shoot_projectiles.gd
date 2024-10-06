@@ -58,7 +58,7 @@ func _physics_process(_delta: float):
 func _start_projectiles():
 	can_activate = false
 	var projectile_node = get_parent().parent_component
-	var direction = Constants._get_direction(target.global_transform.origin, projectile_node.global_transform.origin)
+	var direction = Constants._get_direction(target.global_transform, projectile_node.global_transform)
 	# Store base direction in case there's multiple projectiles
 	var base_direction = direction
 
