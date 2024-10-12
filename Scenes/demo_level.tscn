@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=57 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -24,9 +24,11 @@
 [ext_resource type="Script" path="res://Scripts/level_manager.gd" id="18_37eo3"]
 [ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/Layer 1/gagamboy.tscn" id="21_vkkk4"]
 [ext_resource type="Script" path="res://Scripts/level_ui_manager.gd" id="22_op6m4"]
+[ext_resource type="PackedScene" uid="uid://boucrwj3tlp60" path="res://Scenes/chest.tscn" id="23_vpmjc"]
 [ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="24_4r1bp"]
 [ext_resource type="Script" path="res://Scripts/load_scene.gd" id="25_40ll8"]
 [ext_resource type="PackedScene" uid="uid://dfvyvbrad7cx5" path="res://main.tscn" id="26_0s0kl"]
+[ext_resource type="Texture2D" uid="uid://i56k26rls4bt" path="res://Assets/UI/coin1_16x16.png" id="29_j7irc"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
 viewport_path = NodePath("RefractionViewport")
@@ -74,10 +76,125 @@ viewport_path = NodePath("MainViewport")
 
 [sub_resource type="LabelSettings" id="LabelSettings_pdodo"]
 font = ExtResource("24_4r1bp")
-font_size = 50
-font_color = Color(1, 0, 0, 1)
+font_size = 30
+font_color = Color(1, 0.537255, 0.2, 1)
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.372549)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuayc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5o0t"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0u85"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gohx8"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4j85"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i3ec"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk2r3"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkn7s"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uf88"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ulrh"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjcnu"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeykh"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3lya"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_diejp"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umwoi"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(208, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptfs0"]
+atlas = ExtResource("29_j7irc")
+region = Rect2(224, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a3ru5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5o0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0u85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gohx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4j85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i3ec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk2r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkn7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uf88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ulrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjcnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeykh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3lya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_diejp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umwoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptfs0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Level" type="Node"]
 
@@ -513,17 +630,19 @@ navigation = NodePath("../../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 1,
-ExtResource("21_vkkk4"): 0
+ExtResource("14_7qa7u"): 0,
+ExtResource("21_vkkk4"): 0,
+ExtResource("23_vpmjc"): 1
 }
 spawn_delay = 2.0
 
 [node name="LevelTimer" type="Timer" parent="LevelManager/MobSpawner"]
 
-[node name="UI" type="Node" parent="LevelManager" node_paths=PackedStringArray("end_of_level_ui")]
+[node name="UI" type="Node" parent="LevelManager" node_paths=PackedStringArray("end_of_level_ui", "gold_counter_text")]
 process_mode = 3
 script = ExtResource("22_op6m4")
 end_of_level_ui = NodePath("EndOfLevel")
+gold_counter_text = NodePath("Counter/Gold/GoldCounter")
 
 [node name="PlayerHealthBar" parent="LevelManager/UI" instance=ExtResource("16_m0gkr")]
 is_player_or_boss = true
@@ -556,5 +675,33 @@ offset_bottom = 521.0
 text = "BACK TO MAIN MENU"
 script = ExtResource("25_40ll8")
 scene_to_load = ExtResource("26_0s0kl")
+
+[node name="Counter" type="Node2D" parent="LevelManager/UI"]
+
+[node name="Gold" type="Panel" parent="LevelManager/UI/Counter"]
+offset_left = 951.0
+offset_top = 65.0
+offset_right = 1054.0
+offset_bottom = 116.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kuayc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="LevelManager/UI/Counter/Gold"]
+texture_filter = 3
+position = Vector2(29, 27)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_a3ru5")
+autoplay = "default"
+frame_progress = 0.843884
+
+[node name="GoldCounter" type="Label" parent="LevelManager/UI/Counter/Gold"]
+offset_left = 54.0
+offset_top = 5.0
+offset_right = 115.0
+offset_bottom = 56.0
+text = "0"
+label_settings = SubResource("LabelSettings_pdodo")
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
 
 [connection signal="pressed" from="LevelManager/UI/EndOfLevel/Container/Main Menu" to="LevelManager/UI/EndOfLevel/Container/Main Menu" method="_on_pressed"]
