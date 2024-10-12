@@ -17,6 +17,7 @@ mimic_scene = ExtResource("2_1fgst")
 
 [node name="StatComponent" parent="." instance=ExtResource("1_64cfo")]
 stat_dict = {
+"CD": 2.0,
 "GOLD_GAIN": 10,
 "RNG": 70.0
 }
