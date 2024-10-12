@@ -1,9 +1,12 @@
 shader_type spatial;
 
-
 uniform vec4 albedo : source_color = vec4(1.0f);
 uniform sampler2D albedo_texture : source_color;
 uniform bool clamp_diffuse_to_max = false;
+
+uniform vec3 emission : source_color = vec3(0.0f);
+uniform float energy_multiplier = 1.0f;
+uniform sampler2D emission_texture : source_color;
 
 uniform int cuts : hint_range(1, 8) = 3;
 uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
@@ -35,6 +38,7 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = albedo.rgb * texture(albedo_texture, UV).rgb;
+	EMISSION = emission * (texture(emission_texture, UV).r * energy_multiplier);
 }
 
 void light() {
