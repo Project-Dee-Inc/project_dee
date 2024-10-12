@@ -45,6 +45,10 @@ enum STATS {
 	RNG
 }
 
+var custom_status_effects = [
+	"Silenced"
+]
+
 var stats_enum_mapping = {
 	"ATK": STATS.ATK,
 	"C_RATE": STATS.C_RATE, 
