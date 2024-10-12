@@ -27,7 +27,7 @@ func _open_chest():
 	animated_sprite.play("open")
 
 func _spawn_chest():
-	print("THIS IS A CHEST.")
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_START_GAME), gold)
 
 func _spawn_mimic():
 	var instance = mimic_scene.instantiate()

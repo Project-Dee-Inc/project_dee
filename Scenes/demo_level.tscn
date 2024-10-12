@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=38 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -21,7 +21,12 @@
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
 [ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="14_7qa7u"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
+[ext_resource type="Script" path="res://Scripts/level_manager.gd" id="18_37eo3"]
 [ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/Layer 1/gagamboy.tscn" id="21_vkkk4"]
+[ext_resource type="Script" path="res://Scripts/level_ui_manager.gd" id="22_op6m4"]
+[ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="24_4r1bp"]
+[ext_resource type="Script" path="res://Scripts/load_scene.gd" id="25_40ll8"]
+[ext_resource type="PackedScene" uid="uid://dfvyvbrad7cx5" path="res://main.tscn" id="26_0s0kl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
 viewport_path = NodePath("RefractionViewport")
@@ -66,6 +71,13 @@ shader = ExtResource("13_xuteu")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ub6g4"]
 viewport_path = NodePath("MainViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_pdodo"]
+font = ExtResource("24_4r1bp")
+font_size = 50
+font_color = Color(1, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.372549)
 
 [node name="Level" type="Node"]
 
@@ -493,17 +505,56 @@ centered = false
 
 [node name="Player" parent="." instance=ExtResource("11_7q2wg")]
 
-[node name="LevelMobSpawner" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
-navigation = NodePath("../World/LevelNavMesh")
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("18_37eo3")
+
+[node name="MobSpawner" parent="LevelManager" node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
+navigation = NodePath("../../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 1,
-ExtResource("21_vkkk4"): 0
+ExtResource("14_7qa7u"): 0,
+ExtResource("21_vkkk4"): 1
 }
 spawn_delay = 2.0
 
-[node name="LevelTimer" type="Timer" parent="LevelMobSpawner"]
+[node name="LevelTimer" type="Timer" parent="LevelManager/MobSpawner"]
 
-[node name="HealthBar" parent="." instance=ExtResource("16_m0gkr")]
+[node name="UI" type="Node" parent="LevelManager" node_paths=PackedStringArray("end_of_level_ui")]
+process_mode = 3
+script = ExtResource("22_op6m4")
+end_of_level_ui = NodePath("EndOfLevel")
+
+[node name="PlayerHealthBar" parent="LevelManager/UI" instance=ExtResource("16_m0gkr")]
 is_player_or_boss = true
+
+[node name="EndOfLevel" type="Node2D" parent="LevelManager/UI"]
+visible = false
+
+[node name="Container" type="Panel" parent="LevelManager/UI/EndOfLevel"]
+offset_left = 346.0
+offset_top = 87.0
+offset_right = 713.0
+offset_bottom = 645.0
+
+[node name="Ending Text" type="Label" parent="LevelManager/UI/EndOfLevel/Container"]
+offset_left = -1.0
+offset_top = 52.0
+offset_right = 379.0
+offset_bottom = 103.0
+text = "YOU DIED."
+label_settings = SubResource("LabelSettings_pdodo")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Main Menu" type="Button" parent="LevelManager/UI/EndOfLevel/Container"]
+offset_left = 65.0
+offset_top = 464.0
+offset_right = 309.0
+offset_bottom = 521.0
+text = "BACK TO MAIN MENU"
+script = ExtResource("25_40ll8")
+scene_to_load = ExtResource("26_0s0kl")
+
+[connection signal="pressed" from="LevelManager/UI/EndOfLevel/Container/Main Menu" to="LevelManager/UI/EndOfLevel/Container/Main Menu" method="_on_pressed"]
