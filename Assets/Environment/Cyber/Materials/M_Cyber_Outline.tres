@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ca5ch0l6fto5t"]
+
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="1_8dd1p"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8dd1p")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/shadow_strength = 0.6
+shader_parameter/highlight_strength = 0.4
+shader_parameter/highlight_color = Color(0.602827, 0.4984, 0.89, 1)
+shader_parameter/shadow_color = Color(0.135333, 0.1044, 0.29, 1)
