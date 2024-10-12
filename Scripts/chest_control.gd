@@ -8,6 +8,7 @@ class_name ChestControl
 var mimic_chance:float 
 var gold:int = 0
 var item:PackedScene
+var cd:float = 0
 
 func _ready():
 	_set_values()
@@ -15,6 +16,7 @@ func _ready():
 func _set_values():
 	gold = stat_component.stat_dict[Constants.get_enum_name_by_value(Constants.STATS.GOLD_GAIN)]
 	mimic_chance = stat_component.stat_dict[Constants.get_enum_name_by_value(Constants.STATS.RNG)]
+	cd = stat_component.stat_dict[Constants.get_enum_name_by_value(Constants.STATS.CD)]
 
 func _is_mimic():
 	var rng = randi() % 100  # Generates a random number between 0 and 99
@@ -35,7 +37,7 @@ func _spawn_mimic():
 	var root_node = get_tree().current_scene
 	root_node.add_child(instance)
 
-	instance._set_values(self.global_transform.origin)
+	instance._set_values(self.global_transform.origin, cd)
 
 func _on_body_entered(body: Node3D) -> void:
 	if(body.is_in_group("player")):

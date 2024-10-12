@@ -657,6 +657,7 @@ offset_right = 713.0
 offset_bottom = 645.0
 
 [node name="Ending Text" type="Label" parent="LevelManager/UI/EndOfLevel/Container"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = 52.0
 offset_right = 379.0
@@ -668,6 +669,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Main Menu" type="Button" parent="LevelManager/UI/EndOfLevel/Container"]
+layout_mode = 0
 offset_left = 65.0
 offset_top = 464.0
 offset_right = 309.0
@@ -691,9 +693,10 @@ position = Vector2(29, 27)
 scale = Vector2(2.125, 2.125)
 sprite_frames = SubResource("SpriteFrames_a3ru5")
 autoplay = "default"
-frame_progress = 0.843884
+frame_progress = 0.923325
 
 [node name="GoldCounter" type="Label" parent="LevelManager/UI/Counter/Gold"]
+layout_mode = 0
 offset_left = 54.0
 offset_top = 5.0
 offset_right = 115.0
