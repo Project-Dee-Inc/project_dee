@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4cy08byu7jsu"]
+[gd_scene load_steps=6 format=3 uid="uid://c4cy08byu7jsu"]
 
 [ext_resource type="Script" path="res://Easy.gd" id="1_jvumt"]
 [ext_resource type="Script" path="res://Normal.gd" id="2_qhkdx"]
 [ext_resource type="Script" path="res://Hard.gd" id="3_fjfqm"]
+[ext_resource type="Script" path="res://Scripts/load_scene.gd" id="4_tk55u"]
+[ext_resource type="PackedScene" uid="uid://dpl6faerfh1hc" path="res://Scenes/demo_level.tscn" id="5_kmjoh"]
 
 [node name="Difficulty_Select" type="Node2D"]
 
@@ -30,6 +32,17 @@ offset_bottom = 265.0
 text = "Hard"
 script = ExtResource("3_fjfqm")
 
+[node name="Test" type="Button" parent="."]
+offset_left = 428.0
+offset_top = 304.0
+offset_right = 675.0
+offset_bottom = 395.0
+text = "PLAY
+"
+script = ExtResource("4_tk55u")
+scene_to_load = ExtResource("5_kmjoh")
+
 [connection signal="pressed" from="Easy" to="Easy" method="_on_pressed"]
 [connection signal="pressed" from="Normal" to="Normal" method="_on_pressed"]
 [connection signal="pressed" from="Hard" to="Hard" method="_on_pressed"]
+[connection signal="pressed" from="Test" to="Test" method="_on_pressed"]

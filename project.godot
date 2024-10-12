@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project-Dee"
-run/main_scene="res://TestScene.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Constants="*res://Scripts/constants.gd"
 EventManager="*res://Scripts/event_manager.gd"
 GameManager="*res://Scripts/game_manager.gd"
+GlobalStatManager="*res://Scripts/global_stat_manager.gd"
 
 [display]
 

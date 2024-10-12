@@ -2,25 +2,32 @@ extends Node
 
 var player:Node3D
 var camera:Camera3D
+
 var navregion:NavigationRegion3D
 var nav_mesh_bounds:AABB = AABB()
 var viewport:SubViewport
 
-var marker
-
 func _ready():
 	_on_subscribe_events()
-	_on_game_start()
 
 # List events to listen for
 func _on_subscribe_events():
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAY),self,"_on_game_start")
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_INITIALIZED),self,"_player_initialized")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_PLAYER_DEATH),self,"_on_game_end")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_GAME_PAUSE),self,"_on_game_pause")
 
 # Test run: start game after 0.5 seconds and raise ON_START_GAME event
-func _on_game_start():
+func _on_game_start(_params):
 	await get_tree().create_timer(0.5).timeout
-	print("STARTING GAME")
-	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_START_GAME), null)
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_START_GAME), {})
+
+func _on_game_end(_params):
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_END_GAME), {})
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_GAME_PAUSE), [true])
+
+func _on_game_pause(param:Array):
+	get_tree().paused = param[0]
 
 # Once player is initialized, find player node
 func _player_initialized(_params):
@@ -28,12 +35,8 @@ func _player_initialized(_params):
 	camera = _find_camera_node()
 	navregion = _find_navmesh_node()
 	nav_mesh_bounds = Constants._calculate_navigation_mesh_bounds(navregion.navmesh)
-	marker = _find_marker_node()
 
-func _find_marker_node() -> Node3D:
-	return _find_node_recursive(get_tree().current_scene, "Marker")
-
-# Find player in all nested scenes to store global value
+# Find nodes in all nested scenes to store global value
 func _find_player_node() -> Node3D:
 	return _find_node_recursive(get_tree().current_scene, "Player")
 

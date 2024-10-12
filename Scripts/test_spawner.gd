@@ -14,8 +14,17 @@ class_name Spawner
 
 var active_spawns: Dictionary = {}
 
+func _init():
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAY), {})
+
 func _ready():
+	_subscribe()
+
+func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_SPAWN_OBJECT),self,"_spawn_enemy_from_event")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_START_GAME),self,"_start_level")
+
+func _start_level(_params):
 	_start_level_timer()
 
 	for scene in spawn_table.keys():
