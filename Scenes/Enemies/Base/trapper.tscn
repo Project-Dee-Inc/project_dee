@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1lpvk"]
 
-[node name="Trapper" instance=ExtResource("1_llo2n")]
+[node name="Trapper" groups=["nonsupport-enemies"] instance=ExtResource("1_llo2n")]
 
 [node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_gg8an")]
 collision_layer = 4

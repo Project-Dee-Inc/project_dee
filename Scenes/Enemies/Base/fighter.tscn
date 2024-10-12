@@ -9,7 +9,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s718p"]
 
-[node name="Fighter" instance=ExtResource("1_dqm61")]
+[node name="Fighter" groups=["nonsupport-enemies"] instance=ExtResource("1_dqm61")]
 
 [node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_uby8r")]
 collision_layer = 4
