@@ -5,8 +5,8 @@ class_name MimicControl
 
 func _apply_debuff(cd):
 	var target_status = GameManager.player.stat_components
-	var string_name = "Rooted"
-	target_status._apply_status_effect(Constants.StatusEffect.new(string_name, cd, false, {Constants.STATS.MOVE_SPD: -1}))
+	target_status._apply_status_effect(Constants.StatusEffect.new("Rooted", cd, false, {Constants.STATS.MOVE_SPD: -1}))
+	target_status._apply_status_effect(Constants.StatusEffect.new("Silenced", cd, false, {}))
 
 func _set_values(location_to_spawn:Vector3, cd_time:float):
 	_apply_debuff(cd_time)

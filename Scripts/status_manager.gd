@@ -25,22 +25,32 @@ func _apply_status_effect(effect: Constants.StatusEffect):
 			#active_effects[effect.name] = [effect]
 	else:
 		active_effects[effect.name] = [effect]
-	
-	# Apply the effect's stat modifiers
-	for key in effect.stat_modifiers.keys():
-		if (Constants.get_enum_name_by_value(key) in current_stats):
-			var stat_value = current_stats[Constants.get_enum_name_by_value(key)]
-			var damage = effect.stat_modifiers[key]
-			var reduction_amount: float = stat_value * damage
-			current_stats[Constants.get_enum_name_by_value(key)] += reduction_amount
-			#print("HERE Stat ", Constants.get_enum_name_by_value(key), ": ", stat_value, " - ", reduction_amount, " = ", current_stats[Constants.get_enum_name_by_value(key)])
 
-	_entity_stats_updated.emit(current_stats)
+	if(effect.name not in Constants.custom_status_effects):
+		# Apply the effect's stat modifiers
+		for key in effect.stat_modifiers.keys():
+			if (Constants.get_enum_name_by_value(key) in current_stats):
+				var stat_value = current_stats[Constants.get_enum_name_by_value(key)]
+				var damage = effect.stat_modifiers[key]
+				var reduction_amount: float = stat_value * damage
+				current_stats[Constants.get_enum_name_by_value(key)] += reduction_amount
+				#print("HERE Stat ", Constants.get_enum_name_by_value(key), ": ", stat_value, " - ", reduction_amount, " = ", current_stats[Constants.get_enum_name_by_value(key)])
 
-	# Schedule the removal of the effect after its duration
-	await get_tree().create_timer(effect.duration).timeout
-	if (is_instance_valid(self)):
-		_remove_status_effect(effect)
+		_entity_stats_updated.emit(current_stats)
+
+		# Schedule the removal of the effect after its duration
+		await get_tree().create_timer(effect.duration).timeout
+		if (is_instance_valid(self)):
+			_remove_status_effect(effect)
+	else:
+		_handle_custom_status_effects(effect.name, effect.duration)
+
+func _handle_custom_status_effects(name:String, duration:float):
+	if(name == "Silenced"):
+		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [false])
+		await get_tree().create_timer(duration).timeout
+		if (is_instance_valid(self)):
+			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [true])
 
 func _remove_status_effect(effect: Constants.StatusEffect):
 	if (effect.name in active_effects):

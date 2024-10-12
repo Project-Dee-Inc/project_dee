@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://dalwb0ioih62a"]
+[gd_scene load_steps=159 format=3 uid="uid://dalwb0ioih62a"]
 
 [ext_resource type="Script" path="res://Scripts/entity_manager.gd" id="1_bxs8n"]
 [ext_resource type="Script" path="res://Scripts/stats_manager.gd" id="2_n1od8"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="3_wrmso"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="4_3f8co"]
 [ext_resource type="PackedScene" uid="uid://xc2yr1gio7p6" path="res://Scenes/Weapons/hammer.tscn" id="5_eqkww"]
+[ext_resource type="Script" path="res://Scripts/active_weapon_manager.gd" id="5_i68mo"]
 [ext_resource type="Texture2D" uid="uid://c717vky0dk5e6" path="res://Assets/Player/Idle South.png" id="8_3jiov"]
 [ext_resource type="Script" path="res://player_movement.gd" id="8_srmj2"]
 [ext_resource type="Texture2D" uid="uid://bpj3f4o8qpdmm" path="res://Assets/Player/Idle SouthWest.png" id="9_dvumb"]
+[ext_resource type="PackedScene" uid="uid://crptwvamgle73" path="res://Scenes/inventory.tscn" id="9_o6pcf"]
 [ext_resource type="Texture2D" uid="uid://5rid1kkcqvi0" path="res://Assets/Player/Idle SouthEast.png" id="10_y318t"]
 [ext_resource type="Texture2D" uid="uid://bjecdo24crt13" path="res://Assets/Player/Idle North.png" id="11_rwu1n"]
 [ext_resource type="Texture2D" uid="uid://d0be05rj7lxsa" path="res://Assets/Player/Idle NorthWest.png" id="12_40kmt"]
@@ -21,7 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://ct4pok371rri0" path="res://Assets/Player/Run Northwest.png" id="19_ftb32"]
 [ext_resource type="Texture2D" uid="uid://sabkvbsm7yrk" path="res://Assets/Player/Run Northeast.png" id="20_h0v3h"]
 [ext_resource type="Texture2D" uid="uid://cc1msjkhabns5" path="res://Assets/Player/Idle NorthEast.png" id="20_ul2o1"]
-[ext_resource type="PackedScene" uid="uid://crptwvamgle73" path="res://Scenes/inventory.tscn" id="9_o6pcf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46t1g"]
 radius = 0.15
@@ -1576,7 +1577,7 @@ stat_dict = {
 [node name="Range" parent="StatComponents" instance=ExtResource("2_ojsv5")]
 
 [node name="WeaponManager" type="Node3D" parent="."]
-visible = false
+script = ExtResource("5_i68mo")
 
 [node name="Hammer" parent="WeaponManager" instance=ExtResource("5_eqkww")]
 
@@ -1591,7 +1592,7 @@ pixel_size = 0.02
 billboard = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_ghmpq")
-animation = &"walk_upper_right"
+animation = &"idle_qpenehmp"
 autoplay = "idle_down"
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationComponent"]
