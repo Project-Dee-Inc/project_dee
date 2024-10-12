@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx161td2jvft8"]
+
+[ext_resource type="ArrayMesh" uid="uid://b1chebp8nus1g" path="res://Assets/Environment/Cyber/Mesh/Cyber_Floor_2.res" id="1_a8r1j"]
+[ext_resource type="Shape3D" uid="uid://c5173ftbcvjqv" path="res://Assets/Environment/Cyber/Collision/cyber_floor.tres" id="2_6bcxd"]
+
+[node name="Cyber_Floor_2" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_a8r1j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = ExtResource("2_6bcxd")

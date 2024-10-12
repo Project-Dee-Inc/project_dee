@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhtfwlyxewtfj"]
+
+[ext_resource type="ArrayMesh" uid="uid://dk8bu0hca8j4a" path="res://Assets/Environment/Cyber/Mesh/Cyber_Pillar.res" id="1_i7mj3"]
+[ext_resource type="Shape3D" uid="uid://cp6inxjw7xqr0" path="res://Assets/Environment/Cyber/Collision/cyber_pillar.tres" id="2_3y8kt"]
+
+[node name="Cyber_Pillar" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_i7mj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+shape = ExtResource("2_3y8kt")

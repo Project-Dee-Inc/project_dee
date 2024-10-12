@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://7ta7dtbgninu"]
+
+[ext_resource type="Material" uid="uid://ca5ch0l6fto5t" path="res://Assets/Environment/Cyber/Materials/M_Cyber_Outline.tres" id="1_eqn7p"]
+[ext_resource type="Shader" path="res://Shaders/toon.gdshader" id="1_jj30s"]
+[ext_resource type="Texture2D" uid="uid://uniq8aeue2gj" path="res://Assets/Environment/Cyber/Textures/T_Cyber_Floor_2_Albedo.png" id="2_u76rx"]
+[ext_resource type="Texture2D" uid="uid://ce13xah5onbxe" path="res://Assets/Environment/Cyber/Textures/T_Cyber_Floor_2_Emission.png" id="3_mykf6"]
+[ext_resource type="Texture2D" uid="uid://bi7ud6kude4dl" path="res://Assets/Environment/Cyber/Textures/T_Cyber_Floor_2_Normal.png" id="4_faj8c"]
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_eqn7p")
+shader = ExtResource("1_jj30s")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/emission = Color(0.75, 0.25, 1, 1)
+shader_parameter/energy_multiplier = 10.0
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = true
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = true
+shader_parameter/rim_width = 8.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/albedo_texture = ExtResource("2_u76rx")
+shader_parameter/emission_texture = ExtResource("3_mykf6")
+shader_parameter/normal_map = ExtResource("4_faj8c")
