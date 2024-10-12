@@ -11,7 +11,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkcxh"]
 
-[node name="Shooter" instance=ExtResource("1_dex7l")]
+[node name="Shooter" groups=["nonsupport-enemies"] instance=ExtResource("1_dex7l")]
 
 [node name="BodyHitCollider" parent="." index="0" instance=ExtResource("2_g780y")]
 collision_layer = 4

@@ -20,6 +20,7 @@ var is_static_movement:bool = false
 var needs_line_of_sight:bool = false
 var override_follow_target:bool = false
 var reset_surround_target:bool = false
+var away_from_target:bool = false
 
 var target_position:Vector3
 var surround_timer:float = 0.0
@@ -66,6 +67,9 @@ func _set_independent_movement(value:bool):
 # Set movement to static, only one direction
 func _set_static_movement(value:bool):
 	is_static_movement = value
+
+func _set_movement_away_from_target(value:bool):
+	away_from_target = value
 
 # Manually set target position
 func _set_target_position(value:Vector3):
@@ -115,7 +119,10 @@ func _on_start_move(target_pos:Vector3, delta:float):
 			_set_surround(true)
 		target_position = _get_circle_position(target_pos, randomnum)
 
-	_move_to_pos(target_position, delta)
+	if(away_from_target):
+		_move_away_from_pos(target_position, delta)
+	else:
+		_move_to_pos(target_position, delta)
 
 # Stop movement and stay stationary
 func _on_stop_move():
@@ -135,6 +142,23 @@ func _move_to_pos(target_pos:Vector3, delta:float):
 
 	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
 		_face_player(body.velocity)
+
+# Move away from Vector3 position
+func _move_away_from_pos(target_pos:Vector3, delta:float, distance:float = 3):
+	var init_direction = (body.global_transform.origin - target_pos).normalized()
+	var desired_position = body.global_transform.origin + init_direction * distance
+	
+	var nav_map = GameManager.navregion.get_navigation_map()
+	var nav_mesh_position = NavigationServer3D.map_get_closest_point(nav_map, desired_position)
+
+	nav_agent.target_position = nav_mesh_position
+	var direction = (nav_agent.get_next_path_position() - body.global_transform.origin).normalized()
+
+	body.velocity = body.velocity.lerp(direction * current_speed, 20 * delta)
+	body.move_and_slide()
+
+	if(!Constants.is_close_to_destination(body.global_transform.origin, target.global_transform.origin) && !override_face_player):
+		_face_player(-body.velocity)
 
 func _face_player(direction:Vector3):
 	# Determine direction based on the x axis

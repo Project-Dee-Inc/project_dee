@@ -22,7 +22,7 @@ func enter():
 
 # Find largest cluster of enemies
 func follow_largest_cluster():
-	var enemy_positions = Constants.get_group_positions("enemies")
+	var enemy_positions = Constants.get_group_positions("nonsupport-enemies")
 	if enemy_positions.size() > 0:
 		current_cluster_center = Constants.find_group_center(enemy_positions)
 	else:
@@ -39,10 +39,12 @@ func _physics_process(delta):
 		# If cluster is available, override movement to follow new center cluster point
 		if (current_cluster_center != Vector3.ZERO):
 			movement_manager._set_independent_movement(true)
+			movement_manager._set_movement_away_from_target(false)
 			movement_manager._set_target_position(current_cluster_center)
 		else:
 			# Reevaluate clusters if no valid cluster is found
 			movement_manager._set_independent_movement(false)
+			movement_manager._set_movement_away_from_target(true)
 			follow_largest_cluster()
 
 func exit(next_state):
