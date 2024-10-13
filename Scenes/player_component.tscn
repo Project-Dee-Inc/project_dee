@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cmr1vm5mlcj8x" path="res://Scenes/stat_manager.tscn" id="2_ojsv5"]
 [ext_resource type="PackedScene" uid="uid://b6wsuwkmcipbo" path="res://Scenes/health_component.tscn" id="3_wrmso"]
 [ext_resource type="Script" path="res://Scripts/animation_component.gd" id="4_3f8co"]
-[ext_resource type="PackedScene" uid="uid://xc2yr1gio7p6" path="res://Scenes/Weapons/hammer.tscn" id="5_eqkww"]
 [ext_resource type="Script" path="res://Scripts/active_weapon_manager.gd" id="5_i68mo"]
+[ext_resource type="PackedScene" uid="uid://ibx38kgs5bv6" path="res://Scenes/Weapons/TentacleWeapon.tscn" id="6_i6x8k"]
 [ext_resource type="Texture2D" uid="uid://c717vky0dk5e6" path="res://Assets/Player/Idle South.png" id="8_3jiov"]
 [ext_resource type="Script" path="res://player_movement.gd" id="8_srmj2"]
 [ext_resource type="Texture2D" uid="uid://bpj3f4o8qpdmm" path="res://Assets/Player/Idle SouthWest.png" id="9_dvumb"]
@@ -1579,7 +1579,7 @@ stat_dict = {
 [node name="WeaponManager" type="Node3D" parent="."]
 script = ExtResource("5_i68mo")
 
-[node name="Hammer" parent="WeaponManager" instance=ExtResource("5_eqkww")]
+[node name="Kraquael\'s Grasp" parent="WeaponManager" instance=ExtResource("6_i6x8k")]
 
 [node name="AnimationComponent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738802, 0)
