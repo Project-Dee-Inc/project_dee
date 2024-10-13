@@ -11,8 +11,8 @@ func _ready():
 
 func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT),self,"_enable_skill_input")
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_EQUIP), self, "equip_weapon")
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_UNEQUIP), self, "unequip_weapon")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_EQUIP), self, "_equip_weapon")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_UNEQUIP), self, "_unequip_weapon")
 
 func _init_weapons():
 	active_weapons.clear()
@@ -25,7 +25,7 @@ func _init_weapons():
 func _enable_skill_input(param:Array):
 	enable_active_skill = param[0]
 
-func equip_weapon(_params):
+func _equip_weapon(_params):
 	# TO BE TESTED
 	if(active_weapons.size() < max_size):
 		var instance = _params[0]
@@ -33,7 +33,7 @@ func equip_weapon(_params):
 		instance.global_transform.origin = Vector3(0, 0, 0)
 		_init_weapons()
 
-func unequip_weapon(_params):
+func _unequip_weapon(_params):
 	# TO BE TESTED
 	var instance = _params[0]
 	var active_instance = active_weapons[instance.name]
