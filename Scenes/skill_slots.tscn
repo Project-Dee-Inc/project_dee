@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://caol4hjjka21o"]
+
+[ext_resource type="PackedScene" uid="uid://b4tcqeqpbi0hi" path="res://Scenes/skill_bar.tscn" id="1_nqh5a"]
+
+[node name="Skill_Slots" type="Node2D"]
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 5.0
+offset_right = 336.0
+offset_bottom = 66.96
+columns = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="SkillBar" parent="GridContainer" instance=ExtResource("1_nqh5a")]
+layout_mode = 2
+
+[node name="SkillBar2" parent="GridContainer" instance=ExtResource("1_nqh5a")]
+layout_mode = 2
+skill_action = "Skill2"
+
+[node name="SkillBar3" parent="GridContainer" instance=ExtResource("1_nqh5a")]
+layout_mode = 2
+skill_action = "Skill3"
+
+[node name="SkillBar4" parent="GridContainer" instance=ExtResource("1_nqh5a")]
+layout_mode = 2
+skill_action = "Skill4"

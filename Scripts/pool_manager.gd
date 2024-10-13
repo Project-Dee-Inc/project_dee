@@ -7,14 +7,8 @@ extends Node
 # Dictionary to hold the weapon instances, organized by their keys
 var weapon_pool: Dictionary = {}
 
-func _enter_tree():
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_REFERENCE_POOL_MANAGER), self, "_GetThisReference")
-
 func _ready():
 	_preload_weapons()
-	
-func _exit_tree():
-	EventManager.remove_listener(str(EventManager.EVENT_NAMES.ON_REFERENCE_POOL_MANAGER), self, "_GetThisReference")
 
 # Preloads weapons based on the configuration defined in weapon_pool_entry
 func _preload_weapons():
@@ -22,16 +16,24 @@ func _preload_weapons():
 	for entry in weapon_pool_entry:
 		# Initialize an array to hold instances of the current weapon
 		var instances = []
+		# Variable to store the weapon's name
+		var key
 		# Create a number of instances based on the specified pool size for this weapon
 		for i in range(entry.pool_size):
 			# Instantiate the weapon prefab
 			var weapon_instance = entry.prefab.instantiate()
+			# Get the name of the weapon instance
+			key = weapon_instance.name
 			# Add the instance to the instances array
 			instances.append(weapon_instance)
 			# Add the instance as a child to the current node in the scene tree
 			add_child(weapon_instance)
+			# Set visibility to false (hides the node)	
+			weapon_instance.hide()  
+			# Stop processing for the node
+			weapon_instance.set_process(false)  
 		# Store the instances array in the weapon_pool dictionary using the weapon's key
-		weapon_pool[entry.key] = instances
+		weapon_pool[key] = instances
 
 # Retrieves a weapon instance from the weapon pool based on the specified weapon key	
 func _get_weapon(weapon_key: String):
@@ -43,6 +45,10 @@ func _get_weapon(weapon_key: String):
 		if instances.size() > 0:
 			# Remove the last instance from the array and return it
 			var weapon_instance = instances.pop_back()
+			# Make the weapon instance visible again
+			weapon_instance.show()
+			# Resume processing for the weapon instance, allowing it to update logic
+			weapon_instance.set_process(true)
 			return weapon_instance
 		else:
 			# If no instances are available, instantiate a new weapon from the prefab
@@ -56,16 +62,13 @@ func _get_weapon(weapon_key: String):
 
 # Returns a weapon instance back to the weapon pool.	
 func _return_weapon(weapon_key: String, weapon_instance: Node):
+	# Set visibility to false (hides the node)	
+	weapon_instance.hide()  
+	# Stop processing for the node
+	weapon_instance.set_process(false)  
 	# Check if the weapon pool already has a list for the given weapon key
 	if not weapon_pool.has(weapon_key):
 		# If not, create a new empty array for this weapon key in the weapon pool
 		weapon_pool[weapon_key] = []
 	# Add the weapon instance to the list of instances for this weapon key
 	weapon_pool[weapon_key].append(weapon_instance)
-
-# Retrieves a reference to the current instance and raises an event
-func _GetThisReference(params):
-	# Store a reference to the current instance (the one this method belongs to)
-	var reference = self
-	# Raise an event to return the reference to the pool manager
-	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_RETURN_POOL_MANAGER_REFERENCE), [reference])
