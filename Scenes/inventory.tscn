@@ -2,13 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/weapon_manager.gd" id="1_qdgej"]
 
-[node name="Inventory" type="Node2D"]
+[node name="Inventory" type="Node3D" node_paths=PackedStringArray("skill_bars")]
 script = ExtResource("1_qdgej")
-
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 348.0
-offset_top = 624.0
-offset_right = 679.0
-offset_bottom = 690.96
-columns = 5
-metadata/_edit_use_anchors_ = true
+skill_bars = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]

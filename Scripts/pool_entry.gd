@@ -13,5 +13,3 @@ class_name PoolEntry
 # Exported variable to specify the size of the pool for this weapon.
 # This represents how many instances of this prefab should be preloaded.
 @export var pool_size: int
-# The key used to identify the weapon in the pool
-@export var key: String

@@ -1,13 +1,14 @@
 extends Node
 
-@export var max_slots: int = 4 # Maximum equipped weapons.
-var weapons: Array = [] # List of weapons equiped.
-@onready var grid_container: GridContainer = $GridContainer
-const SKILL_BAR = preload("res://Scenes/skill_bar.tscn")
+# Array of Panel nodes for skill bars, draggable from the scene into the inspector.
+@export var skill_bars: Array[Skill_Icon_Manager] = [] 
+# List of weapons equiped.
+var weapons: Array = [] 
+
 
 func _init():
 	# Initialize weapons slots
-	weapons.resize(max_slots)
+	weapons.resize(skill_bars.size())
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_EQUIP), self, "equip_weapon_listener")
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_UNEQUIP), self, "unequip_weapon_listener")
 	
@@ -38,32 +39,54 @@ func equip_weapon_listener(_params):
 	else:
 		# Equip the weapon in the identified empty slot
 		equip_weapon(instance, slot)
-		
+
+# Equips a weapon in the specified slot of the skill bar.
+# @param weapon_instance: The weapon to be equipped.
+# @param slot: The index of the slot in which to equip the weapon.
 func equip_weapon(weapon_instance, slot: int):
-	if(slot >= 0 and slot < max_slots):
+	# Check if the slot index is within the valid range of skill bars
+	if(slot >= 0 and slot < skill_bars.size()):
+		# If the slot is empty (no weapon equipped), equip the weapon
 		if(weapons[slot] == null):
+			# Assign the weapon instance to the specified slot
 			weapons[slot] = weapon_instance
-			var skill_instance = SKILL_BAR.instantiate()
-			grid_container.add_child(skill_instance)
-			skill_instance.add_child(weapon_instance)
+			# Add the weapon instance as a child to the skill bar's parent node
+			add_child(weapon_instance)
+			# Store a reference to the equipped weapon in the skill bar
+			skill_bars[slot].attached_weapon = weapon_instance
+			# Print a message indicating the weapon has been equipped successfully
 			print("Equipping %s on slot %d" % [weapon_instance.name, slot])
 			print("Damage = %d" % weapon_instance.damage)
 		else:
+			# Inform that the specified slot is already occupied by another weapon
 			print("Slot %d is already occupied." % slot)
 	else:
+		# Print an error message for an invalid slot index
 		print("Invalid slot index")
 
-# Unequip a weapon.
-# Paramters:
-# - slot: The slot index of the weapon to unequip.
+# Listener function for unequipping a weapon based on parameters.
+# @param _params: Array containing parameters, where the second element is the slot index.
 func unequip_weapon_listener(_params):
+	# Retrieve the slot index from the parameters
 	var slot = _params[1]
+	# Call the unequip_weapon function with the specified slot
 	unequip_weapon(slot)
+# Unequips a weapon from the specified slot.
+# @param slot: The slot index of the weapon to unequip.
 func unequip_weapon(slot: int):
-	if(slot >= 0 and slot < max_slots):
+	# Check if the slot index is within the valid range of skill bars
+	if(slot >= 0 and slot < skill_bars.size()):
+		# If the specified slot contains a weapon, proceed to unequip it
 		if(weapons[slot] != null):
+			# Return the weapon to the pool using its name
+			Pool_Manager._return_weapon(weapons[slot].name, weapons[slot])
+			# Set the weapons array slot to null (unequipped)
 			weapons[slot] = null
+			# Clear the reference from the skill bar
+			skill_bars[slot].attached_weapon = null
 		else:
+			# Inform that the specified slot is already empty
 			print("Slot %d is already empty." % slot)
 	else:
+		# Print an error message for an invalid slot index
 		print("Invalid slot index");

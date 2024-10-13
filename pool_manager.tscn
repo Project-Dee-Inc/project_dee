@@ -15,49 +15,41 @@
 script = ExtResource("2_at2ou")
 prefab = ExtResource("3_wvdeb")
 pool_size = 2
-key = "good_morning_star"
 
 [sub_resource type="Resource" id="Resource_o03id"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("4_ut6wv")
 pool_size = 2
-key = "flaccid_spear"
 
 [sub_resource type="Resource" id="Resource_h35vx"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("5_srh2w")
 pool_size = 2
-key = "hammer"
 
 [sub_resource type="Resource" id="Resource_pnmji"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("6_vxt85")
 pool_size = 2
-key = "limp_flail"
 
 [sub_resource type="Resource" id="Resource_hmv1t"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("7_k5rwm")
 pool_size = 2
-key = "long_sword"
 
 [sub_resource type="Resource" id="Resource_1um23"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("8_oacff")
 pool_size = 2
-key = "peasant_persuader"
 
 [sub_resource type="Resource" id="Resource_63fwy"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("9_i8kka")
 pool_size = 2
-key = "tentacle_weapon"
 
 [sub_resource type="Resource" id="Resource_7bb8v"]
 script = ExtResource("2_at2ou")
 prefab = ExtResource("10_j4jgf")
 pool_size = 2
-key = "thrusty_rapier"
 
 [node name="PoolManager" type="Node"]
 script = ExtResource("1_ghjph")

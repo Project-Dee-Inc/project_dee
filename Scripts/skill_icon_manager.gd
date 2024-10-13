@@ -1,3 +1,5 @@
+class_name Skill_Icon_Manager
+
 extends Node
 
 @export var skill_action: String = "Skill1"
@@ -7,8 +9,8 @@ extends Node
 @onready var cooldown: Label = $Skill1/Cooldown
 @onready var timer: Timer = $Skill1/Timer
 
-
 var stat_cooldown:float = 0.0
+var attached_weapon
 
 func _ready():
 	# Setup timer.

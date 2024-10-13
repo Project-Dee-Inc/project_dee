@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Constants="*res://Scripts/constants.gd"
 EventManager="*res://Scripts/event_manager.gd"
 GameManager="*res://Scripts/game_manager.gd"
+Pool_Manager="*res://Scripts/pool_manager.gd"
 
 [display]
 
