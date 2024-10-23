@@ -41,11 +41,11 @@ func _start_damage_over_time(health_component: HealthComponent, tentacle):
 		await(tentacle.dot_timer.timeout)
 	
 func _hold_enemy(enemy:Node):
-	enemy.movement_component._set_independent_movement(true)
-	enemy.movement_component._set_target_position(enemy.global_position)
+	enemy.movement_component._state_moving(false)
+	enemy.movement_component.body.global_transform.origin = enemy.global_position
 
 func _release_enemy(enemy:Node):
-	enemy.movement_component._set_independent_movement(false)
+	enemy.movement_component._state_moving(true)
 
 func _get_random_enemy() -> Node:
 	var enemies:Array = Constants.get_group_nodes("enemies")
