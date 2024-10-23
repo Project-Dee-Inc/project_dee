@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dpl6faerfh1hc"]
+[gd_scene load_steps=56 format=3 uid="uid://dpl6faerfh1hc"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_s1kct"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_i754v"]
@@ -19,16 +19,15 @@
 [ext_resource type="Script" path="res://Display.gd" id="12_hpr5k"]
 [ext_resource type="PackedScene" uid="uid://drkvq62rj5vkl" path="res://Scenes/Enemies/reaper.tscn" id="13_3hg34"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
-[ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="14_7qa7u"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
 [ext_resource type="Script" path="res://Scripts/level_manager.gd" id="18_37eo3"]
-[ext_resource type="PackedScene" uid="uid://bpawloyv75ew5" path="res://Scenes/Enemies/Layer 1/gagamboy.tscn" id="21_vkkk4"]
+[ext_resource type="PackedScene" uid="uid://cnveemnsw66d7" path="res://Scenes/Enemies/wave.tscn" id="21_jtm6q"]
 [ext_resource type="Script" path="res://Scripts/level_ui_manager.gd" id="22_op6m4"]
-[ext_resource type="PackedScene" uid="uid://boucrwj3tlp60" path="res://Scenes/chest.tscn" id="23_vpmjc"]
 [ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="24_4r1bp"]
 [ext_resource type="Script" path="res://Scripts/load_scene.gd" id="25_40ll8"]
 [ext_resource type="PackedScene" uid="uid://dfvyvbrad7cx5" path="res://main.tscn" id="26_0s0kl"]
 [ext_resource type="Texture2D" uid="uid://i56k26rls4bt" path="res://Assets/UI/coin1_16x16.png" id="29_j7irc"]
+[ext_resource type="PackedScene" uid="uid://j71vomurl7g5" path="res://Scenes/skill_slots.tscn" id="30_qxs5d"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wb723"]
 viewport_path = NodePath("RefractionViewport")
@@ -625,16 +624,14 @@ centered = false
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("18_37eo3")
 
-[node name="MobSpawner" parent="LevelManager" node_paths=PackedStringArray("navigation") instance=ExtResource("10_1ccqu")]
+[node name="MobSpawner" parent="LevelManager" node_paths=PackedStringArray("navigation", "waves") instance=ExtResource("10_1ccqu")]
 navigation = NodePath("../../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
-spawn_table = {
-ExtResource("14_7qa7u"): 0,
-ExtResource("21_vkkk4"): 0,
-ExtResource("23_vpmjc"): 5
-}
+waves = [NodePath("Wave")]
 spawn_delay = 2.0
+
+[node name="Wave" parent="LevelManager/MobSpawner" instance=ExtResource("21_jtm6q")]
 
 [node name="LevelTimer" type="Timer" parent="LevelManager/MobSpawner"]
 
@@ -706,5 +703,7 @@ label_settings = SubResource("LabelSettings_pdodo")
 vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
+
+[node name="Skill_Slots" parent="LevelManager/UI" instance=ExtResource("30_qxs5d")]
 
 [connection signal="pressed" from="LevelManager/UI/EndOfLevel/Container/Main Menu" to="LevelManager/UI/EndOfLevel/Container/Main Menu" method="_on_pressed"]

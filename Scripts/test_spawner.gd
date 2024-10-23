@@ -6,7 +6,6 @@ class_name Spawner
 @export var reaper_scene: PackedScene
 @export var reaper_spawn_time: float = 10
 
-@export var spawn_table: Dictionary = {}
 @export var waves: Array[Wave]
 @export var spawn_delay: float = 0
 @export var spawn_range: float = 10
@@ -16,6 +15,7 @@ class_name Spawner
 ## Added this bool in so we can test the active spawns in the editor instead of in script
 @export var is_active_spawns: bool
 var active_spawns: Dictionary = {}
+var is_paused:bool = false
 
 func _init():
 	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAY), {})
@@ -26,12 +26,14 @@ func _ready():
 func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_SPAWN_OBJECT),self,"_spawn_enemy_from_event")
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_START_GAME),self,"_start_level")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_GAME_PAUSE),self,"_on_game_pause")
+
+func _on_game_pause(param:Array):
+	is_paused = param[0]
 
 func _start_level(_params):
 	_start_level_timer()
-	
-	#for scene in spawn_table.keys():
-		#active_spawns[scene] = 0
+
 	## Trying this out instead of above to make use of waves
 	for scene in waves:
 		active_spawns[scene] = 0
@@ -44,18 +46,9 @@ func _spawn_enemy_from_event(params:Array):
 
 func _start_spawning():
 	while true:
-		await get_tree().create_timer(spawn_delay).timeout
-		#_spawn_objects()
-		_spawn_waves()
-
-func _spawn_objects():
-	var target = GameManager.player.global_transform.origin
-	
-	# Attempt to spawn objects for each scene in the spawn table
-	for scene in spawn_table.keys():
-		if active_spawns[scene] < spawn_table[scene]:
-			var spawn_position = _get_random_position_around_object(target, spawn_range)
-			_spawn_object(scene, spawn_position, is_active_spawns)
+		if(!is_paused):
+			await get_tree().create_timer(spawn_delay).timeout
+			_spawn_waves()
 
 ##New function that's similar to above, but has for loops for multiple spawns, making use of waves
 func _spawn_waves():
@@ -71,7 +64,6 @@ func _spawn_waves():
 			continue
 		for count in scene.count:
 			var spawn_position = _get_random_position_around_object(target, spawn_range)
-			#if active_spawns[scene] < spawn_table[scene]:
 			_spawn_object(scene.enemy, spawn_position, is_active_spawns)
 
 func _spawn_object(scene: PackedScene, location: Vector3, include_active_numbers: bool):
