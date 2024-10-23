@@ -161,10 +161,6 @@ func _move_away_from_pos(target_pos:Vector3, delta:float, distance:float = 3):
 		_face_player(-body.velocity)
 
 func _face_player(direction:Vector3):
-	# Determine direction based on the x axis
-	var abs_x = abs(direction.x)
-	var abs_z = abs(direction.z)
-
 	# Horizontal movement (left/right)
 	if direction.x >= 0:
 		animation_component._flip_anim(false)

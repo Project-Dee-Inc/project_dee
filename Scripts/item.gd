@@ -4,8 +4,8 @@ extends Node2D
 @onready var quantity: Label = $TextureRect/Quantity
 @export var item_quantity: int = 1
 		
-func _display_item_icon(name: String, image: Texture2D):
-	item_name = name
+func _display_item_icon(display_name: String, image: Texture2D):
+	item_name = display_name
 	$TextureRect.texture = image
 
 func _increment():

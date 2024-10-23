@@ -19,7 +19,7 @@ func _ready():
 	aoe_sphere.scale = Vector3(scale,scale,scale)
 	skill_timer.timeout.connect(_deactivate_skill)
 	
-func _process(delta):
+func _process(_delta):
 	if is_test and Input.is_action_just_pressed("attack"):
 		_activate_skill()
 

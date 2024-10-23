@@ -16,7 +16,7 @@ func _ready():
 	else:
 		_start_assigning_values(null)
 
-func _game_ended():
+func _game_ended(_params):
 	player_initialized = false
 
 func _reassign_values(new_stat_dict:Dictionary):
