@@ -17,6 +17,7 @@ class_name Spawner
 var waves: Array[WaveEntry]
 var active_spawns: Dictionary = {}
 var is_paused:bool = false
+var is_spawning = false
 
 func _init():
 	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAY), {})
@@ -29,9 +30,13 @@ func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_SPAWN_OBJECT),self,"_spawn_enemy_from_event")
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_START_GAME),self,"_start_level")
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_GAME_PAUSE),self,"_on_game_pause")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_END_GAME),self,"_on_game_end")
 
 func _on_game_pause(param:Array):
 	is_paused = param[0]
+
+func _on_game_end(param):
+	is_spawning = false
 
 func _start_level(_params):
 	_start_level_timer()
@@ -47,7 +52,8 @@ func _spawn_enemy_from_event(params:Array):
 		_spawn_object(params[1], params[2], false)
 
 func _start_spawning():
-	while true:
+	is_spawning = true
+	while is_spawning:
 		if(!is_paused):
 			await get_tree().create_timer(spawn_delay).timeout
 			_spawn_waves()
