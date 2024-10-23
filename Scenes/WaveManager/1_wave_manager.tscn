@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://cffd4r6m3kg0h"]
+
+[ext_resource type="PackedScene" uid="uid://c8n48epp5i7a2" path="res://Scenes/wave_manager.tscn" id="1_pnsu4"]
+[ext_resource type="Script" path="res://Scripts/wave_entry.gd" id="2_agcc6"]
+[ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="3_rivvn"]
+[ext_resource type="PackedScene" uid="uid://bdohdcsfhyvb6" path="res://Scenes/Enemies/Layer 1/1_chest.tscn" id="4_uq1d8"]
+
+[sub_resource type="Resource" id="Resource_tluu3"]
+script = ExtResource("2_agcc6")
+enemy = ExtResource("3_rivvn")
+chance = 100.0
+count = 3
+
+[sub_resource type="Resource" id="Resource_nlp21"]
+script = ExtResource("2_agcc6")
+enemy = ExtResource("4_uq1d8")
+chance = 50.0
+count = 1
+
+[node name="1_WaveManager" instance=ExtResource("1_pnsu4")]
+wave_pool_entry = Array[ExtResource("2_agcc6")]([SubResource("Resource_tluu3"), SubResource("Resource_nlp21")])

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnveemnsw66d7"]
 
-[ext_resource type="Script" path="res://Scenes/wave.gd" id="1_ru4rv"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="1_ru4rv"]
 [ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="2_47lqo"]
 
 [node name="Wave" type="Node"]
