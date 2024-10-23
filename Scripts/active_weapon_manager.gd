@@ -38,7 +38,7 @@ func _update_weapon_list(_params):
 
 	_init_weapons()
 
-func _process(delta):
+func _process(_delta):
 	if(enable_active_skill):
 		_handle_skill_input()
 

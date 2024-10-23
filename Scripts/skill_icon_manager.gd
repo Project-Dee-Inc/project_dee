@@ -28,7 +28,7 @@ func _set_values():
 	timer.wait_time = 5
 	skill_icon.max_value = timer.wait_time
 
-func _process(delta):
+func _process(_delta):
 	# Display cooldown timer.
 	cooldown.text = "%0.1f" % timer.time_left
 	skill_icon.value = timer.time_left

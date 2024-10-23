@@ -80,9 +80,9 @@ func _set_is_boss(value:String):
 func _set_can_damage(value:bool):
 	can_damage = value
 
-var pressed = false
-func _physics_process(delta):
-	if Input.is_key_pressed(KEY_J) && is_boss && !pressed:
-		pressed = true
-		_damage(500)
-		print("J key was pressed!")
+#var pressed = false
+#func _physics_process(_delta):
+	#if Input.is_key_pressed(KEY_J) && is_boss && !pressed:
+		#pressed = true
+		#_damage(500)
+		#print("J key was pressed!")
