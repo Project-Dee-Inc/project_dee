@@ -53,9 +53,8 @@ func _start_damage_over_time(health_component: HealthComponent, tentacle):
 func _hold_enemy(enemy:Node):
 	var tentacle = tentacle_pool._get_unused_object()
 
-	enemy.movement_component._set_static_movement(true)
-	enemy.movement_component._set_independent_movement(true)
-	enemy.movement_component._set_target_position(enemy.global_position)
+	enemy.movement_component._state_moving(false)
+	enemy.movement_component.body.global_transform.origin = enemy.global_position
 
 	tentacle._move_tentacle(enemy.global_position)
 	tentacle._activate_tentacle(skill_duration)
@@ -66,5 +65,4 @@ func _hold_enemy(enemy:Node):
 		_release_enemy(enemy)
 
 func _release_enemy(enemy:Node):
-	enemy.movement_component._set_static_movement(false)
-	enemy.movement_component._set_independent_movement(false)
+	enemy.movement_component._state_moving(true)
