@@ -48,9 +48,11 @@ func _apply_status_effect(effect: Constants.StatusEffect):
 func _handle_custom_status_effects(name:String, duration:float):
 	if(name == "Silenced"):
 		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [false])
+		EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_FACING), [false])
 		await get_tree().create_timer(duration).timeout
 		if (is_instance_valid(self)):
 			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [true])
+			EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_FACING), [true])
 
 func _remove_status_effect(effect: Constants.StatusEffect):
 	if (effect.name in active_effects):

@@ -20,6 +20,7 @@ func _on_subscribe_events():
 # Test run: start game after 0.5 seconds and raise ON_START_GAME event
 func _on_game_start(_params):
 	await get_tree().create_timer(0.5).timeout
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [true])
 	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_START_GAME), {})
 
 func _on_game_end(_params):
@@ -28,6 +29,7 @@ func _on_game_end(_params):
 
 func _on_game_pause(param:Array):
 	get_tree().paused = param[0]
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [param[0]])
 
 # Once player is initialized, find player node
 func _player_initialized(_params):
