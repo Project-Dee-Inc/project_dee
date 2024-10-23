@@ -11,8 +11,7 @@ func _ready():
 
 func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT),self,"_enable_skill_input")
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_EQUIP), self, "_equip_weapon")
-	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_WEAPON_UNEQUIP), self, "_unequip_weapon")
+	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_ACTIVE_WEAPON_UPDATE), self, "_update_weapon_list")
 
 func _init_weapons():
 	active_weapons.clear()
@@ -20,27 +19,24 @@ func _init_weapons():
 
 	for weapon in get_children():
 		active_weapons[weapon.name] = weapon
-		active_skills.append(weapon.get_node("WeaponActiveSkill"))
+		if(weapon.name != "EMPTY"):
+			active_skills.append(weapon.get_node("WeaponSkill"))
 
 func _enable_skill_input(param:Array):
 	enable_active_skill = param[0]
 
-func _equip_weapon(_params):
-	# TO BE TESTED
-	if(active_weapons.size() < max_size):
-		var instance = _params[0]
-		add_child(instance)
-		instance.global_transform.origin = Vector3(0, 0, 0)
-		_init_weapons()
+func _update_weapon_list(_params):
+	var list = _params[0]
+	for weapon in list:
+		if(weapon):
+			add_child(weapon)
+			weapon.global_transform.origin = Vector3(0, 0, 0)
+		else:
+			var empty = Node3D.new()
+			empty.name = "EMPTY"  
+			add_child(empty)
 
-func _unequip_weapon(_params):
-	# TO BE TESTED
-	var instance = _params[0]
-	var active_instance = active_weapons[instance.name]
-	if(active_instance):
-		active_weapons.erase(active_instance.name)
-		active_instance.queue_free()
-		_init_weapons()
+	_init_weapons()
 
 func _process(delta):
 	if(enable_active_skill):

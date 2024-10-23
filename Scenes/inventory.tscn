@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/weapon_manager.gd" id="1_qdgej"]
 
-[node name="Inventory" type="Node3D" node_paths=PackedStringArray("skill_bars")]
+[node name="Inventory" type="Node3D"]
 script = ExtResource("1_qdgej")
-skill_bars = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]

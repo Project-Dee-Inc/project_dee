@@ -22,6 +22,7 @@ EventManager="*res://Scripts/event_manager.gd"
 GameManager="*res://Scripts/game_manager.gd"
 GlobalStatManager="*res://Scripts/global_stat_manager.gd"
 Pool_Manager="*res://Scripts/pool_manager.gd"
+WeaponManager="*res://Scripts/weapon_manager.gd"
 
 [display]
 
