@@ -1,18 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bliuhjx1k1i26"]
+[gd_scene load_steps=3 format=3 uid="uid://bliuhjx1k1i26"]
 
 [ext_resource type="Script" path="res://Scripts/mimic_control.gd" id="1_jgylo"]
 [ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="2_opxhy"]
-[ext_resource type="PackedScene" uid="uid://bgb57gbghkin" path="res://Scenes/Enemies/Layer 1/1_shooter.tscn" id="3_ruefw"]
-[ext_resource type="PackedScene" uid="uid://cn5r62irqolnv" path="res://Scenes/Enemies/Layer 1/1_bomber.tscn" id="4_6xaab"]
-[ext_resource type="PackedScene" uid="uid://2qrtyr2ttotn" path="res://Scenes/Enemies/Layer 1/1_trapper.tscn" id="5_a8uye"]
-[ext_resource type="PackedScene" uid="uid://da0wjr5h6hd10" path="res://Scenes/Enemies/Layer 1/1_support.tscn" id="6_0b6di"]
 
 [node name="Mimic" type="Node"]
 script = ExtResource("1_jgylo")
 enemy_spawn_table = {
-ExtResource("2_opxhy"): 30.0,
-ExtResource("3_ruefw"): 20.0,
-ExtResource("4_6xaab"): 35.0,
-ExtResource("5_a8uye"): 10.0,
-ExtResource("6_0b6di"): 5.0
+ExtResource("2_opxhy"): 100.0
 }

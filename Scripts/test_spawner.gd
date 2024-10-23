@@ -6,7 +6,7 @@ class_name Spawner
 @export var reaper_scene: PackedScene
 @export var reaper_spawn_time: float = 10
 
-@export var waves: Array[Wave]
+@export var wave_manager:Node
 @export var spawn_delay: float = 0
 @export var spawn_range: float = 10
 
@@ -14,6 +14,7 @@ class_name Spawner
 
 ## Added this bool in so we can test the active spawns in the editor instead of in script
 @export var is_active_spawns: bool
+var waves: Array[WaveEntry]
 var active_spawns: Dictionary = {}
 var is_paused:bool = false
 
@@ -21,6 +22,7 @@ func _init():
 	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_PLAY), {})
 
 func _ready():
+	waves = wave_manager.wave_pool_entry
 	_subscribe()
 
 func _subscribe():
@@ -107,9 +109,16 @@ func _get_random_position_around_object(object_position: Vector3, radius: float)
 
 # Start timer for regen countdown and connect to receiving method
 func _start_level_timer():
+	level_timer.stop()
 	level_timer.wait_time = reaper_spawn_time
-	level_timer.connect("timeout", _on_level_timer_timeout)
 	level_timer.start()
+
+	if(!level_timer.is_connected("timeout", _on_level_timer_timeout)):
+		level_timer.connect("timeout", _on_level_timer_timeout)
+
+func _stop_level_timer():
+	level_timer.disconnect("timeout", _on_level_timer_timeout)
+	level_timer.stop()
 
 # Listen for timer timeout and heal
 func _on_level_timer_timeout():

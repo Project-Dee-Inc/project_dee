@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdohdcsfhyvb6"]
+
+[ext_resource type="PackedScene" uid="uid://boucrwj3tlp60" path="res://Scenes/chest.tscn" id="1_slkko"]
+[ext_resource type="PackedScene" uid="uid://bwwyuhyh0s2iv" path="res://Scenes/Enemies/Layer 1/1_mimic.tscn" id="2_18no1"]
+
+[node name="Chest" instance=ExtResource("1_slkko")]
+mimic_scene = ExtResource("2_18no1")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8n48epp5i7a2"]
+
+[ext_resource type="Script" path="res://Scripts/wave_manager.gd" id="1_4sfxd"]
+[ext_resource type="Script" path="res://Scripts/wave_entry.gd" id="2_04neb"]
+[ext_resource type="PackedScene" uid="uid://dqw4pg61po5rm" path="res://Scenes/Enemies/Layer 1/1_fighter.tscn" id="3_casbn"]
+
+[sub_resource type="Resource" id="Resource_tluu3"]
+script = ExtResource("2_04neb")
+enemy = ExtResource("3_casbn")
+chance = 100.0
+count = 3
+
+[node name="WaveManager" type="Node"]
+script = ExtResource("1_4sfxd")
+wave_pool_entry = Array[ExtResource("2_04neb")]([SubResource("Resource_tluu3")])

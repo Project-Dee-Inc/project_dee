@@ -21,7 +21,7 @@
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="13_xuteu"]
 [ext_resource type="PackedScene" uid="uid://didk3s6ip6dcs" path="res://Scenes/health_bar.tscn" id="16_m0gkr"]
 [ext_resource type="Script" path="res://Scripts/level_manager.gd" id="18_37eo3"]
-[ext_resource type="PackedScene" uid="uid://cnveemnsw66d7" path="res://Scenes/Enemies/wave.tscn" id="21_jtm6q"]
+[ext_resource type="PackedScene" uid="uid://cffd4r6m3kg0h" path="res://Scenes/WaveManager/1_wave_manager.tscn" id="21_vlkhq"]
 [ext_resource type="Script" path="res://Scripts/level_ui_manager.gd" id="22_op6m4"]
 [ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="24_4r1bp"]
 [ext_resource type="Script" path="res://Scripts/load_scene.gd" id="25_40ll8"]
@@ -624,14 +624,14 @@ centered = false
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("18_37eo3")
 
-[node name="MobSpawner" parent="LevelManager" node_paths=PackedStringArray("navigation", "waves") instance=ExtResource("10_1ccqu")]
+[node name="MobSpawner" parent="LevelManager" node_paths=PackedStringArray("navigation", "wave_manager") instance=ExtResource("10_1ccqu")]
 navigation = NodePath("../../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
-waves = [NodePath("Wave")]
+wave_manager = NodePath("WaveManager")
 spawn_delay = 2.0
 
-[node name="Wave" parent="LevelManager/MobSpawner" instance=ExtResource("21_jtm6q")]
+[node name="WaveManager" parent="LevelManager/MobSpawner" instance=ExtResource("21_vlkhq")]
 
 [node name="LevelTimer" type="Timer" parent="LevelManager/MobSpawner"]
 
