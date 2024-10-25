@@ -13,7 +13,11 @@ extends Node
 @onready var cooldown: Label = $Skill1/Cooldown
 @onready var timer: Timer = $Skill1/Timer
 
+# Variable to hold the current cooldown time in seconds
 var stat_cooldown:float = 5
+# Variable to hold the reference to the attached weapon; used for accessing weapon properties.
+var attached_weapon
+
 var is_enabled:bool = true
 var is_cd:bool = false
 

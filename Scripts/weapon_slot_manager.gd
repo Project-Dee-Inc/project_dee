@@ -41,6 +41,7 @@ func _equip_weapon_listener(_params):
 	else:
 		# Equip the weapon in the identified empty slot
 		_equip_weapon(instance, slot)
+		_update_weapons_list()
 
 # Equips a weapon in the specified slot of the skill bar.
 # @param weapon_instance: The weapon to be equipped.
@@ -75,6 +76,7 @@ func _unequip_weapon_listener(_params):
 	var slot = _params[1]
 	# Call the unequip_weapon function with the specified slot
 	_unequip_weapon(slot)
+	_update_weapons_list()
 # Unequips a weapon from the specified slot.
 # @param slot: The slot index of the weapon to unequip.
 func _unequip_weapon(slot: int):
@@ -106,3 +108,6 @@ func _initialize_weapons_array():
 	else:
 		# If skill_bars is null, resize the weapons array to a default number of slots (defined by default_number_of_slots).
 		weapons.resize(default_number_of_slots)
+
+func _update_weapons_list():
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ACTIVE_WEAPON_UPDATE), [weapons])
