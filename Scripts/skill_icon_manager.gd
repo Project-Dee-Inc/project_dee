@@ -3,13 +3,14 @@ class_name Skill_Icon_Manager
 extends Node
 
 @export var skill_action: String = "Skill1"
+@export var skill_key: String = "1"
 
 @onready var skill_icon: TextureProgressBar = $Skill1/SkillIcon
 @onready var key: Label = $Skill1/Key
 @onready var cooldown: Label = $Skill1/Cooldown
 @onready var timer: Timer = $Skill1/Timer
 
-var stat_cooldown:float = 0.0
+var stat_cooldown:float = 5
 var is_enabled:bool = true
 var is_cd:bool = false
 
@@ -23,10 +24,14 @@ func _ready():
 func _subscribe():
 	EventManager.add_listener(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT),self,"_enable_skill_input")
 
-func _set_values():
+func _set_cd(cd_value:float):
 	# Setup timer.
-	timer.wait_time = 5
+	timer.wait_time = cd_value
 	skill_icon.max_value = timer.wait_time
+
+func _set_values():
+	_set_cd(stat_cooldown)
+	key.text = skill_key
 
 func _process(_delta):
 	# Display cooldown timer.

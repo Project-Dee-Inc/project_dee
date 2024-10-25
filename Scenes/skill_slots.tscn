@@ -18,11 +18,14 @@ layout_mode = 2
 [node name="SkillBar2" parent="GridContainer" instance=ExtResource("1_nqh5a")]
 layout_mode = 2
 skill_action = "Skill2"
+skill_key = "2"
 
 [node name="SkillBar3" parent="GridContainer" instance=ExtResource("1_nqh5a")]
 layout_mode = 2
 skill_action = "Skill3"
+skill_key = "3"
 
 [node name="SkillBar4" parent="GridContainer" instance=ExtResource("1_nqh5a")]
 layout_mode = 2
 skill_action = "Skill4"
+skill_key = "4"

@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4tcqeqpbi0hi"]
+[gd_scene load_steps=6 format=3 uid="uid://b4tcqeqpbi0hi"]
 
 [ext_resource type="Texture2D" uid="uid://cfrsew5fc8qmy" path="res://icon.svg" id="1_afu6c"]
 [ext_resource type="Script" path="res://Scripts/skill_icon_manager.gd" id="1_p0kfs"]
 [ext_resource type="Texture2D" uid="uid://ny2hiyui4176" path="res://Images/plain-solid-grey-background-ew5fya1gh2bgc49b.jpg" id="2_7pnj2"]
+[ext_resource type="FontFile" uid="uid://bbyaf4lj3435" path="res://Assets/Font/Minecraft.ttf" id="4_c6twe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u7yxa"]
+font = ExtResource("4_c6twe")
+font_size = 31
 
 [node name="SkillBar" type="Panel"]
 custom_minimum_size = Vector2(63, 63)
@@ -28,11 +33,13 @@ tint_progress = Color(1, 1, 1, 0.862745)
 [node name="Key" type="Label" parent="Skill1"]
 clip_contents = true
 layout_mode = 0
+offset_left = 12.0
 offset_top = 63.0
 offset_right = 128.0
-offset_bottom = 129.0
+offset_bottom = 122.0
 theme_override_font_sizes/font_size = 40
 text = "1"
+label_settings = SubResource("LabelSettings_u7yxa")
 vertical_alignment = 2
 autowrap_mode = 3
 
