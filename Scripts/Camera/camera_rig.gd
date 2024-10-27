@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var following: Node3D
 @export var move_speed: float = 4.0
 @export var adjust_speed: float = 2.0
 
@@ -8,8 +7,9 @@ extends Node3D
 
 func _process(delta):
 	#global_position =  following.global_position
-	global_position = lerp(global_position.move_toward(following.global_position, delta * adjust_speed), following.global_position, delta * move_speed)
-	
+	var following = CameraSystem.get_target()
+	if following:
+		global_position = lerp(global_position.move_toward(following.global_position, delta * adjust_speed), following.global_position, delta * move_speed)
 
 #func _process(delta: float) -> void:
 	## movement
