@@ -24,6 +24,7 @@ GlobalStatManager="*res://Scripts/global_stat_manager.gd"
 WeaponManager="*res://Scripts/weapon_slot_manager.gd"
 Pool_Manager="*res://pool_manager.tscn"
 LootManager="*res://Scenes/loot_manager.tscn"
+CameraSystem="*res://Scripts/Camera/camera_system.gd"
 
 [display]
 
