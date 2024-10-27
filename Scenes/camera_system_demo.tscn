@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dmh1yvvaakqap"]
+[gd_scene load_steps=36 format=3 uid="uid://dmh1yvvaakqap"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/camera_rig.gd" id="1_owptd"]
 [ext_resource type="Script" path="res://Scripts/Camera/camera_3D_texel_snapped.gd" id="2_ycli5"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://d0jq0l2pjuvo1" path="res://noiseTexture (1).png" id="7_ul851"]
 [ext_resource type="Texture2D" uid="uid://cv37tttro26bd" path="res://t_water_n.png" id="8_5uwok"]
 [ext_resource type="Script" path="res://Scripts/player_movement_snapped.gd" id="9_6sl1v"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_switch_trigger.gd" id="9_d07ao"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art.gdshader" id="10_kukur"]
 [ext_resource type="Texture2D" uid="uid://p2f6gg4l7pmf" path="res://116031_normal.png" id="11_yonw2"]
 [ext_resource type="Texture2D" uid="uid://t6obwq8n1guy" path="res://116031.png" id="12_0es6p"]
+[ext_resource type="Script" path="res://Scripts/Camera/camera_target.gd" id="13_04y48"]
 [ext_resource type="Script" path="res://Display.gd" id="13_6umvr"]
 [ext_resource type="Shader" path="res://Shaders/pixel_art_upscale.gdshader" id="14_l54hb"]
 
@@ -55,6 +57,21 @@ size = Vector2(100, 100)
 subdivide_width = 128
 subdivide_depth = 128
 
+[sub_resource type="Animation" id="Animation_sc52f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_4oxda"]
 resource_name = "water_anim"
 length = 10.0
@@ -70,21 +87,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, -2.5, 0), Vector3(0, -1, 0), Vector3(0, -2.5, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_sc52f"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ca0vs"]
@@ -105,6 +107,9 @@ size = Vector3(1, 5, 10)
 
 [sub_resource type="SphereMesh" id="SphereMesh_mh24a"]
 material = ExtResource("5_jmb74")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ddhm"]
+size = Vector3(20, 10, 20)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbq03"]
 radius = 0.25
@@ -129,10 +134,9 @@ handle_input_locally = false
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="Main" node_paths=PackedStringArray("following")]
+[node name="Node3D" type="Node3D" parent="Main"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
 script = ExtResource("1_owptd")
-following = NodePath("../../Player")
 move_speed = 2.0
 adjust_speed = 1.0
 
@@ -200,6 +204,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_1a2g4")
 
 [node name="Water" type="MeshInstance3D" parent="World" groups=["snap"]]
+visible = false
 layers = 2
 mesh = SubResource("PlaneMesh_vpq21")
 
@@ -233,6 +238,17 @@ shadow_enabled = true
 shadow_blur = 0.0
 omni_attenuation = 1e-05
 
+[node name="Area3D" type="Area3D" parent="World" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.62, 5, 0)
+script = ExtResource("9_d07ao")
+target = NodePath("CameraTarget")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Area3D"]
+shape = SubResource("BoxShape3D_5ddhm")
+
+[node name="CameraTarget" type="Node3D" parent="World/Area3D"]
+script = ExtResource("13_04y48")
+
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera") groups=["snap"]]
 floor_constant_speed = true
 script = ExtResource("9_6sl1v")
@@ -253,6 +269,11 @@ double_sided = false
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("12_0es6p")
+
+[node name="PlayerCameraTarget" type="Node3D" parent="Player/Sprite3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0)
+script = ExtResource("13_04y48")
+is_initial_target = true
 
 [node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 layout_mode = 3
