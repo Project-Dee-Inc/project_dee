@@ -1,14 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctchtcrpaoccl"]
-
-[ext_resource type="PackedScene" uid="uid://dupherm0ljakl" path="res://Scenes/magic_weapon.tscn" id="1_7scnb"]
-[ext_resource type="Script" path="res://Scenes/summon_swords_skill.gd" id="2_bbf0t"]
-[ext_resource type="Script" path="res://Scenes/summon_sword_passive.gd" id="3_wb1w0"]
-[ext_resource type="PackedScene" uid="uid://d1m2siwfjcan4" path="res://Scenes/Projectiles/sword_projectile.tscn" id="5_qdklx"]
-[ext_resource type="Script" path="res://Scripts/Weapons/Magic/aoe_area.gd" id="6_clntx"]
-[ext_resource type="Script" path="res://Scenes/Weapons/sword_eight_weapon.gd" id="6_quc86"]
-[ext_resource type="Script" path="res://Scripts/base_projectile.gd" id="7_74n0s"]
-[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="7_nyom0"]
-[ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="8_1gqhe"]
+[gd_scene load_steps=17 format=3 uid="uid://b8wx6dpry77yg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_32p2n"]
 animation = &"reach"
@@ -26,7 +16,6 @@ animation = &"speen"
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"rotating"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nbe0y"]
 xfade_time = 0.3
@@ -63,7 +52,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ProjectileCircle/Node3D:scale")
+tracks/0/path = NodePath("../Blades/Node3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +68,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ProjectileCircle/Node3D:scale")
+tracks/0/path = NodePath("../Blades/Node3D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +80,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../ProjectileCircle/Node3D:rotation")
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -107,7 +96,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ProjectileCircle/Node3D:scale")
+tracks/0/path = NodePath("../Blades/Node3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +108,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../ProjectileCircle/Node3D:rotation")
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -135,7 +124,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ProjectileCircle/Node3D:scale")
+tracks/0/path = NodePath("../Blades/Node3D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -147,7 +136,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../ProjectileCircle/Node3D:rotation")
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -165,7 +154,7 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../ProjectileCircle/Node3D:scale")
+tracks/0/path = NodePath("../Blades/Node3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -177,7 +166,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../ProjectileCircle/Node3D:rotation")
+tracks/1/path = NodePath("../Blades/Node3D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -196,107 +185,23 @@ _data = {
 "speen": SubResource("Animation_agh6w")
 }
 
-[sub_resource type="SphereMesh" id="SphereMesh_vek6g"]
+[node name="SpinningSwords" type="Node3D"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_jphd8"]
+[node name="Animation Component" type="Node3D" parent="."]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_dqbip"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_l0kf7"]
-
-[node name="SummonSwords" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_7scnb")]
-transform = Transform3D(0.952275, 0, 0, 0, 0.952275, 0, 0, 0, 0.952275, 0, 0.0189883, 0)
-passive_skill = NodePath("WeaponPassive")
-active_passive = true
-
-[node name="SubTimer" type="Timer" parent="." index="0"]
-one_shot = true
-
-[node name="PassiveTimer" type="Timer" parent="." index="1"]
-one_shot = true
-
-[node name="SkillTimer" type="Timer" parent="." index="2"]
-one_shot = true
-
-[node name="WeaponSkill" parent="." index="4" node_paths=PackedStringArray("stat_component")]
-script = ExtResource("2_bbf0t")
-is_test = true
-max_passive = 5
-skill_wait_time = 0.5
-stat_component = NodePath("../StatManager")
-
-[node name="WeaponPassive" parent="." index="5" node_paths=PackedStringArray("stat_component")]
-script = ExtResource("3_wb1w0")
-pattern = 5
-damage = 5
-projectile_speed = 10.0
-projectile_ref = ExtResource("5_qdklx")
-stat_component = NodePath("../StatManager")
-passive = true
-
-[node name="Camera3D" type="Camera3D" parent="." index="6"]
-transform = Transform3D(-1.15801, 8.27622e-08, -1.54028e-07, 0, 1.02008, 0.54811, 1.74855e-07, 0.54811, -1.02008, -0.187741, 3.58324, -5.38665)
-
-[node name="Sword Eight" type="Node3D" parent="." index="7" node_paths=PackedStringArray("spawn_container", "testMesh", "testMeshContainer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.483928, 0)
-script = ExtResource("6_quc86")
-spawn_container = NodePath("Rotating Swords/ProjectileCircle/Node3D")
-projectile_count = 8
-weapon_scene = ExtResource("5_qdklx")
-projectile_script = ExtResource("7_74n0s")
-sword_script = ExtResource("8_1gqhe")
-testMesh = NodePath("../MeshInstance3D")
-testMeshContainer = NodePath("../Node3D")
-
-[node name="Rotating Swords" type="Node3D" parent="Sword Eight" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00022294, 0)
-
-[node name="Animation Component" type="Node3D" parent="Sword Eight/Rotating Swords" index="0"]
-
-[node name="AnimationTree" type="AnimationTree" parent="Sword Eight/Rotating Swords/Animation Component" index="0"]
+[node name="AnimationTree" type="AnimationTree" parent="Animation Component"]
 tree_root = SubResource("AnimationNodeStateMachine_fk8x1")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attacking_start = false
 parameters/conditions/attacking_stopped = true
-parameters/conditions/rotating = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sword Eight/Rotating Swords/Animation Component" index="1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation Component"]
 libraries = {
 "": SubResource("AnimationLibrary_gcb0b")
 }
 autoplay = "reset"
 
-[node name="ProjectileCircle" type="Node3D" parent="Sword Eight/Rotating Swords" index="1"]
+[node name="Blades" type="Node3D" parent="."]
 
-[node name="Node3D" type="Node3D" parent="Sword Eight/Rotating Swords/ProjectileCircle" index="0"]
+[node name="Node3D" type="Node3D" parent="Blades"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Sword Eight/Rotating Swords/ProjectileCircle/Node3D" index="0"]
-layers = 16385
-mesh = SubResource("SphereMesh_vek6g")
-
-[node name="AOESphere" type="Node3D" parent="." index="8"]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
-visible = false
-script = ExtResource("6_clntx")
-
-[node name="Area3D" type="Area3D" parent="AOESphere" index="0"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AOESphere/Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("7_nyom0")
-mesh = SubResource("CylinderMesh_jphd8")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AOESphere/Area3D" index="1"]
-shape = SubResource("SphereShape3D_dqbip")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="9"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.15827, 0)
-top_level = true
-mesh = SubResource("SphereMesh_l0kf7")
-
-[node name="Node3D" type="Node3D" parent="." index="10"]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)

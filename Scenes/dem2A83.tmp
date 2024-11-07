@@ -69,9 +69,6 @@ viewport_path = NodePath("MainViewport")
 
 [node name="Level" type="Node"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.998721, -0.0296433, 0.0409537, 0, 0.810063, 0.586343, -0.0505562, -0.585593, 0.809027, 0, 25, 43.3012)
-
 [node name="MainViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(640, 360)
@@ -86,7 +83,6 @@ adjust_speed = 1.0
 
 [node name="MainCamera" type="Camera3D" parent="MainViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
-visible = false
 projection = 1
 current = true
 size = 11.25
@@ -502,10 +498,10 @@ navigation = NodePath("../World/LevelNavMesh")
 reaper_scene = ExtResource("13_3hg34")
 reaper_spawn_time = 600.0
 spawn_table = {
-ExtResource("14_7qa7u"): 4,
+ExtResource("14_7qa7u"): 1,
 ExtResource("21_vkkk4"): 0
 }
-spawn_delay = 0.5
+spawn_delay = 2.0
 
 [node name="LevelTimer" type="Timer" parent="LevelMobSpawner"]
 

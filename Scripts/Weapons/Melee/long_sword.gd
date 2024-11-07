@@ -6,7 +6,7 @@ extends "res://Scripts/skill_component.gd"
 
 @export var is_test:bool
 @export var damage:float
-@export var blades_areas:Array[Area3D]
+@export var blades_areas:Array[Sword]
 @export var blade_reach_multiplier: float = 1
 @export var attack_length:float = 1
 @export var base_cooldown:float = 3
