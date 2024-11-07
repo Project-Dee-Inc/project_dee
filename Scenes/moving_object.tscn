@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcwm8b517f5bj"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons/Range/moving_obect.gd" id="1_35nrr"]
+
+[node name="MovingObject" type="Node3D"]
+script = ExtResource("1_35nrr")

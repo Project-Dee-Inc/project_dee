@@ -46,7 +46,7 @@ func _shoot(base:Node3D, starting_node:Node3D , ending_node:Node3D, direction:Ve
 	base_node = starting_node
 	base_target = ending_node
 	target = base_target.health_component
-			   
+	
 	# If not homing, just get general direction
 	if(!is_homing):
 		manual_dir = direction
@@ -102,7 +102,8 @@ func _on_hit_collider_component_area_entered(_area: Area3D):
 			_on_target_hit()
 
 func _on_target_hit():
-	target._damage(damage)
+	if(target!=null):
+		target._damage(damage)
 	if(!as_sword):
 		queue_free()
 

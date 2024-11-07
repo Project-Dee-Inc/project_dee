@@ -3,6 +3,7 @@ class_name Sword
 var area_3d: Area3D
 
 var immediate_geometry:ImmediateMesh
+var moving_object:MovingObject
 var damage = 0
 @export var knockback:bool
 @export var knockback_strength:float
@@ -11,27 +12,29 @@ var damage = 0
 @export var stun:bool
 @export var stun_length:float
 
+var area_active = true
+
 func _ready():
 	set_area_node()
 
-
 func set_area_node():
-	print("marvi setting Area")
 	# Get all children of the current node (or root node)
 	for child in get_children():
 		# Check if the child is of type Area3D
 		if child is Area3D:
 			area_3d = child
 			area_3d.area_entered.connect(_on_area_entered)
+
 func _process(delta: float) -> void:
+	print("luna_inhereted")
 	if(area_3d == null):
 		set_area_node()
 	
 func _on_area_entered(body: Node3D):
-	print("marvi area entered")
-	_apply_damage(body)
-	if(knockback):
-		_apply_knockback(body)
+	if(area_active):
+		_apply_damage(body)
+		if(knockback):
+			_apply_knockback(body)
 
 func _apply_damage(body:Node3D):
 	var parent = body.get_parent()
@@ -42,9 +45,34 @@ func _apply_damage(body:Node3D):
 		health._damage(damage)
 	else:
 		print("Health not available")
-	
+		
+
+func set_moving_object_values():
+	var found = true
+	if(moving_object == null): found = try_to_find_moving_object()
+	if(found):
+		moving_object.moving_object_root_node = self
+
+func _add_object_destination(destination:Vector3):
+	var found = true
+	if(moving_object == null): found = try_to_find_moving_object()
+	if(found):
+		moving_object.destinations.append(destination)
+
+func _set_moving_blade(toggle: bool):
+	var found = true
+	if(moving_object == null): found = try_to_find_moving_object()
+	if(found):
+		moving_object.is_moving = toggle
+		
+func try_to_find_moving_object() -> bool:
+	for child in get_children():
+		if(child is MovingObject):
+			moving_object = child
+			return true
+	return false
+
 func _apply_knockback(body: Node3D):
-	print("knockback")
 	#get values
 	var parent = body.get_parent()
 	#calculate new position
@@ -66,8 +94,6 @@ func _apply_knockback(body: Node3D):
 	query.collide_with_bodies = true
 	var result = space_state.intersect_ray(query)
 	if(result):
-		print("Collider ",result.collider.name)
-		print(destination, " ", result.position)
 			#if there was a collision move only to where the collision is, not beyond
 		destination = result.position
 	#print("Final: ", final_position, " Current: ", body.get_parent().global_position)
@@ -82,7 +108,6 @@ func _assign_knockback_target_pos(movement_component,final_position:Vector3):
 	var nav_agent:NavigationAgent3D =  movement_component.nav_agent
 
 	await(nav_agent.navigation_finished)
-	print("navigation finshed")
 	_resume_movement(movement_component, nav_agent)
 	
 func _resume_movement(movement_component, nav_agent:NavigationAgent3D):

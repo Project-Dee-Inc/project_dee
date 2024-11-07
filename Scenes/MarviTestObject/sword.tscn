@@ -13,7 +13,6 @@ texture_filter = 0
 script = ExtResource("2_dj42m")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 4
 monitoring = false
 
