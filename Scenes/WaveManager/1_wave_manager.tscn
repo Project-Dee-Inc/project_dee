@@ -14,7 +14,7 @@ count = 3
 [sub_resource type="Resource" id="Resource_nlp21"]
 script = ExtResource("2_agcc6")
 enemy = ExtResource("4_uq1d8")
-chance = 50.0
+chance = 30.0
 count = 1
 
 [node name="1_WaveManager" instance=ExtResource("1_pnsu4")]

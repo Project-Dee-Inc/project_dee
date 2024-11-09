@@ -7,7 +7,7 @@ extends Node
 # Dictionary to hold the weapon instances, organized by their keys
 var weapon_pool: Dictionary = {}
 
-func _ready():
+func _init():
 	_preload_weapons()
 
 # Preloads weapons based on the configuration defined in weapon_pool_entry
