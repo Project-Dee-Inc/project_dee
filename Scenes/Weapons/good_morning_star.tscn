@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyb8bb5hgoken"]
+[gd_scene load_steps=2 format=3 uid="uid://btnjl0pyujhhg"]
 
 [ext_resource type="PackedScene" uid="uid://6a3tg0cj6qpv" path="res://Scenes/Weapons/melee_weapon.tscn" id="1_dlynr"]
 

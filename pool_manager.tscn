@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/pool_manager.gd" id="1_ghjph"]
 [ext_resource type="Script" path="res://Scripts/pool_entry.gd" id="2_at2ou"]
-[ext_resource type="PackedScene" path="res://Scenes/Weapons/good_morning_star.tscn" id="3_wvdeb"]
+[ext_resource type="PackedScene" uid="uid://btnjl0pyujhhg" path="res://Scenes/Weapons/good_morning_star.tscn" id="3_wvdeb"]
 [ext_resource type="PackedScene" path="res://Scenes/Weapons/flaccid_spear.tscn" id="4_ut6wv"]
 [ext_resource type="PackedScene" uid="uid://xc2yr1gio7p6" path="res://Scenes/Weapons/hammer.tscn" id="5_srh2w"]
 [ext_resource type="PackedScene" path="res://Scenes/Weapons/limp_flail.tscn" id="6_vxt85"]
@@ -57,7 +57,7 @@ pool_size = 2
 script = ExtResource("2_at2ou")
 id = "Kraquael's Grasp"
 prefab = ExtResource("9_i8kka")
-pool_size = 1
+pool_size = 2
 
 [node name="PoolManager" type="Node"]
 script = ExtResource("1_ghjph")

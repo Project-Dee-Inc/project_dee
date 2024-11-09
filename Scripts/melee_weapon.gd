@@ -75,15 +75,16 @@ func get_nearest_enemies(max_distance: float, max_count: int) -> Array:
 
 # Called every frame to update the attack timer
 func _process(delta: float) -> void:
-	time_since_last_attack += delta
-		
-	if time_since_last_attack >= attack_interval:
-		time_since_last_attack = 0.0
-		enemies = get_tree().get_nodes_in_group("enemies")
-		if not is_cone_attack:
-			damage_nearest_enemies()
-		else:
-			damage_enemies_in_cone()
+	if(get_parent().is_active):
+		time_since_last_attack += delta
+			
+		if time_since_last_attack >= attack_interval:
+			time_since_last_attack = 0.0
+			enemies = get_tree().get_nodes_in_group("enemies")
+			if not is_cone_attack:
+				damage_nearest_enemies()
+			else:
+				damage_enemies_in_cone()
 
 # Helper method to check if an enemy is within range
 func is_enemy_in_range(enemy: Node3D) -> bool:
