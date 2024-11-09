@@ -28,8 +28,8 @@ func _on_game_end(_params):
 	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_GAME_PAUSE), [true])
 
 func _on_game_pause(param:Array):
+	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [!param[0]])
 	get_tree().paused = param[0]
-	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_ENABLE_SKILL_INPUT), [param[0]])
 
 # Once player is initialized, find player node
 func _player_initialized(_params):
