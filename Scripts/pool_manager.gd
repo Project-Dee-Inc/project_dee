@@ -7,7 +7,7 @@ extends Node
 # Dictionary to hold the weapon instances, organized by their keys
 var weapon_pool: Dictionary = {}
 
-func _init():
+func _ready():
 	_preload_weapons()
 
 # Preloads weapons based on the configuration defined in weapon_pool_entry
@@ -53,9 +53,10 @@ func _get_weapon(weapon_key: String):
 		else:
 			# If no instances are available, instantiate a new weapon from the prefab
 			for entry in weapon_pool_entry:
-				# Instantiate a new weapon prefab
-				var weapon_instance = entry.prefab.instantiate()
-				return weapon_instance
+				if(entry.id == weapon_key):
+					# Instantiate a new weapon prefab
+					var weapon_instance = entry.prefab.instantiate()
+					return weapon_instance
 	else:
 		print("Weapon not found in pool: ", weapon_key)
 	return null

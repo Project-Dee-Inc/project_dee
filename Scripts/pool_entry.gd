@@ -7,6 +7,7 @@ extends Resource
 # Declare the class name to make it globally accessible
 class_name PoolEntry
 
+@export var id: String
 # Exported variable to hold the reference to the weapon prefab.
 # This should be set to a PackedScene resource in the Inspector.
 @export var prefab: PackedScene
