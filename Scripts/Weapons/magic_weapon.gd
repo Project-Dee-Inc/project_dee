@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var weapon_icon:Texture2D
+
 @onready var passive_timer: Timer = $PassiveTimer
 @export var passive_skill:BaseSkill
 @export var active_passive:bool
