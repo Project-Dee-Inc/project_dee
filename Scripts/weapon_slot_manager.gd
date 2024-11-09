@@ -59,6 +59,7 @@ func _equip_weapon(weapon_instance, slot: int):
 			if skill_bars != null:
 				# Store a reference to the equipped weapon in the skill bar
 				skill_bars[slot]._slot_weapon(weapon_instance)
+				weapon_instance.is_active(true)
 			# Print a message indicating the weapon has been equipped successfully
 			print("Equipping %s on slot %d" % [weapon_instance.name, slot])
 			print("Damage = %d" % weapon_instance.damage)
@@ -84,6 +85,7 @@ func _unequip_weapon(slot: int):
 	if(slot >= 0 and slot < weapons.size()):
 		# If the specified slot contains a weapon, proceed to unequip it
 		if(weapons[slot] != null):
+			weapons[slot].is_active(false)
 			# Return the weapon to the pool using its name
 			Pool_Manager._return_weapon(weapons[slot].name, weapons[slot])
 			# Set the weapons array slot to null (unequipped)

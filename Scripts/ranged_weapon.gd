@@ -31,7 +31,7 @@ func _set_homing(value:bool):
 
 # If skill is active and within cd intervals, spawn projectile
 func _physics_process(_delta: float):
-	if (projectile_obj):
+	if (projectile_obj && get_parent().is_active):
 		_shoot_timer -= _delta
 		if _shoot_timer <= 0:
 			enemies = get_tree().get_nodes_in_group("enemies")

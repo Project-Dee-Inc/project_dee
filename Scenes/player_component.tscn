@@ -1580,6 +1580,7 @@ stat_dict = {
 script = ExtResource("5_i68mo")
 
 [node name="Kraquael\'s Grasp" parent="WeaponManager" instance=ExtResource("6_i6x8k")]
+is_active = true
 
 [node name="AnimationComponent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.738802, 0)
