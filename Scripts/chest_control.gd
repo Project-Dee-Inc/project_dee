@@ -29,7 +29,9 @@ func _open_chest():
 	animated_sprite.play("open")
 
 func _spawn_chest():
-	EventManager.raise_event(str(EventManager.EVENT_NAMES.ON_GAIN_GOLD), [gold])
+	var loot = LootManager.get_random_loot()
+	LootManager._spawn_item(loot, self.global_transform.origin)
+	LootManager._spawn_item("GOLD", self.global_transform.origin, gold)
 
 func _spawn_mimic():
 	var instance = mimic_scene.instantiate()
@@ -39,7 +41,7 @@ func _spawn_mimic():
 
 	instance._set_values(self.global_transform.origin, cd)
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(body: Node3D):
 	if(body.is_in_group("player")):
 		_open_chest()
 		await get_tree().create_timer(0.8).timeout
