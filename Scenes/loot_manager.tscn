@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmkjyrfi1tjqe"]
+
+[ext_resource type="Script" path="res://Scripts/loottable_manager.gd" id="1_bflq8"]
+[ext_resource type="PackedScene" uid="uid://c1ugflpssqq3u" path="res://Scenes/loot_item.tscn" id="2_h51n8"]
+
+[node name="LootManager" type="Node"]
+script = ExtResource("1_bflq8")
+loot_scene = ExtResource("2_h51n8")
+loot_table = {
+"Kraquael's Grasp": 100.0
+}
