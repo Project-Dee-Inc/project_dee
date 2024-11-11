@@ -1,6 +1,6 @@
-class_name Skill_Icon_Manager
-
 extends Node
+
+class_name Skill_Icon_Manager
 
 # @export variable to define the name of the skill action; can be set in the editor.
 @export var skill_action: String = "Skill1"

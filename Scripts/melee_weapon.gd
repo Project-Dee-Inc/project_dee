@@ -13,7 +13,7 @@ var time_since_last_attack: float = 0.0
 @export var max_enemies_damaged: int = 3
 
 @onready var stat_component = $"../StatManager"
-@onready var weapon_skill = $WeaponSkill
+@onready var weapon_skill = $WeaponActiveSkill
 
 var enemies = []
 var stat_dict: Dictionary = {}

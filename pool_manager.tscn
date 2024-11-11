@@ -1,15 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvu15xy7vgo16"]
+[gd_scene load_steps=21 format=3 uid="uid://dvu15xy7vgo16"]
 
 [ext_resource type="Script" path="res://Scripts/pool_manager.gd" id="1_ghjph"]
 [ext_resource type="Script" path="res://Scripts/pool_entry.gd" id="2_at2ou"]
 [ext_resource type="PackedScene" uid="uid://btnjl0pyujhhg" path="res://Scenes/Weapons/good_morning_star.tscn" id="3_wvdeb"]
-[ext_resource type="PackedScene" path="res://Scenes/Weapons/flaccid_spear.tscn" id="4_ut6wv"]
+[ext_resource type="PackedScene" uid="uid://b1j1i5c8vx7em" path="res://Scenes/Weapons/flaccid_spear.tscn" id="4_ut6wv"]
 [ext_resource type="PackedScene" uid="uid://xc2yr1gio7p6" path="res://Scenes/Weapons/hammer.tscn" id="5_srh2w"]
 [ext_resource type="PackedScene" path="res://Scenes/Weapons/limp_flail.tscn" id="6_vxt85"]
 [ext_resource type="PackedScene" uid="uid://cwmr6lhfr8m0v" path="res://Scenes/Weapons/long_sword.tscn" id="7_k5rwm"]
 [ext_resource type="PackedScene" uid="uid://braaqwngy84me" path="res://Scenes/Weapons/peasant_persuader.tscn" id="8_oacff"]
-[ext_resource type="PackedScene" uid="uid://ibx38kgs5bv6" path="res://Scenes/Weapons/TentacleWeapon.tscn" id="9_i8kka"]
+[ext_resource type="PackedScene" uid="uid://dgivevkrr0le2" path="res://Scenes/Weapons/TentacleWeapon.tscn" id="9_i8kka"]
 [ext_resource type="PackedScene" uid="uid://dw5j1wywifvb0" path="res://Scenes/Weapons/thrusty_rapier.tscn" id="10_j4jgf"]
+[ext_resource type="PackedScene" uid="uid://ctchtcrpaoccl" path="res://Scenes/Weapons/SummonSwords.tscn" id="11_ldlpb"]
 
 [sub_resource type="Resource" id="Resource_gixj7"]
 script = ExtResource("2_at2ou")
@@ -59,6 +60,12 @@ id = "Kraquael's Grasp"
 prefab = ExtResource("9_i8kka")
 pool_size = 2
 
+[sub_resource type="Resource" id="Resource_p20s7"]
+script = ExtResource("2_at2ou")
+id = "SummonSwords"
+prefab = ExtResource("11_ldlpb")
+pool_size = 2
+
 [node name="PoolManager" type="Node"]
 script = ExtResource("1_ghjph")
-weapon_pool_entry = Array[ExtResource("2_at2ou")]([SubResource("Resource_gixj7"), SubResource("Resource_o03id"), SubResource("Resource_h35vx"), SubResource("Resource_pnmji"), SubResource("Resource_hmv1t"), SubResource("Resource_1um23"), SubResource("Resource_7bb8v"), SubResource("Resource_apdjq")])
+weapon_pool_entry = Array[ExtResource("2_at2ou")]([SubResource("Resource_gixj7"), SubResource("Resource_o03id"), SubResource("Resource_h35vx"), SubResource("Resource_pnmji"), SubResource("Resource_hmv1t"), SubResource("Resource_1um23"), SubResource("Resource_7bb8v"), SubResource("Resource_apdjq"), SubResource("Resource_p20s7")])

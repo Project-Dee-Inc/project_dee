@@ -20,7 +20,7 @@ func _init_weapons():
 	for weapon in get_children():
 		active_weapons[weapon.name] = weapon
 		if(weapon.name != "EMPTY"):
-			active_skills.append(weapon.get_node("WeaponSkill"))
+			active_skills.append(weapon.get_node("WeaponActiveSkill"))
 
 func _enable_skill_input(param:Array):
 	enable_active_skill = param[0]

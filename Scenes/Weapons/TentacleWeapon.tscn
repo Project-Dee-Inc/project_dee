@@ -1,20 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgivevkrr0le2"]
+[gd_scene load_steps=11 format=3 uid="uid://dgivevkrr0le2"]
 
 [ext_resource type="PackedScene" uid="uid://dupherm0ljakl" path="res://Scenes/magic_weapon.tscn" id="1_3re6v"]
+[ext_resource type="Texture2D" uid="uid://cq5bp36hth5xp" path="res://Assets/UI/test_icon.png" id="2_gitog"]
 [ext_resource type="Script" path="res://Scenes/tentacle_weapon_skill.gd" id="2_hk55g"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/tentacle_passive.gd" id="2_mo4ju"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/aoe_area.gd" id="3_j8h3v"]
 [ext_resource type="PackedScene" uid="uid://bkck74dbjeoql" path="res://Scenes/Weapons/Tentacle.tscn" id="3_ledoj"]
 [ext_resource type="Script" path="res://Scenes/Weapons/tentacle_pool_manager.gd" id="7_74crw"]
-[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="7_ok81n"]
+[ext_resource type="Material" path="res://Materials/deep.tres" id="7_ok81n"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jphd8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dqbip"]
 
 [node name="Kraquael\'s Grasp" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_3re6v")]
-passive_skill = NodePath("WeaponPassive")
+passive_skill = NodePath("WeaponPassiveSkill")
 active_passive = true
+weapon_icon = ExtResource("2_gitog")
 
 [node name="PassiveTimer" type="Timer" parent="." index="0"]
 wait_time = 2.0
@@ -23,10 +25,10 @@ one_shot = true
 [node name="SkillTimer" type="Timer" parent="." index="1"]
 one_shot = true
 
-[node name="WeaponSkill" parent="." index="3" node_paths=PackedStringArray("aoe_sphere", "tentacle_pool", "stat_component")]
+[node name="WeaponActiveSkill" parent="." index="3" node_paths=PackedStringArray("aoe_sphere", "tentacle_pool", "stat_component")]
 script = ExtResource("2_hk55g")
 aoe_sphere = NodePath("../AOESphere")
-is_test = true
+is_test = false
 radius_modifier = 1.5
 tentacle_pool = NodePath("../Tentacle_Pool")
 damage_over_time_interval = 0.1
@@ -34,7 +36,7 @@ skill_duration = 5.0
 damage = 1
 stat_component = NodePath("../StatManager")
 
-[node name="WeaponPassive" parent="." index="4" node_paths=PackedStringArray("tentacle_pool", "stat_component")]
+[node name="WeaponPassiveSkill" parent="." index="4" node_paths=PackedStringArray("tentacle_pool", "stat_component")]
 script = ExtResource("2_mo4ju")
 tentacle_pool = NodePath("../Tentacle_Pool")
 tentacle_hold_length = 2.0

@@ -1,5 +1,5 @@
 extends "res://Scripts/skill_component.gd"
-@onready var weapon_passive: Node = $"../WeaponPassive"
+@onready var weapon_passive: Node = $"../WeaponPassiveSkill"
 @onready var skill_timer: Timer = $"../SkillTimer"
 @onready var passive_timer: Timer = $"../PassiveTimer"
 

@@ -1,13 +1,13 @@
 [gd_scene load_steps=29 format=3 uid="uid://ctchtcrpaoccl"]
 
-[ext_resource type="PackedScene" uid="uid://bqfdfpwuxatc5" path="res://Scenes/magic_weapon.tscn" id="1_7scnb"]
+[ext_resource type="PackedScene" uid="uid://dupherm0ljakl" path="res://Scenes/magic_weapon.tscn" id="1_7scnb"]
 [ext_resource type="Script" path="res://Scenes/summon_swords_skill.gd" id="2_bbf0t"]
 [ext_resource type="Script" path="res://Scenes/summon_sword_passive.gd" id="3_wb1w0"]
 [ext_resource type="PackedScene" uid="uid://d1m2siwfjcan4" path="res://Scenes/Projectiles/sword_projectile.tscn" id="5_qdklx"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Magic/aoe_area.gd" id="6_clntx"]
 [ext_resource type="Script" path="res://Scenes/Weapons/sword_eight_weapon.gd" id="6_quc86"]
 [ext_resource type="Script" path="res://Scripts/base_projectile.gd" id="7_74n0s"]
-[ext_resource type="Material" uid="uid://d1b55mpjxp0q1" path="res://Materials/deep.tres" id="7_nyom0"]
+[ext_resource type="Material" path="res://Materials/deep.tres" id="7_nyom0"]
 [ext_resource type="Script" path="res://Scripts/Weapons/Melee/player_blade.gd" id="8_1gqhe"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_32p2n"]
@@ -204,7 +204,7 @@ _data = {
 
 [node name="SummonSwords" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_7scnb")]
 transform = Transform3D(0.952275, 0, 0, 0, 0.952275, 0, 0, 0, 0.952275, 0, 0.0189883, 0)
-passive_skill = NodePath("WeaponPassive")
+passive_skill = NodePath("WeaponPassiveSkill")
 active_passive = true
 
 [node name="SubTimer" type="Timer" parent="." index="0"]
@@ -216,14 +216,14 @@ one_shot = true
 [node name="SkillTimer" type="Timer" parent="." index="2"]
 one_shot = true
 
-[node name="WeaponSkill" parent="." index="4" node_paths=PackedStringArray("stat_component")]
+[node name="WeaponActiveSkill" parent="." index="4" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("2_bbf0t")
-is_test = true
+is_test = false
 max_passive = 5
 skill_wait_time = 0.5
 stat_component = NodePath("../StatManager")
 
-[node name="WeaponPassive" parent="." index="5" node_paths=PackedStringArray("stat_component")]
+[node name="WeaponPassiveSkill" parent="." index="5" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("3_wb1w0")
 pattern = 2
 damage = 5
