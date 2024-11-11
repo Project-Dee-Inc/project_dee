@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dw6o21xpbg0vi"]
+[gd_scene load_steps=33 format=3 uid="uid://bkck74dbjeoql"]
 
 [ext_resource type="Texture2D" uid="uid://br4mb2xcxb2vn" path="res://Assets/Tentacles/tentacle-ezgif.com-gif-to-sprite-converter.png" id="1_g77hf"]
 [ext_resource type="Script" path="res://Scenes/tentacle_animation_helper.gd" id="1_hwqss"]
