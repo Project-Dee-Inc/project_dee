@@ -26,7 +26,6 @@ func set_area_node():
 			area_3d.area_entered.connect(_on_area_entered)
 
 func _process(delta: float) -> void:
-	print("luna_inhereted")
 	if(area_3d == null):
 		set_area_node()
 	

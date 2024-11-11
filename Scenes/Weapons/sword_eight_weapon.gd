@@ -8,8 +8,6 @@ class_name RotatingSwordsManager
 @export var weapon_scene:PackedScene
 @export var projectile_script:Script
 @export var sword_script:Script
-@export var testMesh:MeshInstance3D
-@export var testMeshContainer:Node3D
 var sword_references:Array[Node3D]
 var spawn_points:Array[Vector3]
 
@@ -48,6 +46,7 @@ func spawn_eight_projectiles():
 	animate_in(false)
 
 func spawn_eight_bullets_above(center:Vector3, radius:float, height:float):
+	_empty_swords()
 	var locations = calculate_locations_in_location_with_radius(center, radius, height)
 	create_weapons(sword_script, locations, true, true)
 		
@@ -58,7 +57,7 @@ func spawn_eight_rotating_swords(attack_immediately:bool = true):
 	
 func create_weapons(script:Script, locations:Array, attack_immediately = true, is_top_level = false):
 	#if necessary create a new set of weapons
-	if(sword_references.size() != projectile_count):
+	if(sword_references.size() != projectile_count or sword_references[0] == null):
 		_empty_swords()
 		for i in projectile_count:
 			var p:Node3D = weapon_scene.instantiate()

@@ -25,6 +25,6 @@ shape = SubResource("SphereShape3D_lk0bk")
 mesh = SubResource("SphereMesh_oxgnf")
 
 [node name="MovingObject" parent="." index="3" instance=ExtResource("2_07e86")]
-speed = 10.0
+speed = 30.0
 
 [connection signal="area_entered" from="HitColliderComponent" to="." method="_on_hit_collider_component_area_entered"]
