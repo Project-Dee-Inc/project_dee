@@ -10,6 +10,7 @@ var player_stats: Dictionary = {}
 @export var damage:int
 @export var projectile_speed:float
 @export var projectile_ref:PackedScene
+@export var passive_five_radius:float
 
 var passive_reset:bool
 
@@ -51,7 +52,7 @@ func activate_fifth_passive():
 	#create the bullets
 	if(enemy == null ): return
 	sword_eight.set_weapon_visible(true)
-	sword_eight.spawn_eight_bullets_above(enemy.global_position, 1, 3)
+	sword_eight.spawn_eight_bullets_above(enemy.global_position, passive_five_radius, 3)
 	var index = 0
 	for sword in sword_eight.sword_references:
 		if(pattern != 5 ): break

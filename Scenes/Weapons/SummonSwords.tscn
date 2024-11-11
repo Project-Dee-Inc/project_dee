@@ -1,6 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctchtcrpaoccl"]
+[gd_scene load_steps=29 format=3 uid="uid://ctchtcrpaoccl"]
 
-[ext_resource type="PackedScene" uid="uid://dupherm0ljakl" path="res://Scenes/magic_weapon.tscn" id="1_7scnb"]
+[ext_resource type="PackedScene" uid="uid://bqfdfpwuxatc5" path="res://Scenes/magic_weapon.tscn" id="1_7scnb"]
 [ext_resource type="Script" path="res://Scenes/summon_swords_skill.gd" id="2_bbf0t"]
 [ext_resource type="Script" path="res://Scenes/summon_sword_passive.gd" id="3_wb1w0"]
 [ext_resource type="PackedScene" uid="uid://d1m2siwfjcan4" path="res://Scenes/Projectiles/sword_projectile.tscn" id="5_qdklx"]
@@ -202,8 +202,6 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dqbip"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_l0kf7"]
-
 [node name="SummonSwords" node_paths=PackedStringArray("passive_skill") instance=ExtResource("1_7scnb")]
 transform = Transform3D(0.952275, 0, 0, 0, 0.952275, 0, 0, 0, 0.952275, 0, 0.0189883, 0)
 passive_skill = NodePath("WeaponPassive")
@@ -227,15 +225,17 @@ stat_component = NodePath("../StatManager")
 
 [node name="WeaponPassive" parent="." index="5" node_paths=PackedStringArray("stat_component")]
 script = ExtResource("3_wb1w0")
-pattern = 5
+pattern = 2
 damage = 5
 projectile_speed = 10.0
 projectile_ref = ExtResource("5_qdklx")
+passive_five_radius = 2.0
 stat_component = NodePath("../StatManager")
 passive = true
 
 [node name="Camera3D" type="Camera3D" parent="." index="6"]
 transform = Transform3D(-1.15801, 8.27622e-08, -1.54028e-07, 0, 1.02008, 0.54811, 1.74855e-07, 0.54811, -1.02008, -0.187741, 3.58324, -5.38665)
+visible = false
 
 [node name="Sword Eight" type="Node3D" parent="." index="7" node_paths=PackedStringArray("spawn_container")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.483928, 0)
@@ -291,10 +291,5 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AOESphere/Area3D" index="1"]
 shape = SubResource("SphereShape3D_dqbip")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="9"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.15827, 0)
-top_level = true
-mesh = SubResource("SphereMesh_l0kf7")
-
-[node name="Node3D" type="Node3D" parent="." index="10"]
+[node name="Node3D" type="Node3D" parent="." index="9"]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
