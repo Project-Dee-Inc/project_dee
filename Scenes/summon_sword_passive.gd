@@ -39,26 +39,24 @@ func _activate_skill():
 			sub_timer.wait_time = 1
 			activate_fourth_passive()
 		5:
-			passive_timer.wait_time = 5
+			passive_timer.wait_time = 2
 			sub_timer.wait_time = 1
 			activate_fifth_passive()
 			
 
 func activate_fifth_passive():
-	print("solution fifth passive in")
-	var enemy = get_random_enemy()
-	print("solution enemy", enemy)
 	sub_timer.start()
 	await(sub_timer.timeout)
-	print("solution await finished" )
+	var enemy = get_random_enemy()
 	#create the bullets
 	if(enemy == null ): return
 	sword_eight.set_weapon_visible(true)
 	sword_eight.spawn_eight_bullets_above(enemy.global_position, 1, 3)
 	var index = 0
 	for sword in sword_eight.sword_references:
-		print("solution fifth passive", index ," ", sword.global_position)
+		if(pattern != 5 ): break
 		sword._set_moving_blade(true)
+		_set_sword_values(sword)
 		sub_timer.wait_time = .1
 		sub_timer.start()
 		await(sub_timer.timeout)
@@ -72,7 +70,6 @@ func activate_fourth_passive():
 	enemy.add_child(duplicated_sword)
 	sword_eight.set_weapon_visible(false)
 	duplicated_sword.spawn_eight_rotating_swords(false)
-	print("duplicated swords count", duplicated_sword.sword_references.size())
 	await(duplicated_sword.animation_tree.animation_finished)
 	for sword in duplicated_sword.sword_references:
 		sword.area_active = true
@@ -106,7 +103,6 @@ func activate_third_passive():
 
 func activate_second_passive():
 	passive_reset = false
-	print("sword second passive")
 	sub_timer.start()
 	sword_eight.set_weapon_visible(false)
 	sword_eight.spawn_eight_projectiles()
@@ -130,14 +126,12 @@ func activate_second_passive():
 			sub_timer.wait_time = .125
 		sub_timer.start()
 		await(sub_timer.timeout)
-		print("sword count", sword_eight.sword_references.is_empty())
 
 
 func _deactivate_skill():
-	print("marvi_deactivating")
 	match pattern:
-		1:
-			pass
+		1,5:
+			sword_eight._empty_swords()
 		2,3,4:
 			sword_eight.animate_out()
 			
